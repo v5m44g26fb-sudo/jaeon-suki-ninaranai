@@ -158,13 +158,16 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .endcard h3{font-size:19px;margin-bottom:6px}
 .endcard .big{font-size:30px;font-weight:800;color:var(--kakao)}
 .endcard button{background:var(--kakao);color:#3a1d1d;font-weight:700;border-radius:20px;padding:10px 20px;font-size:13.5px;margin-top:10px}
+.choice-btn.locked{opacity:.5;border-style:dashed}
+.endslot{margin:10px 14px;border:1.5px dashed #c9c2ae;border-radius:14px;padding:11px 14px;font-size:13px;background:#fff;color:#555}
+.endslot.got{border-style:solid;background:#fdf6d8;color:#111;font-weight:600}
 .small-note{font-size:10.5px;color:#8d8578;text-align:center;padding:4px 18px 10px;line-height:1.6}
 </style>
 </head>
 <body>
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
-<p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（第1部）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
+<p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
 <p class="src">カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
@@ -250,14 +253,21 @@ const MEMOS=[
 {id:2,tag:'解剖メモ 02',title:'感情はある。言語化の回路が遅いだけ',body:'言いかけて、止める。笑って、話題を変える。\n感情が発生していないのではない。発生してから言葉になるまでの回路が遅くて、その間に防衛が先回りする。\nだから彼の感情は、いつも言葉ではなく行動に直結して出る。来る、持ってくる、迎えに来る。逆に、言葉で確かめようとすると一番遠ざかる。'},
 {id:3,tag:'解剖メモ 03',title:'近さは、行動と体でしか示せない',body:'好みの飲み物を覚えている。体調を崩せば薬とお粥を持ってくる。夜、迎えに来る。\n彼は「好き」と言う代わりに、そばにいる方法を選ぶ。言葉の約束は嘘になるかもしれないけれど、「今ここにいる」ことだけは嘘にならない、と思っている節がある。\nただしそれは、受け取る側に翻訳の負担を全部押しつける示し方でもある。'},
 {id:4,tag:'解剖メモ 04',title:'間欠報酬は、一番依存を強くする',body:'いつも優しい人は、ありがたいけれど依存はしない。\n来るか分からない人、優しいか冷たいか分からない人の「たまに来る優しさ」は、脳にとって一番強い報酬になる。ギャンブルの当たりと同じ仕組み。\n「今日は来た」が特別に感じてしまうのは、自分の気持ちが大きいからじゃなく、報酬の出方が不規則だからかもしれない。'},
-{id:5,tag:'解剖メモ 05',title:'「壊してみたい」は、失いたくないの裏返し',body:'好きになればなるほど相手を苦しめる――ソルアの言葉が正しいなら、あの衝動の正体は悪意じゃない。\n・綺麗なままの相手は、いつか自分を見限って行く気がする\n・壊れるほど弱った相手なら、自分のそばに残る気がする\n・壊しても残るか、試したい\n全部、見捨てられることへの先回りの防衛だ。愛し方ではなく、恥と不安の処理の仕方。'}
+{id:5,tag:'解剖メモ 05',title:'「壊してみたい」は、失いたくないの裏返し',body:'好きになればなるほど相手を苦しめる――ソルアの言葉が正しいなら、あの衝動の正体は悪意じゃない。\n・綺麗なままの相手は、いつか自分を見限って行く気がする\n・壊れるほど弱った相手なら、自分のそばに残る気がする\n・壊しても残るか、試したい\n全部、見捨てられることへの先回りの防衛だ。愛し方ではなく、恥と不安の処理の仕方。'},
+{id:6,tag:'解剖メモ 06',title:'追う側と、逃げる側のループ',body:'私が求めると、彼は引く。私が離れると、彼は追う。\n別れたあと助手として戻ってきたのは、偶然じゃない。喪失が見えた瞬間にだけ、彼のエンジンはかかる。\nこのループでは「追う」のはいつも、距離を取られた側の役目になる。近づきたい方が追い、怖い方が逃げる。動機は両方とも「嫌われたくない」なのに、表面には正反対にしか見えない。'},
+{id:7,tag:'解剖メモ 07',title:'「壊してみたい」の検証結果',body:'雨の夜、検証は終わった。\n嫉妬が限界を超えると、彼は言葉で壊しに来る。「俺みたいなクズと遊んだ君も同じ」――相手を引きずり下ろせば、見捨てられずに済むという、計算のない計算。\nただし決定的なのは、そのあと。彼は言い訳の連絡をしなかった。壊した自覚だけは、逃げずに残っていた。衝動の正体は悪意ではなく、自分の価値を信じられない人の、劣等感の噴出だった。'},
+{id:8,tag:'解剖メモ 08',title:'言葉ではなく、喪失でしか動けない',body:'彼の行動履歴を並べると、規則は単純だ。\n・別れを切り出された時だけ、助手として戻ってきた\n・ライバルが見えた時だけ、「付き合おう」と言った\n・「二度と現れないで」と失うことが確定した時だけ、見返りなしで作品を直す手伝いをした\n感情の強さの問題じゃない。彼は「失う」という形でしか、自分の気持ちを認識できない。認識の回路が、喪失経由でしか開かない。'},
+{id:9,tag:'解剖メモ 09',title:'壁は、付き合っても消えない',body:'最後に、一番大事な検証結果。\n仮に今、彼と付き合ったとして――壁は消えない。消えるのは「彼女」という名前だけで、本音を言葉にする力は、名前では育たない。\n彼の変化は本物だ。でもそれは「行動でなら、少しずつ」という範囲の変化でしかない。\n選ぶなら、壁があることを前提に選ぶしかない。壁が消えた未来を買うことは、できない。'}
 ];
 const IG_J=[
 {id:'atelier',img:'assets/ig-atelier.jpg',cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','先輩、作業しかしてないの？'],['park_jaeon','끝나지 않으니까']]},
 {id:'jaeon2',img:'assets/ig-jaeon2.jpg',cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','오빠 이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
 {id:'jaeon1',img:'assets/ig-jaeon1.jpg',cap:'☁️',likes:'529',unlock:3,cm:[['b1nna_','いいね100個あげたい'],['nao_sculpt','（……見てるだけ）']]},
 {id:'butterfly',img:'assets/ig-butterfly.jpg',cap:'나비. 잡으면 죽는다',likes:'601',unlock:3,cm:[['s0l_a','相変わらずだね'],['park_jaeon','飛んでる時が一番きれいだから']]},
-{id:'bar',img:'assets/ig-bar.jpg',cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]}
+{id:'bar',img:'assets/ig-bar.jpg',cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]},
+{id:'jaeon3',img:'assets/ig-jaeon3.jpg',cap:'전시 준비. 손이 기억하는 것',likes:'358',unlock:6,cm:[['s0l_a','열심히 하네'],['park_jaeon','……見て覚えるタイプなんで']]},
+{id:'rain',img:'assets/ig-rain.jpg',cap:'비. 우산은 없었다',likes:'692',unlock:9,cm:[['b1nna_','誰と？ どこで？'],['park_jaeon','秘密']]},
+{id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]}
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なお先輩かわいい'],['nao_sculpt','ありがとう笑']]},
@@ -275,10 +285,16 @@ const CAL=[
 {d:'下旬',t:'なおの誕生日',s:'展示デート→実家→ドヒョク再会',u:4}]},
 {m:'5月',e:[
 {d:'上旬',t:'一度目の別れ',s:'「いつも壁を作ってる」／第1部・完',u:5},
-{d:'—',t:'（第2部で解放）',s:'作品制作と、彼の変化……？',u:99}]},
-{m:'6月〜7月',e:[
-{d:'？',t:'兵役：未定の予定',s:'兵務庁アプリに未読のお知らせが1件。本人はまだ開いていない',u:5},
-{d:'—',t:'（第2部で解放）',s:'一学期の終わりと、卒業・留学・入隊の現実',u:99}]}
+{d:'中旬',t:'ギャラリー展の助手に、ジェオンが立候補',s:'第4章「変わろうと思っている」',u:6},
+{d:'下旬',t:'ソルアの宣戦布告',s:'「今も付き合ってます」',u:7}]},
+{m:'6月',e:[
+{d:'中旬',t:'彫塑科合宿（ドヒョクの地元）',s:'第5章／観覧車と、ささやきゲーム',u:8},
+{d:'下旬',t:'「付き合おう」／雨の夜の詰問',s:'第6章／「二度と現れないで」',u:9}]},
+{m:'7月',e:[
+{d:'上旬',t:'作品の破損と、修復の日々',s:'最終章／約束通り、彼は去る',u:10},
+{d:'中旬',t:'ギャラリー展／最終選択',s:'彼のスケッチブックと、運命の種明かし',u:11},
+{d:'下旬',t:'卒業・パリ・兵役',s:'選んだ道の先にある、それぞれの現実',u:12},
+{d:'？',t:'兵役：未定の予定',s:'兵務庁アプリに未読のお知らせが1件。本人はまだ開いていない',u:5}]}
 ];
 const BITNA=[
 [],
@@ -286,7 +302,10 @@ const BITNA=[
 [['ビンナ','ねえ聞いた？ 今日の飲み会、2年のパク・ジェオン来るって'],['ビンナ','彫塑科のスター。女の子全員に優しいけど、誰とも付き合わないで有名'],['なお','……へえ'],['ビンナ','先輩、顔に出てるよ']],
 [['ビンナ','最近ジェオンと仲いいよね、先輩'],['ビンナ','忠告だけしとく。あいつは誰とも恋愛しない。言い寄られるのが嬉しいだけだよ'],['なお','分かってる。好きになる気ないし'],['ビンナ','……その「分かってる」が一番危ないんだって']],
 [['ビンナ','誕生日、結局どうだったの'],['なお','複雑。あとで話す'],['ビンナ','ドヒョクくんからも聞いたよ。あんたモテ期？'],['なお','違う。……多分']],
-[['ビンナ','終わりにしたんだって？'],['なお','うん。私が決めた'],['ビンナ','偉い。……でも先輩、泣いてない？'],['なお','泣いてない。解剖が終わっただけ']]
+[['ビンナ','終わりにしたんだって？'],['なお','うん。私が決めた'],['ビンナ','偉い。……でも先輩、泣いてない？'],['なお','泣いてない。解剖が終わっただけ']],
+[['ビンナ','え、ジェオンが先輩の助手になったの？'],['ビンナ','別れた相手の、だよ？'],['なお','仕事の話。彼は変わろうとしてる、らしい'],['ビンナ','……「らしい」を信じるかどうかは、先輩次第だね']],
+[['ビンナ','合宿どうだった？ ドヒョクくんの地元'],['なお','いろいろ。告白は、断った'],['ビンナ','そっちは断るんだ'],['なお','嘘の優しさは、要らないから']],
+[['ビンナ','展示、明日だね。作品、直ったんだ'],['なお','うん。手伝ってくれた'],['ビンナ','彼、明日で最後なんでしょ'],['なお','……約束だから']]
 ];
 const GROUP=[
 [],
@@ -294,7 +313,10 @@ const GROUP=[
 [['彫塑科グループ','📢 飲み会のお知らせ：新学期決起会、今週金曜19時〜'],['ソル','ジェオン来る？'],['ジワン','来るって。女子全員集合じゃん'],['ビンナ','なお先輩も来ます']],
 [['彫塑科グループ','📢 合同展示の助手ペア、来週発表'],['ギュヒョン','助手は立候補制だって'],['ソル','ジェオンが誰の助手になるか賭けよう'],['ビンナ','（……やめとけ）']],
 [['彫塑科グループ','📢 GW中の作業室、利用申請は金曜まで'],['ジワン','誕生日会やる人いる？'],['ビンナ','内緒']],
-[['彫塑科グループ','📢 合同展示まであと少し。体調管理しっかり'],['ソル','なお先輩、最近痩せた？'],['ビンナ','制作で忙しいだけだよ']]
+[['彫塑科グループ','📢 合同展示まであと少し。体調管理しっかり'],['ソル','なお先輩、最近痩せた？'],['ビンナ','制作で忙しいだけだよ']],
+[['彫塑科グループ','📢 合宿の班分け発表。移動はバス2台'],['ソル','遊園地行けるの楽しみ'],['ジワン','観覧車、誰と乗るか問題'],['ビンナ','（……ほんとに問題）']],
+[['彫塑科グループ','📢 ギャラリー展まで2週間。制作追い込み'],['ギュヒョン','なお先輩の作品、デカいな'],['ソル','助手のジェオン、泊まり込みらしい'],['ビンナ','静かに応援しよ']],
+[['彫塑科グループ','📢 本日ギャラリー展。関係者は9時集合'],['ジワン','なお先輩の作品、教授が絶賛してた'],['ソル','すごいじゃん'],['ビンナ','うん。……長かったね、いろいろ']]
 ];
 const DOHYUK=[
 [],
@@ -302,7 +324,17 @@ const DOHYUK=[
 [],
 [],
 [['ドヒョク','久しぶり。10年ぶりだね'],['ドヒョク','誕生日、おめでとう。わかめスープ、店で用意してあるよ'],['なお','ありがとう。……よく覚えてたね'],['ドヒョク','忘れるわけないじゃん。初恋の人の誕生日']],
-[['ドヒョク','この前はありがとう。無理してない？'],['なお','大丈夫。ちゃんと終わらせるって決めたから'],['ドヒョク','そっか。……応援してるよ。何かあったら言って']]
+[['ドヒョク','この前はありがとう。無理してない？'],['なお','大丈夫。ちゃんと終わらせるって決めたから'],['ドヒョク','そっか。……応援してるよ。何かあったら言って']],
+[['ドヒョク','合宿、うちの民宿になったんだって？'],['ドヒョク','地元の美味しい店、案内するよ'],['なお','ありがとう。楽しみにしてる'],['ドヒョク','うん。……楽しみにしてる']],
+[['ドヒョク','この前の返事、ありがとう'],['ドヒョク','ちゃんと言ってくれて、よかった'],['なお','……ごめんね'],['ドヒョク','謝らなくていい。俺は俺で、前に進むから']],
+[['ドヒョク','展示、見に行くよ。花束、持ってく'],['なお','ありがとう。……気持ちだけ、もらっとくね'],['ドヒョク','うん。それでいい']]
+];
+const SOLA=[
+[],[],[],[],[],
+[['ソルア','宣戦布告、聞いた？'],['ソルア','私とジェオンは、切っても切れないの']],
+[['ソルア','カフェで話した。……私が、終わりにした'],['ソルア','中途半端より、他人でいる方がマシだって']],
+[['ソルア','あの子、変わったね'],['ソルア','……あんたのせいかもね']],
+[['ソルア','展示、見に行ったよ'],['ソルア','私の知らない顔、してた']]
 ];
 </script>
 <script>
@@ -366,7 +398,7 @@ const STORY=[
 {k:'fade',v:'―― その夜のことは、ここには書かない。\n書かないことが、二人の約束だった。'},
 {k:'scene',v:'体調を崩して寝込んだ日。インターホンが鳴って、ドアの前に彼が立っていた。薬と、コンビニのお粥。\n「……ついでに近くまで来たから」\n嘘だ。彼の家は、ここから遠い。'},
 {k:'memo',id:3},
-{k:'call',lines:[[0,'……起きてた？'],[1,'うん。今、帰ったとこ'],[0,'声、聞きたくなって'],[0,'……なんでもない。忘れて'],[1,'言いかけてやめるの、得意だよね'],[0,'自覚はある。直す気は……まだない'],[0,'なおはさ、俺のこと何点だと思ってる？'],[1,'保留。まだ採点途中'],[0,'そっか。……じゃあ、まだ終わってないんだね']]},
+{k:'call',id:'c1',lines:[[0,'……起きてた？'],[1,'うん。今、帰ったとこ'],[0,'声、聞きたくなって'],[0,'……なんでもない。忘れて'],[1,'言いかけてやめるの、得意だよね'],[0,'自覚はある。直す気は……まだない'],[0,'なおはさ、俺のこと何点だと思ってる？'],[1,'保留。まだ採点途中'],[0,'そっか。……じゃあ、まだ終わってないんだね']]},
 {k:'memo',id:2},
 {k:'sys',v:'ドヒョクとの再会まで、あと少し――'},
 {k:'date',v:'4月下旬 ― 誕生日',cal:4},
@@ -399,14 +431,99 @@ const STORY=[
  {t:'「止めないんだね」',kai:5,kyo:4,then:[{k:'scene',v:'彼は答えなかった。答えないことが、彼の精一杯の正直さだったのかもしれない。'}]},
  {t:'「ありがとう。気持ちを整理しやすくなった」',kai:7,kyo:5,then:[{k:'scene',v:'帰り際、彼が言った。\n「なおって、最後まで計画的だね」\n違う。計画的なんかじゃない。そうしないと、崩れてしまうからだ。'}]}]},
 {k:'memo',id:5},
-{k:'end'}
+{k:'part1'},
+/* ===== 第2部 ===== */
+{k:'chap',n:5,title:'第4章 ― 助手として戻る'},
+{k:'date',v:'5月中旬 ― ギャラリー展・説明会',cal:6},
+{k:'scene',v:'別れてから、数週間。学科では顔を合わせても、挨拶だけして通り過ぎる他人に戻っていた。\n今日は合同ギャラリー展の説明会。教授が私の作品テーマを酷評して、最後に言った。「助手との相乗効果が出ていない」'},
+{k:'scene',v:'ざわつく教室で、一人だけ手が挙がった。\n「……俺、やります」\nジェオンだった。理由も、言い訳もなかった。'},
+{k:'j',v:'助手の件、ペア確定したらしいね'},
+{k:'j',v:'断るなら、理由は聞くよ'},
+{k:'choice',q:'戻ってきた彼への返しは？',opts:[
+ {t:'「仕事としてなら。私情は持ち込むなって条件つきで」',kai:5,kyo:-3,then:[{k:'j',v:'了解。……条件、守るよ'},{k:'scene',v:'条件をつける私に、彼は少し笑った。文句も、弁解もなかった。'}]},
+ {t:'「変わろうと思ってる、って本気で言える？」',kai:6,kyo:-1,then:[{k:'scene',v:'彼は少し考えて、言った。\n「言葉で言っても、なおは信じないでしょ」\n「……だから、見てて」\n核心は、今日も言わない。でも今日の濁し方は、逃げじゃなくて順番の話に聞こえた。'}]},
+ {t:'「他の人に頼むつもりだった」',kai:3,kyo:5,then:[{k:'j',v:'そっか'},{k:'scene',v:'彼はあっさり引いた。でも翌日、教授が掲示したペア表には、私と彼の名前が並んでいた。本人の立候補が、先に通っていた。'}]}]},
+{k:'scene',v:'放課後、彼の作業場。金属加工で手が止まった私に、彼が後ろから静かに教えてくれる。あの距離。\nでも今日は違った。触れるのは、作業に必要なところだけ。近づき方を、彼は変えようとしていた。'},
+{k:'scene',v:'「……変わろうと思っている」\nぽつり、と彼が言った。\n「上手くは、ならないかもだけど」'},
+{k:'ig',who:'j',id:'jaeon3'},
+{k:'memo',id:6},
+{k:'scene',v:'帰り道、カフェの前。見覚えのある後ろ姿――ユン・ソルア。\n彼女は私を見つけると、わざと大きな声で言った。\n「あら、ナビさん？ 私、ジェオンの元カノ。……今も、付き合ってますけど」'},
+{k:'choice',q:'宣戦布告への返しは？',opts:[
+ {t:'「申告は証拠にならない。本人に聞くわ」',kai:6,kyo:2,then:[{k:'scene',v:'ソルアの笑顔が、一瞬だけ固まった。\n「……ふうん。あんた、面白いね」'}]},
+ {t:'「へえ。じゃあ彼に言って。私じゃなくて」',kai:4,kyo:4,then:[{k:'scene',v:'私は通り過ぎた。でも、心臓は少しだけうるさかった。'}]},
+ {t:'何も言わず、その場を離れる',kai:2,kyo:5,then:[{k:'scene',v:'背中で、ソルアの視線を感じた。戦う価値のある相手かどうか、まだ決めていなかった。'}]}]},
+{k:'scene',v:'そこへ、ジェオンが通りかかった。ソルアが何か言いかけたけれど、彼は短く遮った。\n「……昔の話だよ」\n否定でも、肯定でもない。彼の線引きは、今日も完璧で、最悪だった。'},
+{k:'sys',v:'ソルアとのトークが解放されました（カカオトークのトーク一覧）'},
+{k:'chap',n:6,title:'第5章 ― 合宿'},
+{k:'date',v:'6月中旬 ― 彫塑科合宿（ドヒョクの地元）',cal:8},
+{k:'scene',v:'合宿先は、ドヒョクの地元の民宿だった。私は叔母の家から通いで参加。\nバスを降りた瞬間、ドヒョクが荷物を受け取りに来てくれた。その後ろで、ジェオンが面白くなさそうに立っていた。'},
+{k:'scene',v:'遊園地の観覧車。くじ引きで、ジェオンと二人きりになった。\n狭いゴンドラ。彼は窓の外ばかり見ていた。\n「……ドヒョクとはさ」\n言いかけて、やめた。いつもの癖。'},
+{k:'choice',q:'言いかけた彼への返しは？',opts:[
+ {t:'「言いかけてやめるなら、最初から聞くな」',kai:6,kyo:-2,then:[{k:'scene',v:'彼は小さく笑って、初めて正面を見た。\n「……仲、いいんだね」\nそれだけ。嫉妬の名前は、今日も彼は持っていなかった。'}]},
+ {t:'「先輩として心配してるだけだよ」',kai:3,kyo:2,then:[{k:'scene',v:'「先輩、ね」彼は繰り返して、また外を見た。信じた顔じゃなかった。'}]},
+ {t:'採点する：「今の沈黙、マイナス5点」',kai:5,kyo:0,then:[{k:'scene',v:'「厳しいね」\n「言わない人の分は、こっちが想像で補うしかないから」\n彼は答えなかった。その沈黙も、採点対象になった。'}]}]},
+{k:'scene',v:'夜の飲み会。ささやきゲームで、ドヨンの質問にジェオンが答えた声が、静かな部屋に漏れた。\n「……ユ・ナビ」\n質問は「今夜、キスしたいのは誰？」だったらしい。部屋中が、凍った。'},
+{k:'choice',q:'凍った空気の中での返しは？',opts:[
+ {t:'「聞こえたけど、今は採点しない。……覚えとく」',kai:6,kyo:-4,then:[{k:'scene',v:'彼は耳まで赤くして、珍しく何も言い返せなかった。逃げ場のない正直さは、彼を一番弱くする。'}]},
+ {t:'「ゲームの答えに、本気で答える人いるんだ」',kai:4,kyo:-1,then:[{k:'scene',v:'「……つい」彼は目を逸らした。つい、が一番本音に近い。'}]},
+ {t:'聞こえなかったことにする',kai:2,kyo:3,then:[{k:'scene',v:'私は席を立った。聞こえなかったことにしたのは、私の防衛だったのかもしれない。'}]}]},
+{k:'scene',v:'その夜、庭でドヒョクが待っていた。帰り道を照らす明かりと、トルコキキョウの花束。\n「俺の初恋は、君だ」\n「……付き合ってほしい」'},
+{k:'choice',q:'ドヒョクの告白への返事は？',opts:[
+ {t:'「ありがとう。でも、今の私じゃ誰とも付き合えない」',kai:5,kyo:0,then:[{k:'scene',v:'ドヒョクは少し寂しそうに笑って、「そっか」と頷いた。傷つけた自覚はある。それでも、嘘の優しさより、正直な断りを選んだ。'}]},
+ {t:'「あんたは、私の今じゃなくて昔を見てる気がする」',kai:6,kyo:0,then:[{k:'scene',v:'ドヒョクは驚いた顔をして、それから真剣に頷いた。\n「……かも、しれない」\nちゃんと会話ができる人。言葉で向き合える人。それでも、心は動かなかった。'}]},
+ {t:'「ごめん」とだけ言って、その場を離れる',kai:2,kyo:0,then:[{k:'scene',v:'背中で、花束を持つ手が下がるのが分かった。説明しない別れ方は、私も彼と同じなのかもしれなかった。'}]}]},
+{k:'scene',v:'部屋に戻る途中、暗がりでジェオンと鉢合わせた。\n「……私をもてあそばないで」\n先に言ったのは、私だった。彼は一歩近づいて、言った。\n「嫌なら、嫌だって言って」'},
+{k:'fade',v:'―― その夜のキスのことは、ここには書かない。\n書かないことが、二人の約束だった。'},
+{k:'scene',v:'合宿は終わった。何も決まらないまま、日常に戻る。\n数日後、私の交換留学の審査結果が届いた。不合格。\n夜の街を歩いていたら、いつの間にか、あのバーの裏路地に立っていた。'},
+{k:'scene',v:'「……蝶、見に行く？」\n振り返ると、彼がいた。初めて会った日と同じ誘い文句で。\nその夜は、どこにも行かなかった。彼は文句も言わず、私を家まで送って、帰った。'},
+{k:'chap',n:7,title:'第6章 ― 付き合おう'},
+{k:'date',v:'6月下旬 ― 雨の季節',cal:9},
+{k:'scene',v:'ドヒョクが、実家の店のものを届けに私の家へ来た日。\n入れ違いに、私物を取りに来たジェオンが帰ってきた。ドヒョクの目の前で、彼はわざとみたいに、当たり前に私の部屋へ入っていった。'},
+{k:'j',v:'今日の夜、空いてる？'},
+{k:'j',v:'渡したいもの、あるから'},
+{k:'call',id:'c2',lines:[[0,'……寝てた？'],[1,'ううん。起きてた'],[0,'ブレスレット、サイズ合わなかったら言って'],[1,'合ってる。……ありがとう'],[0,'…………'],[1,'言いかけてる？'],[0,'自覚はある。……でも今日は、言わない方がいい気がする'],[1,'採点：逃げた。でも、正直ではあった'],[0,'厳しいね。……おやすみ、なお']]},
+{k:'scene',v:'夜。私の家に来た彼が、蝶のブレスレットを私の手首につけた。\nキスをしようとした彼の肩を、私は押し返した。曖昧なままは、もう嫌だった。'},
+{k:'scene',v:'彼は少し黙って、言った。\n「……付き合おう」\n初めての、名前の提案だった。'},
+{k:'choice',q:'「付き合おう」への返しは？',opts:[
+ {t:'「今の、それは誰への言葉？ 私、それともドヒョク？」',kai:7,kyo:2,then:[{k:'scene',v:'彼の顔から、笑いが消えた。\n「……なおに言ってる」\n「タイミングが、全部ドヒョクと重なってる」\n彼は否定しなかった。それが答えだった。'}]},
+ {t:'「……本気で言ってる？」',kai:4,kyo:-3,then:[{k:'scene',v:'「本気だよ」彼は即答した。即答できる言葉ほど疑わしいことを、私は知っていた。'}]},
+ {t:'嬉しくて、すぐに頷いてしまう',kai:1,kyo:-6,then:[{k:'scene',v:'彼はほっとしたように笑った。その笑顔に安心した自分と、引っかかる自分が、同時にいた。'}]}]},
+{k:'ig',who:'j',id:'rain'},
+{k:'scene',v:'翌日から、彼は「彼氏」の役を演じ始めた。迎えに来る。連絡も増えた。\nでも教授の評価は下がった。「助手との相乗効果が出ていない」\n電話でドヒョクに弱音を漏らす私を、廊下の向こうで彼が見ていた。'},
+{k:'scene',v:'雨の夜。家の前に、ずぶ濡れの彼が立っていた。酒の匂い。\n「ドヒョクの、どこがいいわけ？」\n「優しくて、真面目で。……だから？」\n彼の笑い方が、初めて汚かった。'},
+{k:'scene',v:'「君さ、俺みたいなクズと遊んでたくせに」\n言葉が、止まらなかった。嫉妬と劣等感と、自分の価値を信じられない人の、一番醜い出し方。\n――ああ、分かった。この人の「付き合おう」は、私への言葉じゃなかった。'},
+{k:'memo',id:7},
+{k:'choice',q:'最後に言う言葉は？',opts:[
+ {t:'「二度と、私の前に現れないで」',kai:5,kyo:8,then:[{k:'scene',v:'彼は雨の中で立ち尽くした。追いすがる言葉は、なかった。'}]},
+ {t:'「あの告白、愛情じゃなかったよね。……現れないで」',kai:7,kyo:8,then:[{k:'scene',v:'彼は何か言いかけて、口を閉じた。否定できないことが、彼の一番の答えだった。'}]},
+ {t:'「あんたの言葉は、いつも誰かへの反応なの。……さよなら」',kai:6,kyo:8,then:[{k:'scene',v:'彼は雨に打たれたまま、私の背中を見送った。'}]}]},
+{k:'scene',v:'部屋に戻って、泣いた。\nその夜、彼は一睡もできなかったと、後でビンナから聞いた。私の傷ついた顔が、頭から離れなかったらしい。\n――それでも、謝罪の連絡は来なかった。言葉では、彼は何もできない。'},
+{k:'chap',n:8,title:'最終章 ― 壊れたもの'},
+{k:'date',v:'7月上旬 ― ギャラリー展直前',cal:10},
+{k:'scene',v:'展示まで、あと数日。私の作品は、完成していた。\n――天井のファンが、落ちた。\n金属の悲鳴と一緒に、作品は粉々に砕けた。私はその場から、動けなかった。'},
+{k:'scene',v:'何時間も経った頃、作業室のドアが開いた。\nジェオンだった。彼は作品の破片を見て、短く言った。\n「もう一度、やろう」\n「……完成したら、俺は二度と君の前に現れない。それでいい」'},
+{k:'choice',q:'約束への返しは？',opts:[
+ {t:'「……本当に、現れないで。それが条件」',kai:6,kyo:5,then:[{k:'scene',v:'彼は頷いた。条件を受け入れる顔は、驚くほど静かだった。'}]},
+ {t:'「なんで、そこまでするの」',kai:5,kyo:3,then:[{k:'scene',v:'彼は破片を拾いながら、答えなかった。\n答えの代わりに、手だけが動いていた。'}]},
+ {t:'断る理由を探すけれど、声が出ない',kai:3,kyo:4,then:[{k:'scene',v:'私の代わりに、彼は作業を始めていた。断る時間は、もうなかった。'}]}]},
+{k:'scene',v:'修復の日々。彼は、私に私的な接近を一切しなかった。触れるのは作品だけ。励ましの言葉も、たった一つ。\n「作業してる君が、一番幸せそうだよ」\n「……一番、きれいだし」'},
+{k:'memo',id:8},
+{k:'scene',v:'完成の前日。助手の後輩から、彼のスケッチブックを預かった。私が返し忘れたと思っていた、私のノートと一緒に。\nページの間から、一枚のデッサンが出てきた。\n――個展の日。花束を持って、元彼の作品の前に立つ私。あの日、彼はギャラリーにいた。'},
+{k:'scene',v:'「運命を信じるなら、それは運命だった」\n後輩伝いの、彼の言葉。バーでの出会いは、偶然の再会だった。彼は最初から、私を知っていた。'},
+{k:'memo',id:9},
+{k:'date',v:'7月中旬 ― ギャラリー展',cal:11},
+{k:'scene',v:'展示当日。私の作品は、教授たちに評価された。パリへの留学も、認められた。\n花束を持って駆けつけたドヒョクに、私は言った。\n「ありがとう。……でも、私の気持ちは、もう決まってる」'},
+{k:'scene',v:'夜。閉館間際の会場に戻ると、私の作品の前に、彼が立っていた。\n約束どおり、今日で最後にするつもりの目だった。\n彼は振り返って、短く言った。\n「……君が、すごく好きだ」'},
+{k:'final'}
 ];
 /* ================= ENGINE ================= */
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
-let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false};
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false};
 try{const raw=localStorage.getItem(LSKEY); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
-let playing=false, replaying=false;
+/* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
+if(!S.ver){ S.ver=2; if(S.done){ S.done=false; S.endId=null; } if(!Array.isArray(S.ends)) S.ends=[]; if(S.callSeen) S.call1=true; }
+let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -417,8 +534,8 @@ function updParams(){
  $('#p-kyori').textContent=S.kyo;
  $('#w-kai').style.width=S.kai+'%';
  $('#w-kyori').textContent=S.kyo<=25?'近い（でも壁はある）':S.kyo<=45?'近づきかけ':S.kyo<=70?'曖昧な距離':'遠い';
- const progs=['プロローグ','第1章 バーでの出会い','第2章 再会と作業室','第3章 曖昧な関係','第3章 一度目の別れ','第1部 完'];
- $('#w-prog').textContent=S.done?'第1部 完':progs[S.chap]||'';
+ const progs=['プロローグ','第1章 バーでの出会い','第2章 再会と作業室','第3章 曖昧な関係','第3章 一度目の別れ','第4章 助手として戻る','第5章 合宿','第6章 付き合おう','最終章 壊れたもの'];
+ $('#w-prog').textContent=S.done?'完結（END到達）':progs[S.chap]||'';
  const nb=$('#bdg-note'); if(S.memos.length){nb.style.display='flex'; nb.textContent=S.memos.length;} else nb.style.display='none';
 }
 const feed=$('#feed');
@@ -442,13 +559,14 @@ function applyItem(it,quiet){
   case 'j': addJ(it.v); break;
   case 'fade': addFade(it.v); break;
   case 'memo': unlockMemo(it.id,quiet); if(!quiet) addSys('―― 解剖メモ '+it.id+' を記録した ――'); break;
+  case 'part1': renderPart1Card(quiet); break;
   case 'ig': unlockIG(it.id,quiet); break;
  }
  updParams(); scrollFeed();
 }
 async function playItems(items,quiet){
  for(const it of items){
-   if(it.k==='call'){ if(!quiet){ await doCall(it.lines); S.callSeen=true; } continue; }
+   if(it.k==='call'){ if(!quiet){ await doCall(it.lines); S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; } continue; }
    applyItem(it,quiet);
    if(!quiet) await sleep(430);
  }
@@ -477,22 +595,24 @@ async function run(){
    const it=STORY[S.idx];
    if(it.k==='choice'){
      if(replaying){ S.idx++; continue; }
+     if(choiceOpen){ playing=false; return; }
      renderChoice(it); save(); playing=false; return;
    }
-   if(it.k==='end'){ S.done=true; S.idx++; renderEnd(); save(); break; }
-   if(it.k==='call'){ S.idx++; save(); await doCall(it.lines); S.callSeen=true; save(); continue; }
+   if(it.k==='final'){ if(choiceOpen){ playing=false; return; } renderFinal(it); save(); playing=false; return; }
+   if(it.k==='call'){ S.idx++; save(); await doCall(it.lines); S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; save(); continue; }
    applyItem(it,false); S.idx++; save();
    await sleep(430);
  }
  playing=false; updParams();
 }
 function renderChoice(it){
+ choiceOpen=true;
  const wrap=document.createElement('div'); wrap.className='choices';
  wrap.innerHTML='<div class="clabel">'+esc(it.q||'返信を選ぶ')+'</div>';
  it.opts.forEach((op,oi)=>{
    const b=document.createElement('button'); b.className='choice-btn'; b.textContent=op.t;
    b.addEventListener('click',async()=>{
-     wrap.remove();
+     choiceOpen=false; wrap.remove();
      S.picks[S.idx]=oi;
      addMe(op.t);
      S.kai=clamp(S.kai+(op.kai||0),0,100); S.kyo=clamp(S.kyo+(op.kyo||0),5,95);
@@ -504,10 +624,53 @@ function renderChoice(it){
  });
  feed.appendChild(wrap); scrollFeed();
 }
-function renderEnd(){
- const d=el('<div class="endcard"><h3>第1部 ― 完</h3><p>「いつも壁を作ってる」<br>一度目の別れまでを描きました。</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p>心の距離：'+S.kyo+'<br>'+(S.kai>=55?'彼の仕組みは、かなり見えてきた。でも、見えることと近づくことは別だ。':S.kai>=35?'彼の輪郭は見えてきた。核心は、まだ壁の向こう。':'まだ彼のことは、ほとんど分かっていない。選択を変えて、もう一度読んでみて。')+'</p><p style="font-size:12px;color:#c8d2de">カレンダーに「兵役：未定の予定」が追加されました。<br>彼の変化と第2部の物語は――「第2部へつづく」</p><button id="btn-tohome">ホームへ</button></div>');
+function renderPart1Card(compact){
+ let inner;
+ if(compact){
+   inner='<h3>第1部 ― 完</h3><p>「いつも壁を作ってる」<br>一度目の別れまで。</p><p style="font-size:12px;color:#c8d2de">――ここから第2部が始まります</p>';
+ }else{
+   inner='<h3>第1部 ― 完</h3><p>「いつも壁を作ってる」<br>一度目の別れまでを描きました。</p><p>第1部終了時点の解明度</p><div class="big">'+S.kai+' ／ 100</div><p>心の距離：'+S.kyo+'</p><p style="font-size:12px;color:#c8d2de">カレンダーに「兵役：未定の予定」が追加されました。<br>このまま ▶ で読み進めると、第2部が始まります。</p><button class="tohome-b">ホームへ</button>';
+ }
+ const d=el('<div class="endcard">'+inner+'</div>');
  feed.appendChild(d); scrollFeed();
- d.querySelector('#btn-tohome').addEventListener('click',()=>showView('v-home'));
+ const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
+}
+const FINAL_OPTS=[
+ {t:'「どこにも行かないで。……私たち、付き合おう」',end:'drama'},
+ {t:'「ありがとう。でも私は、一人で進む」',end:'gen'},
+ {t:'「全部わかった。だから――好きにはならない」',end:'nao',req:55}
+];
+const ENDINGS={
+ drama:{title:'END ― わかっていても',body:'夜のギャラリー。\n「君が、すごく好きだ」\n彼は初めて、濁さずに言った。\n\n……でも私は知っている。この先も、壁は消えない。不安になるたび、私は言葉を求めて、彼は行動で返すだろう。\nそれでも。\n\n「どこにも行かないで。私たち、付き合おう」\n\n繋いだ手を、離しかけて、握り直した。\n傷つくと、わかっていても。'},
+ gen:{title:'END ― 一人で進む',body:'「ありがとう。……でも、私は行く」\nドヒョクの花束も、ジェオンの言葉も、受け取らなかった。\n\n選んだのは、誰かじゃなくて、自分の作品とパリへの切符。\n展示室を出るとき、窓の外を一匹の蝶が横切った。\n捕まえようとしなければ、蝶は自由だ。\n\n――私も。'},
+ nao:{title:'特別END ― 好きにはならない',body:'「全部、わかったよ」\n壁の理由も、言葉にならない感情も、優しさの出方も。解剖は、終わった。\n\n「だから言うね。私は、あんたを好きにはならない」\n\n彼は少し笑って、「……そっか。なおらしい」とだけ言った。責めなかった。追わなかった。それが、彼なりの最後の正直さだった。\n\n数週間後――ビンナから回ってきた、彼の近況。兵務庁の通知を、彼はようやく開いたらしい。入隊の日が決まった、とだけ書かれた短い投稿（彼のInstagramに解放されました）。\n時間は、誰の壁の前でも止まってくれない。\n\n私は、私の制作に戻る。\n好きにはならなかった。でも、嘘のない別れだった。'}
+};
+function renderEnding(id){
+ const E=ENDINGS[id]; if(!E) return;
+ const d=el('<div class="endcard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><button class="tohome-b">ホームへ</button></div>');
+ feed.appendChild(d); scrollFeed();
+ const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
+ updParams();
+}
+function renderFinal(it){
+ choiceOpen=true;
+ const wrap=document.createElement('div'); wrap.className='choices';
+ wrap.innerHTML='<div class="clabel">―― 最終選択 ――</div>';
+ FINAL_OPTS.forEach((op,oi)=>{
+   const locked=op.req && S.kai<op.req;
+   const b=document.createElement('button'); b.className='choice-btn'+(locked?' locked':'');
+   b.textContent=locked?('🔒 ？？？（解明度'+op.req+'以上で解放される選択肢）'):op.t;
+   if(!locked) b.addEventListener('click',()=>{
+     choiceOpen=false; wrap.remove();
+     S.picks[S.idx]=oi; addMe(op.t);
+     S.idx++; S.endId=op.end; S.done=true; S.calU=Math.max(S.calU,12);
+     if(!S.ends.includes(op.end)) S.ends.push(op.end);
+     if(op.end==='nao' && !S.igs.includes('army')) S.igs.push('army');
+     updParams(); save(); renderEnding(op.end);
+   });
+   wrap.appendChild(b);
+ });
+ feed.appendChild(wrap); scrollFeed();
 }
 /* replay saved progress instantly */
 function replay(){
@@ -520,11 +683,13 @@ function replay(){
      const oi=picks[i]; if(oi!=null && it.opts[oi]){ const op=it.opts[oi]; addMe(op.t); (op.then||[]).forEach(t2=>{ if(t2.k!=='call') applyItem(t2,true); }); }
      continue;
    }
-   if(it.k==='call'||it.k==='end') continue;
+   if(it.k==='final'){ const oi=picks[i]; if(oi!=null && FINAL_OPTS[oi]) addMe(FINAL_OPTS[oi].t); continue; }
+   if(it.k==='call'){ S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; continue; }
+   if(it.k==='end') continue;
    applyItem(it,true);
  }
  replaying=false; updParams();
- if(S.done) renderEnd();
+ if(S.done && S.endId) renderEnding(S.endId);
 }
 /* ================= SIDE VIEWS ================= */
 function threadRow(img,name,prev,time,ub,onclick,avc){
@@ -534,11 +699,19 @@ function threadRow(img,name,prev,time,ub,onclick,avc){
 }
 function renderThreads(){
  const L=$('#thread-list'); L.innerHTML='';
- L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',S.done?'……そっか':(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）'),'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); if(!S.done) run();}));
- const bs=S.done?5:S.chap;
- if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',BITNA[Math.min(bs,5)].slice(-1)[0][1],'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[Math.min(bs,5)])));
- if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ','合同展示の助手ペア、来週発表','3月',0,()=>openSide('彫塑科グループ',null,GROUP[Math.min(bs,5)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
- if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク','応援してるよ。何かあったら言って','4月',0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[Math.min(bs,5)])));
+ const prevJ=S.done?(S.endId==='nao'?'解剖、終わったね':S.endId==='gen'?'……行ってらっしゃい':'君がすごく好きだ')
+  :S.chap>=7?'ドヒョクの、どこがいいわけ？'
+  :S.chap>=6?'……ユ・ナビ'
+  :S.chap>=5?'助手、やらせて'
+  :S.chap>=4?'……そっか'
+  :(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）');
+ L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',prevJ,'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); if(!S.done) run();}));
+ const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
+ const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
+ if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
+ if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),'3月',0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
+ if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク',lastT(DOHYUK),'4月',0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[si(DOHYUK)])));
+ if(S.chap>=5) L.appendChild(threadRow('assets/av-sola.jpg','ユン・ソルア',lastT(SOLA),'5月',0,()=>openSide('ユン・ソルア','assets/av-sola.jpg',SOLA[si(SOLA)])));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
 }
 let sideView=null;
@@ -596,13 +769,21 @@ function renderNotes(){
  b.innerHTML=MEMOS.map(m=>{
    const un=S.memos.includes(m.id);
    return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:'🔒 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3><p>'+(un?esc(m.body):'物語のキー場面を読み進めると、観察メモが解放されます。')+'</p></div>';
- }).join('')+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>';
+ }).join('')+endsHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>';
+}
+function endsHTML(){
+ const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
+ return '<div class="cal-m" style="margin-top:4px">エンディングコレクション（'+S.ends.length+' / 3）</div>'+defs.map(d=>{
+   const got=S.ends.includes(d[0]);
+   return '<div class="endslot'+(got?' got':'')+'">'+(got?'🏆 '+d[1]:'🔒 未到達のエンディング')+'</div>';
+ }).join('');
 }
 /* call log */
 function renderCallLog(){
- $('#calllog-body').innerHTML=S.callSeen
-  ?'<div class="thread"><img class="av" src="assets/av-jaeon.jpg"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 ― 言いかけて、止めた夜</span></span></div><p class="locknote">通話の内容は物語の中で再生されます（音声なし）</p>'
-  :'<p class="locknote">まだ通話履歴はありません</p>';
+ let h='';
+ if(S.call1||S.callSeen) h+='<div class="thread"><img class="av" src="assets/av-jaeon.jpg"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 ― 言いかけて、止めた夜</span></span></div>';
+ if(S.call2) h+='<div class="thread"><img class="av" src="assets/av-jaeon.jpg"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 ― ブレスレットの夜。言わないと決めたこと</span></span></div>';
+ $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話の内容は物語の中で再生されます（音声なし）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
 }
 /* nav */
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
