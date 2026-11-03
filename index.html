@@ -461,7 +461,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v48：ビューア系（ストーリー／写真／プロフィール全画面／IG投稿詳細）の操作を実測で点検しました。ストーリー上部のヘッダ帯が左右の送りゾーンを覆い、その範囲のタップが無反応になっていた問題を、ヘッダをタップ透過にして直しました（閉じるボタンは従来どおり反応します）。プロフィール画面は、友だち一覧から開いても✕でチャット画面へ戻されていましたが、開いた元の画面へ戻るようにしました。あわせて、プロフィールの✕ボタンの当たり判定を、他の✕ボタンと同じ大きさ（44×47px）にそろえました。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v49：設定画面の全項目（BGM ON/OFF・BGM音量・メッセージの進み方・メッセージ速度・効果音ON/OFF・効果音量・全体ミュート）を、実際に変更して効き方まで実測で点検しました。音量・速度・ミュート・通話中のBGM減衰（ダッキング）・タブ復帰時の再開はすべて仕様どおりに効いており、設定画面の表示と実際の値も一致していました。一方で、セーブデータ内の音量値が範囲外（効果音量150、BGM音量のマイナス値など）だと、音量の設定でエラーになり効果音・環境音・通話ボイスがすべて無音化する問題が見つかり、読み込み時に0〜100へ丸めるよう直しました（通常のセーブでは値は変わりません）。物語・台詞・選択肢・数値（設定の既定値を含む）・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -955,7 +955,7 @@ let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,call
 try{const raw=localStorage.getItem(LSKEY); if(raw){ try{const p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) S=Object.assign(S,p); else try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} }catch(pe){ try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} } }}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
 if(!S.ver){ S.ver=2; if(S.done){ S.done=false; S.endId=null; } if(!Array.isArray(S.ends)) S.ends=[]; if(S.callSeen) S.call1=true; }
-if(!Array.isArray(S.pov)) S.pov=[]; if(!Array.isArray(S.free)) S.free=[]; if(typeof S.freeN!=='number') S.freeN=0; if(typeof S.freeClosed!=='boolean') S.freeClosed=false; if(typeof S.sndOn!=='boolean') S.sndOn=true; if(typeof S.sndVol!=='number') S.sndVol=70;
+if(!Array.isArray(S.pov)) S.pov=[]; if(!Array.isArray(S.free)) S.free=[]; if(typeof S.freeN!=='number') S.freeN=0; if(typeof S.freeClosed!=='boolean') S.freeClosed=false; if(typeof S.sndOn!=='boolean') S.sndOn=true; if(typeof S.sndVol!=='number'||!isFinite(S.sndVol)) S.sndVol=70; S.sndVol=Math.max(0,Math.min(100,S.sndVol)); /* v49：範囲外の音量値は volume 代入で例外になりうるため 0〜100 に丸める（通常のセーブは素通り） */
 /* v5：進行ペース設定・ノイズ通知の既出管理（旧セーブにはデフォルトで補完） */
 if(typeof S.tap!=='boolean') S.tap=true; if(S.pace!=='slow'&&S.pace!=='normal') S.pace='normal'; if(!Array.isArray(S.noise)) S.noise=[];
 /* v8 defaults（旧セーブへの自動補完） */
@@ -1629,7 +1629,7 @@ $('#bdg-kakao').textContent=S.done?'✓':'1';
    再生はユーザーのタップを起点にし（sfxArmed）、設定はセーブに保存する。
    BGMとは独立した「効果音ON/OFF・効果音量」と、両方を止める全体ミュートを持つ。 */
 if(typeof S.sfxOn!=='boolean') S.sfxOn=true;
-if(typeof S.sfxVol!=='number') S.sfxVol=70;
+if(typeof S.sfxVol!=='number'||!isFinite(S.sfxVol)) S.sfxVol=70; S.sfxVol=Math.max(0,Math.min(100,S.sfxVol)); /* v49：同上（150等では効果音・環境音・ボイスの volume 代入が例外になり全て無音化するため） */
 if(typeof S.mute!=='boolean') S.mute=false;
 const SFXF={send:'assets/sfx/send.mp3',recv:'assets/sfx/receive.mp3',tap:'assets/sfx/tap.mp3',notify:'assets/sfx/notify.mp3',connect:'assets/sfx/connect.mp3',callend:'assets/sfx/callend.mp3',shutter:'assets/sfx/shutter.mp3',unlock:'assets/sfx/unlock.mp3'};
 const SFXG={send:0.9,recv:0.9,tap:0.32,notify:0.85,connect:0.7,callend:0.7,shutter:0.75,unlock:0.5};
