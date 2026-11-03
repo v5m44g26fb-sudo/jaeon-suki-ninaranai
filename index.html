@@ -461,7 +461,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v46：エンディング後のフリーチャットに実際にいろいろなメッセージを送って応答の割り当てを実測し、文脈違いの応答が返る部分一致を是正しました。「感謝してる」が謝罪の応答になっていたため謝罪のキーワードを「謝っ／謝り／謝る」に絞り、「作品が出来てきた」が「会いに行く」応答になっていたため『来て』の一致条件を厳しくし、『今から』は対象から外しました（「今から寝る」は睡眠の応答に戻ります）。あわせて、絵文字「🦋」だけを送っても蝶の応答が返るようにしました。応答文・物語・台詞・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v47：ゲーム中の割り込み表示（トースト・通知バナー・フィード内のシステム文・カード類・ロック画面の通知）を全件点検しました。短い間隔で続けて表示されるトーストが、前のタイマーで途中で消えてしまう問題を、タイマーを張り直す形に直しました。また、エンディングカードにはコレクション登録の案内しかなく、解放された後日談に気づきにくかったため、既存の案内文に「後日談が解放されました（ホームの「後日談」）」の一行を足しました。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -984,7 +984,8 @@ let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2400);}
+let toastTimer=null;
+function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
@@ -1187,7 +1188,7 @@ const ENDINGS={
 };
 function renderEnding(id){
  const E=ENDINGS[id]; if(!E) return;
- const d=el('<div class="endcard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><button class="tohome-b">ホームへ</button></div>');
+ const d=el('<div class="endcard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>後日談が解放されました（ホームの「後日談」）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><button class="tohome-b">ホームへ</button></div>');
  feed.appendChild(d); scrollFeed(true);
  const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
  addSys(id==='nao'?'―― このトークは、もう使われていません ――':'―― エンディング後のフリーチャットが解放されました。このトークで、自由にメッセージを送れます ――');
