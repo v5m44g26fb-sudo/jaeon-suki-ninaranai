@@ -414,7 +414,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v34：後日談3編の内容監査。エンディング到達で解放される後日談（ドラマEND「その後の庭」／特別END「入隊の朝」／原作END「パリからの手紙（未達）」）を、各エンディング本文と本編の時間軸（2021年3月〜7月）に照らして通読しました。点検したのは、各ENDとの接続（ドラマ編は「付き合っても壁は消えない」まま、彼女の進路は「まだ決めてない」という確定描写／手紙編は、パリ行きを選んだ彼女へ出されないままの手紙／入隊編は、特別ENDの数週間後に決まった入隊日と11月15日の入隊当日）、後日談の日付（8月20日・11月15日は2021年の実カレンダーの曜日とも一致）と経過期間の言及、後日談でも彼は言い切らないままでいるか（IG投稿の文面も含む）、「未達」「未送信」という形式と本文が噛み合っているか、の4点です。実害にあたる矛盾はなかったため、後日談の文章は変更していません。「数週間後」という経過表現の幅や、最終告白の例外の延長として言い切る一言など、意図的な設計として残した点は監査記録（~/workspace/jaeon-polish/v34-list.md）に理由付きで残しました。物語・台詞・選択肢・数値・解放構造・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v35：IG・ストーリー・写真アプリの内容監査。彼のIG投稿12件・なおのIG投稿3件のキャプションとコメント、ストーリー7件、写真アプリ10枚のキャプションと日付を、本編の場面・時系列と照合しました。是正は1件（2か所）です。なおのIG投稿「🪼」（nao-post2）は開始直後から表示される設定でしたが、同じ写真は写真アプリでは「4月16日 ― 🪼 息抜きの日」（第3章で追加）と日付づけられており、3月の時点で4月に撮った写真が投稿されている矛盾があったため、投稿とストーリーの解放を第3章に揃えました。彼の投稿のうち観覧車・雨・修復・展示のものは、その出来事を含む章の頭から見える章単位の解放で、章の後半で正しくなる章代表スナップショットとして、v33のサイドトーク監査と同じ基準で残置しています。コメントの口調（ビンナの率直さ、ソルアの刺、ジェオンの「秘密」へのすり替えと短さ）と、時間差で付くコメントの時期も全件点検し、ほかに実害はありませんでした。物語・台詞・選択肢・数値・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -655,7 +655,7 @@ const IG_J=[
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なお先輩かわいい'],['nao_sculpt','ありがとう笑']],cmL:[['b1nna_','この日、泣いてなかった？']]},
-{id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:0,cm:[['b1nna_','その顔すき']],cmL:[['park_jaeon','🪼']]},
+{id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:3,cm:[['b1nna_','その顔すき']],cmL:[['park_jaeon','🪼']]},
 {id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:4,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
 ];
 const CAL=[
@@ -1424,7 +1424,7 @@ $('#povread-back').addEventListener('click',()=>{ renderPOV(); showView('v-pov')
 const STORIES=[
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier.jpg',cap:'작업 중',ago:'2시간',unlock:2},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly.jpg',cap:'나비',ago:'5시간',unlock:3},
-{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post2.jpg',cap:'🪼 오늘도 제작',ago:'3시간',unlock:0},
+{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post2.jpg',cap:'🪼 오늘도 제작',ago:'3시간',unlock:3},
 {user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post3.jpg',cap:'작업 중 잠깐 ☕',ago:'1시간',unlock:3},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-wheel.jpg',cap:'관람차',ago:'1시간',unlock:8},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-rain.jpg',cap:'비',ago:'30분',unlock:9},
