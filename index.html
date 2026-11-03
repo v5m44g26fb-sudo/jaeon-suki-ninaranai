@@ -461,7 +461,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v49：設定画面の全項目（BGM ON/OFF・BGM音量・メッセージの進み方・メッセージ速度・効果音ON/OFF・効果音量・全体ミュート）を、実際に変更して効き方まで実測で点検しました。音量・速度・ミュート・通話中のBGM減衰（ダッキング）・タブ復帰時の再開はすべて仕様どおりに効いており、設定画面の表示と実際の値も一致していました。一方で、セーブデータ内の音量値が範囲外（効果音量150、BGM音量のマイナス値など）だと、音量の設定でエラーになり効果音・環境音・通話ボイスがすべて無音化する問題が見つかり、読み込み時に0〜100へ丸めるよう直しました（通常のセーブでは値は変わりません）。物語・台詞・選択肢・数値（設定の既定値を含む）・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v50：これまで一度も実際に触って検証していなかった操作対象を洗い出して実測しました（ロック画面の装飾ボタン、ホームのウィジェット類、カカオとチャットのヘッダーアイコン、通話履歴の行、通話中の操作グリッド、Instagramの各ボタンなど48件）。大半は、無反応が正しい装飾か、トーストで案内される仕様どおりの反応でした。Instagramのプロフィールのボタン3件（「フォロー中」「メッセージ」「プロフィールを編集」）だけが、ボタンらしい見た目なのに何も起きず、壊れていると誤解されかねない状態だったため、アプリ内の他の場所と同じ作法で案内トーストが出るようにしました（「メッセージ」は、物語が進むカカオトークのトークへの案内です）。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1290,7 +1290,7 @@ function renderIG(){
  const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']];
  let h='<div class="ig-stories">'+SUBAR.map(s=>{const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock);return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+(has?'':' seen')+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>';}).join('')+'</div>';
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
- h+= isJ ? '<div class="ig-folbtn"><span class="ghost">フォロー中</span><span class="ghost">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost">プロフィールを編集</span></div>';
+ h+= isJ ? '<div class="ig-folbtn"><span class="ghost" data-gf="follow">フォロー中</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">🔒 物語で解放</span></button>':'')+'</div>';
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
@@ -1300,6 +1300,7 @@ function renderIG(){
   shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>'};
  body.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast('このユーザーのストーリーは、物語の進行で追加されます'); }));
+ body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':k==='follow'?'（フォローは演出用です）':'（プロフィールの編集は演出用です）'); })); /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{
    const p=posts.find(x=>x.id===b.dataset.post);
    const allCm=(p.cm||[]).concat(S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]);
