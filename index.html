@@ -461,7 +461,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v50：これまで一度も実際に触って検証していなかった操作対象を洗い出して実測しました（ロック画面の装飾ボタン、ホームのウィジェット類、カカオとチャットのヘッダーアイコン、通話履歴の行、通話中の操作グリッド、Instagramの各ボタンなど48件）。大半は、無反応が正しい装飾か、トーストで案内される仕様どおりの反応でした。Instagramのプロフィールのボタン3件（「フォロー中」「メッセージ」「プロフィールを編集」）だけが、ボタンらしい見た目なのに何も起きず、壊れていると誤解されかねない状態だったため、アプリ内の他の場所と同じ作法で案内トーストが出るようにしました（「メッセージ」は、物語が進むカカオトークのトークへの案内です）。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v51：画面に出る数字の推移を横断で点検しました（Instagramのフォロワー数といいね数、ホームのウィジェットとロック画面の日付、通話履歴、解明度と心の距離、コレクション数など）。フォロワー数（彼 1,204→2,088／なお 342→459）といいね数は全段階で単調に増え、ウィジェットの日付とロック画面の日付は全段階で一致していました。一方、トーク一覧の月ラベルだけが全スレッドで初登場の月に固定されていて、プレビューやサイドトークの内容が7月の話に進んでも「3月」と表示される食い違いがあったため、プレビューと同じ章の段階から月を出すように直しました。物語・台詞・選択肢・数値設計・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1250,13 +1250,16 @@ function renderThreads(){
   :S.chap>=4?'……そっか'
   :(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）');
  const proPrev=(S.proUnread>0)?(()=>{const lf=[...(S.free||[])].reverse().find(m=>m.w==='j'||m.w==='jimg'); return lf?(lf.t||'🦋 写真'):prevJ;})():prevJ;
- L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,'3月',S.proUnread>0?S.proUnread:(S.chap>=2&&!S.done?1:0),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
+ /* v51：トーク一覧の月ラベルは、プレビュー／サイドログと同じ章ステージから導出する（従来は初登場月に固定され、7月の内容に「3月」と付く行内不一致があった） */
+ const TM=['3月','3月','3月','4月','4月','5月','5月','6月','7月'];
+ const tmon=i=>TM[Math.min(Math.max(i,0),TM.length-1)];
+ L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,tmon(S.chap),S.proUnread>0?S.proUnread:(S.chap>=2&&!S.done?1:0),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
- if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
- if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),'3月',0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
- if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク',lastT(DOHYUK),'4月',0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[si(DOHYUK)])));
- if(S.chap>=5) L.appendChild(threadRow('assets/av-sola.jpg','ユン・ソルア',lastT(SOLA),'5月',0,()=>openSide('ユン・ソルア','assets/av-sola.jpg',SOLA[si(SOLA)])));
+ if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
+ if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),tmon(si(GROUP)),0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
+ if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[si(DOHYUK)])));
+ if(S.chap>=5) L.appendChild(threadRow('assets/av-sola.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola.jpg',SOLA[si(SOLA)])));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
 }
 let sideView=null;
