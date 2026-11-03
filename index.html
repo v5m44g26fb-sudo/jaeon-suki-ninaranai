@@ -1257,6 +1257,8 @@ let nextPressT=null, nextFFired=false;
 const btnNext=$('#btn-next');
 btnNext.addEventListener('pointerdown',()=>{ nextFFired=false; nextPressT=setTimeout(()=>{ nextFFired=true; ffMode=!ffMode; toast(ffMode?'⏩ 早送りモード ON（タップ待ちと入力中を短縮します）':'▶ 通常の速度に戻しました'); if(ffMode) fireTap(); },600); });
 btnNext.addEventListener('pointerup',()=>{ if(nextPressT) clearTimeout(nextPressT); });
+btnNext.addEventListener('pointerleave',()=>{ if(nextPressT) clearTimeout(nextPressT); });
+btnNext.addEventListener('pointercancel',()=>{ if(nextPressT) clearTimeout(nextPressT); });
 btnNext.addEventListener('click',()=>{ if(nextFFired){ nextFFired=false; return; } if(S.done) return; if(onTap) fireTap(); else run(); });
 /* v5：チャット画面のタップで次へ（選択肢・ボタンのタップは除外） */
 feed.addEventListener('click',e=>{ if(choiceOpen) return; if(e.target.closest('button')) return; fireTap(); });
