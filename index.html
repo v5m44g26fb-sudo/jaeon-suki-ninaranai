@@ -117,6 +117,13 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .thread .tn time{font-size:10.5px;color:var(--sub);font-weight:400}
 .thread .tp{display:block;font-size:12.5px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .thread .ub{background:var(--red);color:#fff;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+/* v24：カカオ実物様式。トーク一覧の時刻は名前の行の右端、未読バッジはその真下（プレビュー行の右端）に置く */
+.thread .tr{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:none;padding-top:2px}
+.thread .tr time{font-size:10.5px;color:var(--sub)}
+/* v24：友だち一覧のプロフィールミュージックは行の右端にピルで出す（カカオ実物様式） */
+.fr-mus{flex:none;max-width:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid #d9d9e0;border-radius:999px;padding:3px 9px;font-size:10.5px;color:#555;background:#fff}
+/* v24：電話（iOS「最近」）行の右端の情報ボタン */
+.cii{flex:none;width:22px;height:22px;border:1.5px solid #0a84ff;color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;font-style:normal;font-family:Georgia,serif}
 .locknote{padding:14px 16px;font-size:12px;color:var(--sub);text-align:center}
 .fr-sec{padding:12px 16px 4px;font-size:11.5px;color:#999;border-top:8px solid #f6f6f8;margin-top:6px}
 .fr-my{display:flex;gap:12px;padding:12px 16px;align-items:center;width:100%;text-align:left}
@@ -320,7 +327,11 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .story-head span{font-size:12.5px;color:rgba(255,255,255,.75)}
 .story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:12px 14px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.story-cap{position:absolute;left:0;right:0;bottom:64px;text-align:center;font-size:19px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.75);z-index:2;padding:0 26px;line-height:1.6}
+.story-cap{position:absolute;left:0;right:0;bottom:86px;text-align:center;font-size:19px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.75);z-index:2;padding:0 26px;line-height:1.6}
+/* v24：ストーリービューア下部の返信欄＋ハート＋紙飛行機（Instagram 2021実物様式・装飾） */
+.story-foot{position:absolute;left:12px;right:12px;bottom:14px;display:flex;align-items:center;gap:15px;z-index:3;pointer-events:none}
+.story-foot .sf-in{flex:1;border:1.5px solid rgba(255,255,255,.9);border-radius:999px;padding:9px 15px;font-size:13.5px;color:rgba(255,255,255,.92);background:rgba(0,0,0,.18)}
+.story-foot svg{flex:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45))}
 .story-zone{position:absolute;top:0;bottom:0;width:32%;z-index:2}
 .story-zone.l{left:0}.story-zone.r{right:0}
 .story .ring.seen{background:#c7c7cc}
@@ -394,7 +405,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v23：操作感と画面の触感。画面遷移にiOSらしい入場の動きを付け、通知バナーは滑って退場するよう直しました。チャットのスクロールは「最下部にいるときだけ追随」に変え、読み返している途中で新着に位置を奪われません。フリーチャットの入力は日本語変換の確定Enterで誤送信しないようにし、タブから戻ったときに止まっていたBGM・環境音・着信音が復帰するよう直しました。設定トグルや閉じるボタンなど小さいボタンのタップ領域も広げています。物語・選択肢・数値・セーブ形式は不変です。v22：ボーナス面とフリーチャットの仕上げ。彼視点ボーナス編5編を本編の確定場面と照合し、残っていた事実のズレ（誕生日の段取り、作品が壊れたことを知った時期、選択肢で変わる反応の回想）を正しました。フリーチャットは、パリの話題への応答を後日談の描写に、展示の応答を修復の場面の彼の台詞に揃え、「蝶が増えた」という言い回しの集中もほどきました。物語・選択肢・数値・セーブ形式は不変です。v21：選択肢と結末まわりの質を点検。響きの重なる選択肢と、台詞に舞台指示が混ざった選択肢を整え、エンディングコレクションと第1部終了画面で特別ENDの存在と条件（解明度55以上）が分かるようにしました。物語・数値・セーブ形式は不変です。v20：横断監査（数値・日付・推移の整合）。日付と曜日、プロフィールの変化段階、フォロワーやいいねの推移、解放条件を全件照合し、通話の帰属（彼視点02とクレジットに残っていた「誕生日の夜」の誤認）、彼視点05の解放条件、カレンダーのソルア宣戦布告の解放時期など、残っていた小さなズレを正しました。物語・選択肢・セーブ形式は不変です。v19：演出と読み味の磨き込み。山場（「付き合おう」／雨の夜の詰問／最終告白／最終選択／後日談の核）の直前にだけ一拍の「間」を置き、逆に軽い台詞へ誤って効いていた間の演出は外しました。あわせて、章の切り替わりには章題の区切りを表示し、展示当日に割り込んでいた日常通知は修復の時期へ移し、重い台詞には受信音を鳴らさないよう鳴らし分けを整えました。物語・選択肢・セーブ形式は不変です。v18：内容の深掘り第2層（脇役と文章の質）。脇役（ビンナ／ソルア／ドヒョク／彫塑科グループ）の口調を各人の立場と性格に合わせて書き分け、彼の投稿への友人のIGコメントを2021年当時の韓国の若者の文体に寄せ、解剖メモ9件の語り口（言い切りすぎの緩和、事実と推測の分け方）を統一しました。あわせて、個展・バー・作業室・合宿・展示会場の場面描写に音・匂い・温度の感覚情報を足しています。v17：内容のリアル寄せ（生活・時代考証）。韓国の大学にない「GW」表記を正し、2021年コロナ禍の実態（人数制限・オンライン併用・少人数合宿）と矛盾しない描写に整え、彫塑の工程（研磨・鋳造・溶接）の手触りを濃くしました。v16：内容のリアル寄せ（台詞・造形の監査）。ジェオンの直接的すぎる台詞をドラマ準拠の「言い切らない」形に書き換え、誕生日の場面の段取りの不整合や、同じ言い回しの反復を修正しました。v8〜v15：後日談（エンディング別3編）と「彼のほうから来る連絡」（v8）、通話ボイス（v9）、続く完成度向上パス（v10〜v15）での整合性監査・実機相当の検証・容量の軽量化（約半分に）・操作感と読みやすさの最終監査までを行いました。v7：効果音と生活音を追加。カカオの送受信音、着信音、雨音やバーの空気感などの環境音を、すべてオリジナル合成音で実装しました。効果音のON／OFF・音量・全体ミュートはホームの演出設定から変更できます。v6：人と世界の変化をリアルに。ジェオンのプロフィール（状態メッセージ／プロフィールミュージック／写真）が物語で変化し、端末の時計とバッテリーは作中の時間と連動。IGのフォロワー・いいね・コメントも時間で育ち、写真アプリに物語の写真が日付付きで増えていきます。v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+<p class="src">v24：アプリ細部の2021年実物寄せ（残差分）。カカオトークのトーク一覧は、時刻を名前の行の右端・未読バッジをその真下に置く実物の配置に直し、友だち一覧のジェオンの行にはプロフィールミュージックのピルを付けました（プロフィール画面のミュージック表示も「曲名 - アーティスト」の実物書式に）。友だちタブのヘッダーアイコンも実物どおり友だち追加に切り替わります。Instagramのストーリービューアには下部の返信欄（メッセージ送信欄＋ハート＋紙飛行機）を追加。通話画面は通話中ボタンのラベルを「통화 추가」に、終話ボタンの受話器アイコンを下向きに直し、通話履歴の各行にはiOS「最近」の情報ボタンを付けました。実物と違うと断言できない箇所（日付の「日」表記、着信ボタンのラベル文言など）は推測で変えず見送っています。物語・選択肢・数値・セーブ形式は不変です。v23：操作感と画面の触感。画面遷移にiOSらしい入場の動きを付け、通知バナーは滑って退場するよう直しました。チャットのスクロールは「最下部にいるときだけ追随」に変え、読み返している途中で新着に位置を奪われません。フリーチャットの入力は日本語変換の確定Enterで誤送信しないようにし、タブから戻ったときに止まっていたBGM・環境音・着信音が復帰するよう直しました。設定トグルや閉じるボタンなど小さいボタンのタップ領域も広げています。物語・選択肢・数値・セーブ形式は不変です。v22：ボーナス面とフリーチャットの仕上げ。彼視点ボーナス編5編を本編の確定場面と照合し、残っていた事実のズレ（誕生日の段取り、作品が壊れたことを知った時期、選択肢で変わる反応の回想）を正しました。フリーチャットは、パリの話題への応答を後日談の描写に、展示の応答を修復の場面の彼の台詞に揃え、「蝶が増えた」という言い回しの集中もほどきました。物語・選択肢・数値・セーブ形式は不変です。v21：選択肢と結末まわりの質を点検。響きの重なる選択肢と、台詞に舞台指示が混ざった選択肢を整え、エンディングコレクションと第1部終了画面で特別ENDの存在と条件（解明度55以上）が分かるようにしました。物語・数値・セーブ形式は不変です。v20：横断監査（数値・日付・推移の整合）。日付と曜日、プロフィールの変化段階、フォロワーやいいねの推移、解放条件を全件照合し、通話の帰属（彼視点02とクレジットに残っていた「誕生日の夜」の誤認）、彼視点05の解放条件、カレンダーのソルア宣戦布告の解放時期など、残っていた小さなズレを正しました。物語・選択肢・セーブ形式は不変です。v19：演出と読み味の磨き込み。山場（「付き合おう」／雨の夜の詰問／最終告白／最終選択／後日談の核）の直前にだけ一拍の「間」を置き、逆に軽い台詞へ誤って効いていた間の演出は外しました。あわせて、章の切り替わりには章題の区切りを表示し、展示当日に割り込んでいた日常通知は修復の時期へ移し、重い台詞には受信音を鳴らさないよう鳴らし分けを整えました。物語・選択肢・セーブ形式は不変です。v18：内容の深掘り第2層（脇役と文章の質）。脇役（ビンナ／ソルア／ドヒョク／彫塑科グループ）の口調を各人の立場と性格に合わせて書き分け、彼の投稿への友人のIGコメントを2021年当時の韓国の若者の文体に寄せ、解剖メモ9件の語り口（言い切りすぎの緩和、事実と推測の分け方）を統一しました。あわせて、個展・バー・作業室・合宿・展示会場の場面描写に音・匂い・温度の感覚情報を足しています。v17：内容のリアル寄せ（生活・時代考証）。韓国の大学にない「GW」表記を正し、2021年コロナ禍の実態（人数制限・オンライン併用・少人数合宿）と矛盾しない描写に整え、彫塑の工程（研磨・鋳造・溶接）の手触りを濃くしました。v16：内容のリアル寄せ（台詞・造形の監査）。ジェオンの直接的すぎる台詞をドラマ準拠の「言い切らない」形に書き換え、誕生日の場面の段取りの不整合や、同じ言い回しの反復を修正しました。v8〜v15：後日談（エンディング別3編）と「彼のほうから来る連絡」（v8）、通話ボイス（v9）、続く完成度向上パス（v10〜v15）での整合性監査・実機相当の検証・容量の軽量化（約半分に）・操作感と読みやすさの最終監査までを行いました。v7：効果音と生活音を追加。カカオの送受信音、着信音、雨音やバーの空気感などの環境音を、すべてオリジナル合成音で実装しました。効果音のON／OFF・音量・全体ミュートはホームの演出設定から変更できます。v6：人と世界の変化をリアルに。ジェオンのプロフィール（状態メッセージ／プロフィールミュージック／写真）が物語で変化し、端末の時計とバッテリーは作中の時間と連動。IGのフォロワー・いいね・コメントも時間で育ち、写真アプリに物語の写真が日付付きで増えていきます。v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -458,7 +469,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
 <!-- KAKAO (2021) -->
 <div class="view" id="v-kakao">
-<div class="kk-head"><h2 id="kk-title">채팅</h2><div class="kk-icons"><span>🔍</span><span>💬</span><span>🎵</span><span>⚙️</span></div></div>
+<div class="kk-head"><h2 id="kk-title">채팅</h2><div class="kk-icons"><span>🔍</span><span id="kk-ico2">💬</span><span>🎵</span><span>⚙️</span></div></div>
 <div class="abody">
 <div id="thread-list"></div>
 <div id="friend-list" style="display:none"></div>
@@ -547,9 +558,9 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="ui-incall">
 <div class="call-grid">
 <div class="cg"><i>🔇</i>음소거</div><div class="cg"><i>⌨️</i>키패드</div><div class="cg"><i>🔊</i>스피커</div>
-<div class="cg"><i>➕</i>추가</div><div class="cg"><i>📹</i>FaceTime</div><div class="cg"><i>👤</i>연락처</div>
+<div class="cg"><i>➕</i>통화 추가</div><div class="cg"><i>📹</i>FaceTime</div><div class="cg"><i>👤</i>연락처</div>
 </div>
-<button class="cb end" id="call-next"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></button>
+<button class="cb end" id="call-next"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff" transform="rotate(135 12 12)"/></svg></button>
 </div>
 </div>
 </div>
@@ -595,6 +606,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="story-progs" id="story-progs"></div>
 <div class="story-head"><img id="story-av" src="" alt=""><b id="story-user"></b><span id="story-ago"></span><button class="sx" id="story-close">✕</button></div>
 <div class="story-cap" id="story-cap"></div>
+<div class="story-foot"><span class="sf-in">メッセージを送信…</span><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></div>
 <button class="story-zone l" id="story-prev"></button>
 <button class="story-zone r" id="story-next"></button>
 </div>
@@ -1152,7 +1164,7 @@ function replay(){
 /* ================= SIDE VIEWS ================= */
 function threadRow(img,name,prev,time,ub,onclick,avc){
  const b=document.createElement('button'); b.className='thread';
- b.innerHTML=(img?'<img class="av" src="'+img+'">':'<span class="avc" style="background:'+avc+'">👥</span>')+'<span class="tt"><span class="tn">'+name+'<time>'+time+'</time></span><span class="tp">'+esc(prev)+'</span></span>'+(ub?'<span class="ub">'+ub+'</span>':'');
+ b.innerHTML=(img?'<img class="av" src="'+img+'">':'<span class="avc" style="background:'+avc+'">👥</span>')+'<span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(prev)+'</span></span>'+'<span class="tr"><time>'+time+'</time>'+(ub?'<span class="ub">'+ub+'</span>':'')+'</span>';
  b.addEventListener('click',onclick); return b;
 }
 function renderThreads(){
@@ -1253,10 +1265,10 @@ function endsHTML(){
 const RAIN_IDX=STORY.findIndex(it=>it.k==='memo'&&it.id===7);
 function renderCallLog(){
  let h='';
- if(S.call1||S.callSeen) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 06:12 ― 言いかけて、止めた夜</span></span></div>';
- if(S.call2) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 03:47 ― ブレスレットの夜。言わないと決めたこと</span></span></div>';
+ if(S.call1||S.callSeen) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 06:12 ― 言いかけて、止めた夜</span></span><span class="cii">i</span></div>';
+ if(S.call2) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 03:47 ― ブレスレットの夜。言わないと決めたこと</span></span><span class="cii">i</span></div>';
  /* 雨の夜の痕跡：言い争いのあと、彼は一度だけ電話をかけた。出られなかった（出なかった）一本だけが履歴に残る */
- if(RAIN_IDX>=0&&S.idx>RAIN_IDX) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn"><span class="missed">パク・ジェオン</span><time>6月</time></span><span class="tp">부재중 전화（不在着信）― 6월 26일 오전 2:47</span></span></div>';
+ if(RAIN_IDX>=0&&S.idx>RAIN_IDX) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn"><span class="missed">パク・ジェオン</span><time>6月</time></span><span class="tp">부재중 전화（不在着信）― 6월 26일 오전 2:47</span></span><span class="cii">i</span></div>';
  $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話の内容は物語の中で再生されます（核となるセリフにはボイス付き）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
 }
 /* nav */
@@ -1295,8 +1307,9 @@ function renderFriends(){
  if(bday) h+='<div class="fr-sec">생일인 친구</div><button class="thread fr-row" data-fr="なお"><img class="av" src="assets/nao-avatar.jpg"><span class="tt"><span class="tn">なお 🎂</span><span class="tp">오늘 생일이에요</span></span></button>';
  const cnt=1+(S.chap>=1?1:0)+(S.chap>=4?1:0)+(S.chap>=5?1:0);
  h+='<div class="fr-sec">친구 '+cnt+'</div>';
- const row=(img,name,st)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(st||'')+'</span></span></button>';
- h+=row(cav(),'パク・ジェオン',profStage().st);
+ const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(st||'')+'</span></span>'+(mus?'<span class="fr-mus">♪ '+esc(mus)+'</span>':'')+'</button>';
+ const jm=(profStage().mus.match(/「([^」]+)」/)||[])[1]||'';
+ h+=row(cav(),'パク・ジェオン',profStage().st,jm);
  if(S.chap>=1) h+=row('assets/av-bitna.jpg','ビンナ','');
  if(S.chap>=4) h+=row('assets/av-dohyuk.jpg','ヤン・ドヒョク','🍜');
  if(S.chap>=5) h+=row('assets/av-sola.jpg','ユン・ソルア','');
@@ -1311,8 +1324,9 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
  const t=b.dataset.tab;
  document.querySelectorAll('.kk-tabbar [data-tab]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
  const T=$('#kk-title');
- if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; }
- else if(t==='chats'){ $('#friend-list').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; }
+ const ic2=$('#kk-ico2');
+ if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; if(ic2) ic2.textContent='👤+'; }
+ else if(t==='chats'){ $('#friend-list').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.textContent='💬'; }
  else{ toast('（このタブは2021年仕様の演出用です）'); }
 }));
 $('#btn-plus').addEventListener('click',()=>{ $('#plus-panel').classList.toggle('on'); });
@@ -1474,7 +1488,7 @@ function updProfile(){ const p=profStage();
  const bg=$('#prof-bg'); if(bg&&bg.getAttribute('src')!==p.bg) bg.src=p.bg;
  const st=$('#prof-status'); if(st) st.textContent=p.st;
  const mw=$('#prof-music-wrap'); if(mw) mw.style.display=p.mus?'':'none';
- const mu=$('#prof-music'); if(mu&&p.mus) mu.textContent='♪ 프로필 뮤직 ― '+p.mus;
+ const mu=$('#prof-music'); if(mu&&p.mus) mu.textContent='♪ '+p.mus.replace(/[「」]/g,'').replace(/―/g,' - ');
  const ch=document.querySelector('#chat-prof-btn img'); if(ch&&ch.getAttribute('src')!==p.av) ch.src=p.av;
 }
 /* ステータスバー／ロック画面の時計とバッテリーは物語内時刻（chatMin）に連動 */
