@@ -171,10 +171,10 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .choice-btn:active{background:var(--kakao)}
 .choice-btn.locked{opacity:.5;border-style:dashed}
 .chat-input{padding:7px 8px 22px;background:#fff;display:flex;gap:7px;align-items:center;border-top:1px solid #eee}
-#btn-plus{font-size:21px;color:#9a9a9e;width:38px;height:38px;flex:none}
+#btn-plus{font-size:21px;color:#9a9a9e;width:40px;height:40px;flex:none}
 .chat-input .fakein{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:13.5px;color:#a3a3a8}
 .in-emo,.in-hash{font-size:18px;color:#9a9a9e;flex:none}
-.chat-input .sendb{background:var(--kakao);border-radius:50%;width:37px;height:37px;font-size:15px;flex:none;color:#3a1d1d}
+.chat-input .sendb{background:var(--kakao);border-radius:50%;width:40px;height:40px;font-size:15px;flex:none;color:#3a1d1d}
 .plus-panel{display:none;background:#fff;padding:10px 8px 30px;grid-template-columns:repeat(4,1fr);gap:14px 4px;border-top:1px solid #f0f0f0}
 .plus-panel.on{display:grid}
 .plus-panel div{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:#666}
@@ -293,7 +293,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .wid-music .mh{display:flex;align-items:center;gap:8px}
 .wid-music .mh b{font-size:13px}
 #mus-now{flex:1;font-size:11.5px;color:#ffe970;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#mus-toggle{background:rgba(255,255,255,.16);color:#fff;border-radius:13px;padding:4px 11px;font-size:11.5px;font-weight:700;flex:none}
+#mus-toggle{background:rgba(255,255,255,.16);color:#fff;border-radius:13px;padding:8px 13px;font-size:11.5px;font-weight:700;flex:none;min-height:38px}
 .wid-music input[type=range]{width:100%;margin-top:7px;accent-color:#fee500}
 .wid-music .mc{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px}
 .ic-pov{background:linear-gradient(150deg,#5b4a8a,#2c2350);font-size:27px}
@@ -306,7 +306,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #povread-body .pr-t{font-size:16px;font-weight:800;margin-bottom:12px;color:#241d3f}
 #free-row{display:none;padding:7px 8px 22px;background:#fff;gap:7px;align-items:center;border-top:1px solid #eee}
 #free-in{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:16px;color:#191919;font-family:inherit;min-width:0}
-#free-send{background:var(--kakao);border-radius:50%;width:37px;height:37px;font-size:15px;flex:none;color:#3a1d1d}
+#free-send{background:var(--kakao);border-radius:50%;width:40px;height:40px;font-size:15px;flex:none;color:#3a1d1d}
 .row.me.unsent .bub{background:#e9e9ec;color:#8a8a90}
 .unsent-lab{font-size:10px;color:#c0392b;flex:none;padding-bottom:2px;font-weight:700}
 #v-story{background:#000;color:#fff;z-index:140}
@@ -318,7 +318,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .story-head img{width:33px;height:33px;border-radius:50%;object-fit:cover}
 .story-head b{font-size:13.5px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .story-head span{font-size:12.5px;color:rgba(255,255,255,.75)}
-.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:10px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:12px 14px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .story-cap{position:absolute;left:0;right:0;bottom:64px;text-align:center;font-size:19px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.75);z-index:2;padding:0 26px;line-height:1.6}
 .story-zone{position:absolute;top:0;bottom:0;width:32%;z-index:2}
@@ -331,8 +331,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #tap-hint{position:absolute;right:15px;bottom:82px;width:36px;height:36px;border-radius:50%;background:rgba(28,38,52,.78);color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;z-index:60;pointer-events:none;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);box-shadow:0 3px 10px rgba(20,30,45,.35)}
 #tap-hint.on{display:flex;animation:hintb 1.5s ease-in-out infinite}
 @keyframes hintb{0%,100%{transform:translateY(0);opacity:.8}50%{transform:translateY(5px);opacity:1}}
-#noise{position:absolute;top:100px;left:10px;right:10px;background:rgba(26,26,32,.95);color:#fff;border-radius:17px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;z-index:90;transform:translateY(-160%);opacity:0;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s;box-shadow:0 10px 26px rgba(0,0,0,.38);cursor:pointer;pointer-events:none;visibility:hidden}
-#noise.on{transform:translateY(0);opacity:1;pointer-events:auto;visibility:visible}
+#noise{position:absolute;top:100px;left:10px;right:10px;background:rgba(26,26,32,.95);color:#fff;border-radius:17px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;z-index:90;transform:translateY(-160%);opacity:0;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s,visibility 0s linear .5s;box-shadow:0 10px 26px rgba(0,0,0,.38);cursor:pointer;pointer-events:none;visibility:hidden}
+#noise.on{transform:translateY(0);opacity:1;pointer-events:auto;visibility:visible;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s,visibility 0s}
 #noise .n-ic{font-size:19px;flex:none;line-height:1.3}
 #noise .n-t{font-size:11px;color:#c6c6cf;letter-spacing:.02em}
 #noise .n-b{font-size:13px;line-height:1.45;margin-top:1px}
@@ -340,7 +340,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .wid-set b{font-size:13px}
 .setrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px}
 .setrow .sl{color:#333;font-size:12.5px}
-.setbtn{background:#eef1f5;border-radius:12px;padding:7px 12px;font-size:12px;font-weight:700;color:#22384e;min-width:92px;min-height:34px}
+.setbtn{background:#eef1f5;border-radius:12px;padding:7px 12px;font-size:12px;font-weight:700;color:#22384e;min-width:92px;min-height:40px}
 .setnote{font-size:11px;color:#777;margin-top:8px;line-height:1.55}
 
 /* ===== v6 : gallery / night tint / call-log missed ===== */
@@ -354,7 +354,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .gal-meta{padding:14px 18px 42px;color:#fff}
 #gal-date{font-size:12px;color:#aeaeb6}
 #gal-cap{font-size:15px;margin-top:3px;line-height:1.6}
-#gal-close{position:absolute;top:52px;right:12px;color:#fff;font-size:19px;padding:10px;text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2}
+#gal-close{position:absolute;top:52px;right:12px;color:#fff;font-size:19px;padding:12px 14px;text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2}
 #night-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,18,48,.15),rgba(24,18,48,.20));pointer-events:none;z-index:150;display:none}
 #night-tint.on{display:block}
 .missed{color:#ff3b30}
@@ -374,10 +374,18 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .bub.draft{background:#ececf0;color:#8a8a90;border:1px dashed #c6c6cc}
 .msgimg{width:180px;max-width:62vw;border-radius:14px;display:block;box-shadow:0 2px 8px rgba(20,30,45,.18)}
 .epi-done{color:#7a6a2f;font-weight:700}
+/* ===== v23 : touch feel ===== */
+@keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.view.on{animation:vin .18s ease-out}
+#gal-view.on{animation:vin .18s ease-out}
+.plus-panel.on{animation:vin .18s ease-out}
+.app:active{opacity:.55}
+.setbtn:active{background:#d9e4ef}
 @media (prefers-reduced-motion: reduce){
  .wall-butterflies span{animation:none !important}
  #tap-hint.on{animation:none !important}
  .typing i{animation:none !important;opacity:.55}
+ .view.on,#gal-view.on,.plus-panel.on{animation:none !important}
  *{transition-duration:.01s !important;scroll-behavior:auto !important}
 }
 </style>
@@ -386,7 +394,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v22：ボーナス面とフリーチャットの仕上げ。彼視点ボーナス編5編を本編の確定場面と照合し、残っていた事実のズレ（誕生日の段取り、作品が壊れたことを知った時期、選択肢で変わる反応の回想）を正しました。フリーチャットは、パリの話題への応答を後日談の描写に、展示の応答を修復の場面の彼の台詞に揃え、「蝶が増えた」という言い回しの集中もほどきました。物語・選択肢・数値・セーブ形式は不変です。v21：選択肢と結末まわりの質を点検。響きの重なる選択肢と、台詞に舞台指示が混ざった選択肢を整え、エンディングコレクションと第1部終了画面で特別ENDの存在と条件（解明度55以上）が分かるようにしました。物語・数値・セーブ形式は不変です。v20：横断監査（数値・日付・推移の整合）。日付と曜日、プロフィールの変化段階、フォロワーやいいねの推移、解放条件を全件照合し、通話の帰属（彼視点02とクレジットに残っていた「誕生日の夜」の誤認）、彼視点05の解放条件、カレンダーのソルア宣戦布告の解放時期など、残っていた小さなズレを正しました。物語・選択肢・セーブ形式は不変です。v19：演出と読み味の磨き込み。山場（「付き合おう」／雨の夜の詰問／最終告白／最終選択／後日談の核）の直前にだけ一拍の「間」を置き、逆に軽い台詞へ誤って効いていた間の演出は外しました。あわせて、章の切り替わりには章題の区切りを表示し、展示当日に割り込んでいた日常通知は修復の時期へ移し、重い台詞には受信音を鳴らさないよう鳴らし分けを整えました。物語・選択肢・セーブ形式は不変です。v18：内容の深掘り第2層（脇役と文章の質）。脇役（ビンナ／ソルア／ドヒョク／彫塑科グループ）の口調を各人の立場と性格に合わせて書き分け、彼の投稿への友人のIGコメントを2021年当時の韓国の若者の文体に寄せ、解剖メモ9件の語り口（言い切りすぎの緩和、事実と推測の分け方）を統一しました。あわせて、個展・バー・作業室・合宿・展示会場の場面描写に音・匂い・温度の感覚情報を足しています。v17：内容のリアル寄せ（生活・時代考証）。韓国の大学にない「GW」表記を正し、2021年コロナ禍の実態（人数制限・オンライン併用・少人数合宿）と矛盾しない描写に整え、彫塑の工程（研磨・鋳造・溶接）の手触りを濃くしました。v16：内容のリアル寄せ（台詞・造形の監査）。ジェオンの直接的すぎる台詞をドラマ準拠の「言い切らない」形に書き換え、誕生日の場面の段取りの不整合や、同じ言い回しの反復を修正しました。v8〜v15：後日談（エンディング別3編）と「彼のほうから来る連絡」（v8）、通話ボイス（v9）、続く完成度向上パス（v10〜v15）での整合性監査・実機相当の検証・容量の軽量化（約半分に）・操作感と読みやすさの最終監査までを行いました。v7：効果音と生活音を追加。カカオの送受信音、着信音、雨音やバーの空気感などの環境音を、すべてオリジナル合成音で実装しました。効果音のON／OFF・音量・全体ミュートはホームの演出設定から変更できます。v6：人と世界の変化をリアルに。ジェオンのプロフィール（状態メッセージ／プロフィールミュージック／写真）が物語で変化し、端末の時計とバッテリーは作中の時間と連動。IGのフォロワー・いいね・コメントも時間で育ち、写真アプリに物語の写真が日付付きで増えていきます。v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+<p class="src">v23：操作感と画面の触感。画面遷移にiOSらしい入場の動きを付け、通知バナーは滑って退場するよう直しました。チャットのスクロールは「最下部にいるときだけ追随」に変え、読み返している途中で新着に位置を奪われません。フリーチャットの入力は日本語変換の確定Enterで誤送信しないようにし、タブから戻ったときに止まっていたBGM・環境音・着信音が復帰するよう直しました。設定トグルや閉じるボタンなど小さいボタンのタップ領域も広げています。物語・選択肢・数値・セーブ形式は不変です。v22：ボーナス面とフリーチャットの仕上げ。彼視点ボーナス編5編を本編の確定場面と照合し、残っていた事実のズレ（誕生日の段取り、作品が壊れたことを知った時期、選択肢で変わる反応の回想）を正しました。フリーチャットは、パリの話題への応答を後日談の描写に、展示の応答を修復の場面の彼の台詞に揃え、「蝶が増えた」という言い回しの集中もほどきました。物語・選択肢・数値・セーブ形式は不変です。v21：選択肢と結末まわりの質を点検。響きの重なる選択肢と、台詞に舞台指示が混ざった選択肢を整え、エンディングコレクションと第1部終了画面で特別ENDの存在と条件（解明度55以上）が分かるようにしました。物語・数値・セーブ形式は不変です。v20：横断監査（数値・日付・推移の整合）。日付と曜日、プロフィールの変化段階、フォロワーやいいねの推移、解放条件を全件照合し、通話の帰属（彼視点02とクレジットに残っていた「誕生日の夜」の誤認）、彼視点05の解放条件、カレンダーのソルア宣戦布告の解放時期など、残っていた小さなズレを正しました。物語・選択肢・セーブ形式は不変です。v19：演出と読み味の磨き込み。山場（「付き合おう」／雨の夜の詰問／最終告白／最終選択／後日談の核）の直前にだけ一拍の「間」を置き、逆に軽い台詞へ誤って効いていた間の演出は外しました。あわせて、章の切り替わりには章題の区切りを表示し、展示当日に割り込んでいた日常通知は修復の時期へ移し、重い台詞には受信音を鳴らさないよう鳴らし分けを整えました。物語・選択肢・セーブ形式は不変です。v18：内容の深掘り第2層（脇役と文章の質）。脇役（ビンナ／ソルア／ドヒョク／彫塑科グループ）の口調を各人の立場と性格に合わせて書き分け、彼の投稿への友人のIGコメントを2021年当時の韓国の若者の文体に寄せ、解剖メモ9件の語り口（言い切りすぎの緩和、事実と推測の分け方）を統一しました。あわせて、個展・バー・作業室・合宿・展示会場の場面描写に音・匂い・温度の感覚情報を足しています。v17：内容のリアル寄せ（生活・時代考証）。韓国の大学にない「GW」表記を正し、2021年コロナ禍の実態（人数制限・オンライン併用・少人数合宿）と矛盾しない描写に整え、彫塑の工程（研磨・鋳造・溶接）の手触りを濃くしました。v16：内容のリアル寄せ（台詞・造形の監査）。ジェオンの直接的すぎる台詞をドラマ準拠の「言い切らない」形に書き換え、誕生日の場面の段取りの不整合や、同じ言い回しの反復を修正しました。v8〜v15：後日談（エンディング別3編）と「彼のほうから来る連絡」（v8）、通話ボイス（v9）、続く完成度向上パス（v10〜v15）での整合性監査・実機相当の検証・容量の軽量化（約半分に）・操作感と読みやすさの最終監査までを行いました。v7：効果音と生活音を追加。カカオの送受信音、着信音、雨音やバーの空気感などの環境音を、すべてオリジナル合成音で実装しました。効果音のON／OFF・音量・全体ミュートはホームの演出設定から変更できます。v6：人と世界の変化をリアルに。ジェオンのプロフィール（状態メッセージ／プロフィールミュージック／写真）が物語で変化し、端末の時計とバッテリーは作中の時間と連動。IGのフォロワー・いいね・コメントも時間で育ち、写真アプリに物語の写真が日付付きで増えていきます。v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -924,7 +932,11 @@ function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
 function scheduleRead(){ if(readTimer) clearTimeout(readTimer); const d=ffMode?60:(900+Math.random()*700)*paceMul()*ambientMul(); readTimer=setTimeout(()=>{ clearUnread(); },d); }
 function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r); }
 function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); feed.appendChild(r);}
-function scrollFeed(){feed.scrollTop=feed.scrollHeight;}
+/* v23：追随スクロール。最下部付近にいるときだけ新着へ追随し、読み返し中の位置は奪わない。
+   操作の起点（選択肢・カード表示、明示タップで進めた直後）は最新へ寄せる */
+let feedStick=true, advForce=false;
+feed.addEventListener('scroll',()=>{ feedStick=(feed.scrollHeight-feed.scrollTop-feed.clientHeight)<160; },{passive:true});
+function scrollFeed(force){ if(force||advForce||feedStick){ feed.scrollTop=feed.scrollHeight; feedStick=true; } advForce=false; }
 function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('🔍 解剖メモが解放されました（ホームの「解剖メモ」）');}}
 function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('📷 Instagramに新しい投稿が解放されました');}}
 function applyItem(it,quiet){
@@ -951,7 +963,7 @@ let inSeq=false, onTap=null, ffMode=false, readTimer=null;
 function paceMul(){ return (S.pace==='slow'?1.6:1)*(ffMode?0.1:1); }
 function ambientMul(){ const h=Math.floor(chatMin/60)%24; return (h>=23||h<5)?1.7:1; } /* 深夜は返信が遅い */
 function setHint(on){ const th=$('#tap-hint'); if(th) th.classList.toggle('on',!!on); }
-function fireTap(){ if(onTap){ const f=onTap; onTap=null; setHint(false); f(); } }
+function fireTap(){ advForce=true; if(onTap){ const f=onTap; onTap=null; setHint(false); f(); } }
 function waitTap(){ return new Promise(res=>{ setHint(true); onTap=()=>{ setHint(false); res(); }; }); }
 function interruptibleSleep(ms){ return new Promise(res=>{ if(ms<=40){ res(); return; } let done=false; const tap=()=>fin(); const fin=()=>{ if(done) return; done=true; clearTimeout(t); if(onTap===tap) onTap=null; res(); }; const t=setTimeout(fin,ms); onTap=tap; }); }
 function typingRow(){ const t=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(t); scrollFeed(); return t; }
@@ -1065,7 +1077,7 @@ function renderChoice(it){
    });
    wrap.appendChild(b);
  });
- feed.appendChild(wrap); scrollFeed();
+ feed.appendChild(wrap); scrollFeed(true);
 }
 function renderPart1Card(compact){
  let inner;
@@ -1075,7 +1087,7 @@ function renderPart1Card(compact){
    inner='<h3>第1部 ― 完</h3><p>「いつも壁を作ってる」<br>一度目の別れまでを描きました。</p><p>第1部終了時点の解明度</p><div class="big">'+S.kai+' ／ 100</div><p>心の距離：'+S.kyo+'</p><p style="font-size:12px;color:#c8d2de">カレンダーに「兵役：未定の予定」が追加されました。<br>このまま ▶ で読み進めると、第2部が始まります。<br>なお、解明度が55以上になると、最終章でもう一つの選択肢が開きます。</p><button class="tohome-b">ホームへ</button>';
  }
  const d=el('<div class="endcard">'+inner+'</div>');
- feed.appendChild(d); scrollFeed();
+ feed.appendChild(d); scrollFeed(true);
  const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
 }
 const FINAL_OPTS=[
@@ -1091,7 +1103,7 @@ const ENDINGS={
 function renderEnding(id){
  const E=ENDINGS[id]; if(!E) return;
  const d=el('<div class="endcard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><button class="tohome-b">ホームへ</button></div>');
- feed.appendChild(d); scrollFeed();
+ feed.appendChild(d); scrollFeed(true);
  const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
  addSys(id==='nao'?'―― このトークは、もう使われていません ――':'―― エンディング後のフリーチャットが解放されました。このトークで、自由にメッセージを送れます ――');
  updChatMode();
@@ -1115,7 +1127,7 @@ function renderFinal(it){
    });
    wrap.appendChild(b);
  });
- feed.appendChild(wrap); scrollFeed();
+ feed.appendChild(wrap); scrollFeed(true);
 }
 /* replay saved progress instantly */
 function replay(){
@@ -1380,7 +1392,7 @@ function freeAddMe(t,unsent){ const r=el('<div class="row me'+(unsent?' unsent':
 function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div></div></div></div>'); feed.appendChild(r); scrollFeed(); }
 function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
 function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); feed.appendChild(r); scrollFeed(); }
-function renderFreeLog(){ (S.free||[]).forEach(m=>{ if(m.w==='me') freeAddMe(m.t,false); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(); }
+function renderFreeLog(){ (S.free||[]).forEach(m=>{ if(m.w==='me') freeAddMe(m.t,false); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
 function pickFreeReplies(txt){
  if(S.endId==='gen'){ if(S.freeN===2) return ['……見たよ']; if(S.freeN===5) return ['……元気で']; return null; }
  const R=[
@@ -1425,7 +1437,7 @@ async function sendFree(){
  save(); freeBusy=false;
 }
 $('#free-send').addEventListener('click',sendFree);
-$('#free-in').addEventListener('keydown',e=>{ if(e.key==='Enter') sendFree(); });
+$('#free-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendFree(); }); /* v23：日本語入力の変換確定Enterでは送信しない */
 
 /* ================= v5 : DAILY-LIFE NOISE & SETTINGS ================= */
 const NOISE={2:['📚','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['🌦','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['💬','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['🎓','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['📦','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
@@ -1592,6 +1604,15 @@ try{
  const mo=new MutationObserver(()=>{ updAmb(); if(curViewId()!=='v-call'&&ringing) sfxRing(false); });
  document.querySelectorAll('.view').forEach(v=>mo.observe(v,{attributes:true,attributeFilter:['class']}));
 }catch(e){}
+/* v23：タブ復帰時の音声状態の復元。離脱中にOS/ブラウザへ止められた再生を、設定上ONのものだけ再開する */
+document.addEventListener('visibilitychange',()=>{
+ if(document.visibilityState!=='visible') return;
+ try{
+   if(musicStarted&&S.sndOn&&!S.mute){ const a=ensureBgm(); if(a&&a.paused&&curTrack) a.play().catch(()=>{}); }
+   if(ringing&&ringEl&&ringEl.paused&&sfxEnabled()) ringEl.play().catch(()=>{});
+   if(ambEl&&ambName&&ambEl.paused&&sfxEnabled()&&curViewId()==='v-chat') ambEl.play().catch(()=>{});
+ }catch(e){}
+});
 /* 設定UI（効果音・効果音量・全体ミュート） */
 function updSfxUI(){
  const b=$('#set-sfx'); if(b) b.textContent=S.sfxOn?'ON':'OFF';
