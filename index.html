@@ -606,8 +606,8 @@ const MEMOS=[
 const IG_J=[
 {id:'atelier',img:'assets/ig-atelier.jpg',cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','先輩、作業しかしてないの？'],['park_jaeon','끝나지 않으니까']],cmL:[['b1nna_','先輩、この人最近ずっと作業室にいるよ']]},
 {id:'jaeon2',img:'assets/ig-jaeon2.jpg',cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','오빠 이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
-{id:'jaeon1',img:'assets/ig-jaeon1.jpg',cap:'☁️',likes:'529',unlock:3,cm:[['b1nna_','いいね100個あげたい'],['nao_sculpt','（……見てるだけ）']],cmL:[['s0l_a','……']]},
-{id:'butterfly',img:'assets/ig-butterfly.jpg',cap:'나비. 잡으면 죽는다',likes:'601',unlock:3,cm:[['s0l_a','相変わらずだね'],['park_jaeon','飛んでる時が一番きれいだから']],cmL:[['b1nna_','蝶の写真、前より増えたね']]},
+{id:'jaeon1',img:'assets/ig-jaeon1.jpg',cap:'☁️',likes:'529',unlock:4,cm:[['b1nna_','いいね100個あげたい'],['nao_sculpt','（……見てるだけ）']],cmL:[['s0l_a','……']]},
+{id:'butterfly',img:'assets/ig-butterfly.jpg',cap:'나비. 잡으면 죽는다',likes:'601',unlock:4,cm:[['s0l_a','相変わらずだね'],['park_jaeon','飛んでる時が一番きれいだから']],cmL:[['b1nna_','蝶の写真、前より増えたね']]},
 {id:'bar',img:'assets/ig-bar.jpg',cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]},
 {id:'jaeon3',img:'assets/ig-jaeon3.jpg',cap:'전시 준비. 손이 기억하는 것',likes:'358',unlock:6,cm:[['s0l_a','열심히 하네'],['park_jaeon','……見て覚えるタイプなんで']]},
 {id:'rain',img:'assets/ig-rain.jpg',cap:'비. 우산은 없었다',likes:'692',unlock:9,cm:[['b1nna_','誰と？ どこで？'],['park_jaeon','秘密']],cmL:[['s0l_a','……元気？']]},
@@ -620,7 +620,7 @@ const IG_J=[
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なお先輩かわいい'],['nao_sculpt','ありがとう笑']],cmL:[['b1nna_','この日、泣いてなかった？']]},
 {id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:0,cm:[['b1nna_','その顔すき']],cmL:[['park_jaeon','🪼']]},
-{id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:3,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
+{id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:4,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
 ];
 const CAL=[
 {m:'3月',e:[
@@ -1235,7 +1235,7 @@ function renderCallLog(){
  if(S.call2) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 03:47 ― ブレスレットの夜。言わないと決めたこと</span></span></div>';
  /* 雨の夜の痕跡：言い争いのあと、彼は一度だけ電話をかけた。出られなかった（出なかった）一本だけが履歴に残る */
  if(RAIN_IDX>=0&&S.idx>RAIN_IDX) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn"><span class="missed">パク・ジェオン</span><time>6月</time></span><span class="tp">부재중 전화（不在着信）― 6월 26일 오전 2:47</span></span></div>';
- $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話の内容は物語の中で再生されます（音声なし）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
+ $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話の内容は物語の中で再生されます（核となるセリフにはボイス付き）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
 }
 /* nav */
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
@@ -1324,9 +1324,9 @@ function musicCreditHTML(){ return '<div class="mus-credit"><b>♪ BGMクレジ�
 /* ================= v4 : POV ================= */
 const POVS=[
 {id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n\n泣いた跡。強い酒。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
-{id:2,title:'彼視点 02 ― 誕生日の電話のあと',sub:'誕生日の章を過ぎると解放',unlock:()=>S.calU>=5,body:'ソルアからの電話。\n行かなきゃ、と口が言った。行きたかったかは、別。\n\n戻った時、食卓は片付いていて、幼なじみとかいう男のわかめスープが、湯気を立てていた。\n……俺が作るはずだったやつ。\n\n「ごめん」しか言えなかった。理由を聞かれても、答えられなかった。\n答えられないものを謝るなよ、と自分でも思う。\n\n夜、電話をかけた。声が聞きたくて。\n――それも、言えなかった。\n「……なんでもない。忘れて」\n忘れてほしかったのは、本当は、こっちのほうだった。'},
+{id:2,title:'彼視点 02 ― 言えなかった夜',sub:'誕生日の章を過ぎると解放',unlock:()=>S.calU>=5,body:'ソルアからの電話。\n行かなきゃ、と口が言った。行きたかったかは、別。\n\n戻った時、食卓は片付いていて、幼なじみとかいう男のわかめスープが、湯気を立てていた。\n……俺が作るはずだったやつ。\n\n「ごめん」しか言えなかった。理由を聞かれても、答えられなかった。\n答えられないものを謝るなよ、と自分でも思う。\n\n夜、電話をかけた。声が聞きたくて。\n――それも、言えなかった。\n「……なんでもない。忘れて」\n忘れてほしかったのは、本当は、こっちのほうだった。'},
 {id:3,title:'彼視点 03 ― 観覧車のあと',sub:'合宿の章で解放',unlock:()=>S.calU>=8,body:'観覧車。くじ引きの結果。\n狭いゴンドラで、外ばかり見ていた。隣を見たら、負ける気がした。\n\n「……ドヒョクとはさ」\n言いかけて、やめた。聞いて、どうするつもりだったのか。\n嫉妬、って名前をつけたら、認めたことになる。\nつけなければ、ないことになる――はずだった。\n\nささやきゲーム。質問は、最悪のやつだった。\n「……ユ・ナビ」\n声が漏れた時、終わったと思った。\n\nでも彼女は、怒らなかった。「覚えとく」とだけ。\n……覚えとく、って何だ。嬉しいのか、怖いのか、自分でも分からなかった。'},
-{id:4,title:'彼視点 04 ― 雨の夜の、翌朝',sub:'雨の章を過ぎると解放',unlock:()=>S.calU>=9,body:'雨。酒。ドヒョクの名前。\n言ったことの半分も覚えていないのに、彼女の顔だけ、覚えている。\n\n「二度と、私の前に現れないで」\n\n謝りの文章を、何度も打って、消した。\n言葉で謝ったら、また軽くなる気がした。言い訳に聞こえる気がした。\n結局、送れなかった。\n\n一睡もできなかった。目を閉じると、雨の中の背中が出てくる。\n――あの人の作品が壊れたと聞いたのは、数日後だった。\n行く理由は、もうなかった。でも手は、勝手に道具を揃えていた。'},
+{id:4,title:'彼視点 04 ― 雨の夜の、翌朝',sub:'雨の章を過ぎると解放',unlock:()=>S.calU>=10||S.pov.includes(4),body:'雨。酒。ドヒョクの名前。\n言ったことの半分も覚えていないのに、彼女の顔だけ、覚えている。\n\n「二度と、私の前に現れないで」\n\n謝りの文章を、何度も打って、消した。\n言葉で謝ったら、また軽くなる気がした。言い訳に聞こえる気がした。\n結局、送れなかった。\n\n一睡もできなかった。目を閉じると、雨の中の背中が出てくる。\n――あの人の作品が壊れたと聞いたのは、数日後だった。\n行く理由は、もうなかった。でも手は、勝手に道具を揃えていた。'},
 {id:5,title:'彼視点 05 ― 去る日',sub:'エンディング到達で解放',unlock:()=>S.done||S.calU>=11,body:'展示室。彼女の作品の前。\n直す手伝いはした。約束通り、今日で最後にするつもりだった。\n……つもり、だった。\n\n振り返った彼女に、言った。\n「……君が、すごく好きだ」\n\n初めて、濁さずに言えた気がする。遅すぎる、ってことも分かっていた。\n答えが何であれ、今日のことは後悔しない――と、思いたい。\n\n蝶は、捕まえようとすると死ぬ。\nだから俺は、手を開いたまま、立っていた。'}
 ];
 function renderPOV(){
@@ -1346,7 +1346,7 @@ const STORIES=[
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier.jpg',cap:'작업 중',ago:'2시간',unlock:2},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly.jpg',cap:'나비',ago:'5시간',unlock:3},
 {user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post2.jpg',cap:'🪼 오늘도 제작',ago:'3시간',unlock:0},
-{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post3.jpg',cap:'작업의 합간 ☕',ago:'1시간',unlock:3},
+{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post3.jpg',cap:'작업 중 잠깐 ☕',ago:'1시간',unlock:3},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-wheel.jpg',cap:'관람차',ago:'1시간',unlock:8},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-rain.jpg',cap:'비',ago:'30분',unlock:9},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-gallery.jpg',cap:'전시 D-day',ago:'방금',unlock:11}
@@ -1435,11 +1435,11 @@ updSetUI();
    すべて物語の進行（S.calU／chatMin）から導出するので、セーブ形式は不変。 */
 function vib(p){ try{ if(navigator&&navigator.vibrate) navigator.vibrate(p); }catch(e){} }
 /* ジェオンのプロフィールは章の進行で変わる。変化の節目は解剖メモ／彼視点の解放と緩く連動：
-   calU3=メモ03の頃（曖昧な関係）、6=助手復帰（メモ06）、9=雨の章（メモ07／彼視点04）、11=最終章（メモ09／彼視点05） */
+   calU3=メモ03の頃（曖昧な関係）、6=助手復帰（メモ06）、10=雨の章のあと（メモ07／彼視点04を過ぎて）、11=最終章（メモ09／彼視点05） */
 function profStage(){ const u=S.calU;
  if(S.epiProf&&S.endId==='drama') return {st:'정원에, 가끔 간다',mus:'「Butterfly」― JUNHA PARK (J.UNA)',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
  if(u>=11) return {st:'나비. 이제는 잡지 않는다',mus:'「Love Me Like That」― SAM KIM',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
- if(u>=9)  return {st:'',mus:'',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-jaeon2.jpg'};
+ if(u>=10) return {st:'',mus:'',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-jaeon2.jpg'};
  if(u>=6)  return {st:'전시 준비 중',mus:'「We\'re Already」― KIMMUSEUM',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon2.jpg'};
  if(u>=3)  return {st:'',mus:'「Whisper」― Park Ji Woo',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon1.jpg'};
  return {st:'작업 중. 끝나지 않는 것',mus:'「Love Song」',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon1.jpg'};
@@ -1552,7 +1552,7 @@ function playVoiceLine(li){
 }
 function stopVoice(){ try{ if(voiceEl){ voiceEl.pause(); try{ voiceEl.currentTime=0; }catch(e){} } }catch(e){} }
 /* 生活音（アンビエント）：場面（dateのcal）で切り替え、チャット画面を離れたら止まる */
-const AMBMAP={0:'room',1:'bar',2:'room',6:'room',9:'rain',10:'room',11:'room'};
+const AMBMAP={0:'room',1:'bar',2:'room',3:'room',5:'room',6:'room',9:'rain',10:'room',11:'room'};
 const AMBF={bar:'assets/sfx/bar.mp3',rain:'assets/sfx/rain.mp3',room:'assets/sfx/room.mp3'};
 const AMBG={bar:0.30,rain:0.38,room:0.5};
 let curAmb=null, ambEl=null, ambName=null;
