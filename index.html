@@ -7,61 +7,106 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
---kakao:#fee500; --kakao-bg:#bacee0; --kakao-brown:#3a1d1d; --me:#fee500;
+--kakao:#fee500; --kakao-bg:#b2c7d9; --kakao-brown:#3a1d1d; --me:#fee500;
 --ink:#111; --sub:#8e8e93; --bg:#f2f2f7; --red:#ff3b30; --line:#e3e3e8;
 }
 html,body{height:100%}
-body{font-family:-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+body{font-family:-apple-system,"SF Pro Text","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
 background:radial-gradient(1200px 700px at 20% 0%,#33302e 0%,#171512 55%,#0b0a09 100%);
 color:#fff;display:flex;flex-direction:column;align-items:center;min-height:100dvh}
 .page-head{padding:16px 16px 8px;text-align:center;max-width:560px}
 .page-head h1{font-size:19px;letter-spacing:.04em}
 .page-head p{font-size:11.5px;color:#c9c2b8;margin-top:5px;line-height:1.6}
 .page-head .src{font-size:10.5px;color:#8d8578;margin-top:5px;line-height:1.6}
+/* ===== phone frame : iPhone 12 ===== */
 .phone{position:relative;width:min(400px,100vw);height:min(844px,calc(100dvh - 118px));
-background:#000;border-radius:54px;padding:11px;flex:none;
-box-shadow:0 0 0 2px #3a3d42,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margin-bottom:12px}
-@media (max-width:430px){.phone{border-radius:0;padding:0;height:calc(100dvh - 96px);box-shadow:none}.page-head{padding:10px 12px 4px}.page-head .src{display:none}}
-.screen{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:#000}
+background:#000;border-radius:52px;padding:11px;flex:none;
+box-shadow:0 0 0 2px #4a4d52,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margin-bottom:12px}
+.phone::before{content:'';position:absolute;left:-2.5px;top:190px;width:3px;height:88px;background:#3a3d42;border-radius:2px}
+.phone::after{content:'';position:absolute;right:-2.5px;top:220px;width:3px;height:120px;background:#3a3d42;border-radius:2px}
+@media (max-width:430px){.phone{border-radius:0;padding:0;height:calc(100dvh - 96px);box-shadow:none}.phone::before,.phone::after{display:none}.page-head{padding:10px 12px 4px}.page-head .src{display:none}}
+.screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#000}
 @media (max-width:430px){.screen{border-radius:0}}
-.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:112px;height:30px;background:#000;border-radius:20px;z-index:200}
-.statusbar{position:absolute;top:0;left:0;right:0;height:52px;z-index:150;display:flex;align-items:flex-end;justify-content:space-between;padding:0 30px 4px;font-size:14.5px;font-weight:600;color:#fff;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.35);mix-blend-mode:difference}
-.homebar{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.85);z-index:190;cursor:pointer;box-shadow:0 0 3px rgba(0,0,0,.3)}
+/* notch (iPhone 12) */
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:196px;height:27px;background:#000;border-radius:0 0 17px 17px;z-index:210}
+.notch::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:56px;height:5px;border-radius:3px;background:#1c1c1f}
+.notch::before{content:'';position:absolute;top:7px;right:32px;width:9px;height:9px;border-radius:50%;background:#101318;box-shadow:inset 0 0 2px 1px #233246}
+@media (max-width:430px){.notch{display:none}}
+.statusbar{position:absolute;top:0;left:0;right:0;height:44px;z-index:205;display:flex;align-items:center;justify-content:space-between;padding:2px 27px 0 32px;font-size:14.5px;font-weight:600;color:#fff;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.sb-r{display:flex;align-items:center;gap:5px}
+.sb-r svg{display:block}
+.homebar{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:220;cursor:pointer;box-shadow:0 0 3px rgba(0,0,0,.3)}
 .view{position:absolute;inset:0;display:none;flex-direction:column;background:#fff;color:var(--ink)}
 .view.on{display:flex}
 button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
-/* ===== home ===== */
-#v-home{background:linear-gradient(160deg,#2e4a5e 0%,#4a3a5e 45%,#1d1a2e 100%);color:#fff;overflow:hidden}
-.wall-butterflies{position:absolute;inset:0;font-size:26px;opacity:.5;pointer-events:none}
+/* ===== lock screen : iOS 14 ===== */
+#v-lock{background:linear-gradient(168deg,#274b63 0%,#3c3a5e 48%,#191725 100%);color:#fff;z-index:100;cursor:pointer;overflow:hidden}
+#v-lock .wall-butterflies{opacity:.35}
+.lock-top{margin-top:52px;text-align:center;font-size:19px;opacity:.95}
+.lock-clock{margin-top:8px;text-align:center}
+.lock-date{font-size:16.5px;font-weight:500;letter-spacing:.01em}
+.lock-time{font-size:76px;font-weight:200;line-height:1.08;letter-spacing:.005em;font-family:-apple-system,"SF Pro Display",sans-serif}
+.lock-notifs{margin:26px 10px 0;display:flex;flex-direction:column;gap:8px}
+.lnotif{position:relative;background:rgba(38,38,44,.62);backdrop-filter:blur(14px);border-radius:20px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start}
+.lnotif img{width:34px;height:34px;border-radius:8px;object-fit:cover;flex:none}
+.ln-ic{width:34px;height:34px;border-radius:8px;background:var(--kakao);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.ln-h{display:flex;justify-content:space-between;font-size:11.5px;color:#d7d7dc;text-transform:uppercase;letter-spacing:.03em}
+.ln-h span{color:#aeaeb6;text-transform:none}
+.ln-t{font-size:13.5px;line-height:1.45;margin-top:1px}
+.lnotif.stack{margin:-2px 6px 0;transform:scale(.97);opacity:.75;padding:8px 13px}
+.lock-btns{margin-top:auto;padding:0 46px 6px;display:flex;justify-content:space-between}
+.lk-btn{width:47px;height:47px;border-radius:50%;background:rgba(30,30,34,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:19px}
+.lock-hint{text-align:center;font-size:12.5px;color:rgba(255,255,255,.85);padding:12px 0 30px}
+/* ===== home : iOS 14 ===== */
+#v-home{background:linear-gradient(168deg,#274b63 0%,#3c3a5e 48%,#191725 100%);color:#fff;overflow:hidden}
+.wall-butterflies{position:absolute;inset:0;font-size:24px;opacity:.4;pointer-events:none}
 .wall-butterflies span{position:absolute;animation:flut 7s ease-in-out infinite}
-@keyframes flut{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(8deg)}}
-.home-clock{margin-top:86px;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.4)}
-.home-clock .dow{font-size:15px;font-weight:500}
-.home-clock .time{font-size:74px;font-weight:200;line-height:1.05;letter-spacing:.01em}
-.home-clock .date{font-size:14px;color:#e8e4da}
-.home-widget{margin:16px 22px 0;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border-radius:20px;padding:13px 16px;font-size:12.5px;line-height:1.7}
-.home-widget b{font-size:13.5px}
-.meterbar{height:6px;background:rgba(255,255,255,.25);border-radius:3px;margin:4px 0 8px;overflow:hidden}
-.meterbar i{display:block;height:100%;background:var(--kakao);border-radius:3px;transition:width .5s}
-.apps{margin-top:22px;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px 12px}
-.app{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:#fff;position:relative}
-.app .ic{width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:29px;box-shadow:0 3px 8px rgba(0,0,0,.25)}
-.app .bdg{position:absolute;top:-5px;right:8px;background:var(--red);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
-.ic-kakao{background:var(--kakao)} .ic-ig{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)}
-.ic-cal{background:#fff} .ic-note{background:#fff7ae} .ic-tel{background:#63d96e} .ic-set{background:#d8d8de}
-.home-foot{margin-top:auto;padding:0 22px 30px;font-size:10.5px;color:rgba(255,255,255,.75);line-height:1.6;text-align:center}
-/* ===== generic app header ===== */
-.ahead{padding:56px 14px 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);background:#fff;z-index:5}
-.ahead .back{font-size:22px;padding:2px 6px;color:#333}
+@keyframes flut{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(8deg)}}
+.home-scroll{flex:1;overflow-y:auto;padding:56px 0 118px;position:relative;z-index:1}
+.wid-row{display:flex;gap:12px;padding:2px 20px 0}
+.wid-cal{flex:1;background:#fff;color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);min-height:104px}
+.wid-cal .wd{color:#ff3b30;font-size:12.5px;font-weight:600}
+.wid-cal .d{font-size:38px;font-weight:300;line-height:1.1}
+.wid-cal .ev{font-size:11px;color:#555;border-left:3px solid #ff9500;padding-left:6px;margin-top:4px;line-height:1.4}
+.wid-photo{flex:1;border-radius:20px;overflow:hidden;position:relative;box-shadow:0 4px 14px rgba(0,0,0,.22);min-height:104px}
+.wid-photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.wid-photo span{position:absolute;left:10px;bottom:8px;font-size:11px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.wid-wide{margin:12px 20px 0;background:rgba(255,255,255,.94);color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.65}
+.wid-wide b{font-size:13px}
+.meterbar{height:6px;background:#e4e4e9;border-radius:3px;margin:4px 0 7px;overflow:hidden}
+.meterbar i{display:block;height:100%;background:#f2b705;border-radius:3px;transition:width .5s}
+.apps{margin-top:18px;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:19px 10px}
+.app{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#fff;position:relative;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.app .ic{width:59px;height:59px;border-radius:13.5px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 3px 8px rgba(0,0,0,.28);overflow:hidden;position:relative}
+.app .bdg{position:absolute;top:-5px;right:6px;background:var(--red);color:#fff;font-size:11.5px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.ic-kakao{background:var(--kakao)}
+.ic-ig{background:linear-gradient(45deg,#feda75 0%,#fa7e1e 32%,#d62976 62%,#962fbf 85%,#4f5bd5 100%)}
+.ic-cal{background:#fff;flex-direction:column;gap:0}
+.ic-cal .cwd{color:#ff3b30;font-size:10.5px;font-weight:700;line-height:1;margin-top:2px}
+.ic-cal .cd2{color:#111;font-size:27px;font-weight:300;line-height:1.05}
+.ic-note{background:#fff;flex-direction:column;justify-content:flex-start}
+.ic-note .nb{width:100%;height:17px;background:#f7d54d;flex:none}
+.ic-note .nl{width:70%;height:3px;background:#d9d9de;border-radius:2px;margin-top:7px}
+.ic-tel{background:linear-gradient(180deg,#67e06a,#29c73a)}
+.ic-set{background:linear-gradient(180deg,#e8e8ec,#b9b9c0);color:#555}
+.pagedots{position:absolute;bottom:104px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
+.pagedots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45)}
+.pagedots i.on{background:#fff}
+.dock{position:absolute;left:11px;right:11px;bottom:9px;height:88px;background:rgba(235,235,240,.34);backdrop-filter:blur(20px) saturate(1.6);border-radius:27px;display:flex;align-items:center;justify-content:space-around;padding:0 12px;z-index:3}
+.dock .app{text-shadow:none}
+.dock .app .ic{width:60px;height:60px}
+/* ===== generic app header (iOS 14 nav) ===== */
+.ahead{padding:50px 14px 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);background:#fff;z-index:5}
+.ahead .back{font-size:24px;padding:2px 6px;color:#333}
 .ahead h2{font-size:17px;font-weight:700;flex:1}
 .ahead .sub{font-size:11px;color:var(--sub)}
 .abody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-/* ===== kakao ===== */
+/* ===== kakao list : 2021 (9.x) ===== */
 #v-kakao{background:#fff}
-.kakao-tabs{display:flex;gap:2px;padding:2px 10px 0;font-size:21px}
-.kakao-tabs span{padding:7px 10px;opacity:.35}
-.kakao-tabs span.on{opacity:1}
-.thread{display:flex;gap:11px;padding:11px 16px;align-items:center;width:100%;text-align:left}
+.kk-head{padding:52px 16px 6px;display:flex;align-items:flex-end;justify-content:space-between;background:#fff;z-index:5}
+.kk-head h2{font-size:23px;font-weight:700}
+.kk-icons{display:flex;gap:17px;font-size:18px;align-items:center;padding-bottom:2px}
+.thread{display:flex;gap:11px;padding:10px 16px;align-items:center;width:100%;text-align:left}
 .thread:active{background:#f4f4f6}
 .thread img.av{width:50px;height:50px;border-radius:18px;object-fit:cover;flex:none}
 .thread .avc{width:50px;height:50px;border-radius:18px;flex:none;display:flex;align-items:center;justify-content:center;font-size:23px;color:#fff}
@@ -71,64 +116,122 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .thread .tp{font-size:12.5px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .thread .ub{background:var(--red);color:#fff;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
 .locknote{padding:14px 16px;font-size:12px;color:var(--sub);text-align:center}
-/* chat */
+.fr-sec{padding:12px 16px 4px;font-size:11.5px;color:#999;border-top:8px solid #f6f6f8;margin-top:6px}
+.fr-my{display:flex;gap:12px;padding:12px 16px;align-items:center;width:100%;text-align:left}
+.fr-my img{width:56px;height:56px;border-radius:20px;object-fit:cover}
+.fr-my .fn{font-size:16px;font-weight:700}
+.fr-my .fs{font-size:12px;color:#888;margin-top:2px}
+.kk-tabbar{display:flex;border-top:1px solid #e8e8e8;background:#f8f8f9;padding:5px 4px 20px;z-index:5}
+.kk-tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#a6a6a6;position:relative;padding:3px 0}
+.kk-tabbar button .ti{font-size:21px;line-height:1.1}
+.kk-tabbar button.on{color:#191919}
+.kk-tabbar .kbadge{position:absolute;top:-1px;right:calc(50% - 19px);background:#ff5a4e;color:#fff;font-size:9.5px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+/* ===== chat room : 2021 kakao ===== */
 #v-chat{background:var(--kakao-bg)}
-.chat-head{padding:52px 10px 6px;background:var(--kakao-bg);display:flex;align-items:center;gap:6px;z-index:5}
-.chat-head .back{font-size:22px;padding:2px 6px}
-.chat-head .cn{flex:1}
-.chat-head .cn b{font-size:16px}
-.chat-head .cn .csub{font-size:10.5px;color:#44576b}
-.paramline{background:rgba(255,255,255,.75);margin:0 10px 6px;border-radius:12px;padding:7px 12px;font-size:11px;color:#33475c;display:flex;gap:12px;align-items:center}
+.chat-head{padding:46px 8px 5px;background:var(--kakao-bg);display:flex;align-items:center;gap:5px;z-index:5;border-bottom:1px solid rgba(0,0,0,.05)}
+.chat-head .back{font-size:23px;padding:2px 5px;color:#222}
+.ch-prof{flex:none;padding:0}
+.ch-prof img{width:34px;height:34px;border-radius:12px;object-fit:cover;display:block}
+.chat-head .cn{flex:1;min-width:0}
+.chat-head .cn b{font-size:15.5px}
+.chat-head .ccount{color:#7a8a99;font-size:13px;font-weight:600;margin-left:2px}
+.chat-head .cn .csub{font-size:10.5px;color:#5a6f82}
+.ch-icons{font-size:16.5px;letter-spacing:3px;color:#222;padding-right:4px}
+.paramline{background:rgba(255,255,255,.82);margin:6px 10px 2px;border-radius:11px;padding:6px 12px;font-size:11px;color:#33475c;display:flex;gap:12px;align-items:center;box-shadow:0 1px 2px rgba(30,50,80,.08)}
 .paramline .mb{flex:1;height:5px;background:#d7dee6;border-radius:3px;overflow:hidden}
 .paramline .mb i{display:block;height:100%;background:#f2b705;transition:width .5s}
 #feed{flex:1;overflow-y:auto;padding:6px 12px 14px;display:flex;flex-direction:column;gap:7px}
-.dchip{align-self:center;background:rgba(0,0,0,.22);color:#fff;font-size:11px;padding:4px 13px;border-radius:12px;margin:8px 0 4px}
+.dchip{align-self:center;background:rgba(70,86,102,.45);color:#fff;font-size:11px;padding:4.5px 13px;border-radius:12px;margin:8px 0 4px}
 .sys{align-self:center;font-size:11px;color:#5a6b7d;text-align:center;max-width:88%;line-height:1.5;margin:2px 0}
 .scene{align-self:stretch;background:rgba(25,32,44,.88);color:#eef2f7;border-radius:14px;padding:13px 15px;font-size:13.5px;line-height:1.85;margin:4px 0;white-space:pre-wrap}
 .scene .who{color:#9fc2e8;font-size:11px;font-weight:700;letter-spacing:.08em;display:block;margin-bottom:4px}
-.row{display:flex;gap:7px;align-items:flex-end;max-width:88%}
-.row img.av{width:36px;height:36px;border-radius:13px;object-fit:cover;flex:none}
-.row .nm{font-size:11px;color:#3c4c5e;margin-bottom:3px}
-.bub{background:#fff;border-radius:13px;padding:8px 11px;font-size:14px;line-height:1.55;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.06)}
-.row.me{align-self:flex-end;flex-direction:row-reverse}
+.row{display:flex;gap:7px;align-items:flex-end;max-width:90%}
+.row img.av{width:38px;height:38px;border-radius:14px;object-fit:cover;flex:none}
+.row .nm{font-size:11.5px;color:#36485a;margin-bottom:3px}
+.brow2{display:flex;align-items:flex-end;gap:5px}
+.bub{background:#fff;border-radius:12px;padding:7.5px 10.5px;font-size:14px;line-height:1.5;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.07);color:#191919}
+.row.me{align-self:flex-end}
 .row.me .bub{background:var(--me)}
-.row .tm{font-size:9.5px;color:#5a6b7d;flex:none}
-.typing{background:#fff;border-radius:13px;padding:10px 13px;font-size:14px;color:#999}
+.row .tm{font-size:10px;color:#4d5f70;flex:none;padding-bottom:1px}
+.bmeta{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex:none;padding-bottom:1px;margin-right:1px}
+.bmeta .tm{padding-bottom:0}
+.unread{color:#f6a500;font-size:11.5px;font-weight:700;line-height:1;text-shadow:0 0 2px rgba(255,255,255,.35)}
+.typing{background:#fff;border-radius:12px;padding:10px 13px;font-size:14px;color:#999}
 .fade{align-self:stretch;text-align:center;background:#101318;color:#cfd6df;border-radius:14px;padding:20px 14px;font-size:13px;line-height:2;margin:4px 0;letter-spacing:.06em}
 .choices{display:flex;flex-direction:column;gap:8px;margin:8px 0 4px}
 .choices .clabel{font-size:11px;color:#44576b;text-align:center}
 .choice-btn{background:#fff;border:1.5px solid #7d93a8;color:#22384e;border-radius:14px;padding:11px 13px;font-size:13.5px;text-align:left;line-height:1.5;box-shadow:0 2px 5px rgba(30,50,80,.12)}
 .choice-btn:active{background:var(--kakao)}
-.chat-input{padding:8px 10px 24px;background:#fff;display:flex;gap:8px;align-items:center}
-.chat-input .fakein{flex:1;background:#f2f2f4;border-radius:18px;padding:9px 14px;font-size:13px;color:#999}
-.chat-input .sendb{background:var(--kakao);border-radius:50%;width:38px;height:38px;font-size:16px;flex:none}
+.choice-btn.locked{opacity:.5;border-style:dashed}
+.chat-input{padding:7px 8px 22px;background:#fff;display:flex;gap:7px;align-items:center;border-top:1px solid #eee}
+#btn-plus{font-size:21px;color:#9a9a9e;width:30px;flex:none}
+.chat-input .fakein{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:13.5px;color:#a3a3a8}
+.in-emo,.in-hash{font-size:18px;color:#9a9a9e;flex:none}
+.chat-input .sendb{background:var(--kakao);border-radius:50%;width:37px;height:37px;font-size:15px;flex:none;color:#3a1d1d}
+.plus-panel{display:none;background:#fff;padding:10px 8px 30px;grid-template-columns:repeat(4,1fr);gap:14px 4px;border-top:1px solid #f0f0f0}
+.plus-panel.on{display:grid}
+.plus-panel div{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:#666}
+.plus-panel span{width:47px;height:47px;border-radius:50%;background:#f4f5f6;display:flex;align-items:center;justify-content:center;font-size:20px}
 #toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:.35s;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-/* ===== IG ===== */
-.ig-head{padding:56px 14px 8px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:#fff}
-.ig-head b{font-size:18px;flex:1;font-family:Georgia,serif;font-style:italic}
-.ig-prof{display:flex;gap:18px;padding:14px 16px 6px;align-items:center}
-.ig-prof img{width:78px;height:78px;border-radius:50%;object-fit:cover}
+/* ===== kakao profile : 2021 ===== */
+#v-profile{background:#000;color:#fff;z-index:130}
+.prof-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
+.prof-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,0) 34%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42))}
+.prof-x{position:absolute;top:56px;left:14px;font-size:19px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:6px}
+.prof-gear{position:absolute;top:56px;right:14px;font-size:18px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:6px}
+.prof-main{position:absolute;left:0;right:0;bottom:158px;text-align:center;z-index:2}
+.prof-av{width:92px;height:92px;border-radius:34px;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.prof-nm{font-size:19px;font-weight:700;margin-top:11px;text-shadow:0 1px 5px rgba(0,0,0,.55)}
+.prof-status{font-size:13px;margin-top:5px;color:#f2f2f2;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.prof-music{display:inline-block;margin-top:11px;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.4);border-radius:13px;padding:4px 12px;font-size:11.5px}
+.prof-actions{position:absolute;left:0;right:0;bottom:0;padding:20px 44px 46px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.35);z-index:2}
+.prof-actions button{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11.5px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.prof-actions button span{font-size:23px}
+/* ===== IG : 2021 ===== */
+.ig-head{padding:50px 13px 7px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #efefef}
+.ig-head .back{font-size:23px;padding:2px 6px;color:#262626}
+.ig-logo{font-size:21px;flex:1;font-family:"Snell Roundhand","Segoe Script",cursive;font-weight:600;color:#262626;padding-left:2px}
+.ig-hicons{display:flex;gap:19px;align-items:center}
+.ig-hicons svg{display:block}
+.ig-badge-dot{position:relative}
+.ig-badge-dot::after{content:'2';position:absolute;top:-6px;right:-8px;background:#ff3b5c;color:#fff;font-size:9px;font-weight:700;min-width:15px;height:15px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.ig-stories{display:flex;gap:15px;padding:11px 14px 9px;overflow-x:auto;border-bottom:1px solid #efefef;background:#fff}
+.story{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#262626;flex:none}
+.story .ring{width:60px;height:60px;border-radius:50%;padding:2.5px;background:conic-gradient(from 210deg,#feda75,#fa7e1e,#d62976,#962fbf,#feda75)}
+.story .ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid #fff;display:block}
+.ig-prof{display:flex;gap:20px;padding:13px 16px 6px;align-items:center}
+.ig-prof .pring{width:82px;height:82px;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,#feda75,#fa7e1e,#d62976,#962fbf,#feda75);flex:none}
+.ig-prof .pring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid #fff;display:block}
 .ig-prof .avd{width:78px;height:78px;border-radius:50%;background:#e8e8ec;display:flex;align-items:center;justify-content:center;font-size:36px;color:#aeaeb4;flex:none}
-.ig-stats{flex:1;display:flex;justify-content:space-around;text-align:center;font-size:12px;color:#555}
-.ig-stats b{display:block;font-size:16px;color:#111}
-.ig-bio{padding:2px 16px 10px;font-size:13px;line-height:1.55}
+.ig-stats{flex:1;display:flex;justify-content:space-around;text-align:center;font-size:12.5px;color:#262626}
+.ig-stats b{display:block;font-size:16.5px;color:#111;font-weight:700}
+.ig-bio{padding:2px 16px 10px;font-size:13px;line-height:1.55;color:#262626}
 .ig-bio b{font-size:13.5px}
+.ig-folbtn{display:flex;gap:6px;padding:0 16px 11px}
+.ig-folbtn span{flex:1;text-align:center;background:#0095f6;color:#fff;font-size:13.5px;font-weight:600;border-radius:6px;padding:6px 0}
+.ig-folbtn span.ghost{background:#fff;border:1px solid #dbdbdb;color:#262626}
 .ig-switch{display:flex;border-top:1px solid var(--line)}
-.ig-switch button{flex:1;padding:9px;font-size:13px;color:#777;border-bottom:2px solid transparent}
-.ig-switch button.on{color:#111;font-weight:700;border-bottom-color:#111}
+.ig-switch button{flex:1;padding:8px;font-size:16px;color:#8e8e8e;border-bottom:1.5px solid transparent}
+.ig-switch button.on{color:#111;border-bottom-color:#111}
 .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
 .ig-grid button{padding:0;aspect-ratio:1;overflow:hidden;background:#eee;position:relative}
 .ig-grid img{width:100%;height:100%;object-fit:cover;display:block}
 .ig-grid .lk{position:absolute;inset:0;background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
-.ig-post{padding-bottom:20px}
-.ig-post .ph{display:flex;gap:9px;align-items:center;padding:9px 12px;font-size:13.5px;font-weight:600}
-.ig-post .ph img{width:33px;height:33px;border-radius:50%;object-fit:cover}
+.ig-post{padding-bottom:22px;background:#fff}
+.ig-post .ph{display:flex;gap:9px;align-items:center;padding:8px 11px;font-size:13.5px;font-weight:600;color:#262626}
+.ig-post .ph img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.ig-post .ph .dots{margin-left:auto;color:#262626;font-size:15px;letter-spacing:1px}
 .ig-post>img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.ig-post .pc{padding:9px 12px;font-size:13px;line-height:1.6}
-.ig-post .pc .lk2{font-weight:700;margin-bottom:3px}
+.ig-actions{display:flex;gap:17px;align-items:center;padding:9px 12px 0}
+.ig-actions svg{display:block}
+.ig-actions .ig-save{margin-left:auto}
+.ig-post .pc{padding:6px 12px;font-size:13px;line-height:1.55;color:#262626}
+.ig-post .pc .lk2{font-weight:600;margin-bottom:3px}
 .ig-post .cm{color:#555;font-size:12.5px;margin-top:3px}
 .ig-post .cm b{color:#111}
+.ig-post .allcm{color:#8e8e8e;font-size:12.5px;margin-top:3px}
+.ig-time{padding:4px 12px 0;font-size:10.5px;color:#8e8e8e;letter-spacing:.02em}
 /* ===== calendar / notes ===== */
 .cal-m{padding:14px 16px 4px;font-size:16px;font-weight:700}
 .cal-e{display:flex;gap:12px;padding:9px 16px;align-items:flex-start}
@@ -143,24 +246,45 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .memo.lock{opacity:.5;background:#f4f4f6}
 .memo .tag{font-size:10.5px;background:var(--kakao);border-radius:8px;padding:2px 8px;font-weight:700;margin-bottom:6px;display:inline-block}
 .memo.lock .tag{background:#ddd}
-/* ===== call ===== */
-#v-call{background:linear-gradient(180deg,#2c3444,#12151d);color:#fff;z-index:120}
-.call-av{width:104px;height:104px;border-radius:50%;object-fit:cover;margin:110px auto 12px;display:block;box-shadow:0 8px 30px rgba(0,0,0,.5)}
-.call-nm{text-align:center;font-size:23px;font-weight:600}
-.call-tm{text-align:center;color:#aeb6c2;font-size:13px;margin-top:5px}
-.call-sub{margin:26px 30px 0;background:rgba(255,255,255,.09);border-radius:16px;padding:15px 17px;font-size:14.5px;line-height:1.8;min-height:86px}
+.endslot{margin:10px 14px;border:1.5px dashed #c9c2ae;border-radius:14px;padding:11px 14px;font-size:13px;background:#fff;color:#555}
+.endslot.got{border-style:solid;background:#fdf6d8;color:#111;font-weight:600}
+/* ===== call : iOS 14 ===== */
+#v-call{background:#0d0f14;color:#fff;z-index:120;overflow:hidden}
+.call-bg{position:absolute;inset:0}
+.call-bg img{width:100%;height:100%;object-fit:cover;filter:blur(34px) brightness(.55);transform:scale(1.25)}
+.call-main{position:relative;flex:1;display:flex;flex-direction:column}
+.call-av{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:96px auto 10px;display:block;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+#v-call[data-phase="incoming"] .call-av{width:110px;height:110px;margin-top:110px}
+.call-nm{text-align:center;font-size:27px;font-weight:600}
+.call-tm{text-align:center;color:#c6ccd6;font-size:14.5px;margin-top:4px}
+.call-sub{display:none;margin:22px 26px 0;background:rgba(18,20,26,.72);backdrop-filter:blur(6px);border-radius:16px;padding:14px 16px;font-size:14.5px;line-height:1.8;min-height:82px;cursor:pointer}
 .call-sub .me2{color:#ffe970}
-.call-btns{margin-top:auto;padding:0 60px 56px;display:flex;justify-content:space-between}
-.call-btns .cb{width:62px;height:62px;border-radius:50%;font-size:24px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16)}
-.call-btns .cb.end{background:#f63c30}
+#v-call[data-phase="incall"] .call-sub{display:block}
+.call-hint{text-align:center;font-size:10.5px;color:rgba(255,255,255,.55);margin-top:7px;display:none}
+#v-call[data-phase="incall"] .call-hint{display:block}
+.ui-incoming{margin-top:auto;padding:0 52px 58px;display:none}
+#v-call[data-phase="incoming"] .ui-incoming{display:block}
+.ci-opts{display:flex;justify-content:space-between;padding:0 6px;margin-bottom:34px}
+.ci-opt{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#e8eaee}
+.ci-opt span{font-size:19px}
+.ci-btns{display:flex;justify-content:space-between}
+.cb{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.cb svg{display:block}
+.cb.decline{background:#f63c30}
+.cb.accept{background:#30d158}
+.ci-lab{display:flex;justify-content:space-between;padding:7px 2px 0;font-size:12px;color:#e8eaee;text-align:center}
+.ci-lab span{width:66px}
+.ui-incall{margin-top:auto;padding:0 46px 52px;display:none}
+#v-call[data-phase="incall"] .ui-incall{display:block}
+.call-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px 20px;justify-items:center;margin-bottom:30px}
+.cg{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:#eef0f3}
+.cg i{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.17);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:22px;font-style:normal}
+.cb.end{background:#f63c30;margin:0 auto;transform:rotate(135deg)}
 /* end card */
 .endcard{align-self:stretch;background:linear-gradient(150deg,#243447,#141a26);color:#fff;border-radius:18px;padding:22px 18px;text-align:center;margin:8px 0;line-height:1.9}
 .endcard h3{font-size:19px;margin-bottom:6px}
 .endcard .big{font-size:30px;font-weight:800;color:var(--kakao)}
 .endcard button{background:var(--kakao);color:#3a1d1d;font-weight:700;border-radius:20px;padding:10px 20px;font-size:13.5px;margin-top:10px}
-.choice-btn.locked{opacity:.5;border-style:dashed}
-.endslot{margin:10px 14px;border:1.5px dashed #c9c2ae;border-radius:14px;padding:11px 14px;font-size:13px;background:#fff;color:#555}
-.endslot.got{border-style:solid;background:#fdf6d8;color:#111;font-weight:600}
 .small-note{font-size:10.5px;color:#8d8578;text-align:center;padding:4px 18px 10px;line-height:1.6}
 </style>
 </head>
@@ -168,55 +292,111 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+<p class="src">v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
-<div class="island"></div>
-<div class="statusbar"><span id="sb-time">9:41</span><span>📶 📡 <span class="batt">🔋</span></span></div>
+<div class="notch"></div>
+<div class="statusbar"><span id="sb-time">9:41</span><span class="sb-r"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#fff"/><rect x="4.5" y="5" width="3" height="6" rx="0.8" fill="#fff"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8" fill="#fff"/><rect x="13.5" y="0" width="3" height="11" rx="0.8" fill="#fff" opacity=".35"/></svg><svg width="16" height="11" viewBox="0 0 16 12"><path d="M8 10.6a1.7 1.7 0 1 1 0 .01zM5.2 8.2a4.2 4.2 0 0 1 5.6 0l-1.4 1.5a2.6 2.6 0 0 0-2.8 0zM2.6 5.4a8 8 0 0 1 10.8 0L12 6.9a6.3 6.3 0 0 0-8 0zM.2 2.7a11.6 11.6 0 0 1 15.6 0l-1.4 1.5a9.9 9.9 0 0 0-12.8 0z" fill="#fff"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" fill="none" stroke="#fff" opacity=".45"/><rect x="2" y="2" width="13" height="8" rx="1.8" fill="#fff"/><path d="M23.2 4v4a2.2 2.2 0 0 0 0-4z" fill="#fff" opacity=".45"/></svg></span></div>
 
-<!-- HOME -->
-<div class="view on" id="v-home">
-<div class="wall-butterflies"><span style="left:12%;top:16%">🦋</span><span style="left:78%;top:11%;animation-delay:1.2s">🦋</span><span style="left:64%;top:34%;animation-delay:2.1s;font-size:19px">🦋</span><span style="left:22%;top:44%;animation-delay:.6s;font-size:20px">🦋</span></div>
-<div class="home-clock"><div class="dow" id="home-dow">3月・新学期</div><div class="time" id="home-time">9:41</div><div class="date">ホンソ大学 彫塑科4年 ― なおのスマホ</div></div>
-<div class="home-widget"><b>🧭 パク・ジェオン解明度</b>
+<!-- LOCK (iOS 14) -->
+<div class="view on" id="v-lock">
+<div class="wall-butterflies"><span style="left:14%;top:20%">🦋</span><span style="left:76%;top:14%;animation-delay:1.2s">🦋</span><span style="left:60%;top:40%;animation-delay:2.1s;font-size:18px">🦋</span></div>
+<div class="lock-top">🔒</div>
+<div class="lock-clock"><div class="lock-date" id="lock-date">3月12日 金曜日</div><div class="lock-time" id="lock-time">9:41</div></div>
+<div class="lock-notifs">
+<div class="lnotif"><img src="assets/av-jaeon.jpg" alt=""><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>지금</span></div><div class="ln-t"><b>박재언</b>： ……蝶、見に行く？</div></div></div>
+<div class="lnotif stack"><img src="assets/av-jaeon.jpg" alt=""><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
+<div class="lnotif"><span class="ln-ic">🔍</span><div style="flex:1;min-width:0"><div class="ln-h"><b>解剖メモ</b><span>1시간 전</span></div><div class="ln-t">新しい観察メモが解放されました</div></div></div>
+</div>
+<div class="lock-btns"><span class="lk-btn">🔦</span><span class="lk-btn">📷</span></div>
+<div class="lock-hint">タップして開く</div>
+</div>
+
+<!-- HOME (iOS 14) -->
+<div class="view" id="v-home">
+<div class="wall-butterflies"><span style="left:12%;top:13%">🦋</span><span style="left:80%;top:9%;animation-delay:1.2s">🦋</span><span style="left:66%;top:31%;animation-delay:2.1s;font-size:18px">🦋</span><span style="left:20%;top:47%;animation-delay:.6s;font-size:19px">🦋</span></div>
+<div class="home-scroll">
+<div class="wid-row">
+<div class="wid-cal"><div class="wd" id="wid-wd">금요일</div><div class="d" id="wid-day">12</div><div class="ev" id="wid-ev">バーでの出会い</div></div>
+<div class="wid-photo"><img src="assets/ig-butterfly.jpg" alt=""><span>🦋 나비 ― 写真</span></div>
+</div>
+<div class="wid-wide"><b>🔍 解剖メモ ― パク・ジェオン解明度</b>
 <div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
 心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
 <div class="apps">
-<button class="app" data-open="kakao"><span class="ic ic-kakao">💬</span>カカオトーク<span class="bdg" id="bdg-kakao">1</span></button>
-<button class="app" data-open="ig"><span class="ic ic-ig">📷</span>Instagram</button>
-<button class="app" data-open="cal"><span class="ic ic-cal">🗓️</span>カレンダー</button>
-<button class="app" data-open="notes"><span class="ic ic-note">🔍</span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
-<button class="app" data-open="calllog"><span class="ic ic-tel">📞</span>電話</button>
-<button class="app" id="app-reset"><span class="ic ic-set">↺</span>最初から</button>
+<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="37" height="37" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span>카카오톡<span class="bdg" id="bdg-kakao">1</span></button>
+<button class="app" data-open="ig"><span class="ic ic-ig"><svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span>Instagram</button>
+<button class="app" data-open="cal"><span class="ic ic-cal"><span class="cwd" id="app-cal-wd">금요일</span><span class="cd2" id="app-cal-d">12</span></span>캘린더</button>
+<button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
+<button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
+<button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
-<div class="home-foot">選択で「解明度」と「心の距離」が変わります。<br>彼の言葉ではなく、行動を読んでください。</div>
+</div>
+<div class="pagedots"><i class="on"></i><i></i></div>
+<div class="dock">
+<button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span></button>
+<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span></button>
+<button class="app" data-open="ig"><span class="ic ic-ig"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span></button>
+<button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span></button>
+</div>
 </div>
 
-<!-- KAKAO LIST -->
+<!-- KAKAO (2021) -->
 <div class="view" id="v-kakao">
-<div class="ahead"><button class="back" data-home="1">‹</button><h2>カカオトーク</h2><span class="sub">💬</span></div>
-<div class="kakao-tabs"><span class="on">👤</span><span>💬</span><span>＃</span><span>…</span></div>
-<div class="abody" id="thread-list"></div>
+<div class="kk-head"><h2 id="kk-title">채팅</h2><div class="kk-icons"><span>🔍</span><span>💬</span><span>🎵</span><span>⚙️</span></div></div>
+<div class="abody">
+<div id="thread-list"></div>
+<div id="friend-list" style="display:none"></div>
+</div>
+<div class="kk-tabbar">
+<button data-tab="friends"><span class="ti">👤</span>친구</button>
+<button data-tab="chats" class="on"><span class="ti">💬</span>채팅<span class="kbadge" id="kk-badge">1</span></button>
+<button data-tab="sharp"><span class="ti" style="font-weight:700">#</span>#</button>
+<button data-tab="shop"><span class="ti">🛍️</span>쇼핑</button>
+<button data-tab="more"><span class="ti">•••</span>더보기</button>
+</div>
 </div>
 
 <!-- CHAT -->
 <div class="view" id="v-chat">
-<div class="chat-head"><button class="back" data-open="kakao">‹</button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span>🔍 ☰</span></div>
+<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><span class="ccount">2</span><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons">🔍 ☎ ☰</span></div>
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
-<div class="chat-input"><span style="font-size:20px;color:#999">＋</span><div class="fakein">メッセージを入力</div><button class="sendb" id="btn-next">▶</button></div>
+<div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo">😊</span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
+<div class="plus-panel" id="plus-panel">
+<div><span>🖼️</span>사진</div><div><span>📷</span>카메라</div><div><span>🎁</span>선물하기</div><div><span>💸</span>송금</div><div><span>📅</span>일정</div><div><span>📍</span>장소</div><div><span>🎤</span>음성메시지</div><div><span>☎️</span>보이스톡</div>
+</div>
 </div>
 
-<!-- IG -->
+<!-- KAKAO PROFILE (2021) -->
+<div class="view" id="v-profile">
+<img class="prof-bg" src="assets/ig-jaeon1.jpg" alt="">
+<div class="prof-shade"></div>
+<button class="prof-x" id="prof-close">✕</button>
+<span class="prof-gear">⚙️</span>
+<div class="prof-main">
+<img class="prof-av" src="assets/av-jaeon.jpg" alt="">
+<div class="prof-nm">パク・ジェオン</div>
+<div class="prof-status">작업 중. 끝나지 않는 것</div>
+<div><span class="prof-music">♪ 프로필 뮤직 ― 「Love Song」</span></div>
+</div>
+<div class="prof-actions">
+<button id="prof-chat"><span>💬</span>1:1 채팅</button>
+<button id="prof-call2"><span>📞</span>무료통화</button>
+<button id="prof-gift"><span>🎁</span>선물하기</button>
+</div>
+</div>
+
+<!-- IG (2021) -->
 <div class="view" id="v-ig">
-<div class="ig-head"><button class="back" data-home="1" style="font-size:22px;padding:2px 6px">‹</button><b>Instagram</b><span>＋ ♡ 💬</span></div>
-<div class="ig-switch"><button id="igsw-j" class="on">パク・ジェオン</button><button id="igsw-n">なお</button></div>
+<div class="ig-head"><button class="back" data-home="1">‹</button><span class="ig-logo">Instagram</span><div class="ig-hicons"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span class="ig-badge-dot"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></span></div></div>
+<div class="ig-switch"><button id="igsw-j" class="on">▦</button><button id="igsw-n">👤</button></div>
 <div class="abody" id="ig-body"></div>
 </div>
 
 <!-- CALENDAR -->
 <div class="view" id="v-cal">
-<div class="ahead"><button class="back" data-home="1">‹</button><h2>カレンダー</h2><span class="sub">一学期（3月〜7月）</span></div>
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>カレンダー</h2><span class="sub">2021年 一学期（3月〜7月）</span></div>
 <div class="abody" id="cal-body"></div>
 </div>
 
@@ -232,20 +412,35 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="abody" id="calllog-body"></div>
 </div>
 
-<!-- CALL -->
-<div class="view" id="v-call">
+<!-- CALL (iOS 14) -->
+<div class="view" id="v-call" data-phase="incoming">
+<div class="call-bg"><img src="assets/av-jaeon.jpg" alt=""></div>
+<div class="call-main">
 <img class="call-av" src="assets/av-jaeon.jpg" alt="">
 <div class="call-nm">パク・ジェオン</div>
-<div class="call-tm" id="call-timer">00:00</div>
+<div class="call-tm" id="call-timer">iPhone</div>
 <div class="call-sub" id="call-sub">……</div>
-<div class="call-btns"><span class="cb">🔇</span><span class="cb">🔊</span><button class="cb end" id="call-next">📞</button></div>
-<p class="small-note" style="color:#aeb6c2">タップで通話が進みます（音声なし・テキスト通話）</p>
+<div class="call-hint">字幕をタップすると会話が進みます</div>
+<div class="ui-incoming">
+<div class="ci-opts"><div class="ci-opt"><span>⏰</span>미리 알림</div><div class="ci-opt"><span>💬</span>메시지</div></div>
+<div class="ci-btns"><button class="cb decline" id="call-decline"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff" transform="rotate(135 12 12)"/></svg></button><button class="cb accept" id="call-accept"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></button></div>
+<div class="ci-lab"><span>거절</span><span>응답</span></div>
+</div>
+<div class="ui-incall">
+<div class="call-grid">
+<div class="cg"><i>🔇</i>음소거</div><div class="cg"><i>⌨️</i>키패드</div><div class="cg"><i>🔊</i>스피커</div>
+<div class="cg"><i>➕</i>추가</div><div class="cg"><i>📹</i>FaceTime</div><div class="cg"><i>👤</i>연락처</div>
+</div>
+<button class="cb end" id="call-next"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></button>
+</div>
+</div>
 </div>
 
 <div id="toast"></div>
 <div class="homebar" id="homebar"></div>
 </div></div>
 <p class="small-note">二次創作ファンゲームです。登場人物の画像はPinterest等で公開されていたファン素材を使用しています（出典はREADMEに記載）。</p>
+
 <script>
 /* ================= DATA ================= */
 const MEMOS=[
@@ -536,23 +731,30 @@ function updParams(){
  $('#w-kyori').textContent=S.kyo<=25?'近い（でも壁はある）':S.kyo<=45?'近づきかけ':S.kyo<=70?'曖昧な距離':'遠い';
  const progs=['プロローグ','第1章 バーでの出会い','第2章 再会と作業室','第3章 曖昧な関係','第3章 一度目の別れ','第4章 助手として戻る','第5章 合宿','第6章 付き合おう','最終章 壊れたもの'];
  $('#w-prog').textContent=S.done?'完結（END到達）':progs[S.chap]||'';
+ const CD=[5,12,26,16,25,7,19,19,18,25,9,16,16], CW=['금요일','금요일','금요일','금요일','일요일','금요일','수요일','수요일','금요일','금요일','금요일','금요일','금요일'];
+ const wdEl=$('#wid-day'); if(wdEl){wdEl.textContent=CD[S.calU]||12; $('#wid-wd').textContent=CW[S.calU]||'금요일'; $('#wid-ev').textContent=progs[S.chap]||''; const acd=$('#app-cal-d'); if(acd) acd.textContent=CD[S.calU]||12; const acw=$('#app-cal-wd'); if(acw) acw.textContent=CW[S.calU]||'금요일';}
  const nb=$('#bdg-note'); if(S.memos.length){nb.style.display='flex'; nb.textContent=S.memos.length;} else nb.style.display='none';
 }
 const feed=$('#feed');
 function el(html){const d=document.createElement('div'); d.innerHTML=html; return d.firstElementChild;}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function addDate(v){feed.appendChild(el('<div class="dchip">'+esc(v)+'</div>'));}
+const KDATE={0:'2021\ub144 3\uc6d4 5\uc77c \uae08\uc694\uc77c',1:'2021\ub144 3\uc6d4 12\uc77c \uae08\uc694\uc77c',2:'2021\ub144 3\uc6d4 26\uc77c \uae08\uc694\uc77c',3:'2021\ub144 4\uc6d4 16\uc77c \uae08\uc694\uc77c',4:'2021\ub144 4\uc6d4 25\uc77c \uc77c\uc694\uc77c',5:'2021\ub144 5\uc6d4 7\uc77c \uae08\uc694\uc77c',6:'2021\ub144 5\uc6d4 19\uc77c \uc218\uc694\uc77c',8:'2021\ub144 6\uc6d4 18\uc77c \uae08\uc694\uc77c',9:'2021\ub144 6\uc6d4 25\uc77c \uae08\uc694\uc77c',10:'2021\ub144 7\uc6d4 9\uc77c \uae08\uc694\uc77c',11:'2021\ub144 7\uc6d4 16\uc77c \uae08\uc694\uc77c'};
+const KTIME={0:18*60+24,1:21*60+41,2:19*60+38,3:23*60+26,4:11*60+42,5:16*60+18,6:15*60+52,8:14*60+14,9:22*60+37,10:13*60+26,11:17*60+48};
+let chatMin=21*60+30, msgSeq=0;
+function fmtTime(){const t=chatMin; chatMin+=1+(msgSeq++%3); const h24=Math.floor(t/60)%24, m=t%60; const ap=h24<12?'\uc624\uc804':'\uc624\ud6c4'; let h=h24%12; if(h===0)h=12; return ap+' '+h+':'+String(m).padStart(2,'0');}
+function clearUnread(){feed.querySelectorAll('.unread').forEach(e=>e.remove());}
+function addDate(v,cal){feed.appendChild(el('<div class="dchip">'+esc(KDATE[cal]||v)+'</div>')); if(typeof cal==='number'&&KTIME[cal]!=null){chatMin=KTIME[cal]; msgSeq=0;}}
 function addSys(v){feed.appendChild(el('<div class="sys">'+esc(v)+'</div>'));}
 function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</span>'+esc(v)+'</div>'); feed.appendChild(d);}
 function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
-function addJ(v){const r=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="bub">'+esc(v)+'</div></div></div>'); feed.appendChild(r);}
-function addMe(v){const r=el('<div class="row me"><div class="bub">'+esc(v)+'</div></div>'); feed.appendChild(r);}
+function addJ(v){clearUnread();const r=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r);}
+function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); feed.appendChild(r);}
 function scrollFeed(){feed.scrollTop=feed.scrollHeight;}
 function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('🔍 解剖メモが解放されました（ホームの「解剖メモ」）');}}
 function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('📷 Instagramに新しい投稿が解放されました');}}
 function applyItem(it,quiet){
  switch(it.k){
-  case 'date': addDate(it.v); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); break;
+  case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); break;
   case 'chap': S.chap=it.n; break;
   case 'scene': addScene(it.v); break;
   case 'sys': addSys(it.v); break;
@@ -571,24 +773,34 @@ async function playItems(items,quiet){
    if(!quiet) await sleep(430);
  }
 }
-let callResolve=null, callLines=[], callIdx=0, callSec=0, callTimerInt=null;
+let callResolve=null, callLines=[], callIdx=0, callSec=0, callTimerInt=null, callPhase='incoming';
 function doCall(lines){
  return new Promise(res=>{
-  callResolve=res; callLines=lines; callIdx=0; callSec=0;
-  showView('v-call'); $('#call-sub').textContent='📞 発信中……';
+  callResolve=res; callLines=lines; callIdx=0; callSec=0; callPhase='incoming';
+  const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming';
+  showView('v-call'); $('#call-timer').textContent='iPhone'; $('#call-sub').textContent='……';
   clearInterval(callTimerInt);
-  callTimerInt=setInterval(()=>{callSec++; const m=String(Math.floor(callSec/60)).padStart(2,'0'),s=String(callSec%60).padStart(2,'0'); $('#call-timer').textContent=m+':'+s;},1000);
  });
 }
-$('#call-next').addEventListener('click',()=>{
+function startIncall(){
+ callPhase='incall'; $('#v-call').dataset.phase='incall'; callSec=0;
+ $('#call-sub').innerHTML='<span style="color:#aeb6c2">（通話中 ― 字幕タップで進みます）</span>';
+ clearInterval(callTimerInt);
+ callTimerInt=setInterval(()=>{callSec++; const m=String(Math.floor(callSec/60)).padStart(2,'0'),s=String(callSec%60).padStart(2,'0'); $('#call-timer').textContent=m+':'+s;},1000);
+}
+function advanceCall(){
  if(callIdx<callLines.length){
    const [who,txt]=callLines[callIdx++];
    $('#call-sub').innerHTML=(who===1?'<span class="me2">なお：</span>':'ジェオン：')+esc(txt);
  } else {
-   clearInterval(callTimerInt); showView('v-chat');
+   clearInterval(callTimerInt); const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming'; showView('v-chat');
    if(callResolve){const r=callResolve; callResolve=null; r();}
  }
-});
+}
+$('#call-next').addEventListener('click',()=>{ if(callPhase==='incall') advanceCall(); });
+$('#call-accept').addEventListener('click',()=>{ if(callPhase==='incoming') startIncall(); });
+$('#call-decline').addEventListener('click',()=>{ toast('応答すると物語が進みます'); });
+$('#call-sub').addEventListener('click',()=>{ if(callPhase==='incall') advanceCall(); });
 async function run(){
  if(playing) return; playing=true;
  while(S.idx<STORY.length){
@@ -741,15 +953,24 @@ function renderIG(){
  const prof=isJ
   ?{img:'assets/av-jaeon.jpg',name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:'1,204'}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:'342'};
- let h='<div class="ig-prof"><img src="'+prof.img+'"><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
+ const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',n1:'1週間前',n2:'5日前',n3:'2時間前'};
+ const ST=[['assets/av-jaeon.jpg','park_jaeon'],['assets/av-bitna.jpg','b1nna_'],['assets/av-sola.jpg','s0l_a'],['assets/av-dohyuk.jpg','ydh_cook']];
+ let h='<div class="ig-stories">'+ST.map(s=>'<span class="story"><span class="ring"><img src="'+s[0]+'"></span>'+s[1]+'</span>').join('')+'</div>';
+ h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
+ h+= isJ ? '<div class="ig-folbtn"><span class="ghost">フォロー中</span><span class="ghost">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost">プロフィールを編集</span></div>';
  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">🔒 物語で解放</span></button>':'')+'</div>';
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
+ const IC={
+  heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
+  cmt:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.5-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>',
+  shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
+  bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>'};
  body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{
    const p=posts.find(x=>x.id===b.dataset.post);
    const cm=(p.cm||[]).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
-   body.querySelector('#ig-detail').innerHTML='<div class="ig-post"><div class="ph"><img src="'+prof.img+'">'+prof.name+'</div><img src="'+p.img+'"><div class="pc"><div class="lk2">♡ いいね！'+p.likes+'件</div><b>'+prof.name+'</b> '+esc(p.cap)+cm+'</div></div>';
-   body.scrollTop=body.scrollHeight;
+   body.querySelector('#ig-detail').innerHTML='<div class="ig-post"><div class="ph"><img src="'+prof.img+'">'+prof.name+'<span class="dots">•••</span></div><img src="'+p.img+'"><div class="ig-actions">'+IC.heart+IC.cmt+IC.shr+'<span class="ig-save">'+IC.bmk+'</span></div><div class="pc"><div class="lk2">いいね！'+p.likes+'件</div><b>'+prof.name+'</b> '+esc(p.cap)+((p.cm&&p.cm.length)?'<div class="allcm">コメント'+p.cm.length+'件をすべて見る</div>':'')+cm+'</div><div class="ig-time">'+(AGO[p.id]||'1日前')+'</div></div>';
+   const dp=body.querySelector('#ig-detail .ig-post'); const sc=()=>{ body.scrollTop+=dp.getBoundingClientRect().top-body.getBoundingClientRect().top-4; }; sc(); const di=dp.querySelectorAll('img')[1]; if(di&&!di.complete) di.addEventListener('load',sc);
  }));
 }
 $('#igsw-j').addEventListener('click',()=>{igWho='j'; $('#igsw-j').classList.add('on'); $('#igsw-n').classList.remove('on'); renderIG();});
@@ -798,8 +1019,42 @@ document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',(
 $('#homebar').addEventListener('click',()=>showView('v-home'));
 $('#btn-next').addEventListener('click',()=>{ if(!S.done) run(); });
 $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（進行状況がリセットされます）')){ localStorage.removeItem(LSKEY); location.reload(); }});
-function tickClock(){const d=new Date(); const t=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); $('#sb-time').textContent=t; $('#home-time').textContent=t;}
+function tickClock(){const d=new Date(); const mm=String(d.getMinutes()).padStart(2,'0'); $('#sb-time').textContent=String(d.getHours()).padStart(2,'0')+':'+mm; const lt=$('#lock-time'); if(lt) lt.textContent=d.getHours()+':'+mm; const ld=$('#lock-date'); if(ld){const wd=['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'][d.getDay()]; ld.textContent=(d.getMonth()+1)+'月'+d.getDate()+'日 '+wd;}}
 tickClock(); setInterval(tickClock,30000);
+/* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
+$('#v-lock').addEventListener('click',()=>showView('v-home'));
+function renderFriends(){
+ const F=$('#friend-list'); if(!F) return;
+ let h='<button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar.jpg"><span><span class="fn">なお</span><div class="fs">졸업 제작 중… 🦋</div></span></button>';
+ const cnt=1+(S.chap>=1?1:0)+(S.chap>=4?1:0)+(S.chap>=5?1:0);
+ h+='<div class="fr-sec">친구 '+cnt+'</div>';
+ const row=(img,name,st)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(st||'')+'</span></span></button>';
+ h+=row('assets/av-jaeon.jpg','パク・ジェオン','작업 중. 끝나지 않는 것');
+ if(S.chap>=1) h+=row('assets/av-bitna.jpg','ビンナ','');
+ if(S.chap>=4) h+=row('assets/av-dohyuk.jpg','ヤン・ドヒョク','🍜');
+ if(S.chap>=5) h+=row('assets/av-sola.jpg','ユン・ソルア','');
+ F.innerHTML=h;
+ const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>toast('自分のプロフィールです'));
+ F.querySelectorAll('.fr-row').forEach(b=>b.addEventListener('click',()=>{
+   if(b.dataset.fr==='パク・ジェオン'){ showView('v-profile'); return; }
+   toast('（このプロフィールは演出用です）');
+ }));
+}
+document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener('click',()=>{
+ const t=b.dataset.tab;
+ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+ const T=$('#kk-title');
+ if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; }
+ else if(t==='chats'){ $('#friend-list').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; }
+ else{ toast('（このタブは2021年仕様の演出用です）'); }
+}));
+$('#btn-plus').addEventListener('click',()=>{ $('#plus-panel').classList.toggle('on'); });
+document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>toast('（送信は演出用です。▶で物語が進みます）')));
+$('#chat-prof-btn').addEventListener('click',()=>showView('v-profile'));
+$('#prof-close').addEventListener('click',()=>showView('v-chat'));
+$('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(!S.done) run(); });
+$('#prof-call2').addEventListener('click',()=>toast('（無料通話は物語の通話シーンで再生されます）'));
+$('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出用です）'));
 /* start */
 replay(); updParams();
 $('#bdg-kakao').textContent=S.done?'✓':'1';
