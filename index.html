@@ -408,13 +408,53 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
  .view.on,#gal-view.on,.plus-panel.on{animation:none !important}
  *{transition-duration:.01s !important;scroll-behavior:auto !important}
 }
+/* ===== v41 : low-height compaction (call / lock) =====
+   360x740・390x600級の低丈では通話中の終話ボタンが画面下へ溢れ、390x600では着信ラベルと
+   ロック画面ヒントも見切れた。844x390級の横向きでは着信ボタン自体が画面外で押せなかった。
+   基準 390x844（viewport高さ844）には当たらないよう max-height で段階的に詰める。 */
+@media (max-height:760px){
+ .call-av{margin-top:54px}
+ #v-call[data-phase="incoming"] .call-av{margin-top:72px}
+ .call-sub{margin-top:12px}
+ .call-grid{margin-bottom:18px}
+ .ui-incall{padding-bottom:32px}
+ .ci-opts{margin-bottom:22px}
+ .ui-incoming{padding-bottom:40px}
+ .lock-top{margin-top:36px}
+ .lock-notifs{margin-top:16px}
+ .lock-hint{padding-bottom:22px}
+}
+@media (max-height:640px){
+ .call-av{margin-top:40px}
+ .call-grid{display:none}
+ .ui-incall{padding-bottom:26px}
+}
+@media (max-height:480px){
+ #v-lock{overflow-y:auto}
+ .lock-top{margin-top:20px;font-size:16px}
+ .lock-time{font-size:46px}
+ .lock-notifs{margin-top:12px}
+ .lock-hint{padding:8px 0 18px}
+ .call-main{overflow-y:auto}
+ .call-av{width:54px;height:54px;margin-top:14px}
+ #v-call[data-phase="incoming"] .call-av{width:72px;height:72px;margin-top:24px}
+ .call-nm{font-size:22px}
+ .call-sub{margin:8px 20px 0;padding:10px 13px;min-height:0;font-size:13.5px;line-height:1.65}
+ .call-hint{display:none !important}
+ .call-grid{display:none}
+ .ci-opts{display:none}
+ .ui-incall{padding:0 40px 16px}
+ .ui-incoming{padding:0 44px 16px}
+ .cb{width:58px;height:58px}
+ .ci-lab{padding-top:5px}
+}
 </style>
 </head>
 <body>
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v40：最終回帰（v16〜v39の積み重ね変更の相互作用チェック）。新しい改修は入れず、v15以来の変更が重なった現行版を一括で再確認しました。3エンディングは1つのセッションで連鎖して再到達し、各END後の後日談の解放と完走（ドラマ編では彼のプロフィールの変化まで）、エンディング別フリーチャット（ドラマ＝キーワード応答あり／原作＝疎な返信／特別＝未送信のまま終了）を確認。「最初から」を挟んでもコレクション・後日談の既読・設定は保持され、到達するたびにコレクションが 1/3→2/3→3/3 と加算されることも実測しました。設定の組合せは、タップ送り／自動再生（早送りなしの実時間で通話まで到達）、効果音ON/OFF、BGM ON/OFF、全体ミュート、音量10と100（通話ボイスの音量連動まで）で序盤から通話まで破綻なし。セーブ移行は v1／v2／v5／v8 形式の再読込に加え、v31の異常系（破損JSONの退避、型違いの是正、範囲外idxの最終選択手前への回復）も再確認しました。画面のはみ出しは Chromium（390×844）と iOS Safari UA 条件で主要画面すべて0件です（通話画面の背景ブラーは、縁を隠すために画面より大きく置かれ overflow で切り取られる意図的な配置で、横スクロールは起きません）。実WebKitでの測定はこの検証環境のブラウザ基盤の不調で見送り、将来の環境更新後に再実施します。v38の通話是正2件（彼女の行へ送ると彼のボイスが止まること、通話中はホームへ離脱できないこと）も再確認済みです。物語・台詞・選択肢・数値・解放構造・セーブ形式・ボイス連動はすべて不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v41：画面サイズ違いのスポット確認。基準の390×844に加えて、小さい画面（360×740）／大きい画面（430×932、電話枠の上限で実効400幅）／高さの低い画面（390×600と、横向きに近い844×390）で主要画面を実測しました。横はみ出しとボタンの文字見切れは全サイズ0件でしたが、低い画面では通話まわりに実害があり、CSSだけで是正しました：通話中の終話ボタンが360×740で下に32px・390×600で画面外まではみ出していた問題と、390×600で着信ラベルとロック画面のヒントが見切れていた問題、844×390で着信の応答・拒否ボタンが画面外で押せなかった問題です。低い画面では段階的に余白を詰め、極端に低い画面では通話の装飾グリッド等を省いて操作ボタンと字幕を画面内に収めています（基準の390×844と430×932の配置は一切変わっていません）。横向きでは通話の実フロー（着信→応答→字幕送り→終話→ホーム復帰）まで確認し、通話中はホームへ離脱できない仕様（v38）も維持しています。ホームのドックとアプリの重なりは、スクロールでずらせる元のiOS風の設計（基準サイズでも同じ）として変更していません。物語・台詞・選択肢・数値・解放構造・セーブ形式・ボイス連動はすべて不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
