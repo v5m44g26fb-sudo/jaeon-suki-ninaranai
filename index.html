@@ -370,7 +370,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v6：人と世界の変化をリアルに。ジェオンのプロフィール（状態メッセージ／プロフィールミュージック／写真）が物語で変化し、端末の時計とバッテリーは作中の時間と連動。IGのフォロワー・いいね・コメントも時間で育ち、写真アプリに物語の写真が日付付きで増えていきます。v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+<p class="src">v7：効果音と生活音を追加。カカオの送受信音、着信音、雨音やバーの空気感などの環境音を、すべてオリジナル合成音で実装しました。効果音のON／OFF・音量・全体ミュートはホームの演出設定から変更できます。v6：人と世界の変化をリアルに。ジェオンのプロフィール（状態メッセージ／プロフィールミュージック／写真）が物語で変化し、端末の時計とバッテリーは作中の時間と連動。IGのフォロワー・いいね・コメントも時間で育ち、写真アプリに物語の写真が日付付きで増えていきます。v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -416,7 +416,10 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="wid-set"><b>⚙️ 演出設定</b>
 <div class="setrow"><span class="sl">メッセージの進み方</span><button class="setbtn" id="set-tap">タップで進む</button></div>
 <div class="setrow"><span class="sl">メッセージ速度</span><button class="setbtn" id="set-pace">ふつう</button></div>
-<div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャットの ▶ ボタンを長押しすると早送りモード（ON／OFF）になります。</div>
+<div class="setrow"><span class="sl">効果音</span><button class="setbtn" id="set-sfx">ON</button></div>
+<div class="setrow"><span class="sl">効果音量</span><input type="range" id="sfx-vol" min="0" max="100" value="70" style="flex:1;max-width:160px;accent-color:#fee500"></div>
+<div class="setrow"><span class="sl">全体ミュート（マナーモード）</span><button class="setbtn" id="set-mute">OFF</button></div>
+<div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャットの ▶ ボタンを長押しすると早送りモード（ON／OFF）になります。効果音と生活音はすべてオリジナル合成音です（詳細は解剖メモ下部のクレジット）。</div>
 </div>
 </div>
 <div class="pagedots"><i class="on"></i><i></i></div>
@@ -889,7 +892,7 @@ function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!qu
 function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('📷 Instagramに新しい投稿が解放されました');}}
 function applyItem(it,quiet){
  switch(it.k){
-  case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); if(!quiet&&typeof it.cal==='number'&&typeof showNoise==='function') showNoise(it.cal); break;
+  case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); if(typeof it.cal==='number'&&typeof setAmb==='function') setAmb(it.cal); if(!quiet&&typeof it.cal==='number'&&typeof showNoise==='function') showNoise(it.cal); break;
   case 'chap': S.chap=it.n; break;
   case 'scene': addScene(it.v); break;
   case 'sys': addSys(it.v); break;
@@ -935,6 +938,7 @@ async function paceBeforeJ(v){
 async function paceStep(it){
  if(it.k==='j') await paceBeforeJ(it.v);
  applyItem(it,false);
+ if(it.k==='j'&&typeof sfxPlay==='function') sfxPlay('recv');
  if(it.k==='chap'||it.k==='ig') return; /* 見えない項目では止まらない */
  if(ffMode){ await interruptibleSleep(70); return; }
  if(S.tap){ await waitTap(); }
@@ -955,12 +959,15 @@ function doCall(lines){
   callResolve=res; callLines=lines; callIdx=0; callSec=0; callPhase='incoming';
   const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming';
   if(typeof vib==='function') vib([260,90,260,90,260]);
+  if(typeof sfxRing==='function') sfxRing(true);
   duckMusic(true);
   showView('v-call'); $('#call-timer').textContent='iPhone'; $('#call-sub').textContent='……';
   clearInterval(callTimerInt);
  });
 }
 function startIncall(){
+ if(typeof sfxRing==='function') sfxRing(false);
+ if(typeof sfxPlay==='function') sfxPlay('connect');
  callPhase='incall'; $('#v-call').dataset.phase='incall'; callSec=0;
  $('#call-sub').innerHTML='<span style="color:#aeb6c2">（通話中 ― 字幕タップで進みます）</span>';
  clearInterval(callTimerInt);
@@ -971,6 +978,7 @@ function advanceCall(){
    const [who,txt]=callLines[callIdx++];
    $('#call-sub').innerHTML=(who===1?'<span class="me2">なお：</span>':'ジェオン：')+esc(txt);
  } else {
+   if(typeof sfxPlay==='function') sfxPlay('callend');
    clearInterval(callTimerInt); duckMusic(false); const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming'; showView('v-chat');
    if(callResolve){const r=callResolve; callResolve=null; r();}
  }
@@ -1003,7 +1011,7 @@ function renderChoice(it){
    b.addEventListener('click',async()=>{
      choiceOpen=false; wrap.remove();
      S.picks[S.idx]=oi;
-     addMe(op.t);
+     addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
      S.kai=clamp(S.kai+(op.kai||0),0,100); S.kyo=clamp(S.kyo+(op.kyo||0),5,95);
      updParams(); S.idx++; save();
      await playItems(op.then||[],false);
@@ -1053,7 +1061,7 @@ function renderFinal(it){
    b.textContent=locked?('🔒 ？？？（解明度'+op.req+'以上で解放される選択肢）'):op.t;
    if(!locked) b.addEventListener('click',()=>{
      choiceOpen=false; wrap.remove();
-     S.picks[S.idx]=oi; addMe(op.t);
+     S.picks[S.idx]=oi; addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
      S.idx++; S.endId=op.end; S.done=true; S.calU=Math.max(S.calU,12);
      if(!S.ends.includes(op.end)) S.ends.push(op.end);
      if(op.end==='nao' && !S.igs.includes('army')) S.igs.push('army');
@@ -1194,6 +1202,7 @@ function renderCallLog(){
 }
 /* nav */
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
+ if(typeof sfxPlay==='function') sfxPlay('tap');
  const k=b.dataset.open;
  if(k==='kakao'){renderThreads(); showView('v-kakao');}
  if(k==='ig'){renderIG(); showView('v-ig');}
@@ -1216,7 +1225,7 @@ feed.addEventListener('click',e=>{ if(choiceOpen) return; if(e.target.closest('b
 $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（進行状況がリセットされます）')){ localStorage.removeItem(LSKEY); location.reload(); }});
 /* v6：ステータスバーとロック画面の時計は実時刻ではなく物語内時刻（chatMin）に連動する（updClock は v6 セクションで定義し、updParams から呼ばれる） */
 /* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
-$('#v-lock').addEventListener('click',()=>showView('v-home'));
+$('#v-lock').addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('unlock'); showView('v-home'); });
 function renderFriends(){
  const F=$('#friend-list'); if(!F) return;
  const bday=S.calU===4;
@@ -1245,7 +1254,7 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
  else{ toast('（このタブは2021年仕様の演出用です）'); }
 }));
 $('#btn-plus').addEventListener('click',()=>{ $('#plus-panel').classList.toggle('on'); });
-document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>toast('（送信は演出用です。▶で物語が進みます）')));
+document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ if(/카메라|사진|📷|🖼/.test(d.textContent)&&typeof sfxPlay==='function') sfxPlay('shutter'); toast('（送信は演出用です。▶で物語が進みます）'); }));
 $('#chat-prof-btn').addEventListener('click',()=>showView('v-profile'));
 $('#prof-close').addEventListener('click',()=>showView('v-chat'));
 $('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(onTap) fireTap(); else if(!S.done) run(); });
@@ -1263,7 +1272,7 @@ const TRACKS={
 const CHAP_TRACK={0:'butterfly',1:'butterfly',2:'were-already',3:'whisper',4:'were-already',5:'were-already',6:'were-already',7:'heavy-heart',8:'love-me-like-that'};
 let bgmEl=null, curTrack=null, ducked=false, musicStarted=false;
 function ensureBgm(){ if(!bgmEl) bgmEl=$('#bgm'); return bgmEl; }
-function effVol(){ return (S.sndOn?(S.sndVol/100):0)*(ducked?0.3:1); }
+function effVol(){ return (S.mute?0:(S.sndOn?(S.sndVol/100):0))*(ducked?0.3:1); }
 function updMusicUI(){ const np=$('#mus-now'); if(np) np.textContent=curTrack?('♪ '+TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a):''; const tg=$('#mus-toggle'); if(tg) tg.textContent=S.sndOn?'🔊 ON':'🔇 OFF'; const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
 function syncMusic(){ const want=CHAP_TRACK[S.chap]||'butterfly'; const a=ensureBgm(); if(!a) return; if(want!==curTrack){ curTrack=want; a.src=TRACKS[want].f; a.volume=effVol(); if(musicStarted&&S.sndOn) a.play().catch(()=>{}); } updMusicUI(); }
 function startMusic(){ musicStarted=true; const a=ensureBgm(); if(!a) return; if(!curTrack) syncMusic(); a.volume=effVol(); if(S.sndOn) a.play().catch(()=>{}); }
@@ -1271,7 +1280,8 @@ function duckMusic(on){ ducked=on; const a=ensureBgm(); if(a) a.volume=effVol();
 document.addEventListener('pointerdown',function h(){ document.removeEventListener('pointerdown',h); startMusic(); });
 $('#mus-toggle').addEventListener('click',()=>{ S.sndOn=!S.sndOn; save(); const a=ensureBgm(); if(a){ a.volume=effVol(); if(S.sndOn) startMusic(); else a.pause(); } updMusicUI(); });
 $('#mus-vol').addEventListener('input',e=>{ S.sndVol=+e.target.value; save(); const a=ensureBgm(); if(a) a.volume=effVol(); });
-function musicCreditHTML(){ return '<div class="mus-credit"><b>♪ BGMクレジット（v4追加）</b><br>ドラマ『わかっていても』OST ― Apple Music公式プレビュー音源（30秒・ループ再生）<br>・「Butterfly」JUNHA PARK (J.UNA)<br>・「Love Me Like That」SAM KIM<br>・「We\'re Already」KIMMUSEUM<br>・「Heavy Heart」RIO<br>・「Whisper」Park Ji Woo<br>楽曲の権利は各権利者に帰属します。音源は assets/music/ に配置し、同名ファイルへの差し替えで長尺版にも対応できる構造にしています。</div>'; }
+function musicCreditHTML(){ return '<div class="mus-credit"><b>♪ BGMクレジット（v4追加）</b><br>ドラマ『わかっていても』OST ― Apple Music公式プレビュー音源（30秒・ループ再生）<br>・「Butterfly」JUNHA PARK (J.UNA)<br>・「Love Me Like That」SAM KIM<br>・「We\'re Already」KIMMUSEUM<br>・「Heavy Heart」RIO<br>・「Whisper」Park Ji Woo<br>楽曲の権利は各権利者に帰属します。音源は assets/music/ に配置し、同名ファイルへの差し替えで長尺版にも対応できる構造にしています。</div>'
+ +'<div class="mus-credit"><b>🔔 効果音・生活音クレジット（v7追加）</b><br>効果音と環境音はすべて本作のために合成したオリジナル音です（カカオ公式音・iOS標準音などの既存音源は使用していません）。正弦波のポップ音／マリンバ風の着信フレーズ／フィルタノイズによる雨音・店内・室内のアンビエントを、波形合成スクリプトで生成しました。音源は assets/sfx/ に配置し、同名ファイルへの差し替えが可能な構造にしています。</div>'; }
 /* ================= v4 : POV ================= */
 const POVS=[
 {id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n\n泣いた跡。強い酒。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
@@ -1349,7 +1359,7 @@ async function sendFree(){
    if(S.freeN>=2&&!S.freeClosed){ S.freeClosed=true; const m='―― このトークは終了しています ――'; addSys(m); S.free.push({w:'sys',t:m}); }
    save(); return;
  }
- freeAddMe(txt,false); S.free.push({w:'me',t:txt}); S.freeN++; save();
+ freeAddMe(txt,false); if(typeof sfxPlay==='function') sfxPlay('send'); S.free.push({w:'me',t:txt}); S.freeN++; save();
  const cap=S.endId==='gen'?6:15;
  if(S.freeN>cap){ if(!S.freeClosed){ S.freeClosed=true; const m=S.endId==='gen'?'（それきり、返信は来なかった）':'―― 今日のトークはここまで ――'; addSys(m); S.free.push({w:'sys',t:m}); save(); } return; }
  const reps=pickFreeReplies(txt);
@@ -1358,7 +1368,7 @@ async function sendFree(){
  const ty=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
  await sleep(Math.round((950+Math.min(reps.join('').length*22,1500))*paceMul())); ty.remove();
  let firstRep=true;
- for(const r of reps){ freeAddJ(r); if(firstRep){ firstRep=false; if(typeof vib==='function') vib(25); } S.free.push({w:'j',t:r}); await sleep(Math.round(680*paceMul())); }
+ for(const r of reps){ freeAddJ(r); if(firstRep){ firstRep=false; if(typeof vib==='function') vib(25); if(typeof sfxPlay==='function') sfxPlay('notify'); } S.free.push({w:'j',t:r}); await sleep(Math.round(680*paceMul())); }
  save(); freeBusy=false;
 }
 $('#free-send').addEventListener('click',sendFree);
@@ -1371,7 +1381,7 @@ function showNoise(cal){
  const n=NOISE[cal]; if(!n||S.noise.includes(cal)) return; S.noise.push(cal); save();
  const b=$('#noise'); if(!b) return;
  b.innerHTML='<span class="n-ic">'+n[0]+'</span><div style="flex:1;min-width:0"><div class="n-t">'+n[1]+'</div><div class="n-b">'+n[2]+'</div></div>';
- b.classList.add('on'); if(typeof vib==='function') vib(35); if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
+ b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify'); if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
 }
 $('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); });
 function updSetUI(){ const st=$('#set-tap'); if(st) st.textContent=S.tap?'タップで進む':'自動で進む'; const sp=$('#set-pace'); if(sp) sp.textContent=S.pace==='slow'?'ゆっくり':'ふつう'; }
@@ -1441,6 +1451,86 @@ $('#gal-close').addEventListener('click',()=>$('#gal-view').classList.remove('on
 /* start */
 replay(); updParams();
 $('#bdg-kakao').textContent=S.done?'✓':'1';
+</script>
+<script>
+/* ================= v7 : SFX & AMBIENCE =================
+   効果音と生活音。音源はすべて波形合成したオリジナル（assets/sfx/）。
+   再生はユーザーのタップを起点にし（sfxArmed）、設定はセーブに保存する。
+   BGMとは独立した「効果音ON/OFF・効果音量」と、両方を止める全体ミュートを持つ。 */
+if(typeof S.sfxOn!=='boolean') S.sfxOn=true;
+if(typeof S.sfxVol!=='number') S.sfxVol=70;
+if(typeof S.mute!=='boolean') S.mute=false;
+const SFXF={send:'assets/sfx/send.mp3',recv:'assets/sfx/receive.mp3',tap:'assets/sfx/tap.mp3',notify:'assets/sfx/notify.mp3',connect:'assets/sfx/connect.mp3',callend:'assets/sfx/callend.mp3',shutter:'assets/sfx/shutter.mp3',unlock:'assets/sfx/unlock.mp3'};
+const SFXG={send:0.9,recv:0.8,tap:0.32,notify:0.85,connect:0.7,callend:0.7,shutter:0.85,unlock:0.5};
+const sfxCache={};
+let sfxArmed=false;
+document.addEventListener('pointerdown',()=>{ sfxArmed=true; });
+function sfxEnabled(){ return S.sfxOn&&!S.mute; }
+function sfxMake(src,loop){ const a=new Audio(); a.src=src; a.preload='auto'; if(loop) a.loop=true; return a; }
+function sfxPlay(name){
+ if(!sfxArmed||!sfxEnabled()) return;
+ try{
+   let a=sfxCache[name];
+   if(!a){ a=sfxMake(SFXF[name],false); sfxCache[name]=a; }
+   a.volume=(S.sfxVol/100)*(SFXG[name]||0.8);
+   try{ a.currentTime=0; }catch(e){}
+   a.play().catch(()=>{});
+ }catch(e){}
+}
+/* 着信音（ループ） */
+let ringEl=null, ringing=false;
+function sfxRing(on){
+ try{
+   if(on){
+     if(!sfxArmed||!sfxEnabled()) return;
+     if(!ringEl) ringEl=sfxMake('assets/sfx/ringtone.mp3',true);
+     ringEl.volume=(S.sfxVol/100)*0.8;
+     ringEl.play().catch(()=>{}); ringing=true;
+   } else {
+     ringing=false;
+     if(ringEl){ ringEl.pause(); try{ ringEl.currentTime=0; }catch(e){} }
+   }
+ }catch(e){}
+}
+/* 生活音（アンビエント）：場面（dateのcal）で切り替え、チャット画面を離れたら止まる */
+const AMBMAP={0:'room',1:'bar',2:'room',6:'room',9:'rain',10:'room',11:'room'};
+const AMBF={bar:'assets/sfx/bar.mp3',rain:'assets/sfx/rain.mp3',room:'assets/sfx/room.mp3'};
+const AMBG={bar:0.30,rain:0.38,room:0.5};
+let curAmb=null, ambEl=null, ambName=null;
+function setAmb(cal){ curAmb=AMBMAP[cal]||null; updAmb(); }
+function curViewId(){ const v=document.querySelector('.view.on'); return v?v.id:null; }
+function updAmb(){
+ try{
+   /* セーブ再開時はロード時replayがsetAmb定義前に走るため、現在の場面はS.calUから導出する */
+   const sceneAmb=curAmb!==null?curAmb:(AMBMAP[S.calU]||null);
+   const want=(sfxArmed&&sfxEnabled()&&curViewId()==='v-chat')?sceneAmb:null;
+   if(want!==ambName){
+     if(ambEl){ ambEl.pause(); }
+     ambName=want;
+     if(want){
+       ambEl=sfxMake(AMBF[want],true); ambEl.dataset.amb=want;
+       ambEl.volume=(S.sfxVol/100)*(AMBG[want]||0.3);
+       ambEl.play().catch(()=>{});
+     } else ambEl=null;
+   } else if(ambEl){
+     ambEl.volume=(S.sfxVol/100)*(AMBG[ambName]||0.3);
+   }
+ }catch(e){}
+}
+try{
+ const mo=new MutationObserver(()=>{ updAmb(); if(curViewId()!=='v-call'&&ringing) sfxRing(false); });
+ document.querySelectorAll('.view').forEach(v=>mo.observe(v,{attributes:true,attributeFilter:['class']}));
+}catch(e){}
+/* 設定UI（効果音・効果音量・全体ミュート） */
+function updSfxUI(){
+ const b=$('#set-sfx'); if(b) b.textContent=S.sfxOn?'ON':'OFF';
+ const m=$('#set-mute'); if(m) m.textContent=S.mute?'ON（無音）':'OFF';
+ const vr=$('#sfx-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sfxVol;
+}
+const sfxBtn=$('#set-sfx'); if(sfxBtn) sfxBtn.addEventListener('click',()=>{ S.sfxOn=!S.sfxOn; save(); updSfxUI(); if(!S.sfxOn){ sfxRing(false); } updAmb(); if(S.sfxOn) sfxPlay('tap'); toast('効果音：'+(S.sfxOn?'ON':'OFF')); });
+const sfxVolEl=$('#sfx-vol'); if(sfxVolEl) sfxVolEl.addEventListener('input',e=>{ S.sfxVol=+e.target.value; save(); updAmb(); if(ringEl&&ringing) ringEl.volume=(S.sfxVol/100)*0.8; });
+const muteBtn=$('#set-mute'); if(muteBtn) muteBtn.addEventListener('click',()=>{ S.mute=!S.mute; save(); updSfxUI(); const a=ensureBgm(); if(a) a.volume=effVol(); if(S.mute){ sfxRing(false); } updAmb(); toast(S.mute?'🔇 全体ミュートON（BGM・効果音とも無音）':'🔊 ミュート解除'); });
+updSfxUI();
 </script>
 </body>
 </html>
