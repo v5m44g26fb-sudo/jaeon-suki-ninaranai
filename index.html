@@ -989,6 +989,7 @@ let callResolve=null, callLines=[], callIdx=0, callSec=0, callTimerInt=null, cal
 function doCall(lines){
  return new Promise(res=>{
   callResolve=res; callLines=lines; callIdx=0; callSec=0; callPhase='incoming';
+  window._voiceCall=lines.some(l=>l[1]==='声、聞きたくなって')?'c1':(lines.some(l=>typeof l[1]==='string'&&l[1].indexOf('ブレスレット、サイズ')===0)?'c2':null);
   const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming';
   if(typeof vib==='function') vib([260,90,260,90,260]);
   if(typeof sfxRing==='function') sfxRing(true);
@@ -1007,9 +1008,12 @@ function startIncall(){
 }
 function advanceCall(){
  if(callIdx<callLines.length){
+   const li=callIdx;
    const [who,txt]=callLines[callIdx++];
    $('#call-sub').innerHTML=(who===1?'<span class="me2">なお：</span>':'ジェオン：')+esc(txt);
+   if(who===0&&typeof playVoiceLine==='function') playVoiceLine(li);
  } else {
+   if(typeof stopVoice==='function') stopVoice();
    if(typeof sfxPlay==='function') sfxPlay('callend');
    clearInterval(callTimerInt); duckMusic(false); const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming'; showView('v-chat');
    if(callResolve){const r=callResolve; callResolve=null; r();}
@@ -1315,7 +1319,8 @@ document.addEventListener('pointerdown',function h(){ document.removeEventListen
 $('#mus-toggle').addEventListener('click',()=>{ S.sndOn=!S.sndOn; save(); const a=ensureBgm(); if(a){ a.volume=effVol(); if(S.sndOn) startMusic(); else a.pause(); } updMusicUI(); });
 $('#mus-vol').addEventListener('input',e=>{ S.sndVol=+e.target.value; save(); const a=ensureBgm(); if(a) a.volume=effVol(); });
 function musicCreditHTML(){ return '<div class="mus-credit"><b>♪ BGMクレジット（v4追加）</b><br>ドラマ『わかっていても』OST ― Apple Music公式プレビュー音源（30秒・ループ再生）<br>・「Butterfly」JUNHA PARK (J.UNA)<br>・「Love Me Like That」SAM KIM<br>・「We\'re Already」KIMMUSEUM<br>・「Heavy Heart」RIO<br>・「Whisper」Park Ji Woo<br>楽曲の権利は各権利者に帰属します。音源は assets/music/ に配置し、同名ファイルへの差し替えで長尺版にも対応できる構造にしています。</div>'
- +'<div class="mus-credit"><b>🔔 効果音・生活音クレジット（v7追加）</b><br>効果音と環境音はすべて本作のために合成したオリジナル音です（カカオ公式音・iOS標準音などの既存音源は使用していません）。正弦波のポップ音／マリンバ風の着信フレーズ／フィルタノイズによる雨音・店内・室内のアンビエントを、波形合成スクリプトで生成しました。音源は assets/sfx/ に配置し、同名ファイルへの差し替えが可能な構造にしています。</div>'; }
+ +'<div class="mus-credit"><b>🔔 効果音・生活音クレジット（v7追加）</b><br>効果音と環境音はすべて本作のために合成したオリジナル音です（カカオ公式音・iOS標準音などの既存音源は使用していません）。正弦波のポップ音／マリンバ風の着信フレーズ／フィルタノイズによる雨音・店内・室内のアンビエントを、波形合成スクリプトで生成しました。音源は assets/sfx/ に配置し、同名ファイルへの差し替えが可能な構造にしています。</div>'
+ +'<div class="mus-credit"><b>🎙 通話ボイス（v9追加）</b><br>通話シーン（誕生日の夜／ブレスレットの夜）のジェオンの核セリフに、韓国語ボイスを付けています（日本語字幕と併用）。声はAnyVoiceの既製ボイス「호기요」（実在俳優のクローンではありません）。音源は assets/voice/ に配置しています。</div>'; }
 /* ================= v4 : POV ================= */
 const POVS=[
 {id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n\n泣いた跡。強い酒。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
@@ -1529,6 +1534,23 @@ function sfxRing(on){
    }
  }catch(e){}
 }
+/* 通話ボイス（v9）：韓国語ボイス＋日本語字幕。AnyVoice既製ボイス 호기요 で生成（俳優クローンではない） */
+const VOICEMAP={c1:{2:'c1-1',3:'c1-2',5:'c1-3'},c2:{2:'c2-1',6:'c2-2',8:'c2-3'}};
+let voiceEl=null;
+function playVoiceLine(li){
+ stopVoice();
+ if(!sfxArmed||!sfxEnabled()) return;
+ const vc=window._voiceCall; if(!vc||!VOICEMAP[vc]) return;
+ const name=VOICEMAP[vc][li]; if(!name) return;
+ try{
+   if(!voiceEl){ voiceEl=new Audio(); voiceEl.preload='auto'; }
+   voiceEl.src='assets/voice/'+name+'.mp3';
+   voiceEl.volume=(S.sfxVol/100)*1.0;
+   voiceEl.play().catch(()=>{});
+   window._voiceEl=voiceEl;
+ }catch(e){}
+}
+function stopVoice(){ try{ if(voiceEl){ voiceEl.pause(); try{ voiceEl.currentTime=0; }catch(e){} } }catch(e){} }
 /* 生活音（アンビエント）：場面（dateのcal）で切り替え、チャット画面を離れたら止まる */
 const AMBMAP={0:'room',1:'bar',2:'room',6:'room',9:'rain',10:'room',11:'room'};
 const AMBF={bar:'assets/sfx/bar.mp3',rain:'assets/sfx/rain.mp3',room:'assets/sfx/room.mp3'};
