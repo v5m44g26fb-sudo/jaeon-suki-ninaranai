@@ -364,6 +364,15 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .endcard .big{font-size:30px;font-weight:800;color:var(--kakao)}
 .endcard button{background:var(--kakao);color:#3a1d1d;font-weight:700;border-radius:20px;padding:10px 20px;font-size:13.5px;margin-top:10px}
 .small-note{font-size:10.5px;color:#8d8578;text-align:center;padding:4px 18px 10px;line-height:1.6}
+
+/* ===== v8 : epilogue / proactive ===== */
+.ic-epi{background:linear-gradient(150deg,#31435f,#101b2c);font-size:26px}
+#epiread-body{padding:20px 20px 34px;font-size:14.5px;line-height:2.05;color:#26221f;white-space:pre-wrap;background:#fbf8f2;flex:1;overflow-y:auto}
+#epiread-body .pr-t{font-size:16px;font-weight:800;margin-bottom:12px;color:#241d3f}
+#epiread-body .pr-note{margin-top:20px;font-size:12px;color:#8a8a90;white-space:normal}
+.bub.draft{background:#ececf0;color:#8a8a90;border:1px dashed #c6c6cc}
+.msgimg{width:180px;max-width:62vw;border-radius:14px;display:block;box-shadow:0 2px 8px rgba(20,30,45,.18)}
+.epi-done{color:#7a6a2f;font-weight:700}
 </style>
 </head>
 <body>
@@ -410,6 +419,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <button class="app" data-open="cal"><span class="ic ic-cal"><span class="cwd" id="app-cal-wd">금요일</span><span class="cd2" id="app-cal-d">12</span></span>캘린더</button>
 <button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
 <button class="app" data-open="pov"><span class="ic ic-pov">🦋</span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
+<button class="app" data-open="epi"><span class="ic ic-epi">🌙</span>後日談</button>
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
 <button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
@@ -552,6 +562,18 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div id="povread-body"></div>
 </div>
 
+<!-- EPILOGUE LIST (v8) -->
+<div class="view" id="v-epi">
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>後日談</h2><span class="sub">エンディングの、その先</span></div>
+<div class="abody" id="epi-body"></div>
+</div>
+
+<!-- EPILOGUE READER (v8) -->
+<div class="view" id="v-epiread">
+<div class="ahead"><button class="back" id="epiread-back">‹</button><h2>後日談</h2><span class="sub">届かなかった言葉</span></div>
+<div id="epiread-body"></div>
+</div>
+
 <!-- IG STORY VIEWER (v4) -->
 <div class="view" id="v-story">
 <img class="story-img" id="story-img" src="" alt="">
@@ -592,7 +614,8 @@ const IG_J=[
 {id:'wheel',img:'assets/ig-wheel.jpg',cap:'관람차. 말하지 못한 것',likes:'447',unlock:8,cm:[['b1nna_','合宿？ 誰と乗ったの'],['park_jaeon','……秘密']]},
 {id:'hands',img:'assets/ig-hands.jpg',cap:'다시 처음부터. 손은 거짓말을 못 한다',likes:'523',unlock:10,cm:[['s0l_a','……本気なんだ'],['nao_sculpt','（見てしまった）']]},
 {id:'gallery',img:'assets/ig-gallery.jpg',cap:'전시. ……와줘서',likes:'766',unlock:11,cm:[['b1nna_','おめでとう！！'],['park_jaeon','ありがとう']]},
-{id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]}
+{id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]},
+{id:'enlist',img:'assets/ig-jaeon3.jpg',cap:'……',likes:'1,876',unlock:99,cm:[['b1nna_','見たよ。……元気で']]}
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なお先輩かわいい'],['nao_sculpt','ありがとう笑']],cmL:[['b1nna_','この日、泣いてなかった？']]},
@@ -851,12 +874,19 @@ if(!S.ver){ S.ver=2; if(S.done){ S.done=false; S.endId=null; } if(!Array.isArray
 if(!Array.isArray(S.pov)) S.pov=[]; if(!Array.isArray(S.free)) S.free=[]; if(typeof S.freeN!=='number') S.freeN=0; if(typeof S.freeClosed!=='boolean') S.freeClosed=false; if(typeof S.sndOn!=='boolean') S.sndOn=true; if(typeof S.sndVol!=='number') S.sndVol=70;
 /* v5：進行ペース設定・ノイズ通知の既出管理（旧セーブにはデフォルトで補完） */
 if(typeof S.tap!=='boolean') S.tap=true; if(S.pace!=='slow'&&S.pace!=='normal') S.pace='normal'; if(!Array.isArray(S.noise)) S.noise=[];
+/* v8 defaults（旧セーブへの自動補完） */
+if(!Array.isArray(S.epiSeen)) S.epiSeen=[];
+if(typeof S.proN!=='number') S.proN=0;
+if(typeof S.proOps!=='number') S.proOps=0;
+if(typeof S.proUnread!=='number') S.proUnread=0;
+if(typeof S.chatOpened!=='boolean') S.chatOpened=false;
+if(typeof S.epiProf!=='boolean') S.epiProf=false;
 let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2400);}
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery'].includes(id)); }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -897,6 +927,8 @@ function applyItem(it,quiet){
   case 'scene': addScene(it.v); break;
   case 'sys': addSys(it.v); break;
   case 'j': addJ(it.v); break;
+  case 'me': addMe(it.v); break;
+  case 'draft': addDraftJ(it.v); break;
   case 'fade': addFade(it.v); break;
   case 'memo': unlockMemo(it.id,quiet); if(!quiet) addSys('―― 解剖メモ '+it.id+' を記録した ――'); break;
   case 'part1': renderPart1Card(quiet); break;
@@ -1105,7 +1137,8 @@ function renderThreads(){
   :S.chap>=5?'助手、やらせて'
   :S.chap>=4?'……そっか'
   :(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）');
- L.appendChild(threadRow(cav(),'パク・ジェオン',prevJ,'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run();}));
+ const proPrev=(S.proUnread>0)?(()=>{const lf=[...(S.free||[])].reverse().find(m=>m.w==='j'||m.w==='jimg'); return lf?(lf.t||'🦋 写真'):prevJ;})():prevJ;
+ L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,'3月',S.proUnread>0?S.proUnread:(S.chap>=2&&!S.done?1:0),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
  if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
@@ -1141,7 +1174,7 @@ function renderIG(){
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
- const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
+ const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
  const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']];
  let h='<div class="ig-stories">'+SUBAR.map(s=>{const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock);return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+(has?'':' seen')+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>';}).join('')+'</div>';
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
@@ -1210,6 +1243,7 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
  if(k==='notes'){renderNotes(); showView('v-notes');}
  if(k==='calllog'){renderCallLog(); showView('v-calllog');}
  if(k==='pov'){renderPOV(); showView('v-pov');}
+ if(k==='epi'){renderEpi(); showView('v-epi');}
  if(k==='gallery'){renderGallery(); showView('v-gallery');}
 }));
 document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>showView('v-home')));
@@ -1327,7 +1361,9 @@ $('#story-prev').addEventListener('click',()=>storyStep(-1));
 function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); } }
 function freeAddMe(t,unsent){ const r=el('<div class="row me'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'')+'<div class="bub">'+esc(t)+'</div></div>'); feed.appendChild(r); scrollFeed(); }
 function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div></div></div></div>'); feed.appendChild(r); scrollFeed(); }
-function renderFreeLog(){ (S.free||[]).forEach(m=>{ if(m.w==='me') freeAddMe(m.t,false); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='sys') addSys(m.t); }); scrollFeed(); }
+function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
+function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); feed.appendChild(r); scrollFeed(); }
+function renderFreeLog(){ (S.free||[]).forEach(m=>{ if(m.w==='me') freeAddMe(m.t,false); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(); }
 function pickFreeReplies(txt){
  if(S.endId==='gen'){ if(S.freeN===2) return ['……見たよ']; if(S.freeN===5) return ['……元気で']; return null; }
  const R=[
@@ -1396,6 +1432,7 @@ function vib(p){ try{ if(navigator&&navigator.vibrate) navigator.vibrate(p); }ca
 /* ジェオンのプロフィールは章の進行で変わる。変化の節目は解剖メモ／彼視点の解放と緩く連動：
    calU3=メモ03の頃（曖昧な関係）、6=助手復帰（メモ06）、9=雨の章（メモ07／彼視点04）、11=最終章（メモ09／彼視点05） */
 function profStage(){ const u=S.calU;
+ if(S.epiProf&&S.endId==='drama') return {st:'정원에, 가끔 간다',mus:'「Butterfly」― JUNHA PARK (J.UNA)',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
  if(u>=11) return {st:'나비. 이제는 잡지 않는다',mus:'「Love Me Like That」― SAM KIM',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
  if(u>=9)  return {st:'',mus:'',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-jaeon2.jpg'};
  if(u>=6)  return {st:'전시 준비 중',mus:'「We\'re Already」― KIMMUSEUM',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon2.jpg'};
@@ -1531,6 +1568,141 @@ const sfxBtn=$('#set-sfx'); if(sfxBtn) sfxBtn.addEventListener('click',()=>{ S.s
 const sfxVolEl=$('#sfx-vol'); if(sfxVolEl) sfxVolEl.addEventListener('input',e=>{ S.sfxVol=+e.target.value; save(); updAmb(); if(ringEl&&ringing) ringEl.volume=(S.sfxVol/100)*0.8; });
 const muteBtn=$('#set-mute'); if(muteBtn) muteBtn.addEventListener('click',()=>{ S.mute=!S.mute; save(); updSfxUI(); const a=ensureBgm(); if(a) a.volume=effVol(); if(S.mute){ sfxRing(false); } updAmb(); toast(S.mute?'🔇 全体ミュートON（BGM・効果音とも無音）':'🔊 ミュート解除'); });
 updSfxUI();
+
+/* ================= v8 : EPILOGUES（後日談） =================
+   エンディング到達で解放される、その先の短編。
+   チャット劇は本編と同じタップ送りで再生され、履歴はフリーチャットのログに残る。 */
+const EPIS=[
+{id:'drama',icon:'🦋',title:'後日談 ― その後の庭',sub:'END「わかっていても」の数週間後',type:'chat',unlock:()=>S.ends.includes('drama')},
+{id:'gen',icon:'✉️',title:'後日談 ― パリからの手紙（未達）',sub:'END「一人で進む」の、その先',type:'letter',unlock:()=>S.ends.includes('gen')},
+{id:'nao',icon:'🌅',title:'後日談 ― 入隊の朝',sub:'特別END「好きにはならない」の、その先',type:'chat',unlock:()=>S.ends.includes('nao')}
+];
+const EPI_ITEMS={
+drama:[
+{k:'date',v:'2021년 8월 20일 금요일'},
+{k:'scene',v:'数週間後 ― 夏の終わり。大学の温室の庭'},
+{k:'j',v:'来たんだ'},
+{k:'me',v:'蝶、増えたって言ってたから'},
+{k:'j',v:'ほんとに増えたよ'},
+{k:'j',v:'……今日は、四匹'},
+{k:'me',v:'数えてないって、言ってなかった？'},
+{k:'j',v:'…………'},
+{k:'j',v:'たまたま、目に入るだけ'},
+{k:'scene',v:'嘘は相変わらず下手で。でも、前より少しだけ、バレるのが早くなった。'},
+{k:'j',v:'なおはさ'},
+{k:'j',v:'卒業制作、終わったら……どうするの'},
+{k:'me',v:'まだ決めてない。……なんで？'},
+{k:'j',v:'なんでもない'},
+{k:'j',v:'……決めたら、言って。聞くだけは、する'},
+{k:'scene',v:'夕方 ― 帰り道'},
+{k:'j',v:'送る。途中まで'},
+{k:'me',v:'……うん'},
+{k:'me',v:'ねえ、ジェオン'},
+{k:'j',v:'ん？'},
+{k:'me',v:'今日は、ちゃんと家まで送って'},
+{k:'j',v:'……最初から、そのつもり'},
+{k:'sys',v:'付き合っても、壁は消えなかった。それでも彼は、黙って隣を歩くようになった。言葉の代わりに、隣にいる時間で返す人。――それが今の、二人の距離。'}
+],
+nao:[
+{k:'date',v:'2021년 11월 15일 월요일'},
+{k:'scene',v:'入隊の朝'},
+{k:'scene',v:'ビンナから、短い連絡が来た。「先輩、今日だよ。……あの人、入隊する日」'},
+{k:'scene',v:'返信は、しなかった。'},
+{k:'sys',v:'―― その朝、彼のInstagramに短い投稿が上がった ――'},
+{k:'ig',id:'enlist'},
+{k:'scene',v:'そして、彼のスマホの下書きフォルダには、送られなかった一文が残っていた。'},
+{k:'draft',v:'……元気で'},
+{k:'scene',v:'送信ボタンは、押されなかった。言葉は、また届かなかった。'},
+{k:'scene',v:'それでも彼は今朝、自分の足で門をくぐった。誰の言葉も、待たずに。'},
+{k:'sys',v:'―― 後日談「入隊の朝」終わり ――'}
+]
+};
+const EPI_LETTER={title:'後日談 ― パリからの手紙（未達）',body:'ユ・ナビへ。\n\n……書き出しから、詰まってる。\n\nパリは、どう？\n俺は相変わらず、作業室と家の往復。作品は、まだ終わらない。終わらないものばっかりだ。\n\nこの手紙は、出さない。\n出さないけど、書くことにする。書くだけなら、嘘にならないから。\n\n……元気でやってるなら、それでいい。\n返事は、いらない。\n――いらない、って書くのも、本当は嘘だな。\n\n……ここまで書いて、やっぱり出さないと思う。\n行くな、とも、待ってる、とも書けない男の手紙なんて、届いたところで重いだけだ。\n\nだから、これはここまで。\n封もしない。この机の引き出しが、この手紙の住所。\n\nパク・ジェオン',note:'（この手紙が、彼女に届くことはなかった）'};
+function logEpiItem(it){
+ if(it.k==='j') S.free.push({w:'j',t:it.v});
+ else if(it.k==='me') S.free.push({w:'me',t:it.v});
+ else if(it.k==='draft') S.free.push({w:'draft',t:it.v});
+ else if(it.k==='sys'||it.k==='scene'||it.k==='date') S.free.push({w:'sys',t:it.v});
+ save();
+}
+let epiBusy=false;
+async function playEpi(id){
+ if(epiBusy) return; epiBusy=true;
+ showView('v-chat'); updChatMode();
+ const items=EPI_ITEMS[id]||[];
+ for(const it of items){
+   await paceStep(it);
+   logEpiItem(it);
+ }
+ if(id==='drama'&&!S.epiProf){ S.epiProf=true; updProfile(); const m='―― 彼のプロフィールが、少しだけ変わっていた ――'; addSys(m); S.free.push({w:'sys',t:m}); }
+ if(!S.epiSeen.includes(id)) S.epiSeen.push(id);
+ save();
+ toast('後日談を読み終えました');
+ epiBusy=false;
+}
+function openEpiLetter(){
+ if(!S.epiSeen.includes('gen')){ S.epiSeen.push('gen'); save(); }
+ $('#epiread-body').innerHTML='<div class="pr-t">'+esc(EPI_LETTER.title)+'</div>'+esc(EPI_LETTER.body)+'<div class="pr-note">'+esc(EPI_LETTER.note)+'</div>';
+ showView('v-epiread');
+}
+function renderEpi(){
+ const b=$('#epi-body'); if(!b) return; b.innerHTML='';
+ EPIS.forEach(e=>{
+   const un=e.unlock();
+   const seen=S.epiSeen.includes(e.id);
+   const btn=document.createElement('button'); btn.className='povrow'+(un?'':' lock');
+   btn.innerHTML='<span class="pic">'+(un?e.icon:'🔒')+'</span><span><span class="pt">'+(un?esc(e.title):'？？？')+'</span><div class="ps">'+(un?esc(e.sub)+(seen?'　<span class="epi-done">✓ 読了（読み返せます）</span>':''):'対応するエンディングに到達すると解放されます')+'</div></span>';
+   if(un) btn.addEventListener('click',()=>{ if(e.type==='letter') openEpiLetter(); else playEpi(e.id); });
+   b.appendChild(btn);
+ });
+ const note=document.createElement('p'); note.className='locknote'; note.textContent='後日談は、到達したエンディングごとに解放されます。チャット劇はカカオトークのトーク画面で、タップ送りで再生されます'; b.appendChild(note);
+}
+$('#epiread-back').addEventListener('click',()=>{ renderEpi(); showView('v-epi'); });
+
+/* ================= v8 : PROACTIVE（彼のほうから来る連絡） =================
+   ドラマEND後のフリーチャットで、トークを離れてしばらく操作していると、
+   稀に彼のほうから先に短い連絡が届く。解放後、最大2回まで。 */
+const PRO_MSGS=[
+[{w:'jimg',img:'assets/ig-butterfly.jpg',cap:'🦋'},{w:'j',t:'庭の蝶、撮れた'},{w:'j',t:'……増えたよ、本当に'}],
+[{w:'j',t:'粘土、乾いた'},{w:'j',t:'一次焼き、終わったよ'},{w:'j',t:'……見に来る？'},{w:'j',t:'来なくても、いいけど'}]
+];
+let proBusy=false;
+function showProBanner(msgs){
+ const b=$('#noise'); if(!b) return;
+ const last=[...msgs].reverse().find(m=>m.t);
+ b.innerHTML='<span class="n-ic">💬</span><div style="flex:1;min-width:0"><div class="n-t">카카오톡 ― パク・ジェオン ・ 지금</div><div class="n-b">'+esc(last?last.t:'写真を送信しました')+'</div></div>';
+ b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify');
+ if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
+}
+async function deliverPro(){
+ if(proBusy) return; proBusy=true;
+ const msgs=PRO_MSGS[S.proN];
+ if(!msgs){ proBusy=false; return; }
+ S.proN++; S.proUnread++; S.proOps=0; save();
+ showProBanner(msgs);
+ for(const m of msgs){
+   await sleep(1200);
+   if(m.w==='j'){ S.free.push({w:'j',t:m.t}); if(curViewId()==='v-chat') freeAddJ(m.t); }
+   else if(m.w==='jimg'){ S.free.push({w:'jimg',img:m.img,cap:m.cap}); if(curViewId()==='v-chat') freeAddJImg(m.img,m.cap); }
+   save();
+ }
+ proBusy=false;
+}
+function noteViewOp(id){
+ try{
+  if(!S.done||S.endId!=='drama') return;
+  if(id==='v-chat'){ S.chatOpened=true; S.proOps=0; save(); return; }
+  if(!S.chatOpened) return;
+  S.proOps++;
+  if(S.proOps>=5&&S.proN<PRO_MSGS.length&&!proBusy&&Math.random()<0.5) deliverPro();
+  save();
+ }catch(e){}
+}
+try{
+ const mo8=new MutationObserver(()=>{ const v=document.querySelector('.view.on'); if(v) noteViewOp(v.id); });
+ document.querySelectorAll('.view').forEach(v=>mo8.observe(v,{attributes:true,attributeFilter:['class']}));
+}catch(e){}
+
 </script>
 </body>
 </html>
