@@ -414,7 +414,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v36：周辺画面の文面監査（カレンダー／ロック画面／ホーム）。カレンダーの全エントリの文面を本編の出来事と照合し、是正は2件です。(1) 未解放のエントリでも要約文（小さな文字）だけは常時表示されていて、最終章の種明かし（「彼のスケッチブックと、運命の種明かし」）や兵役エントリの内容が開始直後から読めてしまう状態だったため、未解放時は要約も伏せるようにしました。(2) 4月下旬「なおの誕生日」の要約「展示デート→実家→ドヒョク再会」は本編と食い違っていたため「実家→昼のデート→ドヒョク再会」に是正（展示の誘いは断って実家へ帰り、そのあと昼のデートをして、帰りにドヒョクと再会する流れ）。ロック画面の静的通知3件は v28 の判断（起動時の「彼女の電話」の演出表示として一貫）を再確認して残置し、作中時刻・日付の連動にも誤りはありませんでした。ホームのウィジェット（日付・曜日・進行表示・バッジ）と演出設定の説明文も現行の挙動（v27のリセット仕様を含む）と照合し、ズレはありませんでした。物語・台詞・選択肢・数値・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v37：見送り項目の総棚卸し。v22〜v36 の各改修で「見送り」として記録された項目（延べ約65件、統合して62件）を全件リスト化し、「その後の変更で前提が崩れていないか」「繰り返し見送られたが、まとめてなら直せるものはないか」「実害の評価が変わったものはないか」の観点で再評価しました。設計として確定した判断（章ごとに代表場面を見せる方式、彼の「秘密」のような意図的な反復、確証の持てない実物寄せ）は覆していません。あわせて、直近で見つかった実害のパターン（未解放なのに中身が見える／旧段取りの残存／時期の先行表示）を他の画面へ横展開して点検し、解剖メモ・彼視点・後日談・Instagram・写真・通話履歴の各一覧では未解放の内容が漏れていないこと、誕生日の旧段取りが本文に残っていないことを確認しました。是正は1件です。カカオトークのトーク画面上部に、1:1トークでは実物に表示されない参加人数「2」と通話アイコンが出ていたため除去しました（v24 で対象範囲外として残置していた件で、通話への導線はプロフィール画面と＋パネル側に別にあります）。物語・台詞・選択肢・数値・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -494,7 +494,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
 <!-- CHAT -->
 <div class="view" id="v-chat">
-<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><span class="ccount">2</span><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons">🔍 ☎ ☰</span></div>
+<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons">🔍 ☰</span></div>
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
 <div id="tap-hint">▼</div>
