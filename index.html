@@ -201,7 +201,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #v-profile{background:#000;color:#fff;z-index:130}
 .prof-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
 .prof-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,0) 34%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42))}
-.prof-x{position:absolute;top:52px;left:10px;font-size:19px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:11px}
+.prof-x{position:absolute;top:52px;left:10px;font-size:19px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:12px 14px} /* v48：他の✕ボタン（44×47px）に当たり判定を統一 */
 .prof-gear{position:absolute;top:56px;right:14px;font-size:18px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:6px}
 .prof-main{position:absolute;left:0;right:0;bottom:158px;text-align:center;z-index:2}
 .prof-av{width:92px;height:92px;border-radius:34px;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.4)}
@@ -330,11 +330,11 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .story-progs i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;position:relative}
 .story-progs i.done{background:#fff}
 .story-progs i.cur{background:#fff}
-.story-head{position:absolute;top:58px;left:12px;right:12px;display:flex;align-items:center;gap:8px;z-index:3}
+.story-head{position:absolute;top:58px;left:12px;right:12px;display:flex;align-items:center;gap:8px;z-index:3;pointer-events:none} /* v48：ヘッダ帯はタップを透過させ、下の送りゾーンを塞がない */
 .story-head img{width:33px;height:33px;border-radius:50%;object-fit:cover}
 .story-head b{font-size:13.5px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .story-head span{font-size:12.5px;color:rgba(255,255,255,.75)}
-.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:12px 14px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:12px 14px;text-shadow:0 1px 4px rgba(0,0,0,.6);pointer-events:auto} /* v48：閉じるボタンだけはタップを受ける */
 .story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .story-cap{position:absolute;left:0;right:0;bottom:86px;text-align:center;font-size:19px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.75);z-index:2;padding:0 26px;line-height:1.6}
 /* v24：ストーリービューア下部の返信欄＋ハート＋紙飛行機（Instagram 2021実物様式・装飾） */
@@ -461,7 +461,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v47：ゲーム中の割り込み表示（トースト・通知バナー・フィード内のシステム文・カード類・ロック画面の通知）を全件点検しました。短い間隔で続けて表示されるトーストが、前のタイマーで途中で消えてしまう問題を、タイマーを張り直す形に直しました。また、エンディングカードにはコレクション登録の案内しかなく、解放された後日談に気づきにくかったため、既存の案内文に「後日談が解放されました（ホームの「後日談」）」の一行を足しました。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v48：ビューア系（ストーリー／写真／プロフィール全画面／IG投稿詳細）の操作を実測で点検しました。ストーリー上部のヘッダ帯が左右の送りゾーンを覆い、その範囲のタップが無反応になっていた問題を、ヘッダをタップ透過にして直しました（閉じるボタンは従来どおり反応します）。プロフィール画面は、友だち一覧から開いても✕でチャット画面へ戻されていましたが、開いた元の画面へ戻るようにしました。あわせて、プロフィールの✕ボタンの当たり判定を、他の✕ボタンと同じ大きさ（44×47px）にそろえました。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1390,7 +1390,7 @@ function renderFriends(){
  F.innerHTML=h;
  const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>toast('自分のプロフィールです'));
  F.querySelectorAll('.fr-row').forEach(b=>b.addEventListener('click',()=>{
-   if(b.dataset.fr==='パク・ジェオン'){ showView('v-profile'); return; }
+   if(b.dataset.fr==='パク・ジェオン'){ profFrom='v-kakao'; showView('v-profile'); return; }
    toast('（このプロフィールは演出用です）');
  }));
 }
@@ -1405,8 +1405,9 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
 }));
 $('#btn-plus').addEventListener('click',()=>{ $('#plus-panel').classList.toggle('on'); });
 document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ if(/카메라|사진|📷|🖼/.test(d.textContent)&&typeof sfxPlay==='function') sfxPlay('shutter'); toast('（送信は演出用です。▶で物語が進みます）'); }));
-$('#chat-prof-btn').addEventListener('click',()=>showView('v-profile'));
-$('#prof-close').addEventListener('click',()=>showView('v-chat'));
+let profFrom='v-chat'; /* v48：プロフィールを開いた画面を覚えておき、✕では元の画面へ戻る */
+$('#chat-prof-btn').addEventListener('click',()=>{ profFrom='v-chat'; showView('v-profile'); });
+$('#prof-close').addEventListener('click',()=>showView(profFrom));
 $('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(onTap) fireTap(); else if(!S.done) run(); });
 $('#prof-call2').addEventListener('click',()=>toast('（無料通話は物語の通話シーンで再生されます）'));
 $('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出用です）'));
