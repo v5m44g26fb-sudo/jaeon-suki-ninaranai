@@ -280,6 +280,47 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .cg{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:#eef0f3}
 .cg i{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.17);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:22px;font-style:normal}
 .cb.end{background:#f63c30;margin:0 auto;transform:rotate(135deg)}
+
+/* ===== v4 : music / pov / story / free chat ===== */
+.wid-music{margin:12px 20px 0;background:rgba(20,20,28,.72);color:#fff;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.6;backdrop-filter:blur(8px)}
+.wid-music .mh{display:flex;align-items:center;gap:8px}
+.wid-music .mh b{font-size:13px}
+#mus-now{flex:1;font-size:11.5px;color:#ffe970;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mus-toggle{background:rgba(255,255,255,.16);color:#fff;border-radius:13px;padding:4px 11px;font-size:11.5px;font-weight:700;flex:none}
+.wid-music input[type=range]{width:100%;margin-top:7px;accent-color:#fee500}
+.wid-music .mc{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px}
+.ic-pov{background:linear-gradient(150deg,#5b4a8a,#2c2350);font-size:27px}
+.povrow{display:flex;gap:12px;margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:14px 15px;background:#f6f2fc;width:calc(100% - 28px);text-align:left;align-items:flex-start}
+.povrow.lock{opacity:.5;background:#f4f4f6}
+.povrow .pt{font-size:14.5px;font-weight:700;color:#241d3f}
+.povrow .ps{font-size:12px;color:#666;line-height:1.6;margin-top:3px}
+.povrow .pic{font-size:24px;flex:none}
+#povread-body{padding:20px 20px 34px;font-size:14.5px;line-height:2.05;color:#26221f;white-space:pre-wrap;background:#fbf8f2;flex:1;overflow-y:auto}
+#povread-body .pr-t{font-size:16px;font-weight:800;margin-bottom:12px;color:#241d3f}
+#free-row{display:none;padding:7px 8px 22px;background:#fff;gap:7px;align-items:center;border-top:1px solid #eee}
+#free-in{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:16px;color:#191919;font-family:inherit;min-width:0}
+#free-send{background:var(--kakao);border-radius:50%;width:37px;height:37px;font-size:15px;flex:none;color:#3a1d1d}
+.row.me.unsent .bub{background:#e9e9ec;color:#8a8a90}
+.unsent-lab{font-size:10px;color:#c0392b;flex:none;padding-bottom:2px;font-weight:700}
+#v-story{background:#000;color:#fff;z-index:140}
+.story-progs{position:absolute;top:48px;left:8px;right:8px;display:flex;gap:4px;z-index:3}
+.story-progs i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;position:relative}
+.story-progs i.done{background:#fff}
+.story-progs i.cur::after{content:'';position:absolute;inset:0;background:#fff;transform-origin:left;animation:sprog 5s linear forwards}
+@keyframes sprog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.story-head{position:absolute;top:58px;left:12px;right:12px;display:flex;align-items:center;gap:8px;z-index:3}
+.story-head img{width:33px;height:33px;border-radius:50%;object-fit:cover}
+.story-head b{font-size:13.5px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.story-head span{font-size:12.5px;color:rgba(255,255,255,.75)}
+.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:4px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.story-cap{position:absolute;left:0;right:0;bottom:64px;text-align:center;font-size:19px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.75);z-index:2;padding:0 26px;line-height:1.6}
+.story-zone{position:absolute;top:0;bottom:0;width:32%;z-index:2}
+.story-zone.l{left:0}.story-zone.r{right:0}
+.story .ring.seen{background:#c7c7cc}
+.mus-credit{margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:13px 15px;background:#fff;font-size:12px;line-height:1.8;color:#444}
+.mus-credit b{font-size:12.5px;color:#111}
+
 /* end card */
 .endcard{align-self:stretch;background:linear-gradient(150deg,#243447,#141a26);color:#fff;border-radius:18px;padding:22px 18px;text-align:center;margin:8px 0;line-height:1.9}
 .endcard h3{font-size:19px;margin-bottom:6px}
@@ -292,7 +333,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+<p class="src">v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -323,11 +364,13 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="wid-wide"><b>🔍 解剖メモ ― パク・ジェオン解明度</b>
 <div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
 心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
+<div class="wid-music"><div class="mh"><b>♪ BGM</b><span id="mus-now"></span><button id="mus-toggle">🔊 ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
 <div class="apps">
 <button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="37" height="37" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span>카카오톡<span class="bdg" id="bdg-kakao">1</span></button>
 <button class="app" data-open="ig"><span class="ic ic-ig"><svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span>Instagram</button>
 <button class="app" data-open="cal"><span class="ic ic-cal"><span class="cwd" id="app-cal-wd">금요일</span><span class="cd2" id="app-cal-d">12</span></span>캘린더</button>
 <button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
+<button class="app" data-open="pov"><span class="ic ic-pov">🦋</span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
 <button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
@@ -363,6 +406,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
 <div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo">😊</span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
+<div id="free-row"><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由に入力できます）" autocomplete="off"><button id="free-send">▶</button></div>
 <div class="plus-panel" id="plus-panel">
 <div><span>🖼️</span>사진</div><div><span>📷</span>카메라</div><div><span>🎁</span>선물하기</div><div><span>💸</span>송금</div><div><span>📅</span>일정</div><div><span>📍</span>장소</div><div><span>🎤</span>음성메시지</div><div><span>☎️</span>보이스톡</div>
 </div>
@@ -436,6 +480,29 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 </div>
 </div>
 
+<!-- POV LIST (v4) -->
+<div class="view" id="v-pov">
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>彼視点</h2><span class="sub">パク・ジェオンの内側（断片）</span></div>
+<div class="abody" id="pov-body"></div>
+</div>
+
+<!-- POV READER (v4) -->
+<div class="view" id="v-povread">
+<div class="ahead"><button class="back" id="povread-back">‹</button><h2>彼視点</h2><span class="sub">彼の言葉にならない側</span></div>
+<div id="povread-body"></div>
+</div>
+
+<!-- IG STORY VIEWER (v4) -->
+<div class="view" id="v-story">
+<img class="story-img" id="story-img" src="" alt="">
+<div class="story-progs" id="story-progs"></div>
+<div class="story-head"><img id="story-av" src="" alt=""><b id="story-user"></b><span id="story-ago"></span><button class="sx" id="story-close">✕</button></div>
+<div class="story-cap" id="story-cap"></div>
+<button class="story-zone l" id="story-prev"></button>
+<button class="story-zone r" id="story-next"></button>
+</div>
+
+<audio id="bgm" loop preload="auto" style="display:none"></audio>
 <div id="toast"></div>
 <div class="homebar" id="homebar"></div>
 </div></div>
@@ -462,6 +529,9 @@ const IG_J=[
 {id:'bar',img:'assets/ig-bar.jpg',cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]},
 {id:'jaeon3',img:'assets/ig-jaeon3.jpg',cap:'전시 준비. 손이 기억하는 것',likes:'358',unlock:6,cm:[['s0l_a','열심히 하네'],['park_jaeon','……見て覚えるタイプなんで']]},
 {id:'rain',img:'assets/ig-rain.jpg',cap:'비. 우산은 없었다',likes:'692',unlock:9,cm:[['b1nna_','誰と？ どこで？'],['park_jaeon','秘密']]},
+{id:'wheel',img:'assets/ig-wheel.jpg',cap:'관람차. 말하지 못한 것',likes:'447',unlock:8,cm:[['b1nna_','合宿？ 誰と乗ったの'],['park_jaeon','……秘密']]},
+{id:'hands',img:'assets/ig-hands.jpg',cap:'다시 처음부터. 손은 거짓말을 못 한다',likes:'523',unlock:10,cm:[['s0l_a','……本気なんだ'],['nao_sculpt','（見てしまった）']]},
+{id:'gallery',img:'assets/ig-gallery.jpg',cap:'전시. ……와줘서',likes:'766',unlock:11,cm:[['b1nna_','おめでとう！！'],['park_jaeon','ありがとう']]},
 {id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]}
 ];
 const IG_N=[
@@ -714,10 +784,11 @@ const STORY=[
 /* ================= ENGINE ================= */
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
-let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false};
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70};
 try{const raw=localStorage.getItem(LSKEY); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
 if(!S.ver){ S.ver=2; if(S.done){ S.done=false; S.endId=null; } if(!Array.isArray(S.ends)) S.ends=[]; if(S.callSeen) S.call1=true; }
+if(!Array.isArray(S.pov)) S.pov=[]; if(!Array.isArray(S.free)) S.free=[]; if(typeof S.freeN!=='number') S.freeN=0; if(typeof S.freeClosed!=='boolean') S.freeClosed=false; if(typeof S.sndOn!=='boolean') S.sndOn=true; if(typeof S.sndVol!=='number') S.sndVol=70;
 let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -734,6 +805,8 @@ function updParams(){
  const CD=[5,12,26,16,25,7,19,19,18,25,9,16,16], CW=['금요일','금요일','금요일','금요일','일요일','금요일','수요일','수요일','금요일','금요일','금요일','금요일','금요일'];
  const wdEl=$('#wid-day'); if(wdEl){wdEl.textContent=CD[S.calU]||12; $('#wid-wd').textContent=CW[S.calU]||'금요일'; $('#wid-ev').textContent=progs[S.chap]||''; const acd=$('#app-cal-d'); if(acd) acd.textContent=CD[S.calU]||12; const acw=$('#app-cal-wd'); if(acw) acw.textContent=CW[S.calU]||'금요일';}
  const nb=$('#bdg-note'); if(S.memos.length){nb.style.display='flex'; nb.textContent=S.memos.length;} else nb.style.display='none';
+ const pb=$('#bdg-pov'); if(pb){ const pc=POVS.filter(p=>p.unlock()).length; if(pc){pb.style.display='flex'; pb.textContent=pc;} else pb.style.display='none'; }
+ syncMusic();
 }
 const feed=$('#feed');
 function el(html){const d=document.createElement('div'); d.innerHTML=html; return d.firstElementChild;}
@@ -778,6 +851,7 @@ function doCall(lines){
  return new Promise(res=>{
   callResolve=res; callLines=lines; callIdx=0; callSec=0; callPhase='incoming';
   const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming';
+  duckMusic(true);
   showView('v-call'); $('#call-timer').textContent='iPhone'; $('#call-sub').textContent='……';
   clearInterval(callTimerInt);
  });
@@ -793,7 +867,7 @@ function advanceCall(){
    const [who,txt]=callLines[callIdx++];
    $('#call-sub').innerHTML=(who===1?'<span class="me2">なお：</span>':'ジェオン：')+esc(txt);
  } else {
-   clearInterval(callTimerInt); const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming'; showView('v-chat');
+   clearInterval(callTimerInt); duckMusic(false); const cv=$('#v-call'); if(cv) cv.dataset.phase='incoming'; showView('v-chat');
    if(callResolve){const r=callResolve; callResolve=null; r();}
  }
 }
@@ -862,6 +936,8 @@ function renderEnding(id){
  const d=el('<div class="endcard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><button class="tohome-b">ホームへ</button></div>');
  feed.appendChild(d); scrollFeed();
  const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
+ addSys(id==='nao'?'―― このトークは、もう使われていません ――':'―― エンディング後のフリーチャットが解放されました。このトークで、自由にメッセージを送れます ――');
+ updChatMode();
  updParams();
 }
 function renderFinal(it){
@@ -901,7 +977,8 @@ function replay(){
    applyItem(it,true);
  }
  replaying=false; updParams();
- if(S.done && S.endId) renderEnding(S.endId);
+ if(S.done && S.endId){ renderEnding(S.endId); renderFreeLog(); }
+ updChatMode();
 }
 /* ================= SIDE VIEWS ================= */
 function threadRow(img,name,prev,time,ub,onclick,avc){
@@ -917,7 +994,7 @@ function renderThreads(){
   :S.chap>=5?'助手、やらせて'
   :S.chap>=4?'……そっか'
   :(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）');
- L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',prevJ,'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); if(!S.done) run();}));
+ L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',prevJ,'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); updChatMode(); if(!S.done) run();}));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
  if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
@@ -948,14 +1025,14 @@ function renderIG(){
  const body=$('#ig-body');
  const isJ=igWho==='j';
  const posts=isJ?IG_J:IG_N;
- const unlocked=posts.filter(p=>S.igs.includes(p.id)||p.unlock===0);
+ const unlocked=posts.filter(p=>S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock));
  const locked=posts.length-unlocked.length;
  const prof=isJ
   ?{img:'assets/av-jaeon.jpg',name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:'1,204'}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:'342'};
- const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',n1:'1週間前',n2:'5日前',n3:'2時間前'};
- const ST=[['assets/av-jaeon.jpg','park_jaeon'],['assets/av-bitna.jpg','b1nna_'],['assets/av-sola.jpg','s0l_a'],['assets/av-dohyuk.jpg','ydh_cook']];
- let h='<div class="ig-stories">'+ST.map(s=>'<span class="story"><span class="ring"><img src="'+s[0]+'"></span>'+s[1]+'</span>').join('')+'</div>';
+ const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
+ const SUBAR=[['park_jaeon','assets/av-jaeon.jpg'],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']];
+ let h='<div class="ig-stories">'+SUBAR.map(s=>{const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock);return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+(has?'':' seen')+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>';}).join('')+'</div>';
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
  h+= isJ ? '<div class="ig-folbtn"><span class="ghost">フォロー中</span><span class="ghost">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost">プロフィールを編集</span></div>';
  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">🔒 物語で解放</span></button>':'')+'</div>';
@@ -966,6 +1043,7 @@ function renderIG(){
   cmt:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.5-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>',
   shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>'};
+ body.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast('このユーザーのストーリーは、物語の進行で追加されます'); }));
  body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{
    const p=posts.find(x=>x.id===b.dataset.post);
    const cm=(p.cm||[]).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
@@ -990,7 +1068,7 @@ function renderNotes(){
  b.innerHTML=MEMOS.map(m=>{
    const un=S.memos.includes(m.id);
    return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:'🔒 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3><p>'+(un?esc(m.body):'物語のキー場面を読み進めると、観察メモが解放されます。')+'</p></div>';
- }).join('')+endsHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>';
+  }).join('')+endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>';
 }
 function endsHTML(){
  const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
@@ -1014,6 +1092,7 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
  if(k==='cal'){renderCal(); showView('v-cal');}
  if(k==='notes'){renderNotes(); showView('v-notes');}
  if(k==='calllog'){renderCallLog(); showView('v-calllog');}
+ if(k==='pov'){renderPOV(); showView('v-pov');}
 }));
 document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>showView('v-home')));
 $('#homebar').addEventListener('click',()=>showView('v-home'));
@@ -1055,6 +1134,118 @@ $('#prof-close').addEventListener('click',()=>showView('v-chat'));
 $('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(!S.done) run(); });
 $('#prof-call2').addEventListener('click',()=>toast('（無料通話は物語の通話シーンで再生されます）'));
 $('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出用です）'));
+
+/* ================= v4 : MUSIC ================= */
+const TRACKS={
+ 'butterfly':{f:'assets/music/butterfly.m4a',t:'Butterfly',a:'JUNHA PARK (J.UNA)'},
+ 'love-me-like-that':{f:'assets/music/love-me-like-that.m4a',t:'Love Me Like That',a:'SAM KIM'},
+ 'were-already':{f:'assets/music/were-already.m4a',t:"We're Already",a:'KIMMUSEUM'},
+ 'heavy-heart':{f:'assets/music/heavy-heart.m4a',t:'Heavy Heart',a:'RIO'},
+ 'whisper':{f:'assets/music/whisper.m4a',t:'Whisper',a:'Park Ji Woo'}
+};
+const CHAP_TRACK={0:'butterfly',1:'butterfly',2:'were-already',3:'whisper',4:'were-already',5:'were-already',6:'were-already',7:'heavy-heart',8:'love-me-like-that'};
+let bgmEl=null, curTrack=null, ducked=false, musicStarted=false;
+function ensureBgm(){ if(!bgmEl) bgmEl=$('#bgm'); return bgmEl; }
+function effVol(){ return (S.sndOn?(S.sndVol/100):0)*(ducked?0.3:1); }
+function updMusicUI(){ const np=$('#mus-now'); if(np) np.textContent=curTrack?('♪ '+TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a):''; const tg=$('#mus-toggle'); if(tg) tg.textContent=S.sndOn?'🔊 ON':'🔇 OFF'; const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
+function syncMusic(){ const want=CHAP_TRACK[S.chap]||'butterfly'; const a=ensureBgm(); if(!a) return; if(want!==curTrack){ curTrack=want; a.src=TRACKS[want].f; a.volume=effVol(); if(musicStarted&&S.sndOn) a.play().catch(()=>{}); } updMusicUI(); }
+function startMusic(){ musicStarted=true; const a=ensureBgm(); if(!a) return; if(!curTrack) syncMusic(); a.volume=effVol(); if(S.sndOn) a.play().catch(()=>{}); }
+function duckMusic(on){ ducked=on; const a=ensureBgm(); if(a) a.volume=effVol(); }
+document.addEventListener('pointerdown',function h(){ document.removeEventListener('pointerdown',h); startMusic(); });
+$('#mus-toggle').addEventListener('click',()=>{ S.sndOn=!S.sndOn; save(); const a=ensureBgm(); if(a){ a.volume=effVol(); if(S.sndOn) startMusic(); else a.pause(); } updMusicUI(); });
+$('#mus-vol').addEventListener('input',e=>{ S.sndVol=+e.target.value; save(); const a=ensureBgm(); if(a) a.volume=effVol(); });
+function musicCreditHTML(){ return '<div class="mus-credit"><b>♪ BGMクレジット（v4追加）</b><br>ドラマ『わかっていても』OST ― Apple Music公式プレビュー音源（30秒・ループ再生）<br>・「Butterfly」JUNHA PARK (J.UNA)<br>・「Love Me Like That」SAM KIM<br>・「We\'re Already」KIMMUSEUM<br>・「Heavy Heart」RIO<br>・「Whisper」Park Ji Woo<br>楽曲の権利は各権利者に帰属します。音源は assets/music/ に配置し、同名ファイルへの差し替えで長尺版にも対応できる構造にしています。</div>'; }
+/* ================= v4 : POV ================= */
+const POVS=[
+{id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n\n泣いた跡。強い酒。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
+{id:2,title:'彼視点 02 ― 誕生日の電話のあと',sub:'誕生日の章を過ぎると解放',unlock:()=>S.calU>=5,body:'ソルアからの電話。\n行かなきゃ、と口が言った。行きたかったかは、別。\n\n戻った時、食卓は片付いていて、幼なじみとかいう男のわかめスープが、湯気を立てていた。\n……俺が作るはずだったやつ。\n\n「ごめん」しか言えなかった。理由を聞かれても、答えられなかった。\n答えられないものを謝るなよ、と自分でも思う。\n\n夜、電話をかけた。声が聞きたくて。\n――それも、言えなかった。\n「……なんでもない。忘れて」\n忘れてほしかったのは、本当は、こっちのほうだった。'},
+{id:3,title:'彼視点 03 ― 観覧車のあと',sub:'合宿の章で解放',unlock:()=>S.calU>=8,body:'観覧車。くじ引きの結果。\n狭いゴンドラで、外ばかり見ていた。隣を見たら、負ける気がした。\n\n「……ドヒョクとはさ」\n言いかけて、やめた。聞いて、どうするつもりだったのか。\n嫉妬、って名前をつけたら、認めたことになる。\nつけなければ、ないことになる――はずだった。\n\nささやきゲーム。質問は、最悪のやつだった。\n「……ユ・ナビ」\n声が漏れた時、終わったと思った。\n\nでも彼女は、怒らなかった。「覚えとく」とだけ。\n……覚えとく、って何だ。嬉しいのか、怖いのか、自分でも分からなかった。'},
+{id:4,title:'彼視点 04 ― 雨の夜の、翌朝',sub:'雨の章を過ぎると解放',unlock:()=>S.calU>=9,body:'雨。酒。ドヒョクの名前。\n言ったことの半分も覚えていないのに、彼女の顔だけ、覚えている。\n\n「二度と、私の前に現れないで」\n\n謝りの文章を、何度も打って、消した。\n言葉で謝ったら、また軽くなる気がした。言い訳に聞こえる気がした。\n結局、送れなかった。\n\n一睡もできなかった。目を閉じると、雨の中の背中が出てくる。\n――あの人の作品が壊れたと聞いたのは、数日後だった。\n行く理由は、もうなかった。でも手は、勝手に道具を揃えていた。'},
+{id:5,title:'彼視点 05 ― 去る日',sub:'エンディング到達で解放',unlock:()=>S.done||S.calU>=11,body:'展示室。彼女の作品の前。\n直す手伝いはした。約束通り、今日で最後にするつもりだった。\n……つもり、だった。\n\n振り返った彼女に、言った。\n「……君が、すごく好きだ」\n\n初めて、濁さずに言えた気がする。遅すぎる、ってことも分かっていた。\n答えが何であれ、今日のことは後悔しない――と、思いたい。\n\n蝶は、捕まえようとすると死ぬ。\nだから俺は、手を開いたまま、立っていた。'}
+];
+function renderPOV(){
+ const b=$('#pov-body'); b.innerHTML='';
+ POVS.forEach(p=>{
+   const un=p.unlock();
+   const btn=document.createElement('button'); btn.className='povrow'+(un?'':' lock');
+   btn.innerHTML='<span class="pic">'+(un?'🦋':'🔒')+'</span><span><span class="pt">'+(un?esc(p.title):'？？？')+'</span><div class="ps">'+(un?esc(p.sub):'物語を進めると解放されます')+'</div></span>';
+   if(un) btn.addEventListener('click',()=>{ if(!S.pov.includes(p.id)){S.pov.push(p.id); save();} $('#povread-body').innerHTML='<div class="pr-t">'+esc(p.title)+'</div>'+esc(p.body); showView('v-povread'); });
+   b.appendChild(btn);
+ });
+ const note=document.createElement('p'); note.className='locknote'; note.textContent='彼の内面も、全部は言葉になっていません。行動と断片から読む記録です'; b.appendChild(note);
+}
+$('#povread-back').addEventListener('click',()=>{ renderPOV(); showView('v-pov'); });
+/* ================= v4 : IG STORIES ================= */
+const STORIES=[
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier.jpg',cap:'작업 중',ago:'2시간',unlock:2},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly.jpg',cap:'나비',ago:'5시간',unlock:3},
+{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post2.jpg',cap:'🪼 오늘도 제작',ago:'3시간',unlock:0},
+{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post3.jpg',cap:'작업의 합간 ☕',ago:'1시간',unlock:3},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-wheel.jpg',cap:'관람차',ago:'1시간',unlock:8},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-rain.jpg',cap:'비',ago:'30분',unlock:9},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-gallery.jpg',cap:'전시 D-day',ago:'방금',unlock:11}
+];
+let storyState={list:[],i:0,timer:null};
+function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return; storyState.list=list; storyState.i=0; showView('v-story'); renderStory(); }
+function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ closeStory(); return; }
+ $('#story-img').src=s.img; $('#story-av').src=s.av; $('#story-user').textContent=s.user; $('#story-ago').textContent=s.ago; $('#story-cap').textContent=s.cap;
+ $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"></i>').join('');
+ if(st.timer) clearTimeout(st.timer); st.timer=setTimeout(()=>storyStep(1),5000); }
+function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>=st.list.length){ closeStory(); return; } renderStory(); }
+function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); showView('v-ig'); }
+$('#story-close').addEventListener('click',closeStory);
+$('#story-next').addEventListener('click',()=>storyStep(1));
+$('#story-prev').addEventListener('click',()=>storyStep(-1));
+/* ================= v4 : FREE CHAT ================= */
+function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); } }
+function freeAddMe(t,unsent){ const r=el('<div class="row me'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'')+'<div class="bub">'+esc(t)+'</div></div>'); feed.appendChild(r); scrollFeed(); }
+function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div></div></div></div>'); feed.appendChild(r); scrollFeed(); }
+function renderFreeLog(){ (S.free||[]).forEach(m=>{ if(m.w==='me') freeAddMe(m.t,false); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='sys') addSys(m.t); }); scrollFeed(); }
+function pickFreeReplies(txt){
+ if(S.endId==='gen'){ if(S.freeN===2) return ['……見たよ']; if(S.freeN===5) return ['……元気で']; return null; }
+ const R=[
+  [['蝶','나비'],['🦋','……庭の蝶、増えたよ']],
+  [['ドヒョク'],['……なんで今、その名前','…………']],
+  [['ごめん','謝'],['なおが謝ることじゃない','……俺の方が、ごめん。言えてなかった分']],
+  [['ありがとう'],['……うん','礼は、言葉じゃなくていいよ']],
+  [['好き','愛し'],['……','言わなくても、分かるでしょ','…………ごめん、今のはナシで']],
+  [['壁'],['……まだ、あると思う','直そうとは、してる。……多分']],
+  [['会いたい','会おう','来て','今から'],['……どこにいるの','行くよ。着いたら、言う']],
+  [['おやすみ'],['おやすみ','……夢に出てくるなよ。出てきそうだけど']],
+  [['パリ','留学'],['……行く日、決まった？','見送りは行くよ。……多分']],
+  [['兵役','入隊','軍隊'],['…………','その話は、まだ、いい']],
+  [['展示','作品','卒業','制作'],['作品、見たよ','……作業してる君が、一番きれいだった']],
+  [['プリン','ごはん','食べ','お腹'],['プリン、買ってく？','……半額だったら、だけど']],
+  [['眠い','寝る'],['……もう寝なよ','俺は、まだ作業']],
+  [['何して','なにして'],['作業','……と、なおのトーク見てた']]
+ ];
+ for(const pair of R){ const ks=pair[0], rs=pair[1]; if(ks.some(k=>txt.indexOf(k)>=0)) return rs.slice(); }
+ const D=[['……うん'],['聞いてるよ'],['……それで？'],['なおはさ'],['……なんでもない'],['夜、更けてるね'],['……会いに来る？'],['ふーん'],['……そっか']];
+ return D[S.freeN % D.length].slice();
+}
+let freeBusy=false;
+async function sendFree(){
+ if(freeBusy||!S.done) return;
+ const inp=$('#free-in'); const txt=(inp.value||'').trim(); if(!txt) return; inp.value='';
+ if(S.endId==='nao'){
+   freeAddMe(txt,true); S.free.push({w:'mu',t:txt}); S.freeN++;
+   if(S.freeN>=2&&!S.freeClosed){ S.freeClosed=true; const m='―― このトークは終了しています ――'; addSys(m); S.free.push({w:'sys',t:m}); }
+   save(); return;
+ }
+ freeAddMe(txt,false); S.free.push({w:'me',t:txt}); S.freeN++; save();
+ const cap=S.endId==='gen'?6:15;
+ if(S.freeN>cap){ if(!S.freeClosed){ S.freeClosed=true; const m=S.endId==='gen'?'（それきり、返信は来なかった）':'―― 今日のトークはここまで ――'; addSys(m); S.free.push({w:'sys',t:m}); save(); } return; }
+ const reps=pickFreeReplies(txt);
+ if(!reps||!reps.length) return;
+ freeBusy=true;
+ const ty=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="typing">…</div></div></div>'); feed.appendChild(ty); scrollFeed();
+ await sleep(1100); ty.remove();
+ for(const r of reps){ freeAddJ(r); S.free.push({w:'j',t:r}); await sleep(650); }
+ save(); freeBusy=false;
+}
+$('#free-send').addEventListener('click',sendFree);
+$('#free-in').addEventListener('keydown',e=>{ if(e.key==='Enter') sendFree(); });
+
 /* start */
 replay(); updParams();
 $('#bdg-kakao').textContent=S.done?'✓':'1';
