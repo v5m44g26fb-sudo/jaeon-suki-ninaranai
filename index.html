@@ -373,6 +373,12 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .bub.draft{background:#ececf0;color:#8a8a90;border:1px dashed #c6c6cc}
 .msgimg{width:180px;max-width:62vw;border-radius:14px;display:block;box-shadow:0 2px 8px rgba(20,30,45,.18)}
 .epi-done{color:#7a6a2f;font-weight:700}
+@media (prefers-reduced-motion: reduce){
+ .wall-butterflies span{animation:none !important}
+ #tap-hint.on{animation:none !important}
+ .typing i{animation:none !important;opacity:.55}
+ *{transition-duration:.01s !important;scroll-behavior:auto !important}
+}
 </style>
 </head>
 <body>
