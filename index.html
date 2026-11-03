@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>パク・ジェオンを好きにならない件｜スマホ風SNSファンゲーム</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--kakao:#fee500; --kakao-bg:#bacee0; --kakao-brown:#3a1d1d; --me:#fee500;
+--ink:#111; --sub:#8e8e93; --bg:#f2f2f7; --red:#ff3b30; --line:#e3e3e8;
+}
+html,body{height:100%}
+body{font-family:-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+background:radial-gradient(1200px 700px at 20% 0%,#33302e 0%,#171512 55%,#0b0a09 100%);
+color:#fff;display:flex;flex-direction:column;align-items:center;min-height:100dvh}
+.page-head{padding:16px 16px 8px;text-align:center;max-width:560px}
+.page-head h1{font-size:19px;letter-spacing:.04em}
+.page-head p{font-size:11.5px;color:#c9c2b8;margin-top:5px;line-height:1.6}
+.page-head .src{font-size:10.5px;color:#8d8578;margin-top:5px;line-height:1.6}
+.phone{position:relative;width:min(400px,100vw);height:min(844px,calc(100dvh - 118px));
+background:#000;border-radius:54px;padding:11px;flex:none;
+box-shadow:0 0 0 2px #3a3d42,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margin-bottom:12px}
+@media (max-width:430px){.phone{border-radius:0;padding:0;height:calc(100dvh - 96px);box-shadow:none}.page-head{padding:10px 12px 4px}.page-head .src{display:none}}
+.screen{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:#000}
+@media (max-width:430px){.screen{border-radius:0}}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:112px;height:30px;background:#000;border-radius:20px;z-index:200}
+.statusbar{position:absolute;top:0;left:0;right:0;height:52px;z-index:150;display:flex;align-items:flex-end;justify-content:space-between;padding:0 30px 4px;font-size:14.5px;font-weight:600;color:#fff;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.35);mix-blend-mode:difference}
+.homebar{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.85);z-index:190;cursor:pointer;box-shadow:0 0 3px rgba(0,0,0,.3)}
+.view{position:absolute;inset:0;display:none;flex-direction:column;background:#fff;color:var(--ink)}
+.view.on{display:flex}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+/* ===== home ===== */
+#v-home{background:linear-gradient(160deg,#2e4a5e 0%,#4a3a5e 45%,#1d1a2e 100%);color:#fff;overflow:hidden}
+.wall-butterflies{position:absolute;inset:0;font-size:26px;opacity:.5;pointer-events:none}
+.wall-butterflies span{position:absolute;animation:flut 7s ease-in-out infinite}
+@keyframes flut{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(8deg)}}
+.home-clock{margin-top:86px;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.home-clock .dow{font-size:15px;font-weight:500}
+.home-clock .time{font-size:74px;font-weight:200;line-height:1.05;letter-spacing:.01em}
+.home-clock .date{font-size:14px;color:#e8e4da}
+.home-widget{margin:16px 22px 0;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border-radius:20px;padding:13px 16px;font-size:12.5px;line-height:1.7}
+.home-widget b{font-size:13.5px}
+.meterbar{height:6px;background:rgba(255,255,255,.25);border-radius:3px;margin:4px 0 8px;overflow:hidden}
+.meterbar i{display:block;height:100%;background:var(--kakao);border-radius:3px;transition:width .5s}
+.apps{margin-top:22px;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px 12px}
+.app{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:#fff;position:relative}
+.app .ic{width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:29px;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.app .bdg{position:absolute;top:-5px;right:8px;background:var(--red);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.ic-kakao{background:var(--kakao)} .ic-ig{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)}
+.ic-cal{background:#fff} .ic-note{background:#fff7ae} .ic-tel{background:#63d96e} .ic-set{background:#d8d8de}
+.home-foot{margin-top:auto;padding:0 22px 30px;font-size:10.5px;color:rgba(255,255,255,.75);line-height:1.6;text-align:center}
+/* ===== generic app header ===== */
+.ahead{padding:56px 14px 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);background:#fff;z-index:5}
+.ahead .back{font-size:22px;padding:2px 6px;color:#333}
+.ahead h2{font-size:17px;font-weight:700;flex:1}
+.ahead .sub{font-size:11px;color:var(--sub)}
+.abody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* ===== kakao ===== */
+#v-kakao{background:#fff}
+.kakao-tabs{display:flex;gap:2px;padding:2px 10px 0;font-size:21px}
+.kakao-tabs span{padding:7px 10px;opacity:.35}
+.kakao-tabs span.on{opacity:1}
+.thread{display:flex;gap:11px;padding:11px 16px;align-items:center;width:100%;text-align:left}
+.thread:active{background:#f4f4f6}
+.thread img.av{width:50px;height:50px;border-radius:18px;object-fit:cover;flex:none}
+.thread .avc{width:50px;height:50px;border-radius:18px;flex:none;display:flex;align-items:center;justify-content:center;font-size:23px;color:#fff}
+.thread .tt{flex:1;min-width:0}
+.thread .tn{font-size:15px;font-weight:600;display:flex;justify-content:space-between}
+.thread .tn time{font-size:10.5px;color:var(--sub);font-weight:400}
+.thread .tp{font-size:12.5px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.thread .ub{background:var(--red);color:#fff;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.locknote{padding:14px 16px;font-size:12px;color:var(--sub);text-align:center}
+/* chat */
+#v-chat{background:var(--kakao-bg)}
+.chat-head{padding:52px 10px 6px;background:var(--kakao-bg);display:flex;align-items:center;gap:6px;z-index:5}
+.chat-head .back{font-size:22px;padding:2px 6px}
+.chat-head .cn{flex:1}
+.chat-head .cn b{font-size:16px}
+.chat-head .cn .csub{font-size:10.5px;color:#44576b}
+.paramline{background:rgba(255,255,255,.75);margin:0 10px 6px;border-radius:12px;padding:7px 12px;font-size:11px;color:#33475c;display:flex;gap:12px;align-items:center}
+.paramline .mb{flex:1;height:5px;background:#d7dee6;border-radius:3px;overflow:hidden}
+.paramline .mb i{display:block;height:100%;background:#f2b705;transition:width .5s}
+#feed{flex:1;overflow-y:auto;padding:6px 12px 14px;display:flex;flex-direction:column;gap:7px}
+.dchip{align-self:center;background:rgba(0,0,0,.22);color:#fff;font-size:11px;padding:4px 13px;border-radius:12px;margin:8px 0 4px}
+.sys{align-self:center;font-size:11px;color:#5a6b7d;text-align:center;max-width:88%;line-height:1.5;margin:2px 0}
+.scene{align-self:stretch;background:rgba(25,32,44,.88);color:#eef2f7;border-radius:14px;padding:13px 15px;font-size:13.5px;line-height:1.85;margin:4px 0;white-space:pre-wrap}
+.scene .who{color:#9fc2e8;font-size:11px;font-weight:700;letter-spacing:.08em;display:block;margin-bottom:4px}
+.row{display:flex;gap:7px;align-items:flex-end;max-width:88%}
+.row img.av{width:36px;height:36px;border-radius:13px;object-fit:cover;flex:none}
+.row .nm{font-size:11px;color:#3c4c5e;margin-bottom:3px}
+.bub{background:#fff;border-radius:13px;padding:8px 11px;font-size:14px;line-height:1.55;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.row.me{align-self:flex-end;flex-direction:row-reverse}
+.row.me .bub{background:var(--me)}
+.row .tm{font-size:9.5px;color:#5a6b7d;flex:none}
+.typing{background:#fff;border-radius:13px;padding:10px 13px;font-size:14px;color:#999}
+.fade{align-self:stretch;text-align:center;background:#101318;color:#cfd6df;border-radius:14px;padding:20px 14px;font-size:13px;line-height:2;margin:4px 0;letter-spacing:.06em}
+.choices{display:flex;flex-direction:column;gap:8px;margin:8px 0 4px}
+.choices .clabel{font-size:11px;color:#44576b;text-align:center}
+.choice-btn{background:#fff;border:1.5px solid #7d93a8;color:#22384e;border-radius:14px;padding:11px 13px;font-size:13.5px;text-align:left;line-height:1.5;box-shadow:0 2px 5px rgba(30,50,80,.12)}
+.choice-btn:active{background:var(--kakao)}
+.chat-input{padding:8px 10px 24px;background:#fff;display:flex;gap:8px;align-items:center}
+.chat-input .fakein{flex:1;background:#f2f2f4;border-radius:18px;padding:9px 14px;font-size:13px;color:#999}
+.chat-input .sendb{background:var(--kakao);border-radius:50%;width:38px;height:38px;font-size:16px;flex:none}
+#toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:.35s;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/* ===== IG ===== */
+.ig-head{padding:56px 14px 8px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:#fff}
+.ig-head b{font-size:18px;flex:1;font-family:Georgia,serif;font-style:italic}
+.ig-prof{display:flex;gap:18px;padding:14px 16px 6px;align-items:center}
+.ig-prof img{width:78px;height:78px;border-radius:50%;object-fit:cover}
+.ig-prof .avd{width:78px;height:78px;border-radius:50%;background:#e8e8ec;display:flex;align-items:center;justify-content:center;font-size:36px;color:#aeaeb4;flex:none}
+.ig-stats{flex:1;display:flex;justify-content:space-around;text-align:center;font-size:12px;color:#555}
+.ig-stats b{display:block;font-size:16px;color:#111}
+.ig-bio{padding:2px 16px 10px;font-size:13px;line-height:1.55}
+.ig-bio b{font-size:13.5px}
+.ig-switch{display:flex;border-top:1px solid var(--line)}
+.ig-switch button{flex:1;padding:9px;font-size:13px;color:#777;border-bottom:2px solid transparent}
+.ig-switch button.on{color:#111;font-weight:700;border-bottom-color:#111}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.ig-grid button{padding:0;aspect-ratio:1;overflow:hidden;background:#eee;position:relative}
+.ig-grid img{width:100%;height:100%;object-fit:cover;display:block}
+.ig-grid .lk{position:absolute;inset:0;background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.ig-post{padding-bottom:20px}
+.ig-post .ph{display:flex;gap:9px;align-items:center;padding:9px 12px;font-size:13.5px;font-weight:600}
+.ig-post .ph img{width:33px;height:33px;border-radius:50%;object-fit:cover}
+.ig-post>img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.ig-post .pc{padding:9px 12px;font-size:13px;line-height:1.6}
+.ig-post .pc .lk2{font-weight:700;margin-bottom:3px}
+.ig-post .cm{color:#555;font-size:12.5px;margin-top:3px}
+.ig-post .cm b{color:#111}
+/* ===== calendar / notes ===== */
+.cal-m{padding:14px 16px 4px;font-size:16px;font-weight:700}
+.cal-e{display:flex;gap:12px;padding:9px 16px;align-items:flex-start}
+.cal-e .cd{width:40px;height:40px;border-radius:12px;background:#eef3f8;color:#33506e;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;flex:none}
+.cal-e .cd b{font-size:16px;line-height:1}
+.cal-e .ct{font-size:13.5px;line-height:1.55}
+.cal-e .ct small{display:block;color:var(--sub);font-size:11.5px}
+.cal-e.lock{opacity:.38}
+.memo{margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:14px 15px;background:#fffdf4}
+.memo h3{font-size:14.5px;margin-bottom:6px}
+.memo p{font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap}
+.memo.lock{opacity:.5;background:#f4f4f6}
+.memo .tag{font-size:10.5px;background:var(--kakao);border-radius:8px;padding:2px 8px;font-weight:700;margin-bottom:6px;display:inline-block}
+.memo.lock .tag{background:#ddd}
+/* ===== call ===== */
+#v-call{background:linear-gradient(180deg,#2c3444,#12151d);color:#fff;z-index:120}
+.call-av{width:104px;height:104px;border-radius:50%;object-fit:cover;margin:110px auto 12px;display:block;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.call-nm{text-align:center;font-size:23px;font-weight:600}
+.call-tm{text-align:center;color:#aeb6c2;font-size:13px;margin-top:5px}
+.call-sub{margin:26px 30px 0;background:rgba(255,255,255,.09);border-radius:16px;padding:15px 17px;font-size:14.5px;line-height:1.8;min-height:86px}
+.call-sub .me2{color:#ffe970}
+.call-btns{margin-top:auto;padding:0 60px 56px;display:flex;justify-content:space-between}
+.call-btns .cb{width:62px;height:62px;border-radius:50%;font-size:24px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16)}
+.call-btns .cb.end{background:#f63c30}
+/* end card */
+.endcard{align-self:stretch;background:linear-gradient(150deg,#243447,#141a26);color:#fff;border-radius:18px;padding:22px 18px;text-align:center;margin:8px 0;line-height:1.9}
+.endcard h3{font-size:19px;margin-bottom:6px}
+.endcard .big{font-size:30px;font-weight:800;color:var(--kakao)}
+.endcard button{background:var(--kakao);color:#3a1d1d;font-weight:700;border-radius:20px;padding:10px 20px;font-size:13.5px;margin-top:10px}
+.small-note{font-size:10.5px;color:#8d8578;text-align:center;padding:4px 18px 10px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="page-head">
+<h1>パク・ジェオンを好きにならない件</h1>
+<p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（第1部）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
+<p class="src">カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+</div>
+<div class="phone"><div class="screen">
+<div class="island"></div>
+<div class="statusbar"><span id="sb-time">9:41</span><span>📶 📡 <span class="batt">🔋</span></span></div>
+
+<!-- HOME -->
+<div class="view on" id="v-home">
+<div class="wall-butterflies"><span style="left:12%;top:16%">🦋</span><span style="left:78%;top:11%;animation-delay:1.2s">🦋</span><span style="left:64%;top:34%;animation-delay:2.1s;font-size:19px">🦋</span><span style="left:22%;top:44%;animation-delay:.6s;font-size:20px">🦋</span></div>
+<div class="home-clock"><div class="dow" id="home-dow">3月・新学期</div><div class="time" id="home-time">9:41</div><div class="date">ホンソ大学 彫塑科4年 ― なおのスマホ</div></div>
+<div class="home-widget"><b>🧭 パク・ジェオン解明度</b>
+<div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
+心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
+<div class="apps">
+<button class="app" data-open="kakao"><span class="ic ic-kakao">💬</span>カカオトーク<span class="bdg" id="bdg-kakao">1</span></button>
+<button class="app" data-open="ig"><span class="ic ic-ig">📷</span>Instagram</button>
+<button class="app" data-open="cal"><span class="ic ic-cal">🗓️</span>カレンダー</button>
+<button class="app" data-open="notes"><span class="ic ic-note">🔍</span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
+<button class="app" data-open="calllog"><span class="ic ic-tel">📞</span>電話</button>
+<button class="app" id="app-reset"><span class="ic ic-set">↺</span>最初から</button>
+</div>
+<div class="home-foot">選択で「解明度」と「心の距離」が変わります。<br>彼の言葉ではなく、行動を読んでください。</div>
+</div>
+
+<!-- KAKAO LIST -->
+<div class="view" id="v-kakao">
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>カカオトーク</h2><span class="sub">💬</span></div>
+<div class="kakao-tabs"><span class="on">👤</span><span>💬</span><span>＃</span><span>…</span></div>
+<div class="abody" id="thread-list"></div>
+</div>
+
+<!-- CHAT -->
+<div class="view" id="v-chat">
+<div class="chat-head"><button class="back" data-open="kakao">‹</button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span>🔍 ☰</span></div>
+<div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
+<div id="feed"></div>
+<div class="chat-input"><span style="font-size:20px;color:#999">＋</span><div class="fakein">メッセージを入力</div><button class="sendb" id="btn-next">▶</button></div>
+</div>
+
+<!-- IG -->
+<div class="view" id="v-ig">
+<div class="ig-head"><button class="back" data-home="1" style="font-size:22px;padding:2px 6px">‹</button><b>Instagram</b><span>＋ ♡ 💬</span></div>
+<div class="ig-switch"><button id="igsw-j" class="on">パク・ジェオン</button><button id="igsw-n">なお</button></div>
+<div class="abody" id="ig-body"></div>
+</div>
+
+<!-- CALENDAR -->
+<div class="view" id="v-cal">
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>カレンダー</h2><span class="sub">一学期（3月〜7月）</span></div>
+<div class="abody" id="cal-body"></div>
+</div>
+
+<!-- NOTES -->
+<div class="view" id="v-notes">
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>解剖メモ</h2><span class="sub">パク・ジェオン観察記録</span></div>
+<div class="abody" id="notes-body"></div>
+</div>
+
+<!-- CALL LOG -->
+<div class="view" id="v-calllog">
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>電話</h2><span class="sub">履歴</span></div>
+<div class="abody" id="calllog-body"></div>
+</div>
+
+<!-- CALL -->
+<div class="view" id="v-call">
+<img class="call-av" src="assets/av-jaeon.jpg" alt="">
+<div class="call-nm">パク・ジェオン</div>
+<div class="call-tm" id="call-timer">00:00</div>
+<div class="call-sub" id="call-sub">……</div>
+<div class="call-btns"><span class="cb">🔇</span><span class="cb">🔊</span><button class="cb end" id="call-next">📞</button></div>
+<p class="small-note" style="color:#aeb6c2">タップで通話が進みます（音声なし・テキスト通話）</p>
+</div>
+
+<div id="toast"></div>
+<div class="homebar" id="homebar"></div>
+</div></div>
+<p class="small-note">二次創作ファンゲームです。登場人物の画像はPinterest等で公開されていたファン素材を使用しています（出典はREADMEに記載）。</p>
+<script>
+/* ================= DATA ================= */
+const MEMOS=[
+{id:1,tag:'解剖メモ 01',title:'壁は、拒絶ではなく安全装置',body:'誰にでも親切で、誰にでも一定以上は近づかない。\nあの「一歩引いた感じ」は、興味がないからじゃない。近づきすぎると醜い部分が見える、と思っている人の距離の取り方だ。\n壁の内側に入れてくれないのは、嫌われている証拠とは限らない。むしろ彼は、壁なしで人と接する方法を知らない。'},
+{id:2,tag:'解剖メモ 02',title:'感情はある。言語化の回路が遅いだけ',body:'言いかけて、止める。笑って、話題を変える。\n感情が発生していないのではない。発生してから言葉になるまでの回路が遅くて、その間に防衛が先回りする。\nだから彼の感情は、いつも言葉ではなく行動に直結して出る。来る、持ってくる、迎えに来る。逆に、言葉で確かめようとすると一番遠ざかる。'},
+{id:3,tag:'解剖メモ 03',title:'近さは、行動と体でしか示せない',body:'好みの飲み物を覚えている。体調を崩せば薬とお粥を持ってくる。夜、迎えに来る。\n彼は「好き」と言う代わりに、そばにいる方法を選ぶ。言葉の約束は嘘になるかもしれないけれど、「今ここにいる」ことだけは嘘にならない、と思っている節がある。\nただしそれは、受け取る側に翻訳の負担を全部押しつける示し方でもある。'},
+{id:4,tag:'解剖メモ 04',title:'間欠報酬は、一番依存を強くする',body:'いつも優しい人は、ありがたいけれど依存はしない。\n来るか分からない人、優しいか冷たいか分からない人の「たまに来る優しさ」は、脳にとって一番強い報酬になる。ギャンブルの当たりと同じ仕組み。\n「今日は来た」が特別に感じてしまうのは、自分の気持ちが大きいからじゃなく、報酬の出方が不規則だからかもしれない。'},
+{id:5,tag:'解剖メモ 05',title:'「壊してみたい」は、失いたくないの裏返し',body:'好きになればなるほど相手を苦しめる――ソルアの言葉が正しいなら、あの衝動の正体は悪意じゃない。\n・綺麗なままの相手は、いつか自分を見限って行く気がする\n・壊れるほど弱った相手なら、自分のそばに残る気がする\n・壊しても残るか、試したい\n全部、見捨てられることへの先回りの防衛だ。愛し方ではなく、恥と不安の処理の仕方。'}
+];
+const IG_J=[
+{id:'atelier',img:'assets/ig-atelier.jpg',cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','先輩、作業しかしてないの？'],['park_jaeon','끝나지 않으니까']]},
+{id:'jaeon2',img:'assets/ig-jaeon2.jpg',cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','오빠 이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
+{id:'jaeon1',img:'assets/ig-jaeon1.jpg',cap:'☁️',likes:'529',unlock:3,cm:[['b1nna_','いいね100個あげたい'],['nao_sculpt','（……見てるだけ）']]},
+{id:'butterfly',img:'assets/ig-butterfly.jpg',cap:'나비. 잡으면 죽는다',likes:'601',unlock:3,cm:[['s0l_a','相変わらずだね'],['park_jaeon','飛んでる時が一番きれいだから']]},
+{id:'bar',img:'assets/ig-bar.jpg',cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]}
+];
+const IG_N=[
+{id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なお先輩かわいい'],['nao_sculpt','ありがとう笑']]},
+{id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:0,cm:[['b1nna_','その顔すき']]},
+{id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:3,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
+];
+const CAL=[
+{m:'3月',e:[
+{d:'上旬',t:'元彼の個展／破局',s:'プロローグ',u:0},
+{d:'中旬',t:'新学期スタート（彫塑科4年）',s:'卒業制作の一年が始まる',u:0},
+{d:'中旬',t:'バーで、蝶の男と出会う',s:'第1章',u:1},
+{d:'下旬',t:'学科の飲み会で再会／作業室',s:'第2章',u:2}]},
+{m:'4月',e:[
+{d:'中旬',t:'曖昧な関係が始まる',s:'第3章',u:3},
+{d:'下旬',t:'なおの誕生日',s:'展示デート→実家→ドヒョク再会',u:4}]},
+{m:'5月',e:[
+{d:'上旬',t:'一度目の別れ',s:'「いつも壁を作ってる」／第1部・完',u:5},
+{d:'—',t:'（第2部で解放）',s:'作品制作と、彼の変化……？',u:99}]},
+{m:'6月〜7月',e:[
+{d:'？',t:'兵役：未定の予定',s:'兵務庁アプリに未読のお知らせが1件。本人はまだ開いていない',u:5},
+{d:'—',t:'（第2部で解放）',s:'一学期の終わりと、卒業・留学・入隊の現実',u:99}]}
+];
+const BITNA=[
+[],
+[['ビンナ','先輩、昨日のバー男、誰だったの'],['ビンナ','コースター大事そうに持って帰ってたじゃん'],['なお','人違いで話しかけられただけ'],['ビンナ','ふーん。まあ、あの顔は覚えとくわ']],
+[['ビンナ','ねえ聞いた？ 今日の飲み会、2年のパク・ジェオン来るって'],['ビンナ','彫塑科のスター。女の子全員に優しいけど、誰とも付き合わないで有名'],['なお','……へえ'],['ビンナ','先輩、顔に出てるよ']],
+[['ビンナ','最近ジェオンと仲いいよね、先輩'],['ビンナ','忠告だけしとく。あいつは誰とも恋愛しない。言い寄られるのが嬉しいだけだよ'],['なお','分かってる。好きになる気ないし'],['ビンナ','……その「分かってる」が一番危ないんだって']],
+[['ビンナ','誕生日、結局どうだったの'],['なお','複雑。あとで話す'],['ビンナ','ドヒョクくんからも聞いたよ。あんたモテ期？'],['なお','違う。……多分']],
+[['ビンナ','終わりにしたんだって？'],['なお','うん。私が決めた'],['ビンナ','偉い。……でも先輩、泣いてない？'],['なお','泣いてない。解剖が終わっただけ']]
+];
+const GROUP=[
+[],
+[],
+[['彫塑科グループ','📢 飲み会のお知らせ：新学期決起会、今週金曜19時〜'],['ソル','ジェオン来る？'],['ジワン','来るって。女子全員集合じゃん'],['ビンナ','なお先輩も来ます']],
+[['彫塑科グループ','📢 合同展示の助手ペア、来週発表'],['ギュヒョン','助手は立候補制だって'],['ソル','ジェオンが誰の助手になるか賭けよう'],['ビンナ','（……やめとけ）']],
+[['彫塑科グループ','📢 GW中の作業室、利用申請は金曜まで'],['ジワン','誕生日会やる人いる？'],['ビンナ','内緒']],
+[['彫塑科グループ','📢 合同展示まであと少し。体調管理しっかり'],['ソル','なお先輩、最近痩せた？'],['ビンナ','制作で忙しいだけだよ']]
+];
+const DOHYUK=[
+[],
+[],
+[],
+[],
+[['ドヒョク','久しぶり。10年ぶりだね'],['ドヒョク','誕生日、おめでとう。わかめスープ、店で用意してあるよ'],['なお','ありがとう。……よく覚えてたね'],['ドヒョク','忘れるわけないじゃん。初恋の人の誕生日']],
+[['ドヒョク','この前はありがとう。無理してない？'],['なお','大丈夫。ちゃんと終わらせるって決めたから'],['ドヒョク','そっか。……応援してるよ。何かあったら言って']]
+];
+</script>
+<script>
+/* ================= STORY ================= */
+/* k: date/scene/j/scene choice/call/fade/memo/ig/sys/chap/end */
+const STORY=[
+{k:'chap',n:0,title:'プロローグ'},
+{k:'date',v:'3月 ― 個展',cal:0},
+{k:'scene',v:'元彼の個展。白い壁一面に、私の体をかたどった裸像が並んでいた。タイトルには、私の名前。\n「芸術のためだ」と彼は言った。私の許可もなしに。'},
+{k:'scene',v:'しかも会場の隅では、塾の教え子と腕を組んで笑っていた。\n……ああ、そうか。私は「作品」でも「彼女」でもなくて、都合のいい素材だったんだ。'},
+{k:'choice',q:'なおの反応は？',opts:[
+ {t:'「二度と、私を素材にしないで」静かに言って出ていく',kai:4,kyo:0,then:[{k:'scene',v:'言い返さなかった彼の顔を、最後に見た。\n言葉と気持ちが一致しない人の言葉は、もう要らない。'}]},
+ {t:'展示の前で笑って「傑作だね、私のおかげで」',kai:2,kyo:0,then:[{k:'scene',v:'震える手は、ポケットの中で握りしめた。外では、笑って終わらせた。'}]},
+ {t:'何も言わずに会場を出る',kai:1,kyo:0,then:[{k:'scene',v:'説明する価値もない、と判断した。足は自然と、知らない店の並ぶ通りへ向かった。'}]}]},
+{k:'sys',v:'ビンナとのトークが解放されました（カカオトークのトーク一覧）'},
+{k:'chap',n:1,title:'第1章 ― バーでの出会い'},
+{k:'date',v:'3月 ― バー',cal:1},
+{k:'scene',v:'一人で入ったバー。ライムのカクテルを頼んで、カウンターの端に座る。\n失恋の夜くらい、誰にも構われずに飲みたかったのに――'},
+{k:'scene',v:'「久しぶり」\n隣に座った男が、当然のように話しかけてきた。人違いだったらしい。謝りもせず、彼は笑う。\n「……でも、せっかくだから。このまま話さない？」'},
+{k:'scene',v:'うなじに蝶のタトゥー。彼はコースターにペンを走らせて、蝶を一匹描くと、私の前に滑らせた。\n「家で蝶、飼ってるんだ」\n「蝶、見に行く？」'},
+{k:'choice',q:'なおの返しは？（ENTP-T的に試してみる）',opts:[
+ {t:'「その誘い文句、何人目に使ったの？」',kai:6,kyo:-2,then:[{k:'scene',v:'彼は吹き出して笑った。\n「数えてない。……数える気もないけど」\n否定も肯定もしない。採点：逃げ方は上手い。'}]},
+ {t:'「蝶を飼ってる設定、作り込みが細かいね」',kai:5,kyo:0,then:[{k:'scene',v:'「設定だったら、もっと上手くやるよ」\n「下手なの？」\n「……捕まえ方は、下手かもね」彼はコースターの蝶を指でなぞった。'}]},
+ {t:'「……本当にいるの？ 蝶」',kai:3,kyo:-4,then:[{k:'scene',v:'「いるよ。見せたら信じる？」\n「信じるかどうかは、見てから決める」\n「ふーん。……そういうの、嫌いじゃない」'}]}]},
+{k:'scene',v:'結局、その夜は行かなかった。彼はあっさり引き下がって、コースターだけ置いて帰った。\n「気が向いたら、またここで」\n追わない男。……それが一番、頭に残る。'},
+{k:'ig',who:'n',id:'n1'},
+{k:'chap',n:2,title:'第2章 ― 再会と作業室'},
+{k:'date',v:'3月下旬 ― 学科の飲み会',cal:2},
+{k:'scene',v:'数日後、学科の飲み会。遅れて入ってきた後輩を見て、息が止まった。\nバーの男。ホンソ大彫塑科2年、パク・ジェオン。再受験と休学で、私と同い年。\n彼は私を見て、悪びれもせず笑った。'},
+{k:'scene',v:'席を離れた私に、彼がグラスを持ってきた。ライムのカクテル。\n「この前、同じの飲んでたから」\n注文もしていないのに、私の好みが置かれていた。'},
+{k:'choice',q:'覚えられていたことへの返しは？',opts:[
+ {t:'「一回会っただけなのに、よく覚えてるね」',kai:5,kyo:-3,then:[{k:'scene',v:'「覚えるよ。……先輩のことだけじゃないけど」\n悪びれもなく全員分を言い訳にする。でも、事実として彼は覚えていた。'}]},
+ {t:'「全員の好み、そうやって覚えるの？」',kai:6,kyo:1,then:[{k:'scene',v:'彼は少し笑って、答えなかった。その沈黙が、答えみたいなものだった。\n全員に優しい。でも全員、同じ深さじゃないのかもしれない。'}]},
+ {t:'「ありがとう」素直に受け取る',kai:2,kyo:-5,then:[{k:'scene',v:'「……素直だね」彼は少しだけ驚いた顔をして、すぐにいつもの笑いに戻した。'}]}]},
+{k:'sys',v:'パク・ジェオンとカカオトークがつながりました。以降の物語はこのトークで進みます'},
+{k:'j',v:'先輩、今日はありがとうございました'},
+{k:'j',v:'……あのさ、学校では先輩でいいけど'},
+{k:'j',v:'外では名前で呼んでいい？'},
+{k:'choice',q:'カカオでの最初の返信',opts:[
+ {t:'「学校では先輩。ここでは、なおで」',kai:4,kyo:-4,then:[{k:'j',v:'その分け方、覚えとく'},{k:'j',v:'じゃあ、なお。よろしく'}]},
+ {t:'「呼びたいんじゃなくて、許可が欲しいだけでしょ」',kai:6,kyo:0,then:[{k:'j',v:'バレた？'},{k:'j',v:'……まあ、呼びたいのも嘘じゃないけど'}]},
+ {t:'「好きに呼べば」',kai:1,kyo:-2,then:[{k:'j',v:'じゃあ、なおで'},{k:'j',v:'遠慮しないタイプなんで'}]}]},
+{k:'scene',v:'翌週、作業室。卒業制作の金属加工で手が止まった私に、彼が後ろから手を添えて教えてくれた。距離が、近い。\n「先輩は飲み込み早いから、教えるの楽」'},
+{k:'choice',q:'近すぎる距離への返しは？',opts:[
+ {t:'「私にだけ、そんなに丁寧に教えるの？」',kai:5,kyo:-2,then:[{k:'scene',v:'「……順番だよ、順番。たまたま近くにいたのが、なおだった」\n理由は作れる。作らなければいけない理由がある、ということだけ分かった。'}]},
+ {t:'採点する：「今の、先生としては80点」',kai:6,kyo:1,then:[{k:'scene',v:'「残り20点は？」\n「距離が近すぎるところ」\n「……引かなかったくせに」彼は笑って、それ以上は言わなかった。'}]},
+ {t:'何も言わず、教わるままにする',kai:2,kyo:-5,then:[{k:'scene',v:'何も言わなかった。言わないことも、ひとつの返事だと分かっていて、彼は距離を戻さなかった。'}]}]},
+{k:'memo',id:1},
+{k:'ig',who:'j',id:'atelier'},
+{k:'ig',who:'j',id:'jaeon2'},
+{k:'sys',v:'ジェオンのInstagramをフォローしました（Instagramアプリで投稿が見られます）'},
+{k:'chap',n:3,title:'第3章 ― 曖昧な関係'},
+{k:'date',v:'4月 ― 夜のカカオ',cal:3},
+{k:'j',v:'なお、起きてる？'},
+{k:'j',v:'暇なら、ちょっと出てこない？'},
+{k:'choice',q:'深夜の誘いへの返しは？',opts:[
+ {t:'「暇じゃないけど、理由を聞くくらいはする」',kai:5,kyo:-3,then:[{k:'j',v:'理由……コンビニのプリンが半額だった'},{k:'j',v:'嘘。本当の理由は、内緒'}]},
+ {t:'「彼女でもないのに、夜に呼び出すんだ」',kai:6,kyo:2,then:[{k:'j',v:'彼女じゃなきゃ、ダメ？'},{k:'j',v:'……ごめん、今のはナシで'}]},
+ {t:'「今日はやめとく」',kai:3,kyo:4,then:[{k:'j',v:'そっか'},{k:'j',v:'じゃあ、また明日学校で'}]}]},
+{k:'scene',v:'それでも結局、何度か夜に会った。名前のない関係。決めたのは私のほうだ。\n名前をつけたくないのは、彼だけじゃなかった。'},
+{k:'fade',v:'―― その夜のことは、ここには書かない。\n書かないことが、二人の約束だった。'},
+{k:'scene',v:'体調を崩して寝込んだ日。インターホンが鳴って、ドアの前に彼が立っていた。薬と、コンビニのお粥。\n「……ついでに近くまで来たから」\n嘘だ。彼の家は、ここから遠い。'},
+{k:'memo',id:3},
+{k:'call',lines:[[0,'……起きてた？'],[1,'うん。今、帰ったとこ'],[0,'声、聞きたくなって'],[0,'……なんでもない。忘れて'],[1,'言いかけてやめるの、得意だよね'],[0,'自覚はある。直す気は……まだない'],[0,'なおはさ、俺のこと何点だと思ってる？'],[1,'保留。まだ採点途中'],[0,'そっか。……じゃあ、まだ終わってないんだね']]},
+{k:'memo',id:2},
+{k:'sys',v:'ドヒョクとの再会まで、あと少し――'},
+{k:'date',v:'4月下旬 ― 誕生日',cal:4},
+{k:'j',v:'今度の日曜、暇？'},
+{k:'j',v:'展示、一緒に行かない？'},
+{k:'choice',q:'誕生日だと、言っていない誘いへの返しは？',opts:[
+ {t:'「その日、私の誕生日だけど」',kai:4,kyo:-3,then:[{k:'j',v:'……知らなかった。じゃあ余計に、俺にちょうだい、その日'},{k:'j',v:'冗談。半分だけ'}]},
+ {t:'「考えとく」（誕生日だとは言わない）',kai:5,kyo:2,then:[{k:'j',v:'そっか。返事、待ってる'}]},
+ {t:'「彼女でもないのに、誕生日に誘うんだ」',kai:6,kyo:1,then:[{k:'j',v:'……彼女じゃなきゃ、祝っちゃダメ？'},{k:'j',v:'線引き、好きだね。なおは'}]}]},
+{k:'scene',v:'誕生日。結局、展示の約束を断って実家に帰った。母は新しい恋人と楽しそうで、私の誕生日は「ああ、そうだったね」で終わった。\n駅で呆然としていたら、向かいのホームに彼がいた。'},
+{k:'scene',v:'初めての、昼のデート。服をプレゼントされて、わかめスープを作ると言い出した彼の手を、火傷しそうになって止めた。\n楽しい誕生日になるはずだった。――ソルアからの電話が鳴るまでは。'},
+{k:'scene',v:'「ごめん、行かなきゃ」\n彼は謝って、行った。理由は言わなかった。いつもそう。謝るけれど、説明はしない。\n一人残された食卓で、幼なじみのドヒョクがわかめスープとケーキを出してくれた。10年ぶりなのに、私の誕生日を覚えていた。'},
+{k:'ig',who:'j',id:'jaeon1'},
+{k:'ig',who:'j',id:'butterfly'},
+{k:'ig',who:'j',id:'bar'},
+{k:'ig',who:'n',id:'n3'},
+{k:'memo',id:4},
+{k:'chap',n:4,title:'第3章 ― 一度目の別れ'},
+{k:'date',v:'5月上旬 ― 話し合い',cal:5},
+{k:'scene',v:'成績が落ち始めた。制作も手につかない。原因は分かっている。\n来るか分からない優しさに、生活の全部が引っ張られていく。このままじゃ、私が壊れる。'},
+{k:'j',v:'今日、会える？'},
+{k:'choice',q:'切り出し方は？',opts:[
+ {t:'「会える。……最後に、話したいことがある」',kai:4,kyo:3,then:[{k:'j',v:'最後？'},{k:'j',v:'……わかった。行く'}]},
+ {t:'「私たち、何なの？ それを決めに来て」',kai:6,kyo:2,then:[{k:'j',v:'……今まで通りじゃ、ダメなんだ'}]},
+ {t:'いきなり本題：「終わりにしたい」',kai:3,kyo:5,then:[{k:'j',v:'…………'}]}]},
+{k:'scene',v:'カフェ。彼は私の言葉を、最後まで遮らなかった。\n「あんたはいつも壁を作ってる。必要な時だけ近づいて、私が本気になるのは怖いんでしょ」\n言い当てたはずなのに、彼の顔は読めなかった。'},
+{k:'scene',v:'「……今まで、平気だったじゃん。なんで急に」\n「終わりにするかどうかは、なおが決めて」\n彼はあっさり、そう言った。引き止めない。怒りもしない。それが一番、答えだった。'},
+{k:'choice',q:'最後の一言は？',opts:[
+ {t:'「分かった。私が決める。……終わりにする」',kai:6,kyo:6,then:[{k:'scene',v:'「……そっか」彼は少し笑って、席を立った。\n終わらせる権利を渡すことも、彼の逃げ方なんだと分かった。'}]},
+ {t:'「止めないんだね」',kai:5,kyo:4,then:[{k:'scene',v:'彼は答えなかった。答えないことが、彼の精一杯の正直さだったのかもしれない。'}]},
+ {t:'「ありがとう。気持ちを整理しやすくなった」',kai:7,kyo:5,then:[{k:'scene',v:'帰り際、彼が言った。\n「なおって、最後まで計画的だね」\n違う。計画的なんかじゃない。そうしないと、崩れてしまうからだ。'}]}]},
+{k:'memo',id:5},
+{k:'end'}
+];
+/* ================= ENGINE ================= */
+const $=s=>document.querySelector(s);
+const LSKEY='jaeon-suki-ninaranai-v1';
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false};
+try{const raw=localStorage.getItem(LSKEY); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
+let playing=false, replaying=false;
+const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2400);}
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on');}
+function updParams(){
+ $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
+ $('#p-kyori').textContent=S.kyo;
+ $('#w-kai').style.width=S.kai+'%';
+ $('#w-kyori').textContent=S.kyo<=25?'近い（でも壁はある）':S.kyo<=45?'近づきかけ':S.kyo<=70?'曖昧な距離':'遠い';
+ const progs=['プロローグ','第1章 バーでの出会い','第2章 再会と作業室','第3章 曖昧な関係','第3章 一度目の別れ','第1部 完'];
+ $('#w-prog').textContent=S.done?'第1部 完':progs[S.chap]||'';
+ const nb=$('#bdg-note'); if(S.memos.length){nb.style.display='flex'; nb.textContent=S.memos.length;} else nb.style.display='none';
+}
+const feed=$('#feed');
+function el(html){const d=document.createElement('div'); d.innerHTML=html; return d.firstElementChild;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function addDate(v){feed.appendChild(el('<div class="dchip">'+esc(v)+'</div>'));}
+function addSys(v){feed.appendChild(el('<div class="sys">'+esc(v)+'</div>'));}
+function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</span>'+esc(v)+'</div>'); feed.appendChild(d);}
+function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
+function addJ(v){const r=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="bub">'+esc(v)+'</div></div></div>'); feed.appendChild(r);}
+function addMe(v){const r=el('<div class="row me"><div class="bub">'+esc(v)+'</div></div>'); feed.appendChild(r);}
+function scrollFeed(){feed.scrollTop=feed.scrollHeight;}
+function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('🔍 解剖メモが解放されました（ホームの「解剖メモ」）');}}
+function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('📷 Instagramに新しい投稿が解放されました');}}
+function applyItem(it,quiet){
+ switch(it.k){
+  case 'date': addDate(it.v); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); break;
+  case 'chap': S.chap=it.n; break;
+  case 'scene': addScene(it.v); break;
+  case 'sys': addSys(it.v); break;
+  case 'j': addJ(it.v); break;
+  case 'fade': addFade(it.v); break;
+  case 'memo': unlockMemo(it.id,quiet); if(!quiet) addSys('―― 解剖メモ '+it.id+' を記録した ――'); break;
+  case 'ig': unlockIG(it.id,quiet); break;
+ }
+ updParams(); scrollFeed();
+}
+async function playItems(items,quiet){
+ for(const it of items){
+   if(it.k==='call'){ if(!quiet){ await doCall(it.lines); S.callSeen=true; } continue; }
+   applyItem(it,quiet);
+   if(!quiet) await sleep(430);
+ }
+}
+let callResolve=null, callLines=[], callIdx=0, callSec=0, callTimerInt=null;
+function doCall(lines){
+ return new Promise(res=>{
+  callResolve=res; callLines=lines; callIdx=0; callSec=0;
+  showView('v-call'); $('#call-sub').textContent='📞 発信中……';
+  clearInterval(callTimerInt);
+  callTimerInt=setInterval(()=>{callSec++; const m=String(Math.floor(callSec/60)).padStart(2,'0'),s=String(callSec%60).padStart(2,'0'); $('#call-timer').textContent=m+':'+s;},1000);
+ });
+}
+$('#call-next').addEventListener('click',()=>{
+ if(callIdx<callLines.length){
+   const [who,txt]=callLines[callIdx++];
+   $('#call-sub').innerHTML=(who===1?'<span class="me2">なお：</span>':'ジェオン：')+esc(txt);
+ } else {
+   clearInterval(callTimerInt); showView('v-chat');
+   if(callResolve){const r=callResolve; callResolve=null; r();}
+ }
+});
+async function run(){
+ if(playing) return; playing=true;
+ while(S.idx<STORY.length){
+   const it=STORY[S.idx];
+   if(it.k==='choice'){
+     if(replaying){ S.idx++; continue; }
+     renderChoice(it); save(); playing=false; return;
+   }
+   if(it.k==='end'){ S.done=true; S.idx++; renderEnd(); save(); break; }
+   if(it.k==='call'){ S.idx++; save(); await doCall(it.lines); S.callSeen=true; save(); continue; }
+   applyItem(it,false); S.idx++; save();
+   await sleep(430);
+ }
+ playing=false; updParams();
+}
+function renderChoice(it){
+ const wrap=document.createElement('div'); wrap.className='choices';
+ wrap.innerHTML='<div class="clabel">'+esc(it.q||'返信を選ぶ')+'</div>';
+ it.opts.forEach((op,oi)=>{
+   const b=document.createElement('button'); b.className='choice-btn'; b.textContent=op.t;
+   b.addEventListener('click',async()=>{
+     wrap.remove();
+     S.picks[S.idx]=oi;
+     addMe(op.t);
+     S.kai=clamp(S.kai+(op.kai||0),0,100); S.kyo=clamp(S.kyo+(op.kyo||0),5,95);
+     updParams(); S.idx++; save();
+     await playItems(op.then||[],false);
+     save(); run();
+   });
+   wrap.appendChild(b);
+ });
+ feed.appendChild(wrap); scrollFeed();
+}
+function renderEnd(){
+ const d=el('<div class="endcard"><h3>第1部 ― 完</h3><p>「いつも壁を作ってる」<br>一度目の別れまでを描きました。</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p>心の距離：'+S.kyo+'<br>'+(S.kai>=55?'彼の仕組みは、かなり見えてきた。でも、見えることと近づくことは別だ。':S.kai>=35?'彼の輪郭は見えてきた。核心は、まだ壁の向こう。':'まだ彼のことは、ほとんど分かっていない。選択を変えて、もう一度読んでみて。')+'</p><p style="font-size:12px;color:#c8d2de">カレンダーに「兵役：未定の予定」が追加されました。<br>彼の変化と第2部の物語は――「第2部へつづく」</p><button id="btn-tohome">ホームへ</button></div>');
+ feed.appendChild(d); scrollFeed();
+ d.querySelector('#btn-tohome').addEventListener('click',()=>showView('v-home'));
+}
+/* replay saved progress instantly */
+function replay(){
+ if(S.idx<=0) return;
+ replaying=true;
+ const picks=S.picks;
+ for(let i=0;i<S.idx && i<STORY.length;i++){
+   const it=STORY[i];
+   if(it.k==='choice'){
+     const oi=picks[i]; if(oi!=null && it.opts[oi]){ const op=it.opts[oi]; addMe(op.t); (op.then||[]).forEach(t2=>{ if(t2.k!=='call') applyItem(t2,true); }); }
+     continue;
+   }
+   if(it.k==='call'||it.k==='end') continue;
+   applyItem(it,true);
+ }
+ replaying=false; updParams();
+ if(S.done) renderEnd();
+}
+/* ================= SIDE VIEWS ================= */
+function threadRow(img,name,prev,time,ub,onclick,avc){
+ const b=document.createElement('button'); b.className='thread';
+ b.innerHTML=(img?'<img class="av" src="'+img+'">':'<span class="avc" style="background:'+avc+'">👥</span>')+'<span class="tt"><span class="tn">'+name+'<time>'+time+'</time></span><span class="tp">'+esc(prev)+'</span></span>'+(ub?'<span class="ub">'+ub+'</span>':'');
+ b.addEventListener('click',onclick); return b;
+}
+function renderThreads(){
+ const L=$('#thread-list'); L.innerHTML='';
+ L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',S.done?'……そっか':(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）'),'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); if(!S.done) run();}));
+ const bs=S.done?5:S.chap;
+ if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',BITNA[Math.min(bs,5)].slice(-1)[0][1],'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[Math.min(bs,5)])));
+ if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ','合同展示の助手ペア、来週発表','3月',0,()=>openSide('彫塑科グループ',null,GROUP[Math.min(bs,5)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
+ if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク','応援してるよ。何かあったら言って','4月',0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[Math.min(bs,5)])));
+ if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
+}
+let sideView=null;
+function openSide(name,img,log){
+ if(!sideView){
+   sideView=document.createElement('div'); sideView.className='view'; sideView.id='v-side';
+   sideView.innerHTML='<div class="chat-head"><button class="back" id="side-back">‹</button><div class="cn"><b id="side-name"></b><div class="csub">読み取り専用（物語の進行には影響しません）</div></div></div><div id="side-feed" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:7px;background:var(--kakao-bg)"></div>';
+   document.querySelector('.screen').appendChild(sideView);
+   sideView.querySelector('#side-back').addEventListener('click',()=>{renderThreads(); showView('v-kakao');});
+ }
+ $('#side-name').textContent=name;
+ const f=sideView.querySelector('#side-feed'); f.innerHTML='';
+ log.forEach(([who,txt])=>{
+   if(who==='なお'){ f.appendChild(el('<div class="row me"><div class="bub">'+esc(txt)+'</div></div>')); }
+   else{ f.appendChild(el('<div class="row">'+(img?'<img class="av" src="'+img+'">':'<span class="avc" style="width:36px;height:36px;border-radius:13px;background:#7fb2d9;display:flex;align-items:center;justify-content:center;color:#fff;flex:none">👥</span>')+'<div><div class="nm">'+esc(who)+'</div><div class="bub">'+esc(txt)+'</div></div></div>')); }
+ });
+ showView('v-side');
+}
+/* IG */
+let igWho='j';
+function renderIG(){
+ const body=$('#ig-body');
+ const isJ=igWho==='j';
+ const posts=isJ?IG_J:IG_N;
+ const unlocked=posts.filter(p=>S.igs.includes(p.id)||p.unlock===0);
+ const locked=posts.length-unlocked.length;
+ const prof=isJ
+  ?{img:'assets/av-jaeon.jpg',name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:'1,204'}
+  :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:'342'};
+ let h='<div class="ig-prof"><img src="'+prof.img+'"><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
+ h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">🔒 物語で解放</span></button>':'')+'</div>';
+ h+='<div id="ig-detail"></div>';
+ body.innerHTML=h;
+ body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{
+   const p=posts.find(x=>x.id===b.dataset.post);
+   const cm=(p.cm||[]).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
+   body.querySelector('#ig-detail').innerHTML='<div class="ig-post"><div class="ph"><img src="'+prof.img+'">'+prof.name+'</div><img src="'+p.img+'"><div class="pc"><div class="lk2">♡ いいね！'+p.likes+'件</div><b>'+prof.name+'</b> '+esc(p.cap)+cm+'</div></div>';
+   body.scrollTop=body.scrollHeight;
+ }));
+}
+$('#igsw-j').addEventListener('click',()=>{igWho='j'; $('#igsw-j').classList.add('on'); $('#igsw-n').classList.remove('on'); renderIG();});
+$('#igsw-n').addEventListener('click',()=>{igWho='n'; $('#igsw-n').classList.add('on'); $('#igsw-j').classList.remove('on'); renderIG();});
+/* calendar */
+function renderCal(){
+ const b=$('#cal-body'); let h='';
+ CAL.forEach(mo=>{ h+='<div class="cal-m">'+mo.m+'</div>'; mo.e.forEach(e=>{
+   const locked=e.u>S.calU;
+   h+='<div class="cal-e'+(locked?' lock':'')+'"><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'・')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+esc(e.s)+'</small></span></div>';
+ });});
+ b.innerHTML=h+'<p class="locknote">物語の進行に合わせて解放されます</p>';
+}
+/* notes */
+function renderNotes(){
+ const b=$('#notes-body');
+ b.innerHTML=MEMOS.map(m=>{
+   const un=S.memos.includes(m.id);
+   return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:'🔒 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3><p>'+(un?esc(m.body):'物語のキー場面を読み進めると、観察メモが解放されます。')+'</p></div>';
+ }).join('')+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>';
+}
+/* call log */
+function renderCallLog(){
+ $('#calllog-body').innerHTML=S.callSeen
+  ?'<div class="thread"><img class="av" src="assets/av-jaeon.jpg"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 ― 言いかけて、止めた夜</span></span></div><p class="locknote">通話の内容は物語の中で再生されます（音声なし）</p>'
+  :'<p class="locknote">まだ通話履歴はありません</p>';
+}
+/* nav */
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
+ const k=b.dataset.open;
+ if(k==='kakao'){renderThreads(); showView('v-kakao');}
+ if(k==='ig'){renderIG(); showView('v-ig');}
+ if(k==='cal'){renderCal(); showView('v-cal');}
+ if(k==='notes'){renderNotes(); showView('v-notes');}
+ if(k==='calllog'){renderCallLog(); showView('v-calllog');}
+}));
+document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>showView('v-home')));
+$('#homebar').addEventListener('click',()=>showView('v-home'));
+$('#btn-next').addEventListener('click',()=>{ if(!S.done) run(); });
+$('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（進行状況がリセットされます）')){ localStorage.removeItem(LSKEY); location.reload(); }});
+function tickClock(){const d=new Date(); const t=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); $('#sb-time').textContent=t; $('#home-time').textContent=t;}
+tickClock(); setInterval(tickClock,30000);
+/* start */
+replay(); updParams();
+$('#bdg-kakao').textContent=S.done?'✓':'1';
+</script>
+</body>
+</html>
