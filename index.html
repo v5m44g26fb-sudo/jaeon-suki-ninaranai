@@ -414,7 +414,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v30：アセットと参照の棚卸し。index.html 内の全アセット参照を実ファイルと照合しました。参照は画像19点・BGM5点・効果音／環境音13点・通話ボイス6点（VOICEMAP 経由の動的参照）の計43件で、実ファイル43点と完全一致し、参照切れ・大文字小文字の不一致・未参照ファイルはいずれも0件でした（公開URLでも43点すべて HTTP 200 を確認）。画像の表示は全箇所 object-fit:cover（写真ビューアは原寸の contain）で統一され、引き伸ばしはなく、縦長ポートレートのスクエア表示でも顔が見切れないことを実寸と実描画で確認しました。あわせて、共有・ブックマーク時に使われるメタ情報（description／OGP／favicon）が未設定だったため、作品紹介文と蝶の画像で新設しました。アセット総量は3,416,538バイトで、v12の削減後からの増加は v25 で追加した海辺の環境音（sea.mp3）の分だけです。物語・台詞・選択肢・数値・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v31：セーブデータの異常系と復旧。壊れた状態で開かれても止まらないよう、読み込み時の防御を足しました（正常なセーブの挙動・形式は不変で、防御は異常な値のときだけ働きます）。JSONが壊れている・オブジェクトでないセーブは、元のデータを別キー（.bak）へ退避してから初期状態で起動します。フィールドの型違い（memos／igs／ends／picks 等）やフリーチャットの要素欠落は読み込み時に正しい形へ直し、数値（解明度・心の距離・idx 等）の範囲外や非数は範囲内へ丸めます。idx が物語の長さを超える「未来の版」相当のセーブや、未到達のはずの endId を持つセーブは、最終選択の手前まで戻して続きを選べるようにしました。localStorage が使えない環境（保存・読み込みが例外）でも、保存を諦めてそのまま遊べることは従来どおりです。異常系13ケース＋回復後のエンディング到達＋完走済みセーブの再読み込みを実測し、全てJSエラー0件でした。物語・台詞・選択肢・数値バランスは不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -904,7 +904,8 @@ const STORY=[
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
 let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70};
-try{const raw=localStorage.getItem(LSKEY); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
+/* v31：壊れたセーブ（JSON破損・非オブジェクト）は LSKEY+'.bak' へ退避し、初期状態で起動する */
+try{const raw=localStorage.getItem(LSKEY); if(raw){ try{const p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) S=Object.assign(S,p); else try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} }catch(pe){ try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} } }}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
 if(!S.ver){ S.ver=2; if(S.done){ S.done=false; S.endId=null; } if(!Array.isArray(S.ends)) S.ends=[]; if(S.callSeen) S.call1=true; }
 if(!Array.isArray(S.pov)) S.pov=[]; if(!Array.isArray(S.free)) S.free=[]; if(typeof S.freeN!=='number') S.freeN=0; if(typeof S.freeClosed!=='boolean') S.freeClosed=false; if(typeof S.sndOn!=='boolean') S.sndOn=true; if(typeof S.sndVol!=='number') S.sndVol=70;
@@ -917,6 +918,21 @@ if(typeof S.proOps!=='number') S.proOps=0;
 if(typeof S.proUnread!=='number') S.proUnread=0;
 if(typeof S.chatOpened!=='boolean') S.chatOpened=false;
 if(typeof S.epiProf!=='boolean') S.epiProf=false;
+/* v31：セーブ異常系の防御（型違い・要素欠落・範囲外の是正）。正常なセーブでは全て素通りし、値は変わらない */
+if(!Array.isArray(S.memos)) S.memos=[];
+if(!Array.isArray(S.igs)) S.igs=[];
+if(!Array.isArray(S.ends)) S.ends=[]; else S.ends=S.ends.filter(e=>e==='drama'||e==='gen'||e==='nao');
+if(!S.picks||typeof S.picks!=='object'||Array.isArray(S.picks)) S.picks={};
+S.free=S.free.filter(m=>!!m&&typeof m==='object');
+S.free.forEach(m=>{ if(m.w==='jimg'){ if(typeof m.img!=='string') m.img=''; if(typeof m.cap!=='string') m.cap=m.cap==null?'':String(m.cap); } else if(typeof m.t!=='string') m.t=m.t==null?'':String(m.t); });
+const __fin=(v,d)=>(typeof v==='number'&&isFinite(v))?v:d;
+S.kai=Math.max(0,Math.min(100,__fin(S.kai,0)));
+S.kyo=Math.max(0,Math.min(100,__fin(S.kyo,62)));
+S.chap=Math.max(0,Math.min(8,Math.floor(__fin(S.chap,0))));
+S.calU=Math.max(0,Math.min(12,Math.floor(__fin(S.calU,0))));
+S.freeN=Math.max(0,Math.floor(__fin(S.freeN,0)));
+if(S.done&&S.endId!=='drama'&&S.endId!=='gen'&&S.endId!=='nao'){ S.done=false; S.endId=null; }
+S.idx=Math.floor(__fin(S.idx,0)); if(S.idx<0) S.idx=0; if(S.idx>STORY.length) S.idx=STORY.length; if(!S.done&&S.idx>=STORY.length) S.idx=STORY.length-1;
 let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
