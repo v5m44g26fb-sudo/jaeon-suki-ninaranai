@@ -49,7 +49,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .lock-date{font-size:16.5px;font-weight:500;letter-spacing:.01em}
 .lock-time{font-size:76px;font-weight:200;line-height:1.08;letter-spacing:.005em;font-family:-apple-system,"SF Pro Display",sans-serif}
 .lock-notifs{margin:26px 10px 0;display:flex;flex-direction:column;gap:8px}
-.lnotif{position:relative;background:rgba(38,38,44,.62);backdrop-filter:blur(14px);border-radius:20px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start}
+.lnotif{position:relative;background:rgba(38,38,44,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:20px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start}
 .lnotif img{width:34px;height:34px;border-radius:8px;object-fit:cover;flex:none}
 .ln-ic{width:34px;height:34px;border-radius:8px;background:var(--kakao);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
 .ln-h{display:flex;justify-content:space-between;font-size:11.5px;color:#d7d7dc;text-transform:uppercase;letter-spacing:.03em}
@@ -57,7 +57,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ln-t{font-size:13.5px;line-height:1.45;margin-top:1px}
 .lnotif.stack{margin:-2px 6px 0;transform:scale(.97);opacity:.75;padding:8px 13px}
 .lock-btns{margin-top:auto;padding:0 46px 6px;display:flex;justify-content:space-between}
-.lk-btn{width:47px;height:47px;border-radius:50%;background:rgba(30,30,34,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:19px}
+.lk-btn{width:47px;height:47px;border-radius:50%;background:rgba(30,30,34,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:19px}
 .lock-hint{text-align:center;font-size:12.5px;color:rgba(255,255,255,.85);padding:12px 0 30px}
 /* ===== home : iOS 14 ===== */
 #v-home{background:linear-gradient(168deg,#274b63 0%,#3c3a5e 48%,#191725 100%);color:#fff;overflow:hidden}
@@ -94,7 +94,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .pagedots{position:absolute;bottom:104px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
 .pagedots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45)}
 .pagedots i.on{background:#fff}
-.dock{position:absolute;left:11px;right:11px;bottom:9px;height:88px;background:rgba(235,235,240,.34);backdrop-filter:blur(20px) saturate(1.6);border-radius:27px;display:flex;align-items:center;justify-content:space-around;padding:0 12px;z-index:3}
+.dock{position:absolute;left:11px;right:11px;bottom:9px;height:88px;background:rgba(235,235,240,.34);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);border-radius:27px;display:flex;align-items:center;justify-content:space-around;padding:0 12px;z-index:3}
 .dock .app{text-shadow:none}
 .dock .app .ic{width:60px;height:60px}
 /* ===== generic app header (iOS 14 nav) ===== */
@@ -115,7 +115,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .thread .tt{flex:1;min-width:0}
 .thread .tn{font-size:15px;font-weight:600;display:flex;justify-content:space-between}
 .thread .tn time{font-size:10.5px;color:var(--sub);font-weight:400}
-.thread .tp{font-size:12.5px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.thread .tp{display:block;font-size:12.5px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .thread .ub{background:var(--red);color:#fff;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
 .locknote{padding:14px 16px;font-size:12px;color:var(--sub);text-align:center}
 .fr-sec{padding:12px 16px 4px;font-size:11.5px;color:#999;border-top:8px solid #f6f6f8;margin-top:6px}
@@ -263,7 +263,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #v-call[data-phase="incoming"] .call-av{width:110px;height:110px;margin-top:110px}
 .call-nm{text-align:center;font-size:27px;font-weight:600}
 .call-tm{text-align:center;color:#c6ccd6;font-size:14.5px;margin-top:4px}
-.call-sub{display:none;margin:22px 26px 0;background:rgba(18,20,26,.72);backdrop-filter:blur(6px);border-radius:16px;padding:14px 16px;font-size:14.5px;line-height:1.8;min-height:82px;cursor:pointer}
+.call-sub{display:none;margin:22px 26px 0;background:rgba(18,20,26,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:16px;padding:14px 16px;font-size:14.5px;line-height:1.8;min-height:82px;cursor:pointer}
 .call-sub .me2{color:#ffe970}
 #v-call[data-phase="incall"] .call-sub{display:block}
 .call-hint{text-align:center;font-size:10.5px;color:rgba(255,255,255,.55);margin-top:7px;display:none}
@@ -284,11 +284,11 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #v-call[data-phase="incall"] .ui-incall{display:block}
 .call-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px 20px;justify-items:center;margin-bottom:30px}
 .cg{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:#eef0f3}
-.cg i{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.17);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:22px;font-style:normal}
+.cg i{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.17);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:22px;font-style:normal}
 .cb.end{background:#f63c30;margin:0 auto;transform:rotate(135deg)}
 
 /* ===== v4 : music / pov / story / free chat ===== */
-.wid-music{margin:12px 20px 0;background:rgba(20,20,28,.72);color:#fff;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.6;backdrop-filter:blur(8px)}
+.wid-music{margin:12px 20px 0;background:rgba(20,20,28,.72);color:#fff;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.6;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .wid-music .mh{display:flex;align-items:center;gap:8px}
 .wid-music .mh b{font-size:13px}
 #mus-now{flex:1;font-size:11.5px;color:#ffe970;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -327,7 +327,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .mus-credit b{font-size:12.5px;color:#111}
 
 /* ===== v5 : pacing UI / noise banner / settings ===== */
-#tap-hint{position:absolute;right:15px;bottom:82px;width:36px;height:36px;border-radius:50%;background:rgba(28,38,52,.78);color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;z-index:60;pointer-events:none;backdrop-filter:blur(3px);box-shadow:0 3px 10px rgba(20,30,45,.35)}
+#tap-hint{position:absolute;right:15px;bottom:82px;width:36px;height:36px;border-radius:50%;background:rgba(28,38,52,.78);color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;z-index:60;pointer-events:none;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);box-shadow:0 3px 10px rgba(20,30,45,.35)}
 #tap-hint.on{display:flex;animation:hintb 1.5s ease-in-out infinite}
 @keyframes hintb{0%,100%{transform:translateY(0);opacity:.8}50%{transform:translateY(5px);opacity:1}}
 #noise{position:absolute;top:100px;left:10px;right:10px;background:rgba(26,26,32,.95);color:#fff;border-radius:17px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;z-index:90;transform:translateY(-160%);opacity:0;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s;box-shadow:0 10px 26px rgba(0,0,0,.38);cursor:pointer;pointer-events:none;visibility:hidden}
