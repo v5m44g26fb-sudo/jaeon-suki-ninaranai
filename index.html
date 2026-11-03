@@ -414,7 +414,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v37：見送り項目の総棚卸し。v22〜v36 の各改修で「見送り」として記録された項目（延べ約65件、統合して62件）を全件リスト化し、「その後の変更で前提が崩れていないか」「繰り返し見送られたが、まとめてなら直せるものはないか」「実害の評価が変わったものはないか」の観点で再評価しました。設計として確定した判断（章ごとに代表場面を見せる方式、彼の「秘密」のような意図的な反復、確証の持てない実物寄せ）は覆していません。あわせて、直近で見つかった実害のパターン（未解放なのに中身が見える／旧段取りの残存／時期の先行表示）を他の画面へ横展開して点検し、解剖メモ・彼視点・後日談・Instagram・写真・通話履歴の各一覧では未解放の内容が漏れていないこと、誕生日の旧段取りが本文に残っていないことを確認しました。是正は1件です。カカオトークのトーク画面上部に、1:1トークでは実物に表示されない参加人数「2」と通話アイコンが出ていたため除去しました（v24 で対象範囲外として残置していた件で、通話への導線はプロフィール画面と＋パネル側に別にあります）。物語・台詞・選択肢・数値・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v38：通話シーン2件（看病の夜／ブレスレットの夜）の演出最終点検。v9のボイス実装後に積み重なった変更（間の演出・画面遷移とタブ復帰・ダッキングのランプ化）を踏まえ、着信→応答→通話→終話を通しで実測しました。是正は2件です。(1) 行送りで前行のボイスが止まらず、彼女の行の字幕に彼の声が重なっていることがあったため、行送りのたびに前行ボイスを止めるよう統一しました（彼の無ボイス行では従来から止まっており、相手の行だけ止まらない非対称の解消）。(2) 通話中でも画面下部のホームバーが通話画面より前面にあり、タップでホームへ離脱できてしまう一方、離脱すると通話が宙に浮いて物語が進行不能になり、BGMのダッキング（音量低下）も残り続けていました。通話中はホームバーのタップを受け付けないよう是正しました。着信ループの応答での停止・接続音と終了音の位置・ダッキングの入りと戻り・通話タイマーの進行・通話履歴（06:12／03:47／不在着信）の対応・効果音OFF／全体ミュート／効果音量との連動・通話途中のリロード（履歴は再構築で復元され、物語は通話の先から再開する）は、実測で仕様どおりと確認しています。通話の台詞・物語・選択肢・数値・セーブ形式は不変です。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1069,6 +1069,7 @@ function advanceCall(){
  if(callIdx<callLines.length){
    const li=callIdx;
    const [who,txt]=callLines[callIdx++];
+   if(typeof stopVoice==='function') stopVoice(); /* v38：行送りで前行のボイスを必ず止める（相手の行へ送っても彼の声が重ならない） */
    $('#call-sub').innerHTML=(who===1?'<span class="me2">なお：</span>':'ジェオン：')+esc(txt);
    if(who===0&&typeof playVoiceLine==='function') playVoiceLine(li);
  } else {
@@ -1310,7 +1311,7 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
  if(k==='gallery'){renderGallery(); showView('v-gallery');}
 }));
 document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>showView('v-home')));
-$('#homebar').addEventListener('click',()=>showView('v-home'));
+$('#homebar').addEventListener('click',()=>{ if(callResolve) return; showView('v-home'); }); /* v38：通話中はホームへ離脱できない（離脱すると通話が宙に浮いて進行不能＋BGMダッキングが残るため） */
 /* v5：▶は「タップで進む」の送りボタン兼用。長押しで早送りモード切替 */
 let nextPressT=null, nextFFired=false;
 const btnNext=$('#btn-next');
