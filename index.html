@@ -34,6 +34,8 @@ box-shadow:0 0 0 2px #4a4d52,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margi
 @media (max-width:430px){.notch{display:none}}
 .statusbar{position:absolute;top:0;left:0;right:0;height:44px;z-index:205;display:flex;align-items:center;justify-content:space-between;padding:2px 27px 0 32px;font-size:14.5px;font-weight:600;color:#fff;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.3)}
 .sb-r{display:flex;align-items:center;gap:5px}
+.statusbar.dark{color:#191919;text-shadow:none}
+.statusbar.dark .sb-r{filter:invert(1)}
 .sb-r svg{display:block}
 .homebar{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:220;cursor:pointer;box-shadow:0 0 3px rgba(0,0,0,.3)}
 .view{position:absolute;inset:0;display:none;flex-direction:column;background:#fff;color:var(--ink)}
@@ -97,7 +99,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .dock .app .ic{width:60px;height:60px}
 /* ===== generic app header (iOS 14 nav) ===== */
 .ahead{padding:50px 14px 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);background:#fff;z-index:5}
-.ahead .back{font-size:24px;padding:2px 6px;color:#333}
+.ahead .back{font-size:24px;padding:7px 11px;color:#333}
 .ahead h2{font-size:17px;font-weight:700;flex:1}
 .ahead .sub{font-size:11px;color:var(--sub)}
 .abody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -122,14 +124,14 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .fr-my .fn{font-size:16px;font-weight:700}
 .fr-my .fs{font-size:12px;color:#888;margin-top:2px}
 .kk-tabbar{display:flex;border-top:1px solid #e8e8e8;background:#f8f8f9;padding:5px 4px 20px;z-index:5}
-.kk-tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#a6a6a6;position:relative;padding:3px 0}
+.kk-tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;color:#a6a6a6;position:relative;padding:5px 0;min-height:46px}
 .kk-tabbar button .ti{font-size:21px;line-height:1.1}
 .kk-tabbar button.on{color:#191919}
 .kk-tabbar .kbadge{position:absolute;top:-1px;right:calc(50% - 19px);background:#ff5a4e;color:#fff;font-size:9.5px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 /* ===== chat room : 2021 kakao ===== */
 #v-chat{background:var(--kakao-bg)}
 .chat-head{padding:46px 8px 5px;background:var(--kakao-bg);display:flex;align-items:center;gap:5px;z-index:5;border-bottom:1px solid rgba(0,0,0,.05)}
-.chat-head .back{font-size:23px;padding:2px 5px;color:#222}
+.chat-head .back{font-size:23px;padding:7px 10px;color:#222}
 .ch-prof{flex:none;padding:0}
 .ch-prof img{width:34px;height:34px;border-radius:12px;object-fit:cover;display:block}
 .chat-head .cn{flex:1;min-width:0}
@@ -156,15 +158,19 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .bmeta{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex:none;padding-bottom:1px;margin-right:1px}
 .bmeta .tm{padding-bottom:0}
 .unread{color:#f6a500;font-size:11.5px;font-weight:700;line-height:1;text-shadow:0 0 2px rgba(255,255,255,.35)}
-.typing{background:#fff;border-radius:12px;padding:10px 13px;font-size:14px;color:#999}
+.typing{background:#fff;border-radius:12px;padding:11px 13px;font-size:14px;color:#999;display:inline-flex;gap:4px;align-items:center}
+.typing i{width:6px;height:6px;border-radius:50%;background:#aeb9c4;display:block;animation:tyb 1.15s ease-in-out infinite}
+.typing i:nth-child(2){animation-delay:.18s}
+.typing i:nth-child(3){animation-delay:.36s}
+@keyframes tyb{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-3.5px);opacity:1}}
 .fade{align-self:stretch;text-align:center;background:#101318;color:#cfd6df;border-radius:14px;padding:20px 14px;font-size:13px;line-height:2;margin:4px 0;letter-spacing:.06em}
 .choices{display:flex;flex-direction:column;gap:8px;margin:8px 0 4px}
 .choices .clabel{font-size:11px;color:#44576b;text-align:center}
-.choice-btn{background:#fff;border:1.5px solid #7d93a8;color:#22384e;border-radius:14px;padding:11px 13px;font-size:13.5px;text-align:left;line-height:1.5;box-shadow:0 2px 5px rgba(30,50,80,.12)}
+.choice-btn{background:#fff;border:1.5px solid #7d93a8;color:#22384e;border-radius:14px;padding:13px 14px;font-size:13.5px;text-align:left;line-height:1.5;box-shadow:0 2px 5px rgba(30,50,80,.12);min-height:48px}
 .choice-btn:active{background:var(--kakao)}
 .choice-btn.locked{opacity:.5;border-style:dashed}
 .chat-input{padding:7px 8px 22px;background:#fff;display:flex;gap:7px;align-items:center;border-top:1px solid #eee}
-#btn-plus{font-size:21px;color:#9a9a9e;width:30px;flex:none}
+#btn-plus{font-size:21px;color:#9a9a9e;width:38px;height:38px;flex:none}
 .chat-input .fakein{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:13.5px;color:#a3a3a8}
 .in-emo,.in-hash{font-size:18px;color:#9a9a9e;flex:none}
 .chat-input .sendb{background:var(--kakao);border-radius:50%;width:37px;height:37px;font-size:15px;flex:none;color:#3a1d1d}
@@ -178,7 +184,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #v-profile{background:#000;color:#fff;z-index:130}
 .prof-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
 .prof-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,0) 34%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42))}
-.prof-x{position:absolute;top:56px;left:14px;font-size:19px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:6px}
+.prof-x{position:absolute;top:52px;left:10px;font-size:19px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:11px}
 .prof-gear{position:absolute;top:56px;right:14px;font-size:18px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:6px}
 .prof-main{position:absolute;left:0;right:0;bottom:158px;text-align:center;z-index:2}
 .prof-av{width:92px;height:92px;border-radius:34px;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.4)}
@@ -190,7 +196,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .prof-actions button span{font-size:23px}
 /* ===== IG : 2021 ===== */
 .ig-head{padding:50px 13px 7px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #efefef}
-.ig-head .back{font-size:23px;padding:2px 6px;color:#262626}
+.ig-head .back{font-size:23px;padding:7px 11px;color:#262626}
 .ig-logo{font-size:21px;flex:1;font-family:"Snell Roundhand","Segoe Script",cursive;font-weight:600;color:#262626;padding-left:2px}
 .ig-hicons{display:flex;gap:19px;align-items:center}
 .ig-hicons svg{display:block}
@@ -212,7 +218,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ig-folbtn span{flex:1;text-align:center;background:#0095f6;color:#fff;font-size:13.5px;font-weight:600;border-radius:6px;padding:6px 0}
 .ig-folbtn span.ghost{background:#fff;border:1px solid #dbdbdb;color:#262626}
 .ig-switch{display:flex;border-top:1px solid var(--line)}
-.ig-switch button{flex:1;padding:8px;font-size:16px;color:#8e8e8e;border-bottom:1.5px solid transparent}
+.ig-switch button{flex:1;padding:11px 8px;font-size:16px;color:#8e8e8e;border-bottom:1.5px solid transparent}
 .ig-switch button.on{color:#111;border-bottom-color:#111}
 .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
 .ig-grid button{padding:0;aspect-ratio:1;overflow:hidden;background:#eee;position:relative}
@@ -306,13 +312,12 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .story-progs{position:absolute;top:48px;left:8px;right:8px;display:flex;gap:4px;z-index:3}
 .story-progs i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;position:relative}
 .story-progs i.done{background:#fff}
-.story-progs i.cur::after{content:'';position:absolute;inset:0;background:#fff;transform-origin:left;animation:sprog 5s linear forwards}
-@keyframes sprog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.story-progs i.cur{background:#fff}
 .story-head{position:absolute;top:58px;left:12px;right:12px;display:flex;align-items:center;gap:8px;z-index:3}
 .story-head img{width:33px;height:33px;border-radius:50%;object-fit:cover}
 .story-head b{font-size:13.5px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .story-head span{font-size:12.5px;color:rgba(255,255,255,.75)}
-.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:4px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.story-head .sx{margin-left:auto;font-size:19px;color:#fff;padding:10px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .story-cap{position:absolute;left:0;right:0;bottom:64px;text-align:center;font-size:19px;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,.75);z-index:2;padding:0 26px;line-height:1.6}
 .story-zone{position:absolute;top:0;bottom:0;width:32%;z-index:2}
@@ -320,6 +325,22 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .story .ring.seen{background:#c7c7cc}
 .mus-credit{margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:13px 15px;background:#fff;font-size:12px;line-height:1.8;color:#444}
 .mus-credit b{font-size:12.5px;color:#111}
+
+/* ===== v5 : pacing UI / noise banner / settings ===== */
+#tap-hint{position:absolute;right:15px;bottom:82px;width:36px;height:36px;border-radius:50%;background:rgba(28,38,52,.78);color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;z-index:60;pointer-events:none;backdrop-filter:blur(3px);box-shadow:0 3px 10px rgba(20,30,45,.35)}
+#tap-hint.on{display:flex;animation:hintb 1.5s ease-in-out infinite}
+@keyframes hintb{0%,100%{transform:translateY(0);opacity:.8}50%{transform:translateY(5px);opacity:1}}
+#noise{position:absolute;top:100px;left:10px;right:10px;background:rgba(26,26,32,.95);color:#fff;border-radius:17px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;z-index:90;transform:translateY(-160%);opacity:0;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s;box-shadow:0 10px 26px rgba(0,0,0,.38);cursor:pointer;pointer-events:none;visibility:hidden}
+#noise.on{transform:translateY(0);opacity:1;pointer-events:auto;visibility:visible}
+#noise .n-ic{font-size:19px;flex:none;line-height:1.3}
+#noise .n-t{font-size:11px;color:#c6c6cf;letter-spacing:.02em}
+#noise .n-b{font-size:13px;line-height:1.45;margin-top:1px}
+.wid-set{margin:12px 20px 0;background:rgba(255,255,255,.94);color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.6}
+.wid-set b{font-size:13px}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px}
+.setrow .sl{color:#333;font-size:12.5px}
+.setbtn{background:#eef1f5;border-radius:12px;padding:7px 12px;font-size:12px;font-weight:700;color:#22384e;min-width:92px;min-height:34px}
+.setnote{font-size:11px;color:#777;margin-top:8px;line-height:1.55}
 
 /* end card */
 .endcard{align-self:stretch;background:linear-gradient(150deg,#243447,#141a26);color:#fff;border-radius:18px;padding:22px 18px;text-align:center;margin:8px 0;line-height:1.9}
@@ -333,7 +354,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
+<p class="src">v5：メッセージ進行をタップ送り＋リアルな待ち時間（入力中表示・既読の間・重要台詞の沈黙）に全面見直し、全画面の操作感も改善。v4：ドラマOSTのBGM（Apple Music公式プレビュー音源）、彼視点ボーナス編、エンディング後フリーチャット、IGストーリーを追加。v3：UIを2021年当時の実物仕様に寄せて改修（iPhone 12／iOS 14、カカオトーク9.x、Instagram 2021年版UI）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo/tws-virtual-phone-studio）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（README参照）。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -374,6 +395,11 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
 <button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
+<div class="wid-set"><b>⚙️ 演出設定</b>
+<div class="setrow"><span class="sl">メッセージの進み方</span><button class="setbtn" id="set-tap">タップで進む</button></div>
+<div class="setrow"><span class="sl">メッセージ速度</span><button class="setbtn" id="set-pace">ふつう</button></div>
+<div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャットの ▶ ボタンを長押しすると早送りモード（ON／OFF）になります。</div>
+</div>
 </div>
 <div class="pagedots"><i class="on"></i><i></i></div>
 <div class="dock">
@@ -405,8 +431,10 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><span class="ccount">2</span><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons">🔍 ☎ ☰</span></div>
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
+<div id="tap-hint">▼</div>
+<div id="noise"></div>
 <div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo">😊</span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
-<div id="free-row"><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由に入力できます）" autocomplete="off"><button id="free-send">▶</button></div>
+<div id="free-row"><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send">▶</button></div>
 <div class="plus-panel" id="plus-panel">
 <div><span>🖼️</span>사진</div><div><span>📷</span>카메라</div><div><span>🎁</span>선물하기</div><div><span>💸</span>송금</div><div><span>📅</span>일정</div><div><span>📍</span>장소</div><div><span>🎤</span>음성메시지</div><div><span>☎️</span>보이스톡</div>
 </div>
@@ -789,12 +817,14 @@ try{const raw=localStorage.getItem(LSKEY); if(raw) S=Object.assign(S,JSON.parse(
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
 if(!S.ver){ S.ver=2; if(S.done){ S.done=false; S.endId=null; } if(!Array.isArray(S.ends)) S.ends=[]; if(S.callSeen) S.call1=true; }
 if(!Array.isArray(S.pov)) S.pov=[]; if(!Array.isArray(S.free)) S.free=[]; if(typeof S.freeN!=='number') S.freeN=0; if(typeof S.freeClosed!=='boolean') S.freeClosed=false; if(typeof S.sndOn!=='boolean') S.sndOn=true; if(typeof S.sndVol!=='number') S.sndVol=70;
+/* v5：進行ペース設定・ノイズ通知の既出管理（旧セーブにはデフォルトで補完） */
+if(typeof S.tap!=='boolean') S.tap=true; if(S.pace!=='slow'&&S.pace!=='normal') S.pace='normal'; if(!Array.isArray(S.noise)) S.noise=[];
 let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2400);}
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on');}
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-cal','v-notes','v-calllog','v-pov','v-povread'].includes(id)); }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -820,14 +850,15 @@ function addDate(v,cal){feed.appendChild(el('<div class="dchip">'+esc(KDATE[cal]
 function addSys(v){feed.appendChild(el('<div class="sys">'+esc(v)+'</div>'));}
 function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</span>'+esc(v)+'</div>'); feed.appendChild(d);}
 function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
-function addJ(v){clearUnread();const r=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r);}
+function scheduleRead(){ if(readTimer) clearTimeout(readTimer); const d=ffMode?60:(900+Math.random()*700)*paceMul()*ambientMul(); readTimer=setTimeout(()=>{ clearUnread(); },d); }
+function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const r=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r); }
 function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); feed.appendChild(r);}
 function scrollFeed(){feed.scrollTop=feed.scrollHeight;}
 function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('🔍 解剖メモが解放されました（ホームの「解剖メモ」）');}}
 function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('📷 Instagramに新しい投稿が解放されました');}}
 function applyItem(it,quiet){
  switch(it.k){
-  case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); break;
+  case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); if(!quiet&&typeof it.cal==='number'&&typeof showNoise==='function') showNoise(it.cal); break;
   case 'chap': S.chap=it.n; break;
   case 'scene': addScene(it.v); break;
   case 'sys': addSys(it.v); break;
@@ -839,12 +870,53 @@ function applyItem(it,quiet){
  }
  updParams(); scrollFeed();
 }
+/* ================= v5 : PACING ENGINE =================
+   メッセージは1通ずつ。相手の文は「入力中（…）」を経て表示され、
+   表示後はプレイヤーのタップで次へ進む（設定で自動にも切替可）。
+   自分の送信の未読「1」は、相手が読むまで時間差で消える。 */
+let inSeq=false, onTap=null, ffMode=false, readTimer=null;
+function paceMul(){ return (S.pace==='slow'?1.6:1)*(ffMode?0.1:1); }
+function ambientMul(){ const h=Math.floor(chatMin/60)%24; return (h>=23||h<5)?1.7:1; } /* 深夜は返信が遅い */
+function setHint(on){ const th=$('#tap-hint'); if(th) th.classList.toggle('on',!!on); }
+function fireTap(){ if(onTap){ const f=onTap; onTap=null; setHint(false); f(); } }
+function waitTap(){ return new Promise(res=>{ setHint(true); onTap=()=>{ setHint(false); res(); }; }); }
+function interruptibleSleep(ms){ return new Promise(res=>{ if(ms<=40){ res(); return; } let done=false; const tap=()=>fin(); const fin=()=>{ if(done) return; done=true; clearTimeout(t); if(onTap===tap) onTap=null; res(); }; const t=setTimeout(fin,ms); onTap=tap; }); }
+function typingRow(){ const t=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(t); scrollFeed(); return t; }
+const KEYLINE=/好きだ|好きです|付き合|別れ|現れないで|さよなら|ごめん|愛して|行かないで|もう会わない|最後に/;
+async function paceBeforeJ(v){
+ const base=Math.min(3000,Math.max(800,380+v.length*30));
+ const mul=paceMul()*ambientMul();
+ if(KEYLINE.test(v)&&!ffMode){
+   /* 重要な一文の前：入力中が出て、いったん消えて、沈黙があってから届く */
+   let ty=typingRow();
+   await interruptibleSleep(Math.min(base*mul,1300));
+   ty.remove(); scrollFeed();
+   await interruptibleSleep(1500*(S.pace==='slow'?1.5:1));
+   ty=typingRow();
+   await interruptibleSleep(Math.max(700,base*mul*0.45));
+   ty.remove();
+ } else {
+   const ty=typingRow();
+   await interruptibleSleep(base*mul);
+   ty.remove();
+ }
+}
+async function paceStep(it){
+ if(it.k==='j') await paceBeforeJ(it.v);
+ applyItem(it,false);
+ if(it.k==='chap'||it.k==='ig') return; /* 見えない項目では止まらない */
+ if(ffMode){ await interruptibleSleep(70); return; }
+ if(S.tap){ await waitTap(); }
+ else{ await interruptibleSleep((it.k==='scene'||it.k==='fade'||it.k==='part1'?1100:520)*paceMul()); }
+}
 async function playItems(items,quiet){
+ if(!quiet) inSeq=true;
  for(const it of items){
    if(it.k==='call'){ if(!quiet){ await doCall(it.lines); S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; } continue; }
-   applyItem(it,quiet);
-   if(!quiet) await sleep(430);
+   if(quiet){ applyItem(it,true); continue; }
+   await paceStep(it);
  }
+ if(!quiet) inSeq=false;
 }
 let callResolve=null, callLines=[], callIdx=0, callSec=0, callTimerInt=null, callPhase='incoming';
 function doCall(lines){
@@ -876,20 +948,19 @@ $('#call-accept').addEventListener('click',()=>{ if(callPhase==='incoming') star
 $('#call-decline').addEventListener('click',()=>{ toast('応答すると物語が進みます'); });
 $('#call-sub').addEventListener('click',()=>{ if(callPhase==='incall') advanceCall(); });
 async function run(){
- if(playing) return; playing=true;
+ if(playing) return; playing=true; inSeq=true;
  while(S.idx<STORY.length){
    const it=STORY[S.idx];
    if(it.k==='choice'){
      if(replaying){ S.idx++; continue; }
-     if(choiceOpen){ playing=false; return; }
-     renderChoice(it); save(); playing=false; return;
+     if(choiceOpen){ playing=false; inSeq=false; return; }
+     renderChoice(it); save(); playing=false; inSeq=false; return;
    }
-   if(it.k==='final'){ if(choiceOpen){ playing=false; return; } renderFinal(it); save(); playing=false; return; }
+   if(it.k==='final'){ if(choiceOpen){ playing=false; inSeq=false; return; } renderFinal(it); save(); playing=false; inSeq=false; return; }
    if(it.k==='call'){ S.idx++; save(); await doCall(it.lines); S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; save(); continue; }
-   applyItem(it,false); S.idx++; save();
-   await sleep(430);
+   await paceStep(it); S.idx++; save();
  }
- playing=false; updParams();
+ playing=false; inSeq=false; updParams();
 }
 function renderChoice(it){
  choiceOpen=true;
@@ -994,7 +1065,7 @@ function renderThreads(){
   :S.chap>=5?'助手、やらせて'
   :S.chap>=4?'……そっか'
   :(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）');
- L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',prevJ,'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); updChatMode(); if(!S.done) run();}));
+ L.appendChild(threadRow('assets/av-jaeon.jpg','パク・ジェオン',prevJ,'3月',S.chap>=2&&!S.done?1:0,()=>{showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run();}));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
  if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),'3月',0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
@@ -1058,7 +1129,7 @@ function renderCal(){
  const b=$('#cal-body'); let h='';
  CAL.forEach(mo=>{ h+='<div class="cal-m">'+mo.m+'</div>'; mo.e.forEach(e=>{
    const locked=e.u>S.calU;
-   h+='<div class="cal-e'+(locked?' lock':'')+'"><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'・')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+esc(e.s)+'</small></span></div>';
+   h+='<div class="cal-e'+(locked?' lock':'')+'"><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+esc(e.s)+'</small></span></div>';
  });});
  b.innerHTML=h+'<p class="locknote">物語の進行に合わせて解放されます</p>';
 }
@@ -1096,7 +1167,14 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
 }));
 document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>showView('v-home')));
 $('#homebar').addEventListener('click',()=>showView('v-home'));
-$('#btn-next').addEventListener('click',()=>{ if(!S.done) run(); });
+/* v5：▶は「タップで進む」の送りボタン兼用。長押しで早送りモード切替 */
+let nextPressT=null, nextFFired=false;
+const btnNext=$('#btn-next');
+btnNext.addEventListener('pointerdown',()=>{ nextFFired=false; nextPressT=setTimeout(()=>{ nextFFired=true; ffMode=!ffMode; toast(ffMode?'⏩ 早送りモード ON（タップ待ちと入力中を短縮します）':'▶ 通常の速度に戻しました'); if(ffMode) fireTap(); },600); });
+btnNext.addEventListener('pointerup',()=>{ if(nextPressT) clearTimeout(nextPressT); });
+btnNext.addEventListener('click',()=>{ if(nextFFired){ nextFFired=false; return; } if(S.done) return; if(onTap) fireTap(); else run(); });
+/* v5：チャット画面のタップで次へ（選択肢・ボタンのタップは除外） */
+feed.addEventListener('click',e=>{ if(choiceOpen) return; if(e.target.closest('button')) return; fireTap(); });
 $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（進行状況がリセットされます）')){ localStorage.removeItem(LSKEY); location.reload(); }});
 function tickClock(){const d=new Date(); const mm=String(d.getMinutes()).padStart(2,'0'); $('#sb-time').textContent=String(d.getHours()).padStart(2,'0')+':'+mm; const lt=$('#lock-time'); if(lt) lt.textContent=d.getHours()+':'+mm; const ld=$('#lock-date'); if(ld){const wd=['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'][d.getDay()]; ld.textContent=(d.getMonth()+1)+'月'+d.getDate()+'日 '+wd;}}
 tickClock(); setInterval(tickClock,30000);
@@ -1131,7 +1209,7 @@ $('#btn-plus').addEventListener('click',()=>{ $('#plus-panel').classList.toggle(
 document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>toast('（送信は演出用です。▶で物語が進みます）')));
 $('#chat-prof-btn').addEventListener('click',()=>showView('v-profile'));
 $('#prof-close').addEventListener('click',()=>showView('v-chat'));
-$('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(!S.done) run(); });
+$('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(onTap) fireTap(); else if(!S.done) run(); });
 $('#prof-call2').addEventListener('click',()=>toast('（無料通話は物語の通話シーンで再生されます）'));
 $('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出用です）'));
 
@@ -1190,7 +1268,7 @@ function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.
 function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ closeStory(); return; }
  $('#story-img').src=s.img; $('#story-av').src=s.av; $('#story-user').textContent=s.user; $('#story-ago').textContent=s.ago; $('#story-cap').textContent=s.cap;
  $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"></i>').join('');
- if(st.timer) clearTimeout(st.timer); st.timer=setTimeout(()=>storyStep(1),5000); }
+ if(st.timer) clearTimeout(st.timer); st.timer=null; /* v5：ストーリーは自動で進まない（タップ送り） */ }
 function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>=st.list.length){ closeStory(); return; } renderStory(); }
 function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); showView('v-ig'); }
 $('#story-close').addEventListener('click',closeStory);
@@ -1238,13 +1316,28 @@ async function sendFree(){
  const reps=pickFreeReplies(txt);
  if(!reps||!reps.length) return;
  freeBusy=true;
- const ty=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="typing">…</div></div></div>'); feed.appendChild(ty); scrollFeed();
- await sleep(1100); ty.remove();
- for(const r of reps){ freeAddJ(r); S.free.push({w:'j',t:r}); await sleep(650); }
+ const ty=el('<div class="row"><img class="av" src="assets/av-jaeon.jpg"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
+ await sleep(Math.round((950+Math.min(reps.join('').length*22,1500))*paceMul())); ty.remove();
+ for(const r of reps){ freeAddJ(r); S.free.push({w:'j',t:r}); await sleep(Math.round(680*paceMul())); }
  save(); freeBusy=false;
 }
 $('#free-send').addEventListener('click',sendFree);
 $('#free-in').addEventListener('keydown',e=>{ if(e.key==='Enter') sendFree(); });
+
+/* ================= v5 : DAILY-LIFE NOISE & SETTINGS ================= */
+const NOISE={2:['📚','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['🌦','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['💬','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['🎓','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],11:['📦','宅配便 ・ 지금','ご注文の粘土と材料が、明日届きます']};
+let noiseTimer=null;
+function showNoise(cal){
+ const n=NOISE[cal]; if(!n||S.noise.includes(cal)) return; S.noise.push(cal); save();
+ const b=$('#noise'); if(!b) return;
+ b.innerHTML='<span class="n-ic">'+n[0]+'</span><div style="flex:1;min-width:0"><div class="n-t">'+n[1]+'</div><div class="n-b">'+n[2]+'</div></div>';
+ b.classList.add('on'); if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
+}
+$('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); });
+function updSetUI(){ const st=$('#set-tap'); if(st) st.textContent=S.tap?'タップで進む':'自動で進む'; const sp=$('#set-pace'); if(sp) sp.textContent=S.pace==='slow'?'ゆっくり':'ふつう'; }
+const setTapBtn=$('#set-tap'); if(setTapBtn) setTapBtn.addEventListener('click',()=>{ S.tap=!S.tap; save(); updSetUI(); toast(S.tap?'メッセージはタップで進みます':'メッセージは自動で進みます'); if(!S.tap) fireTap(); });
+const setPaceBtn=$('#set-pace'); if(setPaceBtn) setPaceBtn.addEventListener('click',()=>{ S.pace=S.pace==='slow'?'normal':'slow'; save(); updSetUI(); toast('メッセージ速度：'+(S.pace==='slow'?'ゆっくり':'ふつう')); });
+updSetUI();
 
 /* start */
 replay(); updParams();
