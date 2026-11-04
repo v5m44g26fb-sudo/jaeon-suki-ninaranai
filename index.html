@@ -520,13 +520,49 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
    選択肢ラベル .clabel #44576b→#3a4f63 (4.28→4.87)、未送信ラベル .unsent-lab #c0392b→#93291b (3.12→4.69)、
    案内文 .locknote / 見出し補足 .ahead .sub / カレンダー要約 .cal-e .ct small --sub→#6e6e73 (3.26→5.07)、
    後日談注記 .pr-note #8a8a90→#67676f (3.24→5.29)、設定注記 .setnote #777→#6a6a6a (4.04→4.88)。 */
+/* ===== v70 : settings in iOS Settings style / reader lists / app icons =====
+   設定（ホームの「演出設定」＋BGMウィジェット）を iOS「設定」アプリの体裁に寄せる：
+   セクション見出し→白いグルーピングカード（行間ヘアライン）→フッタ注記の並びにし、
+   ON/OFF は実物のトグルスイッチ（51×31・ノブ27px・ON=#34c759）、選択項目は右側に
+   グレーの現在値＋シェブロン、音量は iOS 様式のスライダー（細いトラック＋白い丸ノブ）にする。
+   スイッチの状態表示は .on クラスのみで表し、実挙動（updMusicUI／updSfxUI の保存・連動）は不変。 */
+.wid-set{background:transparent;border-radius:0;padding:0;box-shadow:none}
+.set-head{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.9);margin:2px 6px 7px}
+.set-card{background:rgba(255,255,255,.97);border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.22);overflow:hidden}
+.wid-set .setrow{position:relative;margin-top:0;min-height:46px;padding:5px 15px 5px 16px;gap:12px}
+.wid-set .setrow + .setrow::before{content:'';position:absolute;left:16px;right:0;top:0;height:1px;background:#e0e0e4;transform:scaleY(.5);transform-origin:top}
+.wid-set .setrow .sl{color:#111;font-size:13.5px}
+.wid-set .setnote{color:rgba(255,255,255,.75);margin:8px 6px 0}
+.setbtn.val{background:none;border-radius:0;min-width:0;min-height:0;padding:9px 1px;color:#8e8e93;font-size:13px;font-weight:400;text-align:right}
+.setbtn.val::after{content:'›';margin-left:6px;color:#c7c7cc;font-size:16px}
+.setbtn.val:active{background:none;opacity:.45}
+.isw{width:51px;height:31px;border-radius:999px;background:#e9e9ea;border:none;position:relative;flex:none;padding:0;font-size:0;color:transparent;cursor:pointer;transition:background .2s ease;-webkit-tap-highlight-color:transparent}
+.isw::after{content:'';position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.16),0 0 1px rgba(0,0,0,.25);transition:transform .2s ease,width .15s ease}
+.isw.on{background:#34c759}
+.isw.on::after{transform:translateX(20px)}
+.isw:active::after{width:34px}
+.isw.on:active::after{transform:translateX(13px)}
+#mus-toggle.isw{width:51px;height:31px;min-height:0;border-radius:999px;padding:0;font-size:0;color:transparent;background:#787880}
+#mus-toggle.isw.on{background:#34c759}
+.wid-music input[type=range],.wid-set input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+.wid-music input[type=range]{height:26px}
+.wid-set input[type=range]{flex:1;min-width:0;height:30px}
+.wid-music input[type=range]::-webkit-slider-runnable-track,.wid-set input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:#d9d9de}
+.wid-music input[type=range]::-webkit-slider-runnable-track{background:rgba(255,255,255,.32)}
+.wid-music input[type=range]::-webkit-slider-thumb,.wid-set input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.28),0 0 1px rgba(0,0,0,.2);margin-top:-11.5px}
+.wid-music input[type=range]::-moz-range-track,.wid-set input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#d9d9de}
+.wid-music input[type=range]::-moz-range-track{background:rgba(255,255,255,.32)}
+.wid-music input[type=range]::-moz-range-thumb,.wid-set input[type=range]::-moz-range-thumb{width:27px;height:27px;border:none;border-radius:50%;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.28)}
+/* 解剖メモ一覧：iOSメモ風に、解放済みメモへ記録日（解放時点の作中日付）をグレーの小さい文字で添える */
+.memo-date{font-size:11.5px;color:#8e8e93;margin:-3px 0 6px}
+.notes-count{text-align:center;font-size:12px;color:#8e8e93;margin:18px 0 8px}
 </style>
 </head>
 <body>
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v69：リアル化第4弾です。通話・ロック画面・ホームの実物感を深めました。①通話中のボタンが実際に反応するようになりました。ミュートとスピーカーは押すと白く反転して状態が分かり、キーパッドを開くと数字キーが出て入力でき（入力した数字はタイマーの下に表示され、⌫で消せます）、通話の追加・FaceTime・連絡先は演出用の案内を返します。実際の音声や会話の進み方には影響しません。②ロック画面は、タップすると錠が開く表示になってからホームへ移るようになりました。③ホームの後日談アイコンに、解放済みの後日談の件数バッジが付きました（彼視点と同じ作法で、件数だけの表示です）。④ドックの中のカカオトークと解剖メモにも、上のアイコンと同じバッジが出るようになりました。セーブの形式は変えていないので、既存セーブはそのまま継続できます。本編の物語・台詞・選択肢・数値・解放条件・エンディング3種・通話の台詞とボイスの連動は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v70：リアル化第5弾です。設定まわりと読み物系の画面、ホームのアプリアイコンを実物に寄せました。①ホームの設定（BGMと演出設定）を iOS「設定」アプリの体裁にしました。見出しの下に白いカードで項目が並び、ON／OFF は緑のトグルスイッチ、進み方と速度は右側にグレーの現在値、音量は白い丸ノブのスライダーで操作します（効き方や保存される設定は今までどおりです）。②解剖メモの一覧に、iOSメモ風の記録日（そのメモが解放された時点の作中日付）と「○件のメモ」の表示を足しました。未解放のメモには日付は出ません。③彼視点の一覧で、読み終えた話に「✓ 読了」が付くようになりました（後日談と同じ作法）。④写真アプリのアイコンを実物の色とりどりの風車マークに差し替え、カカオトークのアイコンの吹き出しに「TALK」の文字を入れました。セーブの形式は変えていないので、既存セーブはそのまま継続できます。本編の物語・台詞・選択肢・数値・解放条件・エンディング3種・通話の台詞とボイスの連動は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -558,11 +594,11 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <div class="wid-wide"><b>🔍 解剖メモ ― パク・ジェオン解明度</b>
 <div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
 心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
-<div class="wid-music"><div class="mh"><b>♪ BGM</b><span id="mus-now"></span><button id="mus-toggle">🔊 ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
+<div class="wid-music"><div class="mh"><b>♪ BGM</b><span id="mus-now"></span><button id="mus-toggle" class="isw" aria-label="BGMのオン・オフ">🔊 ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
 <div class="apps">
-<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="37" height="37" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span>카카오톡<span class="bdg" id="bdg-kakao">1</span></button>
+<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="37" height="37" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span>카카오톡<span class="bdg" id="bdg-kakao">1</span></button>
 <button class="app" data-open="ig"><span class="ic ic-ig"><svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span>Instagram</button>
-<button class="app" data-open="gallery"><span class="ic" style="background:#fff;font-size:27px">🌼</span>사진</button>
+<button class="app" data-open="gallery"><span class="ic" style="background:#fff"><svg width="41" height="41" viewBox="0 0 48 48" aria-label="写真"><g fill-opacity=".85"><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#f6b73c"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#f28c28" transform="rotate(45 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#e64b35" transform="rotate(90 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#cc2e7a" transform="rotate(135 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#7e57a5" transform="rotate(180 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#3d6db5" transform="rotate(225 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#2e9e8f" transform="rotate(270 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#8bc34a" transform="rotate(315 24 24)"/></g></svg></span>사진</button>
 <button class="app" data-open="cal"><span class="ic ic-cal"><span class="cwd" id="app-cal-wd">금요일</span><span class="cd2" id="app-cal-d">12</span></span>캘린더</button>
 <button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
 <button class="app" data-open="pov"><span class="ic ic-pov">🦋</span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
@@ -570,19 +606,21 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
 <button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
-<div class="wid-set"><b>⚙️ 演出設定</b>
-<div class="setrow"><span class="sl">メッセージの進み方</span><button class="setbtn" id="set-tap">タップで進む</button></div>
-<div class="setrow"><span class="sl">メッセージ速度</span><button class="setbtn" id="set-pace">ふつう</button></div>
-<div class="setrow"><span class="sl">効果音</span><button class="setbtn" id="set-sfx">ON</button></div>
-<div class="setrow"><span class="sl">効果音量</span><input type="range" id="sfx-vol" min="0" max="100" value="70" style="flex:1;max-width:160px;accent-color:#fee500"></div>
-<div class="setrow"><span class="sl">全体ミュート（マナーモード）</span><button class="setbtn" id="set-mute">OFF</button></div>
+<div class="wid-set"><div class="set-head">⚙️ 演出設定</div>
+<div class="set-card">
+<div class="setrow"><span class="sl">メッセージの進み方</span><button class="setbtn val" id="set-tap">タップで進む</button></div>
+<div class="setrow"><span class="sl">メッセージ速度</span><button class="setbtn val" id="set-pace">ふつう</button></div>
+<div class="setrow"><span class="sl">効果音</span><button class="isw" id="set-sfx" aria-label="効果音のオン・オフ">ON</button></div>
+<div class="setrow"><span class="sl">効果音量</span><input type="range" id="sfx-vol" min="0" max="100" value="70" aria-label="効果音量"></div>
+<div class="setrow"><span class="sl">全体ミュート（マナーモード）</span><button class="isw" id="set-mute" aria-label="全体ミュートのオン・オフ">OFF</button></div>
+</div>
 <div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャットの ▶ ボタンを長押しすると早送りモード（ON／OFF）になります。選択肢を選ぶと「解明度」と「心の距離」が変わります。解明度は彼を見抜くほど上がり、55以上で特別な結末への選択肢が開きます。効果音と生活音はすべてオリジナル合成音です（詳細は解剖メモ下部のクレジット）。</div>
 </div>
 </div>
 <div class="pagedots"><i class="on"></i><i></i></div>
 <div class="dock">
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span></button>
-<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span><span class="bdg" id="bdg-kakao-d">1</span></button>
+<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><span class="bdg" id="bdg-kakao-d">1</span></button>
 <button class="app" data-open="ig"><span class="ic ic-ig"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span></button>
 <button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span><span class="bdg" id="bdg-note-d" style="display:none">0</span></button>
 </div>
@@ -760,6 +798,10 @@ const MEMOS=[
 {id:10,tag:'解剖メモ 10',title:'本音は、漏れた時にだけ出る',unlock:()=>S.calU>=9,body:'合宿の夜、ささやきゲーム。ジワンの質問に答えた彼の声が、静かな部屋に漏れた。\n「……ユ・ナビ」\n質問は「今夜、キスしたいのは誰？」だったらしい。\n彼の言葉は、いつも出る前に止められる。言いかけて、笑って、逸らして。なのにあの夜は、名前が一つ、止めるより先にこぼれた。\n固有名詞一つが、彼の言葉の最大値なのかもしれない。それでも、漏れた一言は意図した言葉より正直だ。管理をすり抜けたものだけが、検閲を受けていない。'},
 {id:11,tag:'解剖メモ 11',title:'終わり方は、自分で決める',unlock:()=>S.calU>=11,body:'作品が壊れた日、彼は何時間も経ってから現れた。「もう一度、やろう」。条件も、自分からだった。\n「……完成したら、俺は二度と君の前に現れない。それでいい」\n直す話より先に、終わりが決まっていた。戻ってくる時でさえ、去り方を用意してから来る。\n追い出される終わりは、もう味わいたくないのだと思う。自分で出せば「約束を守ったこと」になる。捨てられた、ことにはならない。\n誠実さの形ではある。でも、終わりの主導権だけは手放さない防衛でもある。'}
 ];
+/* v70：解剖メモの記録日（iOSメモ一覧の日付表示用）。各メモが解放される時点の作中日付で、
+   本編の日付チップ（KDATE）の段階から機械的に導いたもの（内容の出来事の日付ではない）。
+   1〜9は本編のメモ解放アイテム直前の日付チップ、10は calU>=9（6月25日）、11は calU>=11（7月16日）。 */
+const MEMO_DATES={1:'2021年3月26日',2:'2021年4月16日',3:'2021年4月16日',4:'2021年4月25日',5:'2021年5月7日',6:'2021年5月19日',7:'2021年6月25日',8:'2021年7月9日',9:'2021年7月9日',10:'2021年6月25日',11:'2021年7月16日'};
 const IG_J=[
 {id:'atelier',img:'assets/ig-atelier.jpg',cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','선배 작업실에서 살아요?'],['park_jaeon','끝나지 않으니까']],cmL:[['b1nna_','이 선배 요즘 작업실에서 살아요']]},
 {id:'jaeon2',img:'assets/ig-jaeon2.jpg',cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
@@ -1509,8 +1551,8 @@ function renderNotes(){
  const b=$('#notes-body');
  b.innerHTML=MEMOS.map(m=>{
    const un=S.memos.includes(m.id);
-   return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:'🔒 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3><p>'+(un?esc(m.body):'物語のキー場面を読み進めると、解剖メモが解放されます。')+'</p></div>';
-  }).join('')+endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>';
+   return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:'🔒 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3>'+(un&&MEMO_DATES[m.id]?'<div class="memo-date">'+MEMO_DATES[m.id]+'</div>':'')+'<p>'+(un?esc(m.body):'物語のキー場面を読み進めると、解剖メモが解放されます。')+'</p></div>';
+  }).join('')+endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>'; /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
 }
 function endsHTML(){
  const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
@@ -1627,7 +1669,7 @@ function rampBgmTo(target,ms,done){
    if(p>=1){ stopBgmFade(); if(done)done(); }
  },40);
 }
-function updMusicUI(){ const np=$('#mus-now'); if(np) np.textContent=curTrack?('♪ '+TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a):''; const tg=$('#mus-toggle'); if(tg) tg.textContent=S.sndOn?'🔊 ON':'🔇 OFF'; const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
+function updMusicUI(){ const np=$('#mus-now'); if(np) np.textContent=curTrack?('♪ '+TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a):''; const tg=$('#mus-toggle'); if(tg){ tg.textContent=S.sndOn?'🔊 ON':'🔇 OFF'; tg.classList.toggle('on',!!S.sndOn); } /* v70：実物トグルスイッチの状態表示（表示のみ） */ const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
 function syncMusic(){ const want=CHAP_TRACK[S.chap]||'butterfly'; const a=ensureBgm(); if(!a) return; if(want!==curTrack){ curTrack=want; if(musicStarted&&S.sndOn&&!a.paused){ /* 再生中の曲替わりはクロスフェード（フェードアウト→差し替え→フェードイン） */ rampBgmTo(0,450,()=>{ a.src=TRACKS[want].f; a.play().catch(()=>{}); rampBgmTo(effVol(),750); }); } else { stopBgmFade(); a.src=TRACKS[want].f; a.volume=effVol(); if(musicStarted&&S.sndOn) a.play().catch(()=>{}); } } updMusicUI(); }
 function startMusic(){ musicStarted=true; const a=ensureBgm(); if(!a) return; if(!curTrack) syncMusic(); stopBgmFade(); if(S.sndOn&&a.paused){ a.volume=0; a.play().catch(()=>{}); rampBgmTo(effVol(),800); } else { a.volume=effVol(); if(S.sndOn) a.play().catch(()=>{}); } }
 function duckMusic(on){ ducked=on; const a=ensureBgm(); if(a) rampBgmTo(effVol(),on?350:600); }
@@ -1652,7 +1694,7 @@ function renderPOV(){
  POVS.forEach(p=>{
    const un=p.unlock();
    const btn=document.createElement('button'); btn.className='povrow'+(un?'':' lock');
-   btn.innerHTML='<span class="pic">'+(un?'🦋':'🔒')+'</span><span><span class="pt">'+(un?esc(p.title):'？？？')+'</span><div class="ps">'+(un?esc(p.sub):'物語を進めると解放されます')+'</div></span>';
+   btn.innerHTML='<span class="pic">'+(un?'🦋':'🔒')+'</span><span><span class="pt">'+(un?esc(p.title):'？？？')+'</span><div class="ps">'+(un?esc(p.sub)+(S.pov.includes(p.id)?'　<span class="epi-done">✓ 読了（読み返せます）</span>':''):'物語を進めると解放されます')+'</div></span>'; /* v70：既読マーカーを後日談一覧の作法に統一（表示のみ） */
    if(un) btn.addEventListener('click',()=>{ if(!S.pov.includes(p.id)){S.pov.push(p.id); save();} $('#povread-body').innerHTML='<div class="pr-t">'+esc(p.title)+'</div>'+esc(p.body); showView('v-povread'); });
    b.appendChild(btn);
  });
@@ -1945,8 +1987,8 @@ document.addEventListener('visibilitychange',()=>{
 });
 /* 設定UI（効果音・効果音量・全体ミュート） */
 function updSfxUI(){
- const b=$('#set-sfx'); if(b) b.textContent=S.sfxOn?'ON':'OFF';
- const m=$('#set-mute'); if(m) m.textContent=S.mute?'ON（無音）':'OFF';
+ const b=$('#set-sfx'); if(b){ b.textContent=S.sfxOn?'ON':'OFF'; b.classList.toggle('on',!!S.sfxOn); } /* v70：実物トグルスイッチの状態表示（表示のみ） */
+ const m=$('#set-mute'); if(m){ m.textContent=S.mute?'ON（無音）':'OFF'; m.classList.toggle('on',!!S.mute); }
  const vr=$('#sfx-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sfxVol;
 }
 const sfxBtn=$('#set-sfx'); if(sfxBtn) sfxBtn.addEventListener('click',()=>{ S.sfxOn=!S.sfxOn; save(); updSfxUI(); if(!S.sfxOn){ sfxRing(false); } updAmb(); if(S.sfxOn) sfxPlay('tap'); toast('効果音：'+(S.sfxOn?'ON':'OFF')); });
