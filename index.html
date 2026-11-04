@@ -136,6 +136,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .cii{flex:none;width:22px;height:22px;border:1.5px solid #0a84ff;color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;font-style:normal;font-family:Georgia,serif}
 .locknote{padding:14px 16px;font-size:12px;color:#6e6e73;text-align:center}
 .fr-sec{padding:12px 16px 4px;font-size:11.5px;color:#999;border-top:8px solid #f6f6f8;margin-top:6px}
+/* v66：先頭セクション（내 프로필）はヘッダー直下に置くため帯を持たない */
+.fr-sec.first{border-top:none;margin-top:0;padding-top:10px}
 .fr-my{display:flex;gap:12px;padding:12px 16px;align-items:center;width:100%;text-align:left}
 .fr-my img{width:56px;height:56px;border-radius:20px;object-fit:cover}
 .fr-my .fn{font-size:16px;font-weight:700}
@@ -188,14 +190,18 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .choice-btn:active{background:var(--kakao)}
 .choice-btn.locked{opacity:.5;border-style:dashed}
 .chat-input{padding:7px 8px 22px;background:#fff;display:flex;gap:7px;align-items:center;border-top:1px solid #eee}
-#btn-plus{font-size:21px;color:#9a9a9e;width:40px;height:40px;flex:none}
+#btn-plus{font-size:21px;color:#9a9a9e;width:40px;height:40px;flex:none;transition:transform .18s}
+/* v66：実物どおり、パネルを開くと＋が×に回転する */
+#btn-plus.on{transform:rotate(45deg)}
 .chat-input .fakein{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:13.5px;color:#a3a3a8}
 .in-emo,.in-hash{font-size:18px;color:#9a9a9e;flex:none}
 .chat-input .sendb{background:var(--kakao);border-radius:50%;width:40px;height:40px;font-size:15px;flex:none;color:#3a1d1d}
 .plus-panel{display:none;background:#fff;padding:10px 8px 30px;grid-template-columns:repeat(4,1fr);gap:14px 4px;border-top:1px solid #f0f0f0}
 .plus-panel.on{display:grid}
 .plus-panel div{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:#666}
-.plus-panel span{width:47px;height:47px;border-radius:50%;background:#f4f5f6;display:flex;align-items:center;justify-content:center;font-size:20px}
+.plus-panel span{width:47px;height:47px;border-radius:50%;background:#f4f5f6;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .12s}
+/* v66：パネル項目の押下フィードバック */
+.plus-panel div:active span{transform:scale(.88)}
 #toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:.35s;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 /* ===== kakao profile : 2021 ===== */
@@ -323,7 +329,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #povread-body .pr-t{font-size:16px;font-weight:800;margin-bottom:12px;color:#241d3f}
 #free-row{display:none;padding:7px 8px 22px;background:#fff;gap:7px;align-items:center;border-top:1px solid #eee}
 #free-in{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:16px;color:#191919;font-family:inherit;min-width:0}
-#free-send{background:var(--kakao);border-radius:50%;width:40px;height:40px;font-size:15px;flex:none;color:#3a1d1d}
+#free-send{background:#e9e9eb;border-radius:50%;width:40px;height:40px;font-size:15px;flex:none;color:#b4b4ba;transition:background .15s,color .15s}
+#free-send.on{background:var(--kakao);color:#3a1d1d}
 .row.me.unsent .bub{background:#e9e9ec;color:#8a8a90}
 .unsent-lab{font-size:10px;color:#93291b;flex:none;padding-bottom:2px;font-weight:700}
 #v-story{background:#000;color:#fff;z-index:140}
@@ -462,7 +469,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v65：内容増補の第8弾です。カレンダーに、後日談「その後の庭・続」と連動する9月と10月の予定を3件追加しました。9月17日（金）の温室、9月19日（日）の水やり当番、10月半ばが期限の交換留学・最終手続きの締切です。いずれも後日談「その後の庭・続」を読み終えると解放され、それまでは他の未解放の予定と同じ伏せ表示で、内容は出ません。要約は出来事の事実だけに留め、彼の気持ちを断定する表現は入れていません。既存の3月から7月の予定の本文・解放条件・表示、本編の物語・台詞・選択肢・数値・エンディング3種・セーブ形式は変更していません（既存セーブはそのまま継続できます）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v66：新アーク「各アプリのリアル化」の第1弾です。カカオトークの実物感を4点深めました。①友達タブの先頭にセクション見出し「내 프로필」を追加し、実物のセクション構成（내 프로필→생일인 친구→친구 N）に揃えました。②フリーチャットの送信ボタンは、入力があるときだけカカオイエローになり、空のときはグレーです。③＋パネルを実物の1ページ目の構成（앨범／카메라／선물하기／송금／음성메시지／연락처／파일／일정）に整え、項目ごとのフィードバックと、開くと＋が×に回転する動きを付けました。④フリーチャットでも本編と同じく、自分の送信に時刻と既読「1」が付き、彼の返信が届くと「1」が消えます。本編の物語・台詞・選択肢・数値・エンディング3種・セーブ形式は変更していません（既存セーブはそのまま継続できます）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -550,7 +557,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo">😊</span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
 <div id="free-row"><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send">▶</button></div>
 <div class="plus-panel" id="plus-panel">
-<div><span>🖼️</span>사진</div><div><span>📷</span>카메라</div><div><span>🎁</span>선물하기</div><div><span>💸</span>송금</div><div><span>📅</span>일정</div><div><span>📍</span>장소</div><div><span>🎤</span>음성메시지</div><div><span>☎️</span>보이스톡</div>
+<div data-pp="album"><span>🖼️</span>앨범</div><div data-pp="camera"><span>📷</span>카메라</div><div data-pp="gift"><span>🎁</span>선물하기</div><div data-pp="pay"><span>💸</span>송금</div><div data-pp="voice"><span>🎤</span>음성메시지</div><div data-pp="contact"><span>👤</span>연락처</div><div data-pp="file"><span>📁</span>파일</div><div data-pp="cal"><span>📅</span>일정</div>
 </div>
 </div>
 
@@ -1394,7 +1401,7 @@ $('#v-lock').addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxP
 function renderFriends(){
  const F=$('#friend-list'); if(!F) return;
  const bday=S.calU===4;
- let h='<button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar.jpg"><span><span class="fn">なお'+(bday?' 🎂':'')+'</span><div class="fs">'+(bday?'오늘 생일이에요 🎂':'졸업 제작 중… 🦋')+'</div></span></button>';
+ let h='<div class="fr-sec first">내 프로필</div><button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar.jpg"><span><span class="fn">なお'+(bday?' 🎂':'')+'</span><div class="fs">'+(bday?'오늘 생일이에요 🎂':'졸업 제작 중… 🦋')+'</div></span></button>';
  if(bday) h+='<div class="fr-sec">생일인 친구</div><button class="thread fr-row" data-fr="なお"><img class="av" src="assets/nao-avatar.jpg"><span class="tt"><span class="tn">なお 🎂</span><span class="tp">오늘 생일이에요</span></span></button>';
  const cnt=1+(S.chap>=1?1:0)+(S.chap>=4?1:0)+(S.chap>=5?1:0);
  h+='<div class="fr-sec">친구 '+cnt+'</div>';
@@ -1420,8 +1427,10 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
  else if(t==='chats'){ $('#friend-list').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.textContent='💬'; }
  else{ toast('（このタブは2021年仕様の演出用です）'); }
 }));
-$('#btn-plus').addEventListener('click',()=>{ $('#plus-panel').classList.toggle('on'); });
-document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ if(/카메라|사진|📷|🖼/.test(d.textContent)&&typeof sfxPlay==='function') sfxPlay('shutter'); toast('（送信は演出用です。▶で物語が進みます）'); }));
+$('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
+/* v66：＋パネルは実物の1ページ目の構成（앨범／카메라／선물하기／송금／음성메시지／연락처／파일／일정）に統一。項目ごとに実物らしいフィードバックを返す（物語の進行には影響しない） */
+const PP_T={album:'（送信は演出用です。▶で物語が進みます）',camera:'（送信は演出用です。▶で物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
+document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='camera'&&typeof sfxPlay==='function') sfxPlay('shutter'); toast(PP_T[k]||'（送信は演出用です。▶で物語が進みます）'); }));
 let profFrom='v-chat'; /* v48：プロフィールを開いた画面を覚えておき、✕では元の画面へ戻る */
 $('#chat-prof-btn').addEventListener('click',()=>{ profFrom='v-chat'; showView('v-profile'); });
 $('#prof-close').addEventListener('click',()=>showView(profFrom));
@@ -1513,12 +1522,13 @@ $('#story-close').addEventListener('click',closeStory);
 $('#story-next').addEventListener('click',()=>storyStep(1));
 $('#story-prev').addEventListener('click',()=>storyStep(-1));
 /* ================= v4 : FREE CHAT ================= */
-function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); } }
-function freeAddMe(t,unsent){ const r=el('<div class="row me'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'')+'<div class="bub">'+esc(t)+'</div></div>'); feed.appendChild(r); scrollFeed(); }
-function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div></div></div></div>'); feed.appendChild(r); scrollFeed(); }
+function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); const bp=$('#btn-plus'); if(bp) bp.classList.remove('on'); } }
+/* v66：フリーチャットでも本編と同じ実物様式にする。自分の送信には時刻と既読「1」を付け、彼の返信が来た時点で「1」が消える（既読化）。時刻・既読は S.free の並びから導出するのでセーブ形式は不変 */
+function freeAddMe(t,unsent,unread){ const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+'<div class="bub">'+esc(t)+'</div></div>'); feed.appendChild(r); scrollFeed(); }
+function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
 function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
 function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); feed.appendChild(r); scrollFeed(); }
-function renderFreeLog(){ (S.free||[]).forEach(m=>{ if(m.w==='me') freeAddMe(m.t,false); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
+function renderFreeLog(){ const F=S.free||[]; /* v66：自分の送信より後に彼の返信（j／jimg）があれば既読（「1」なし）、なければ未読（「1」あり）として描き直す */ const later=F.map((m,i)=>F.slice(i+1).some(x=>x.w==='j'||x.w==='jimg')); F.forEach((m,i)=>{ if(m.w==='me') freeAddMe(m.t,false,!later[i]); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
 function pickFreeReplies(txt){
  if(S.endId==='gen'){ if(S.freeN===2) return ['……見たよ']; if(S.freeN===5) return ['……元気で']; return null; }
  const R=[
@@ -1551,13 +1561,13 @@ function pickFreeReplies(txt){
 let freeBusy=false;
 async function sendFree(){
  if(freeBusy||!S.done) return;
- const inp=$('#free-in'); const txt=(inp.value||'').trim(); if(!txt) return; inp.value='';
+ const inp=$('#free-in'); const txt=(inp.value||'').trim(); if(!txt) return; inp.value=''; updFreeSend();
  if(S.endId==='nao'){
    freeAddMe(txt,true); S.free.push({w:'mu',t:txt}); S.freeN++;
    if(S.freeN>=2&&!S.freeClosed){ S.freeClosed=true; const m='―― このトークは終了しています ――'; addSys(m); S.free.push({w:'sys',t:m}); }
    save(); return;
  }
- freeAddMe(txt,false); if(typeof sfxPlay==='function') sfxPlay('send'); S.free.push({w:'me',t:txt}); S.freeN++; save();
+ freeAddMe(txt,false,true); if(typeof sfxPlay==='function') sfxPlay('send'); S.free.push({w:'me',t:txt}); S.freeN++; save();
  const cap=S.endId==='gen'?6:15;
  if(S.freeN>cap){ if(!S.freeClosed){ S.freeClosed=true; const m=S.endId==='gen'?'（それきり、返信は来なかった）':'―― 今日のトークはここまで ――'; addSys(m); S.free.push({w:'sys',t:m}); save(); } return; }
  const reps=pickFreeReplies(txt);
@@ -1565,12 +1575,16 @@ async function sendFree(){
  freeBusy=true;
  const ty=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
  await sleep(Math.round((950+Math.min(reps.join('').length*22,1500))*paceMul())); ty.remove();
+ feed.querySelectorAll('.row.fr .unread').forEach(e=>e.remove()); /* v66：彼の返信が届いた時点で、自分の送信の「1」が消える（既読化） */
  let firstRep=true;
  for(const r of reps){ freeAddJ(r); if(firstRep){ firstRep=false; if(typeof vib==='function') vib(25); if(typeof sfxPlay==='function') sfxPlay('recv'); } S.free.push({w:'j',t:r}); await sleep(Math.round(680*paceMul())); }
  save(); freeBusy=false;
 }
 $('#free-send').addEventListener('click',sendFree);
 $('#free-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendFree(); }); /* v23：日本語入力の変換確定Enterでは送信しない */
+/* v66：実物どおり、入力があるときだけ送信ボタンがカカオイエローになる */
+function updFreeSend(){ const b=$('#free-send'); if(b) b.classList.toggle('on',!!($('#free-in').value||'').trim()); }
+$('#free-in').addEventListener('input',updFreeSend);
 
 /* ================= v5 : DAILY-LIFE NOISE & SETTINGS ================= */
 const NOISE={2:['📚','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['🌦','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['💬','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['🎓','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['📦','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
