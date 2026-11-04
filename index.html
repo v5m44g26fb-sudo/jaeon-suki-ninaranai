@@ -462,7 +462,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v60：内容増補の第3弾です。エンディング後のフリーチャット（ドラマEND）に、作中の出来事への新しい応答を5つ追加しました（ソルア／ブレスレット／観覧車／合宿／雨の夜）。どれも彼の造形のままに、核心は言い切らず、質問返しや沈黙、行動や日常へのすり替えで返します。新しい応答は既存の話題より後ろに足したので、これまでの話題への答え方は変わりません。「雨」は単独では反応せず、「雨の夜」など複合の言い方のときだけ応答します。原作END・特別ENDの仕様、本編の物語・台詞・選択肢・数値・エンディング・セーブ形式は変更していません（既存セーブはそのまま継続できます）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v61：内容増補の第4弾です。後日談に、新しい短編「その後の庭・続」を追加しました。ドラマENDの後日談「その後の庭」の続きで、秋のはじめの温室を描きます。蝶の蛹、彼女の進路の締切、そして彼が初めて自分からする小さな誘い――どれも結論は出ないまま、日常の温度で閉じます。彼の造形は後日談でも変えていません（核心は言い切らず、沈黙と行動で示します）。解放は、ドラマEND到達後に「その後の庭」を読み終えると開きます。本編の物語・台詞・選択肢・数値・エンディング3種・既存の後日談3編・セーブ形式は変更していません（既存セーブはそのまま継続できます）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1755,7 +1755,8 @@ updSfxUI();
 const EPIS=[
 {id:'drama',icon:'🦋',title:'後日談 ― その後の庭',sub:'END「わかっていても」の数週間後',type:'chat',unlock:()=>S.ends.includes('drama')},
 {id:'gen',icon:'✉️',title:'後日談 ― パリからの手紙（未達）',sub:'END「一人で進む」の、その先',type:'letter',unlock:()=>S.ends.includes('gen')},
-{id:'nao',icon:'🌅',title:'後日談 ― 入隊の朝',sub:'特別END「好きにはならない」の、その先',type:'chat',unlock:()=>S.ends.includes('nao')}
+{id:'nao',icon:'🌅',title:'後日談 ― 入隊の朝',sub:'特別END「好きにはならない」の、その先',type:'chat',unlock:()=>S.ends.includes('nao')},
+{id:'drama2',icon:'🍂',title:'後日談 ― その後の庭・続',sub:'「その後の庭」の、その先',type:'chat',lockNote:'後日談「その後の庭」を読み終えると解放されます',unlock:()=>S.ends.includes('drama')&&S.epiSeen.includes('drama')}
 ];
 const EPI_ITEMS={
 drama:[
@@ -1795,6 +1796,35 @@ nao:[
 {k:'scene',v:'送信ボタンは、押されなかった。言葉は、また届かなかった。'},
 {k:'scene',v:'それでも彼は今朝、自分の足で門をくぐった。誰の言葉も、待たずに。'},
 {k:'sys',v:'―― 後日談「入隊の朝」終わり ――'}
+],
+drama2:[
+{k:'date',v:'2021년 9월 17일 금요일'},
+{k:'scene',v:'「その後の庭」から4週間 ― 秋のはじめ。また、大学の温室の庭'},
+{k:'j',v:'……一匹、減った'},
+{k:'me',v:'え、蝶？'},
+{k:'j',v:'蛹になった'},
+{k:'me',v:'……数えたんだ'},
+{k:'j',v:'…………'},
+{k:'j',v:'目に入るだけ'},
+{k:'scene',v:'葉の裏の、小さな蛹。言われなければ、気づかない場所。彼はこの数週間、ずっとここに来ていたらしい。'},
+{k:'me',v:'羽化するまで、どれくらいかかるんだろう'},
+{k:'j',v:'……知らない'},
+{k:'j',v:'だから、見てる'},
+{k:'scene',v:'夕方 ― 温室を出る時、スマホが震えた。大学からのメール。「交換留学 ― 最終手続きのご案内」。締切は、来月の半ば。'},
+{k:'me',v:'……締切、来月だって。手続きの'},
+{k:'j',v:'…………'},
+{k:'j',v:'……そう'},
+{k:'scene',v:'彼は聞かなかった。行くのかも、行かないのかも。いつもと同じ沈黙が、今日だけ少し長かった。'},
+{k:'j',v:'……日曜'},
+{k:'me',v:'ん？'},
+{k:'j',v:'水やり、当番'},
+{k:'j',v:'一人だと、終わらない量で'},
+{k:'me',v:'……手伝えばいいの？'},
+{k:'j',v:'…………'},
+{k:'j',v:'来れるなら、でいい'},
+{k:'me',v:'……日曜、ね'},
+{k:'j',b:1100,v:'……うん'},
+{k:'sys',v:'結論は、まだ何も出ていない。蛹の中も、彼女の進路も。それでも――次の日曜が、二人のカレンダーに残った。'}
 ]
 };
 const EPI_LETTER={title:'後日談 ― パリからの手紙（未達）',body:'ユ・ナビへ。\n\n……書き出しから、詰まってる。\n\nパリは、どう？\n俺は相変わらず、作業室と家の往復。作品は、まだ終わらない。終わらないものばっかりだ。\n\nこの手紙は、出さない。\n出さないけど、書くことにする。書くだけなら、嘘にならないから。\n\n……元気でやってるなら、それでいい。\n返事は、いらない。\n――いらない、って書くのも、本当は嘘だな。\n\n……ここまで書いて、やっぱり出さないと思う。\n行くな、とも、待ってる、とも書けない男の手紙なんて、届いたところで重いだけだ。\n\nだから、これはここまで。\n封もしない。この机の引き出しが、この手紙の住所。\n\nパク・ジェオン',note:'（この手紙が、彼女に届くことはなかった）'};
@@ -1831,7 +1861,7 @@ function renderEpi(){
    const un=e.unlock();
    const seen=S.epiSeen.includes(e.id);
    const btn=document.createElement('button'); btn.className='povrow'+(un?'':' lock');
-   btn.innerHTML='<span class="pic">'+(un?e.icon:'🔒')+'</span><span><span class="pt">'+(un?esc(e.title):'？？？')+'</span><div class="ps">'+(un?esc(e.sub)+(seen?'　<span class="epi-done">✓ 読了（読み返せます）</span>':''):'対応するエンディングに到達すると解放されます')+'</div></span>';
+   btn.innerHTML='<span class="pic">'+(un?e.icon:'🔒')+'</span><span><span class="pt">'+(un?esc(e.title):'？？？')+'</span><div class="ps">'+(un?esc(e.sub)+(seen?'　<span class="epi-done">✓ 読了（読み返せます）</span>':''):(e.lockNote||'対応するエンディングに到達すると解放されます'))+'</div></span>';
    if(un) btn.addEventListener('click',()=>{ if(e.type==='letter') openEpiLetter(); else playEpi(e.id); });
    b.appendChild(btn);
  });
