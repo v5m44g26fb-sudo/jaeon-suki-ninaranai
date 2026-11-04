@@ -462,7 +462,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v61：内容増補の第4弾です。後日談に、新しい短編「その後の庭・続」を追加しました。ドラマENDの後日談「その後の庭」の続きで、秋のはじめの温室を描きます。蝶の蛹、彼女の進路の締切、そして彼が初めて自分からする小さな誘い――どれも結論は出ないまま、日常の温度で閉じます。彼の造形は後日談でも変えていません（核心は言い切らず、沈黙と行動で示します）。解放は、ドラマEND到達後に「その後の庭」を読み終えると開きます。本編の物語・台詞・選択肢・数値・エンディング3種・既存の後日談3編・セーブ形式は変更していません（既存セーブはそのまま継続できます）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v62：内容増補の第5弾です。彼のInstagramに投稿を1件、IGストーリーを2件追加しました。追加した投稿は、修復の日々に夜の作業室を上げた一枚で、写真は第2章の作業室の投稿と同じ場所の再掲です（コメント欄でも「また作業室」と触れられています）。ストーリーは、助手として戻った時期の「전시 준비」と、修復中の「고치는 중」で、どちらも彼の既存の投稿写真のストーリーへの再掲です。新しい写真は使っていません。キャプションはいつもどおり短い韓国語で、核心めいたことは書いていません。解放は物語の進行に連動します。本編の物語・台詞・選択肢・数値・エンディング3種・既存の投稿／ストーリー／写真・セーブ形式は変更していません（既存セーブはそのまま継続できます）。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -701,7 +701,8 @@ const IG_J=[
 {id:'hands',img:'assets/ig-hands.jpg',cap:'다시 처음부터. 손은 거짓말을 못 한다',likes:'523',unlock:10,cm:[['s0l_a','……本気なんだ'],['nao_sculpt','（見てしまった）']]},
 {id:'gallery',img:'assets/ig-gallery.jpg',cap:'전시. ……와줘서',likes:'766',unlock:11,cm:[['b1nna_','おめでとう！！'],['park_jaeon','ありがとう']]},
 {id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]},
-{id:'enlist',img:'assets/ig-jaeon3.jpg',cap:'……',likes:'1,876',unlock:99,cm:[['b1nna_','見たよ。……元気で']]}
+{id:'enlist',img:'assets/ig-jaeon3.jpg',cap:'……',likes:'1,876',unlock:99,cm:[['b1nna_','見たよ。……元気で']]},
+{id:'atelier2',img:'assets/ig-atelier.jpg',cap:'작업실. 밤',likes:'539',unlock:10,cm:[['b1nna_','또 작업실이네'],['park_jaeon','조용하니까']]}
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なお先輩かわいい'],['nao_sculpt','ありがとう笑']],cmL:[['b1nna_','この日、泣いてなかった？']]},
@@ -1292,7 +1293,7 @@ function renderIG(){
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
- const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
+ const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
  const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']];
  let h='<div class="ig-stories">'+SUBAR.map(s=>{const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock);return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+(has?'':' seen')+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>';}).join('')+'</div>';
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
@@ -1489,8 +1490,10 @@ const STORIES=[
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly.jpg',cap:'나비',ago:'5시간',unlock:3},
 {user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post2.jpg',cap:'🪼 오늘도 제작',ago:'3시간',unlock:3},
 {user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post3.jpg',cap:'작업 중 잠깐 ☕',ago:'1시간',unlock:3},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-jaeon3.jpg',cap:'전시 준비',ago:'3시간',unlock:6},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-wheel.jpg',cap:'관람차',ago:'1시간',unlock:8},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-rain.jpg',cap:'비',ago:'30분',unlock:9},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-hands.jpg',cap:'고치는 중',ago:'1시간',unlock:10},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-gallery.jpg',cap:'전시 D-day',ago:'방금',unlock:11}
 ];
 let storyState={list:[],i:0,timer:null};
