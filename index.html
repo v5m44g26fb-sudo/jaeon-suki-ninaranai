@@ -342,6 +342,22 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .cg{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:#eef0f3}
 .cg i{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.17);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:22px;font-style:normal}
 .cb.end{background:#f63c30;margin:0 auto;transform:rotate(135deg)}
+/* ===== v69 : call grid actions / keypad / digits ===== */
+.cg{cursor:pointer}
+.cg i{transition:transform .08s ease,background .15s ease,color .15s ease}
+.cg:active i{transform:scale(.88)}
+.cg.on i{background:#fff;color:#14161a}
+.call-digits{min-height:27px;margin-top:1px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:21px;letter-spacing:.16em;color:#fff}
+.call-digits #call-del{font-size:14px;color:#c6ccd6;cursor:pointer;letter-spacing:0;padding:3px 7px}
+.cg.kp i{width:56px;height:56px;flex-direction:column;gap:1px;background:rgba(255,255,255,.13)}
+.cg.kp b{font-size:21px;font-weight:500;line-height:1}
+.cg.kp small{font-size:7.5px;letter-spacing:.18em;color:#c6ccd6;min-height:9px}
+.cg.kp-hide{grid-column:1/-1;flex-direction:row}
+.cg.kp-hide i{width:auto;height:34px;border-radius:17px;padding:0 24px;font-size:12.5px}
+/* v69：キーパッド表示中は実物どおり上部を圧縮し、終了ボタンまで画面内に収める */
+#v-call[data-pad="1"] .call-av{margin-top:26px;width:62px;height:62px}
+#v-call[data-pad="1"] .call-sub{margin-top:10px;min-height:64px}
+#v-call[data-pad="1"] .call-grid{gap:12px 20px;margin-bottom:16px}
 
 /* ===== v4 : music / pov / story / free chat ===== */
 .wid-music{margin:12px 20px 0;background:rgba(20,20,28,.72);color:#fff;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.6;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
@@ -510,7 +526,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v68：リアル化第3弾です。写真とカレンダーの実物感を深めました。①カレンダーの各月に、iOSカレンダー風の月グリッドが付きました（曜日・月末は2021年の実カレンダーどおり）。解放済みの予定がある日にだけドットが付き、タップすると下のリストの該当の予定までスクロールして光ります。まだ解放されていない予定の日にドットは付きません。②写真の詳細画面に、上部の日付ヘッダ（曜日つき）と下部のツールバー（共有／お気に入り／情報／削除）が付きました。お気に入りのハートはこのセッションの中だけで有効で、削除ボタンは演出用（実際に写真は消えません）。③写真の一覧に月ごとの見出しが付きました。セーブの形式は変えていないので、既存セーブはそのまま継続できます。本編の物語・台詞・選択肢・数値・解放条件・エンディング3種・通話の台詞は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v69：リアル化第4弾です。通話・ロック画面・ホームの実物感を深めました。①通話中のボタンが実際に反応するようになりました。ミュートとスピーカーは押すと白く反転して状態が分かり、キーパッドを開くと数字キーが出て入力でき（入力した数字はタイマーの下に表示され、⌫で消せます）、通話の追加・FaceTime・連絡先は演出用の案内を返します。実際の音声や会話の進み方には影響しません。②ロック画面は、タップすると錠が開く表示になってからホームへ移るようになりました。③ホームの後日談アイコンに、解放済みの後日談の件数バッジが付きました（彼視点と同じ作法で、件数だけの表示です）。④ドックの中のカカオトークと解剖メモにも、上のアイコンと同じバッジが出るようになりました。セーブの形式は変えていないので、既存セーブはそのまま継続できます。本編の物語・台詞・選択肢・数値・解放条件・エンディング3種・通話の台詞とボイスの連動は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -550,7 +566,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <button class="app" data-open="cal"><span class="ic ic-cal"><span class="cwd" id="app-cal-wd">금요일</span><span class="cd2" id="app-cal-d">12</span></span>캘린더</button>
 <button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
 <button class="app" data-open="pov"><span class="ic ic-pov">🦋</span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
-<button class="app" data-open="epi"><span class="ic ic-epi">🌙</span>後日談</button>
+<button class="app" data-open="epi"><span class="ic ic-epi">🌙</span>後日談<span class="bdg" id="bdg-epi" style="display:none">0</span></button>
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
 <button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
@@ -566,9 +582,9 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <div class="pagedots"><i class="on"></i><i></i></div>
 <div class="dock">
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span></button>
-<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span></button>
+<button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/></svg></span><span class="bdg" id="bdg-kakao-d">1</span></button>
 <button class="app" data-open="ig"><span class="ic ic-ig"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span></button>
-<button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span></button>
+<button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span><span class="bdg" id="bdg-note-d" style="display:none">0</span></button>
 </div>
 </div>
 
@@ -653,6 +669,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <img class="call-av" src="assets/av-jaeon.jpg" alt="">
 <div class="call-nm">パク・ジェオン</div>
 <div class="call-tm" id="call-timer">iPhone</div>
+<div class="call-digits" id="call-digits"></div>
 <div class="call-sub" id="call-sub">……</div>
 <div class="call-hint">字幕をタップすると会話が進みます</div>
 <div class="ui-incoming">
@@ -662,8 +679,8 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 </div>
 <div class="ui-incall">
 <div class="call-grid">
-<div class="cg"><i>🔇</i>음소거</div><div class="cg"><i>⌨️</i>키패드</div><div class="cg"><i>🔊</i>스피커</div>
-<div class="cg"><i>➕</i>통화 추가</div><div class="cg"><i>📹</i>FaceTime</div><div class="cg"><i>👤</i>연락처</div>
+<div class="cg" data-cg="mute"><i>🔇</i>음소거</div><div class="cg" data-cg="pad"><i>⌨️</i>키패드</div><div class="cg" data-cg="spk"><i>🔊</i>스피커</div>
+<div class="cg" data-cg="add"><i>➕</i>통화 추가</div><div class="cg" data-cg="ft"><i>📹</i>FaceTime</div><div class="cg" data-cg="ct"><i>👤</i>연락처</div>
 </div>
 <button class="cb end" id="call-next"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff" transform="rotate(135 12 12)"/></svg></button>
 </div>
@@ -1060,8 +1077,9 @@ function updParams(){
  $('#w-prog').textContent=S.done?'完結（END到達）':progs[S.chap]||'';
  const CD=[5,12,26,16,25,7,19,28,18,25,9,16,16], CW=['금요일','금요일','금요일','금요일','일요일','금요일','수요일','금요일','금요일','금요일','금요일','금요일','금요일'];
  const wdEl=$('#wid-day'); if(wdEl){wdEl.textContent=CD[S.calU]||12; $('#wid-wd').textContent=CW[S.calU]||'금요일'; $('#wid-ev').textContent=progs[S.chap]||''; const acd=$('#app-cal-d'); if(acd) acd.textContent=CD[S.calU]||12; const acw=$('#app-cal-wd'); if(acw) acw.textContent=CW[S.calU]||'금요일';}
- const nb=$('#bdg-note'); if(S.memos.length){nb.style.display='flex'; nb.textContent=S.memos.length;} else nb.style.display='none';
+ const nb=$('#bdg-note'); const nbd=$('#bdg-note-d'); [nb,nbd].forEach(b=>{ if(!b) return; if(S.memos.length){b.style.display='flex'; b.textContent=S.memos.length;} else b.style.display='none'; }); /* v69：ドック側にも同じバッジを出す */
  const pb=$('#bdg-pov'); if(pb){ const pc=POVS.filter(p=>p.unlock()).length; if(pc){pb.style.display='flex'; pb.textContent=pc;} else pb.style.display='none'; }
+ const eb=$('#bdg-epi'); if(eb){ try{ const ec=EPIS.filter(x=>x.unlock()).length; if(ec){eb.style.display='flex'; eb.textContent=ec;} else eb.style.display='none'; }catch(e){} } /* v69：後日談の解放数バッジ（導出のみ）。EPIS は第3ブロックで定義されるため初回呼び出しでは try/catch で飛ばし、第3ブロック末尾の再呼び出しで確定させる */
  syncMusic();
  if(typeof updClock==='function') updClock();
  if(typeof updProfile==='function') updProfile();
@@ -1157,6 +1175,7 @@ async function playItems(items,quiet){
  if(!quiet) inSeq=false;
 }
 let callResolve=null, callLines=[], callIdx=0, callSec=0, callTimerInt=null, callPhase='incoming';
+let callMute=false, callSpk=false, callPad=false, callDigits=''; /* v69：通話中ボタンの状態（セッション内のみ・セーブしない・音声には干渉しない） */
 function doCall(lines){
  return new Promise(res=>{
   callResolve=res; callLines=lines; callIdx=0; callSec=0; callPhase='incoming';
@@ -1167,6 +1186,7 @@ function doCall(lines){
   duckMusic(true);
   showView('v-call'); $('#call-timer').textContent='iPhone'; $('#call-sub').textContent='……';
   clearInterval(callTimerInt);
+  resetCallUi(); /* v69：通話が始まるたびにボタン状態とキーパッド入力を初期化する */
  });
 }
 function startIncall(){
@@ -1195,6 +1215,41 @@ $('#call-next').addEventListener('click',()=>{ if(callPhase==='incall') advanceC
 $('#call-accept').addEventListener('click',()=>{ if(callPhase==='incoming') startIncall(); });
 $('#call-decline').addEventListener('click',()=>{ toast('応答すると物語が進みます'); });
 $('#call-sub').addEventListener('click',()=>{ if(callPhase==='incall') advanceCall(); });
+/* v69：通話中ボタン群の実挙動。ミュート／スピーカーは見た目の状態表示のみで音声には干渉せず、キーパッドは数字表示だけを行う。台詞行送り（advanceCall）とボイス連動には触れない */
+const CALLGRID_HTML='<div class="cg" data-cg="mute"><i>🔇</i>음소거</div><div class="cg" data-cg="pad"><i>⌨️</i>키패드</div><div class="cg" data-cg="spk"><i>🔊</i>스피커</div><div class="cg" data-cg="add"><i>➕</i>통화 추가</div><div class="cg" data-cg="ft"><i>📹</i>FaceTime</div><div class="cg" data-cg="ct"><i>👤</i>연락처</div>';
+function renderCallGrid(){
+ const g=document.querySelector('.call-grid'); if(!g) return;
+ const cv=$('#v-call'); if(cv) cv.dataset.pad=callPad?'1':''; /* v69：キーパッド表示中の圧縮レイアウト切替 */
+ if(callPad){
+  const KEYS=[['1',''],['2','ABC'],['3','DEF'],['4','GHI'],['5','JKL'],['6','MNO'],['7','PQRS'],['8','TUV'],['9','WXYZ'],['*',''],['0','+'],['#','']];
+  g.innerHTML=KEYS.map(k=>'<div class="cg kp" data-kp="'+k[0]+'"><i><b>'+k[0]+'</b><small>'+k[1]+'</small></i></div>').join('')+'<div class="cg kp-hide" data-kp="hide"><i>숨기기</i></div>';
+ } else {
+  g.innerHTML=CALLGRID_HTML;
+  const m=g.querySelector('[data-cg="mute"]'); if(m&&callMute) m.classList.add('on');
+  const s=g.querySelector('[data-cg="spk"]'); if(s&&callSpk) s.classList.add('on');
+ }
+}
+function updCallDigits(){ const d=$('#call-digits'); if(!d) return; d.innerHTML=callDigits?('<span>'+esc(callDigits)+'</span><span id="call-del" role="button" aria-label="1文字消す">⌫</span>'):''; }
+function resetCallUi(){ callMute=false; callSpk=false; callPad=false; callDigits=''; renderCallGrid(); updCallDigits(); }
+const callGridEl=document.querySelector('.call-grid');
+if(callGridEl) callGridEl.addEventListener('click',e=>{
+ if(callPhase!=='incall') return;
+ const kp=e.target.closest('[data-kp]');
+ if(kp){ if(typeof sfxPlay==='function') sfxPlay('tap'); const k=kp.dataset.kp;
+  if(k==='hide'){ callPad=false; renderCallGrid(); }
+  else if(callDigits.length<18){ callDigits+=k; updCallDigits(); }
+  return; }
+ const cg=e.target.closest('[data-cg]'); if(!cg) return;
+ if(typeof sfxPlay==='function') sfxPlay('tap');
+ const k=cg.dataset.cg;
+ if(k==='mute'){ callMute=!callMute; cg.classList.toggle('on',callMute); }
+ else if(k==='spk'){ callSpk=!callSpk; cg.classList.toggle('on',callSpk); }
+ else if(k==='pad'){ callPad=true; renderCallGrid(); }
+ else if(k==='add') toast('（通話の追加は演出用です）');
+ else if(k==='ft') toast('（FaceTimeは演出用です）');
+ else if(k==='ct') toast('（連絡先は演出用です）');
+});
+$('#call-digits').addEventListener('click',e=>{ if(e.target.id==='call-del'){ callDigits=callDigits.slice(0,-1); updCallDigits(); if(typeof sfxPlay==='function') sfxPlay('tap'); } });
 async function run(){
  if(playing) return; playing=true; inSeq=true;
  while(S.idx<STORY.length){
@@ -1502,7 +1557,8 @@ feed.addEventListener('click',e=>{ if(choiceOpen) return; if(e.target.closest('b
 $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（本編の進行状況がリセットされます。エンディングコレクション・後日談・彼視点の既読と、設定は残ります）')){ const ns=Object.assign({},S,{idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,endId:null,call1:false,call2:false,free:[],freeN:0,freeClosed:false,noise:[],proN:0,proOps:0,proUnread:0,chatOpened:false}); try{localStorage.setItem(LSKEY,JSON.stringify(ns));}catch(e){} location.reload(); }});
 /* v6：ステータスバーとロック画面の時計は実時刻ではなく物語内時刻（chatMin）に連動する（updClock は v6 セクションで定義し、updParams から呼ばれる） */
 /* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
-$('#v-lock').addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('unlock'); showView('v-home'); });
+let lockOpening=false;
+$('#v-lock').addEventListener('click',()=>{ if(lockOpening) return; lockOpening=true; if(typeof sfxPlay==='function') sfxPlay('unlock'); const lt=document.querySelector('.lock-top'); if(lt) lt.textContent='🔓'; setTimeout(()=>{ showView('v-home'); if(lt) lt.textContent='🔒'; lockOpening=false; },380); }); /* v69：実物どおり、錠が開く表示を挟んでからホームへ移る */
 function renderFriends(){
  const F=$('#friend-list'); if(!F) return;
  const bday=S.calU===4;
@@ -1788,7 +1844,7 @@ document.querySelectorAll('.gal-bar [data-ga]').forEach(btn=>btn.addEventListene
 
 /* start */
 replay(); updParams();
-$('#bdg-kakao').textContent=S.done?'✓':'1';
+$('#bdg-kakao').textContent=S.done?'✓':'1'; const kbd=$('#bdg-kakao-d'); if(kbd) kbd.textContent=S.done?'✓':'1'; /* v69：ドック側にも同じバッジを出す（実物iOSのドック内バッジ） */
 </script>
 <script>
 /* ================= v7 : SFX & AMBIENCE =================
@@ -1996,6 +2052,7 @@ async function playEpi(id){
  if(id==='drama'&&!S.epiProf){ S.epiProf=true; updProfile(); const m='―― 彼のプロフィールが、少しだけ変わっていた ――'; addSys(m); S.free.push({w:'sys',t:m}); }
  if(!S.epiSeen.includes(id)) S.epiSeen.push(id);
  save();
+ if(typeof updParams==='function') updParams(); /* v69：後日談バッジ（drama 読了で drama2 が解放される）を即時反映する */
  toast('後日談を読み終えました');
  epiBusy=false;
 }
@@ -2061,6 +2118,7 @@ try{
  const mo8=new MutationObserver(()=>{ const v=document.querySelector('.view.on'); if(v) noteViewOp(v.id); });
  document.querySelectorAll('.view').forEach(v=>mo8.observe(v,{attributes:true,attributeFilter:['class']}));
 }catch(e){}
+try{ updParams(); }catch(e){} /* v69：EPIS の定義後に後日談バッジ（bdg-epi）を確定させる */
 
 </script>
 </body>
