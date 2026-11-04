@@ -289,6 +289,19 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .cal-e .ct{font-size:13.5px;line-height:1.55}
 .cal-e .ct small{display:block;color:#6e6e73;font-size:11.5px}
 .cal-e.lock{opacity:.38}
+/* ===== v68 : calendar month grid ===== */
+.cal-grid{margin:2px 16px 8px;background:#fff;border:1px solid #e4eaf1;border-radius:14px;padding:8px 10px 10px}
+.cal-wd,.cal-days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.cal-wd span{font-size:10.5px;color:#8a94a0;padding:2px 0}
+.cal-wd span.sun{color:#e5484d}
+.cal-wd span.sat{color:#2f6fd0}
+.cal-d{font-size:12.5px;line-height:1.5;padding:4px 0;color:#22384e;background:none;border:none;font-family:inherit;position:relative}
+button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cal-d.dot{font-weight:700}
+.cal-d.dot::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#e8a13a}
+.cal-e.flash{animation:calflash 1.2s ease-out}
+@keyframes calflash{0%,55%{background:#fdf0cd}100%{background:transparent}}
+.gal-mh{padding:16px 12px 6px;font-size:14px;font-weight:700;color:#1c1c1e}
 .memo{margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:14px 15px;background:#fffdf4}
 .memo h3{font-size:14.5px;margin-bottom:6px}
 .memo p{font-size:13px;line-height:1.8;color:#333;white-space:pre-wrap}
@@ -398,10 +411,18 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 #gal-view{position:absolute;inset:0;background:#000;z-index:60;display:none;flex-direction:column}
 #gal-view.on{display:flex}
 #gal-img{flex:1;width:100%;object-fit:contain;min-height:0}
-.gal-meta{padding:14px 18px 42px;color:#fff}
-#gal-date{font-size:12px;color:#aeaeb6}
-#gal-cap{font-size:15px;margin-top:3px;line-height:1.6}
-#gal-close{position:absolute;top:52px;right:12px;color:#fff;font-size:19px;padding:12px 14px;text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2}
+.gal-meta{padding:12px 18px 6px;color:#fff}
+#gal-cap{font-size:15px;line-height:1.6}
+/* ===== v68 : photo detail chrome (top date header / bottom toolbar) ===== */
+.gal-top{display:flex;justify-content:space-between;align-items:flex-start;padding:54px 18px 8px;color:#fff}
+#gal-date{font-size:15.5px;font-weight:700}
+#gal-wday{font-size:11.5px;color:#aeaeb6;margin-top:2px}
+#gal-close{color:#fff;font-size:19px;padding:2px 8px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.gal-bar{display:flex;justify-content:space-around;align-items:center;padding:8px 26px 30px}
+.gal-bar button{color:#fff;background:none;border:none;padding:8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gal-bar button:active{opacity:.55}
+.gal-bar button.on{color:#ff3b30}
+.gal-bar button.on .ic-heart{fill:currentColor}
 #night-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,18,48,.15),rgba(24,18,48,.20));pointer-events:none;z-index:150;display:none}
 #night-tint.on{display:block}
 .missed{color:#ff3b30}
@@ -433,6 +454,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
  #tap-hint.on{animation:none !important}
  .typing i{animation:none !important;opacity:.55}
  .view.on,#gal-view.on,.plus-panel.on{animation:none !important}
+ .cal-e.flash{animation:none !important}
  *{transition-duration:.01s !important;scroll-behavior:auto !important}
 }
 /* ===== v41 : low-height compaction (call / lock) =====
@@ -488,7 +510,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v67：リアル化第2弾です。Instagramの実物感を深めました。①投稿のハートをタップすると赤くなり、いいね数が1つ増えます（もう一度タップで取り消し）。投稿の写真をダブルタップすると大きなハートが出ていいねが付きます（実物どおり、ダブルタップでは取り消せません）。②ブックマークで投稿を保存でき、なおのプロフィールに「保存済み」タブが付きました（彼のプロフィールには出ません）。③投稿の下に、自分のアバター付きの「コメントを追加…」欄が付きました（コメント自体は演出用で、押しても物語は変わりません）。いいね・保存の記録用にセーブ項目が2つ増えましたが、既存セーブはそのまま継続できます。本編の物語・台詞・選択肢・数値（フォロワー数といいねの基礎値）・エンディング3種・通話の台詞は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v68：リアル化第3弾です。写真とカレンダーの実物感を深めました。①カレンダーの各月に、iOSカレンダー風の月グリッドが付きました（曜日・月末は2021年の実カレンダーどおり）。解放済みの予定がある日にだけドットが付き、タップすると下のリストの該当の予定までスクロールして光ります。まだ解放されていない予定の日にドットは付きません。②写真の詳細画面に、上部の日付ヘッダ（曜日つき）と下部のツールバー（共有／お気に入り／情報／削除）が付きました。お気に入りのハートはこのセッションの中だけで有効で、削除ボタンは演出用（実際に写真は消えません）。③写真の一覧に月ごとの見出しが付きました。セーブの形式は変えていないので、既存セーブはそのまま継続できます。本編の物語・台詞・選択肢・数値・解放条件・エンディング3種・通話の台詞は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -653,9 +675,15 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="ahead"><button class="back" data-home="1">‹</button><h2>사진</h2><span class="sub" id="gal-count"></span></div>
 <div class="abody" id="gal-body"></div>
 <div id="gal-view">
+<div class="gal-top"><div class="gal-top-tx"><div id="gal-date"></div><div id="gal-wday"></div></div><button id="gal-close">✕</button></div>
 <img id="gal-img" src="" alt="">
-<div class="gal-meta"><div id="gal-date"></div><div id="gal-cap"></div></div>
-<button id="gal-close">✕</button>
+<div class="gal-meta"><div id="gal-cap"></div></div>
+<div class="gal-bar">
+<button data-ga="share" aria-label="共有"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M12 15V4.2M12 4.2 8.2 8M12 4.2 15.8 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 11.5H5.4a1.9 1.9 0 0 0-1.9 1.9v5.2a1.9 1.9 0 0 0 1.9 1.9h13.2a1.9 1.9 0 0 0 1.9-1.9v-5.2a1.9 1.9 0 0 0-1.9-1.9h-.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+<button data-ga="fav" aria-label="お気に入り"><svg width="23" height="23" viewBox="0 0 24 24"><path class="ic-heart" d="M12 20.3C7.2 16.6 3.8 13.4 3.8 9.7 3.8 7.2 5.7 5.2 8.1 5.2c1.6 0 3.1.9 3.9 2.2.8-1.3 2.3-2.2 3.9-2.2 2.4 0 4.3 2 4.3 4.5 0 3.7-3.4 6.9-8.2 10.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
+<button data-ga="info" aria-label="情報"><svg width="23" height="23" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 11.2v5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="12" cy="7.9" r="1.25" fill="currentColor"/></svg></button>
+<button data-ga="trash" aria-label="削除"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M4.2 6.8h15.6M9.2 6.8V5.2A1.7 1.7 0 0 1 10.9 3.5h2.2a1.7 1.7 0 0 1 1.7 1.7v1.6m2.9 0-.8 12a2 2 0 0 1-2 1.9H9.1a2 2 0 0 1-2-1.9l-.8-12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.1 11v5.6M13.9 11v5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+</div>
 </div>
 </div>
 
@@ -735,30 +763,31 @@ const IG_N=[
 {id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:3,cm:[['b1nna_','その顔すき']],cmL:[['park_jaeon','🪼']]},
 {id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:4,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
 ];
+/* v68：day は月グリッドのドット用。値は新規に作らず、写真アプリ（GAL）の日付・要約内の明記日付など既存データで確定できるものだけに付けた（個展3/5・バー3/12・作業室3/26・曖昧な関係4/16・誕生日4/25・合宿6/18・雨の夜6/25・修復7/9・展示7/16・温室9/17・水やり9/19）。確定できないエントリには付けない */
 const CAL=[
 {m:'3月',e:[
-{d:'上旬',t:'元彼の個展／破局',s:'プロローグ',u:0},
+{d:'上旬',t:'元彼の個展／破局',s:'プロローグ',u:0,day:5},
 {d:'中旬',t:'新学期スタート（彫塑科4年）',s:'卒業制作の一年が始まる',u:0},
-{d:'中旬',t:'バーで、蝶の男と出会う',s:'第1章',u:1},
-{d:'下旬',t:'学科の飲み会で再会／作業室',s:'第2章',u:2}]},
+{d:'中旬',t:'バーで、蝶の男と出会う',s:'第1章',u:1,day:12},
+{d:'下旬',t:'学科の飲み会で再会／作業室',s:'第2章',u:2,day:26}]},
 {m:'4月',e:[
-{d:'中旬',t:'曖昧な関係が始まる',s:'第3章',u:3},
-{d:'下旬',t:'なおの誕生日',s:'実家→昼のデート→ドヒョク再会',u:4}]},
+{d:'中旬',t:'曖昧な関係が始まる',s:'第3章',u:3,day:16},
+{d:'下旬',t:'なおの誕生日',s:'実家→昼のデート→ドヒョク再会',u:4,day:25}]},
 {m:'5月',e:[
 {d:'上旬',t:'一度目の別れ',s:'「いつも壁を作ってる」／第1部・完',u:5},
 {d:'中旬',t:'ギャラリー展の助手に、ジェオンが立候補',s:'第4章「変わろうと思っている」',u:6},
 {d:'下旬',t:'ソルアの宣戦布告',s:'「今も付き合ってます」',u:6}]},
 {m:'6月',e:[
-{d:'中旬',t:'彫塑科合宿（ドヒョクの地元）',s:'第5章／観覧車と、ささやきゲーム',u:8},
-{d:'下旬',t:'「付き合おう」／雨の夜の詰問',s:'第6章／「二度と現れないで」',u:9}]},
+{d:'中旬',t:'彫塑科合宿（ドヒョクの地元）',s:'第5章／観覧車と、ささやきゲーム',u:8,day:18},
+{d:'下旬',t:'「付き合おう」／雨の夜の詰問',s:'第6章／「二度と現れないで」',u:9,day:25}]},
 {m:'7月',e:[
-{d:'上旬',t:'作品の破損と、修復の日々',s:'最終章／約束通り、彼は去る',u:10},
-{d:'中旬',t:'ギャラリー展／最終選択',s:'彼のスケッチブックと、運命の種明かし',u:11},
+{d:'上旬',t:'作品の破損と、修復の日々',s:'最終章／約束通り、彼は去る',u:10,day:9},
+{d:'中旬',t:'ギャラリー展／最終選択',s:'彼のスケッチブックと、運命の種明かし',u:11,day:16},
 {d:'下旬',t:'卒業・パリ・兵役',s:'選んだ道の先にある、それぞれの現実',u:12},
 {d:'？',t:'兵役：未定の予定',s:'兵務庁アプリに未読のお知らせが1件。本人はまだ開いていない',u:5}]},
 {m:'9月',e:[
-{d:'中旬',t:'温室で、蛹になった蝶',s:'9月17日（金）／後日談「その後の庭・続」',u:99,cond:()=>S.epiSeen.includes('drama2')},
-{d:'中旬',t:'日曜の水やり当番',s:'9月19日（日）。一人では終わらない量の、二人の当番',u:99,cond:()=>S.epiSeen.includes('drama2')}]},
+{d:'中旬',t:'温室で、蛹になった蝶',s:'9月17日（金）／後日談「その後の庭・続」',u:99,day:17,cond:()=>S.epiSeen.includes('drama2')},
+{d:'中旬',t:'日曜の水やり当番',s:'9月19日（日）。一人では終わらない量の、二人の当番',u:99,day:19,cond:()=>S.epiSeen.includes('drama2')}]},
 {m:'10月',e:[
 {d:'中旬',t:'交換留学 最終手続きの締切',s:'大学からの「最終手続きのご案内」の期限（10月半ば）',u:99,cond:()=>S.epiSeen.includes('drama2')}]}
 ];
@@ -1383,11 +1412,38 @@ $('#igsw-n').addEventListener('click',()=>{igWho='n'; igNTab='grid'; $('#igsw-n'
 /* calendar */
 function renderCal(){
  const b=$('#cal-body'); let h='';
- CAL.forEach(mo=>{ h+='<div class="cal-m">'+mo.m+'</div>'; mo.e.forEach(e=>{
-   const locked=e.u>S.calU&&!(e.cond&&e.cond()); /* v65：cond を持つエントリは u ゲートと OR で解放（後日談連動）。cond なしのエントリは従来どおり */
-   h+='<div class="cal-e'+(locked?' lock':'')+'"><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+(locked?'？？？':esc(e.s))+'</small></span></div>';
- });});
+ const WD7=['日','月','火','水','木','金','土'];
+ CAL.forEach((mo,mi)=>{
+   const lockedE=mo.e.map(e=>e.u>S.calU&&!(e.cond&&e.cond())); /* v65：cond を持つエントリは u ゲートと OR で解放（後日談連動）。cond なしのエントリは従来どおり */
+   h+='<div class="cal-m">'+mo.m+'</div>';
+   /* v68：iOSカレンダー風の月グリッド。曜日配列・月末日数は Date(2021,...) から生成し実カレンダーどおりにする。
+      ドットは「解放済み」かつ「day（確定日）を持つ」エントリの日だけに置く。未解放エントリの日にはドットを置かない（日付の漏れ防止、v36/v65の伏せ原則） */
+   const mnum=parseInt(mo.m,10);
+   if(mnum>=1&&mnum<=12){
+     const dotDay={};
+     mo.e.forEach((e,ei)=>{ if(e.day&&!lockedE[ei]&&!(e.day in dotDay)) dotDay[e.day]='cale-'+mi+'-'+ei; });
+     const first=new Date(2021,mnum-1,1).getDay(), dim=new Date(2021,mnum,0).getDate();
+     h+='<div class="cal-grid"><div class="cal-wd">'+WD7.map((w,i)=>'<span class="'+(i===0?'sun':i===6?'sat':'')+'">'+w+'</span>').join('')+'</div><div class="cal-days">';
+     for(let i=0;i<first;i++) h+='<span class="cal-d"></span>';
+     for(let d=1;d<=dim;d++){
+       const tgt=dotDay[d];
+       h+=tgt?'<button class="cal-d dot" data-cald="'+tgt+'" aria-label="'+d+'日の予定へ">'+d+'</button>':'<span class="cal-d">'+d+'</span>';
+     }
+     h+='</div></div>';
+   }
+   mo.e.forEach((e,ei)=>{
+     const locked=lockedE[ei];
+     h+='<div class="cal-e'+(locked?' lock':'')+'" id="cale-'+mi+'-'+ei+'"><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+(locked?'？？？':esc(e.s))+'</small></span></div>';
+   });
+ });
  b.innerHTML=h+'<p class="locknote">物語の進行に合わせて解放されます</p>';
+ /* v68：ドットの日タップ → 該当エントリへスクロール＋ハイライト（表示だけの操作で、状態は持たない） */
+ b.querySelectorAll('[data-cald]').forEach(btn=>btn.addEventListener('click',()=>{
+   const t=document.getElementById(btn.dataset.cald); if(!t) return;
+   t.scrollIntoView({behavior:'smooth',block:'center'});
+   t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash');
+   setTimeout(()=>t.classList.remove('flash'),1300);
+ }));
 }
 /* notes */
 function renderNotes(){
@@ -1701,14 +1757,34 @@ const GAL=[
  {img:'assets/ig-hands.jpg',d:'7월 9일',cap:'修復の日々 ― 手は嘘をつかない',u:10},
  {img:'assets/ig-gallery.jpg',d:'7월 16일',cap:'ギャラリー展当日',u:11}
 ];
+/* v68：写真詳細のお気に入りはセッション内のみ（セーブに持たせない）。galCur はツールバー操作の対象 */
+let galCur=null; const galFav=new Set();
+function galWeekday(g){ const md=g.d.match(/(\d+)월\s*(\d+)일/); return md?['일','월','화','수','목','금','토'][new Date(2021,+md[1]-1,+md[2]).getDay()]:''; }
+function updGalFav(){ const fb=document.querySelector('.gal-bar [data-ga="fav"]'); if(fb) fb.classList.toggle('on',!!(galCur&&galFav.has(galCur.img))); }
 function renderGallery(){
  const un=GAL.filter(g=>S.calU>=g.u);
  const cnt=$('#gal-count'); if(cnt) cnt.textContent='사진 '+un.length+'장';
  const b=$('#gal-body');
- b.innerHTML='<div class="gal-grid">'+un.map((g,i)=>'<button data-gal="'+i+'"><img src="'+g.img+'"><span class="gd">'+g.d+'</span></button>').join('')+'</div>'+(un.length<GAL.length?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>');
- b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; $('#gal-cap').textContent=g.cap; $('#gal-view').classList.add('on'); }));
+ /* v68：iOS写真風に月グループ見出し（2021년 N월）を挟む。data-gal は従来どおり un の通し番号 */
+ let h='',lastM='';
+ un.forEach((g,i)=>{
+   const mo=g.d.split(' ')[0];
+   if(mo!==lastM){ if(lastM) h+='</div>'; h+='<div class="gal-mh">2021년 '+mo+'</div><div class="gal-grid">'; lastM=mo; }
+   h+='<button data-gal="'+i+'"><img src="'+g.img+'"><span class="gd">'+g.d+'</span></button>';
+ });
+ if(lastM) h+='</div>';
+ b.innerHTML=h+(un.length<GAL.length?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>');
+ b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; galCur=g; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':''; $('#gal-cap').textContent=g.cap; updGalFav(); $('#gal-view').classList.add('on'); }));
 }
 $('#gal-close').addEventListener('click',()=>$('#gal-view').classList.remove('on'));
+/* v68：写真詳細の下部ツールバー（共有／お気に入り／情報／削除）。実物様式のフィードバックのみで、物語・セーブには影響しない。削除は実際に消さない */
+document.querySelectorAll('.gal-bar [data-ga]').forEach(btn=>btn.addEventListener('click',()=>{
+ const k=btn.dataset.ga; if(!galCur) return;
+ if(k==='share') toast('（共有は演出用です）');
+ else if(k==='fav'){ if(galFav.has(galCur.img)) galFav.delete(galCur.img); else galFav.add(galCur.img); updGalFav(); }
+ else if(k==='info'){ const wd=galWeekday(galCur); toast('2021년 '+galCur.d+(wd?'（'+wd+'요일）':'')+' ・ '+galCur.cap); }
+ else if(k==='trash') toast('（削除は演出用です）');
+}));
 
 /* start */
 replay(); updParams();
