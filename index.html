@@ -34,6 +34,7 @@ box-shadow:0 0 0 2px #4a4d52,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margi
 .phone::before{content:'';position:absolute;left:-2.5px;top:190px;width:3px;height:88px;background:#3a3d42;border-radius:2px}
 .phone::after{content:'';position:absolute;right:-2.5px;top:220px;width:3px;height:120px;background:#3a3d42;border-radius:2px}
 @media (max-width:430px){.phone{border-radius:0;padding:0;height:calc(100dvh - 96px);box-shadow:none}.phone::before,.phone::after{display:none}.page-head{padding:10px 12px 4px}.page-head .src{display:none}}
+@media (min-width:431px){body{height:100dvh}.page-head{flex:none}.phone{flex:0 1 auto;min-height:0}} /* v57：デスクトップでは見出しの実高（265px）が電話の確保量（118px）を上回り、電話の下端が初見で画面外に出ていた（実測で溢れ190px）。広幅のときだけ body を画面高に固定し、電話を残り高さに縮めて収める。430px以下はこのクエリが効かず従来どおり */
 .screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#000}
 @media (max-width:430px){.screen{border-radius:0}}
 /* notch (iPhone 12) */
@@ -461,7 +462,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v56：夜間の改修は、この版で締めとなります。最終の確認は、ブラウザが起動できない環境が続いたため、再生しての確認ではなく静的な点検で行いました（分岐B）。現行コードの構文、通話ボイスの対応づけ（VOICEMAP）、バージョン履歴（v1〜v55）の完全性はすべて確認済みで、ゲーム本体・物語・台詞に変更はありません。改修の過程で見送り・申し送りとなった項目は、棚卸し資料にまとめ直しました。残る確認は、実機iPhoneでの体感確認と、ブラウザが使える環境での最終プレイ確認（エンディング到達、デスクトップ表示の実測）です。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v57：新しい改修フェーズの初便です。検証環境（ブラウザとgit）の復旧を受けて、夜間改修で積み残していた動的な確認を回収しました。新規セーブから3つのエンディング（ドラマEND／原作END／特別END）すべてに到達し、JSエラーは全セッションで0件でした。v46〜v51の是正（フリーチャットのキーワード一致条件、連続トーストのタイマー、ストーリーのタップ透過、プロフィールの戻り先、音量のクランプ、IGボタンの案内トースト、トーク一覧の月ラベル）も、実描画で生きていることを確認しました。あわせて、PCの広い画面で見出しが想定より高く、電話の下端が最初の画面の外に出ていた問題を是正しました（実測で溢れは最大190px→0に。スマートフォン幅の表示は変更していません）。物語・台詞・選択肢・数値・解放構造・セーブ形式は変更していません。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
