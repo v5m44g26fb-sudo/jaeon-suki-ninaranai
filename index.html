@@ -700,13 +700,18 @@ img{-webkit-user-drag:none}
 .gal-strip button{flex:none;width:42px;height:42px;padding:0;border-radius:7px;overflow:hidden;opacity:.45;border:2px solid transparent;background:#222}
 .gal-strip button.on{opacity:1;border-color:#fff}
 .gal-strip img{width:100%;height:100%;object-fit:cover;display:block}
+/* ===== v78：ホームのニュース見出しウィジェット ===== */
+.wid-news{display:flex;align-items:center;gap:9px;margin:12px 20px 0;text-align:left;background:rgba(255,255,255,.96);border-radius:16px;padding:11px 13px;color:#111;box-shadow:0 4px 14px rgba(10,15,25,.18)}
+.wn-tag{flex:none;background:#03c75a;color:#fff;font-size:10.5px;font-weight:800;font-style:italic;border-radius:6px;padding:3px 7px;letter-spacing:.02em}
+.wn-title{flex:1;min-width:0;font-size:12.5px;font-weight:600;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wn-press{flex:none;font-size:10.5px;color:#9a9a9e}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>パク・ジェオンを好きにならない件</h1><div class="ph-rule"></div>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v77：実物寄せの追加と、案内文の言い回しの微調整です。ニュースに韓国ポータルの実物と同じカテゴリタブ（전체／날씨／문화／대학／생활／여행）を付け、タブで記事を絞り込めるようにしました（ランキングは全体タブのときだけ表示）。写真ビューアには iOS「写真」と同じフィルムストリップを追加し、下部のサムネイルから前後の写真へ直接移動できます（左右スワイプと連動）。あわせて、後日談と電話履歴の案内文の言い回しを少し自然な日本語に整えました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。前版 v76：UIの絵文字を全廃し、インラインSVGアイコンに置き換えました（ホームのアプリアイコン、カカオ・Instagram・電話・ニュース等のボタン類、メッセージ反応のトレーとチップ、天気アイコンまで）。反応の保存形式は従来どおりのため、既存セーブの反応もそのまま表示されます。あわせてタイトル画面を刷新しました：ページ見出しとロック画面に、作品の世界観（蝶・夜・美大）に合わせた明朝タイポグラフィと金の蝶のモチーフ、金色の差し色と夜色のグラデーションを入れています。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v78：ホーム画面にニュースの見出しウィジェットを追加しました。その時点で読める記事の中から一番読まれている見出しがホームに出て、タップするとニュースアプリが開きます。物語が進むと見出しもその時期のものに差し替わります。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。前版 v77：実物寄せの追加と、案内文の言い回しの微調整です。ニュースに韓国ポータルの実物と同じカテゴリタブ（전체／날씨／문화／대학／생활／여행）を付け、タブで記事を絞り込めるようにしました（ランキングは全体タブのときだけ表示）。写真ビューアには iOS「写真」と同じフィルムストリップを追加し、下部のサムネイルから前後の写真へ直接移動できます（左右スワイプと連動）。あわせて、後日談と電話履歴の案内文の言い回しを少し自然な日本語に整えました。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -740,6 +745,7 @@ img{-webkit-user-drag:none}
 <div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
 心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
 <div class="wid-music"><div class="mh"><b><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg> BGM</b><span id="mus-now"></span><button id="mus-toggle" class="isw" aria-label="BGMのオン・オフ"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9.5a4 4 0 0 1 0 5M18 7a7.5 7.5 0 0 1 0 10"/></svg> ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
+<button class="wid-news" id="wid-news" data-open="news"><span class="wn-tag">뉴스</span><span class="wn-title" id="wn-title">젊은 조각가들의 개인전, 봄 전시 시즌 개막</span><span class="wn-press" id="wn-press">아트인사이트</span></button>
 <div class="apps">
 <button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="37" height="37" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span>카카오톡<span class="bdg" id="bdg-kakao">1</span></button>
 <button class="app" data-open="ig"><span class="ic ic-ig"><svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span>Instagram</button>
@@ -2569,6 +2575,15 @@ function openNews(id){
  showView('v-newsread');
 }
 const nwBack=$('#newsread-back'); if(nwBack) nwBack.addEventListener('click',()=>{ renderNews(); showView('v-news'); });
+/* v78：ホームのニュース見出しウィジェット（解放済み記事の中で最も読まれている見出しを出す。タップでニュースが開く＝data-open 配線済み） */
+function updNewsWidget(){
+ const t=$('#wn-title'), p=$('#wn-press'); if(!t) return;
+ const top=NEWS.filter(newsVis).slice().sort((x,y)=>y.hot-x.hot)[0];
+ if(top){ t.textContent=top.title; if(p) p.textContent=top.press; }
+}
+const __showViewOrig=showView;
+showView=function(id){ __showViewOrig(id); if(id==='v-home') updNewsWidget(); };
+updNewsWidget();
 
 </script>
 </body>
