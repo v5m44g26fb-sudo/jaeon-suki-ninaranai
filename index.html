@@ -54,7 +54,7 @@ box-shadow:0 0 0 2px #4a4d52,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margi
 .view.on{display:flex}
 button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
 /* ===== lock screen : iOS 14 ===== */
-#v-lock{background:linear-gradient(168deg,#274b63 0%,#3c3a5e 48%,#191725 100%);color:#fff;z-index:100;cursor:pointer;overflow:hidden}
+#v-lock{background:radial-gradient(120% 60% at 78% -10%,rgba(216,180,110,.20) 0%,rgba(216,180,110,0) 55%),radial-gradient(130% 70% at 12% 108%,rgba(64,110,140,.38) 0%,rgba(64,110,140,0) 55%),linear-gradient(168deg,#1d3a52 0%,#2c2a4e 46%,#12101f 100%);color:#fff;z-index:100;cursor:pointer;overflow:hidden}
 #v-lock .wall-butterflies{opacity:.35}
 .lock-top{margin-top:max(52px,calc(var(--sat) + 8px));text-align:center;font-size:19px;opacity:.95}
 .lock-clock{margin-top:8px;text-align:center}
@@ -640,13 +640,63 @@ img{-webkit-user-drag:none}
 .nwr-meta{font-size:12px;color:#999;padding-bottom:13px;border-bottom:1px solid #eee}
 .nwr-body p{font-size:15px;line-height:1.85;color:#333;margin-top:15px}
 .nwr-foot{margin-top:26px;padding-top:12px;border-top:1px solid #eee;font-size:11.5px;color:#aaa;line-height:1.7}
+/* ===== v76：UI絵文字の全廃（SVG化）＋タイトル画面刷新 ===== */
+.icx{width:20px;height:20px;vertical-align:-4px}
+.kk-icons .icx{width:20px;height:20px}
+.kk-tabbar .ti .icx{width:22px;height:22px;display:block}
+.ch-icons{display:inline-flex;gap:13px;align-items:center}
+.ch-icons .icx{width:19px;height:19px}
+.cg i .icx{width:27px;height:27px}
+.ci-opt span .icx{width:19px;height:19px;vertical-align:-4px}
+.lk-btn{color:#fff}.lk-btn .icx{width:21px;height:21px}
+.ln-ic{color:#3a1d1d}.ln-ic .icx{width:19px;height:19px}
+.lock-top{color:#fff}.lock-top .icx{width:19px;height:19px}
+.plus-panel span .icx{width:21px;height:21px}
+.prof-actions button span .icx{width:22px;height:22px}
+.ig-nav button .icx{width:22px;height:22px}
+#rtray button svg{width:24px;height:24px;display:block}
+.rchip svg{width:13px;height:13px;vertical-align:-2px}
+.povrow .pic .icx{width:25px;height:25px}
+#noise .n-ic .icx{width:19px;height:19px;vertical-align:-4px}
+.endslot .icx{width:14px;height:14px;vertical-align:-2px}
+.memo .tag .icx{width:12px;height:12px;vertical-align:-1px}
+.choice-btn .icx{width:13px;height:13px;vertical-align:-2px}
+.epi-done .icx{width:12px;height:12px;vertical-align:-1px}
+.fr-mus .icx{width:11px;height:11px;vertical-align:-1px}
+.fr-row .icx{width:13px;height:13px;vertical-align:-2px}
+.thread .avc .icx{width:19px;height:19px}
+#mus-toggle .icx{width:14px;height:14px;vertical-align:-2px}
+#mus-now .icx{width:13px;height:13px;vertical-align:-2px}
+.prof-music .icx{width:12px;height:12px;vertical-align:-2px}
+.ig-grid .lk .icx{width:13px;height:13px;vertical-align:-2px}
+.mus-credit .icx{width:14px;height:14px;vertical-align:-2px}
+.bdg .icx{width:12px;height:12px;vertical-align:-1px}
+#chat-bottom-btn .icx{width:14px;height:14px}
+#story-pause-ind svg{width:13px;height:13px;vertical-align:-1px}
+.nw-wx{display:flex}.nw-wx svg{width:27px;height:27px}
+.wall-butterflies span{color:rgba(255,255,255,.92)}
+.wall-butterflies svg{display:block;filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
+.ic-pov .icx,.ic-epi .icx{width:30px;height:30px}
+.ic-set .icx{width:28px;height:28px}
+.set-head .icx{width:15px;height:15px;vertical-align:-2px}
+.prof-gear .icx{width:21px;height:21px}
+.in-emo .icx{width:19px;height:19px;vertical-align:-3px}
+/* タイトル画面（ページ見出し＋ロック画面）の刷新 */
+.page-head h1{font-family:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:24px;font-weight:600;letter-spacing:.15em;color:#f3ecdc}
+.ph-mark{display:flex;justify-content:center;margin-bottom:8px}
+.ph-rule{width:56px;height:1px;background:linear-gradient(90deg,transparent,#c9a86a,transparent);margin:11px auto 3px}
+.lock-title{margin-top:19px;text-align:center;color:#fff;padding:0 20px}
+.lt-over{font-size:10.5px;letter-spacing:.32em;color:rgba(240,230,205,.78);font-weight:500}
+.lt-main{font-family:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:21px;font-weight:600;letter-spacing:.11em;line-height:1.55;margin-top:8px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.lt-rule{width:44px;height:1px;background:linear-gradient(90deg,transparent,rgba(230,205,150,.9),transparent);margin:12px auto 0}
+@media (max-height:720px){.lt-main{font-size:17px}.lock-title{margin-top:11px}.lt-rule{margin-top:8px}}
 </style>
 </head>
 <body>
 <div class="page-head">
-<h1>パク・ジェオンを好きにならない件</h1>
+<div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>パク・ジェオンを好きにならない件</h1><div class="ph-rule"></div>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v75：韓国ポータル風ニュースアプリ（P7）を追加しました。ホームの「뉴스」から、作中の時期に合わせた天気・大学・美術展などの記事と、アクセスランキングが読めます。記事は物語の進行に連動して増え、まだ来ていない時期の出来事は出ません。あわせて自己監査で見つけた不整合を1件直しました：Instagramの検索で、物語にまだ登場していない人物のアカウントが序盤から表示されていたため、登場に合わせて表示されるよう統一しました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。前版 v74：姉妹作『現役アイドル、Tinderやってた件』から実物寄せの仕組みを移植しました。チャットの「一番下へ戻る」ボタン、カカオ風のメッセージ反応（長押しで付けられ、保存されます）、フリーチャットでの写真送信、Instagramストーリーの長押し一時停止と下スワイプ閉じ、写真の左右スワイプ送り、Instagramの検索・探索タブを追加しました。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v76：UIの絵文字を全廃し、インラインSVGアイコンに置き換えました（ホームのアプリアイコン、カカオ・Instagram・電話・ニュース等のボタン類、メッセージ反応のトレーとチップ、天気アイコンまで）。反応の保存形式は従来どおりのため、既存セーブの反応もそのまま表示されます。あわせてタイトル画面を刷新しました：ページ見出しとロック画面に、作品の世界観（蝶・夜・美大）に合わせた明朝タイポグラフィと金の蝶のモチーフ、金色の差し色と夜色のグラデーションを入れています。導線（タップで開く／各アプリへの遷移）とセーブ判定は変更していません。前版 v75：韓国ポータル風ニュースアプリ（P7）を追加しました。ホームの「뉴스」から、作中の時期に合わせた天気・大学・美術展などの記事と、アクセスランキングが読めます。記事は物語の進行に連動して増え、まだ来ていない時期の出来事は出ません。あわせて自己監査で見つけた不整合を1件直しました：Instagramの検索で、物語にまだ登場していない人物のアカウントが序盤から表示されていたため、登場に合わせて表示されるよう統一しました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -655,43 +705,44 @@ img{-webkit-user-drag:none}
 
 <!-- LOCK (iOS 14) -->
 <div class="view on" id="v-lock">
-<div class="wall-butterflies"><span style="left:14%;top:20%">🦋</span><span style="left:76%;top:14%;animation-delay:1.2s">🦋</span><span style="left:60%;top:40%;animation-delay:2.1s;font-size:18px">🦋</span></div>
-<div class="lock-top">🔒</div>
+<div class="wall-butterflies"><span style="left:14%;top:20%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:76%;top:14%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:60%;top:40%;animation-delay:2.1s"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span></div>
+<div class="lock-top"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></svg></div>
 <div class="lock-clock"><div class="lock-date" id="lock-date">3月12日 金曜日</div><div class="lock-time" id="lock-time">9:41</div></div>
+<div class="lock-title"><div class="lt-over">알고 있어도 ― わかっていても</div><div class="lt-main">パク・ジェオンを<br>好きにならない件</div><div class="lt-rule"></div></div>
 <div class="lock-notifs">
 <div class="lnotif"><img src="assets/av-jaeon.jpg" alt=""><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>지금</span></div><div class="ln-t"><b>박재언</b>： ……蝶、見に行く？</div></div></div>
 <div class="lnotif stack"><img src="assets/av-jaeon.jpg" alt=""><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
-<div class="lnotif"><span class="ln-ic">🔍</span><div style="flex:1;min-width:0"><div class="ln-h"><b>解剖メモ</b><span>1시간 전</span></div><div class="ln-t">新しい解剖メモが解放されました</div></div></div>
+<div class="lnotif"><span class="ln-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>解剖メモ</b><span>1시간 전</span></div><div class="ln-t">新しい解剖メモが解放されました</div></div></div>
 </div>
-<div class="lock-btns"><span class="lk-btn">🔦</span><span class="lk-btn">📷</span></div>
+<div class="lock-btns"><span class="lk-btn"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 2.5h7l.8 5.5H7.7z"/><rect x="10" y="8" width="4" height="12.5" rx="1.8"/></svg></span><span class="lk-btn"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span></div>
 <div class="lock-hint">タップして開く</div>
 </div>
 
 <!-- HOME (iOS 14) -->
 <div class="view" id="v-home">
-<div class="wall-butterflies"><span style="left:12%;top:13%">🦋</span><span style="left:80%;top:9%;animation-delay:1.2s">🦋</span><span style="left:66%;top:31%;animation-delay:2.1s;font-size:18px">🦋</span><span style="left:20%;top:47%;animation-delay:.6s;font-size:19px">🦋</span></div>
+<div class="wall-butterflies"><span style="left:12%;top:13%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:80%;top:9%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:66%;top:31%;animation-delay:2.1s"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:20%;top:47%;animation-delay:.6s"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span></div>
 <div class="home-scroll">
 <div class="wid-row">
 <div class="wid-cal"><div class="wd" id="wid-wd">금요일</div><div class="d" id="wid-day">12</div><div class="ev" id="wid-ev">バーでの出会い</div></div>
-<div class="wid-photo"><img src="assets/ig-butterfly.jpg" alt=""><span>🦋 나비 ― 写真</span></div>
+<div class="wid-photo"><img src="assets/ig-butterfly.jpg" alt=""><span><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg> 나비 ― 写真</span></div>
 </div>
-<div class="wid-wide"><b>🔍 解剖メモ ― パク・ジェオン解明度</b>
+<div class="wid-wide"><b><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg> 解剖メモ ― パク・ジェオン解明度</b>
 <div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
 心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
-<div class="wid-music"><div class="mh"><b>♪ BGM</b><span id="mus-now"></span><button id="mus-toggle" class="isw" aria-label="BGMのオン・オフ">🔊 ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
+<div class="wid-music"><div class="mh"><b><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg> BGM</b><span id="mus-now"></span><button id="mus-toggle" class="isw" aria-label="BGMのオン・オフ"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9.5a4 4 0 0 1 0 5M18 7a7.5 7.5 0 0 1 0 10"/></svg> ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
 <div class="apps">
 <button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="37" height="37" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span>카카오톡<span class="bdg" id="bdg-kakao">1</span></button>
 <button class="app" data-open="ig"><span class="ic ic-ig"><svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.35" fill="#fff" stroke="none"/></svg></span>Instagram</button>
 <button class="app" data-open="gallery"><span class="ic" style="background:#fff"><svg width="41" height="41" viewBox="0 0 48 48" aria-label="写真"><g fill-opacity=".85"><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#f6b73c"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#f28c28" transform="rotate(45 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#e64b35" transform="rotate(90 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#cc2e7a" transform="rotate(135 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#7e57a5" transform="rotate(180 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#3d6db5" transform="rotate(225 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#2e9e8f" transform="rotate(270 24 24)"/><ellipse cx="24" cy="14.6" rx="4.9" ry="10.2" fill="#8bc34a" transform="rotate(315 24 24)"/></g></svg></span>사진</button>
 <button class="app" data-open="cal"><span class="ic ic-cal"><span class="cwd" id="app-cal-wd">금요일</span><span class="cd2" id="app-cal-d">12</span></span>캘린더</button>
 <button class="app" data-open="notes"><span class="ic ic-note"><span class="nb"></span><span class="nl"></span><span class="nl" style="width:52%"></span></span>解剖メモ<span class="bdg" id="bdg-note" style="display:none">0</span></button>
-<button class="app" data-open="pov"><span class="ic ic-pov">🦋</span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
-<button class="app" data-open="epi"><span class="ic ic-epi">🌙</span>後日談<span class="bdg" id="bdg-epi" style="display:none">0</span></button>
+<button class="app" data-open="pov"><span class="ic ic-pov"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
+<button class="app" data-open="epi"><span class="ic ic-epi"><svg viewBox="0 0 24 24" width="29" height="29" fill="currentColor" aria-hidden="true"><path d="M20.2 14.2A8.6 8.6 0 1 1 9.8 3.8a7.2 7.2 0 0 0 10.4 10.4z"/></svg></span>後日談<span class="bdg" id="bdg-epi" style="display:none">0</span></button>
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
 <button class="app" data-open="news"><span class="ic ic-news">N</span>뉴스</button>
-<button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
+<button class="app" id="app-reset"><span class="ic ic-set"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span>最初から</button>
 </div>
-<div class="wid-set"><div class="set-head">⚙️ 演出設定</div>
+<div class="wid-set"><div class="set-head"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg> 演出設定</div>
 <div class="set-card">
 <div class="setrow"><span class="sl">メッセージの進み方</span><button class="setbtn val" id="set-tap">タップで進む</button></div>
 <div class="setrow"><span class="sl">メッセージ速度</span><button class="setbtn val" id="set-pace">ふつう</button></div>
@@ -713,69 +764,69 @@ img{-webkit-user-drag:none}
 
 <!-- KAKAO (2021) -->
 <div class="view" id="v-kakao">
-<div class="kk-head"><h2 id="kk-title">채팅</h2><div class="kk-icons"><span>🔍</span><span id="kk-ico2">💬</span><span>🎵</span><span>⚙️</span></div></div>
+<div class="kk-head"><h2 id="kk-title">채팅</h2><div class="kk-icons"><span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><span id="kk-ico2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span><span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg></span><span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span></div></div>
 <div class="abody">
 <div id="thread-list"></div>
 <div id="friend-list" style="display:none"></div>
 </div>
 <div class="kk-tabbar">
-<button data-tab="friends"><span class="ti">👤</span>친구</button>
-<button data-tab="chats" class="on"><span class="ti">💬</span>채팅<span class="kbadge" id="kk-badge">1</span></button>
+<button data-tab="friends"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></span>친구</button>
+<button data-tab="chats" class="on"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span>채팅<span class="kbadge" id="kk-badge">1</span></button>
 <button data-tab="sharp"><span class="ti" style="font-weight:700">#</span>#</button>
-<button data-tab="shop"><span class="ti">🛍️</span>쇼핑</button>
+<button data-tab="shop"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l-1.1 12.5H6.6z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg></span>쇼핑</button>
 <button data-tab="more"><span class="ti">•••</span>더보기</button>
 </div>
 </div>
 
 <!-- CHAT -->
 <div class="view" id="v-chat">
-<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons">🔍 ☰</span></div>
+<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></div>
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
 <div id="tap-hint">▼</div>
 <div id="noise"></div>
-<button id="chat-bottom-btn" aria-label="一番下へ戻る">⬇ 一番下へ戻る</button>
-<div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo">😊</span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
+<button id="chat-bottom-btn" aria-label="一番下へ戻る"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v13M6 11.5l6 6 6-6"/></svg> 一番下へ戻る</button>
+<div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="9" cy="10" r="1.05" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.05" fill="currentColor" stroke="none"/><path d="M8.5 14c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
 <div id="free-row"><button id="btn-plus2" aria-label="添付">＋</button><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send">▶</button></div>
 <div class="plus-panel" id="plus-panel">
-<div data-pp="album"><span>🖼️</span>앨범</div><div data-pp="camera"><span>📷</span>카메라</div><div data-pp="gift"><span>🎁</span>선물하기</div><div data-pp="pay"><span>💸</span>송금</div><div data-pp="voice"><span>🎤</span>음성메시지</div><div data-pp="contact"><span>👤</span>연락처</div><div data-pp="file"><span>📁</span>파일</div><div data-pp="cal"><span>📅</span>일정</div>
+<div data-pp="album"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17.5 9.5 12l3.5 3.5 3-3 4.5 4.5"/></svg></span>앨범</div><div data-pp="camera"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span>카메라</div><div data-pp="gift"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg></span>선물하기</div><div data-pp="pay"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.9a2.3 2.3 0 0 1 0 4.2M17.8 9.9a2.3 2.3 0 0 0 0 4.2"/></svg></span>송금</div><div data-pp="voice"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg></span>음성메시지</div><div data-pp="contact"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></span>연락처</div><div data-pp="file"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg></span>파일</div><div data-pp="cal"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span>일정</div>
 </div>
 <div id="rtray" role="dialog" aria-label="メッセージ反応"></div>
-<div id="albumpick"><div class="ap-sheet"><div class="ap-head"><span>사진 선택（写真を選ぶ）</span><button class="ap-x" id="ap-close">✕</button></div><div class="ap-grid" id="ap-grid"></div></div></div>
+<div id="albumpick"><div class="ap-sheet"><div class="ap-head"><span>사진 선택（写真を選ぶ）</span><button class="ap-x" id="ap-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="ap-grid" id="ap-grid"></div></div></div>
 </div>
 
 <!-- KAKAO PROFILE (2021) -->
 <div class="view" id="v-profile">
 <img class="prof-bg" id="prof-bg" src="assets/ig-jaeon1.jpg" alt="">
 <div class="prof-shade"></div>
-<button class="prof-x" id="prof-close">✕</button>
-<span class="prof-gear">⚙️</span>
+<button class="prof-x" id="prof-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+<span class="prof-gear"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span>
 <div class="prof-main">
 <img class="prof-av" id="prof-av" src="assets/av-jaeon.jpg" alt="">
 <div class="prof-nm">パク・ジェオン</div>
 <div class="prof-status" id="prof-status">작업 중. 끝나지 않는 것</div>
-<div id="prof-music-wrap"><span class="prof-music" id="prof-music">♪ 프로필 뮤직 ― 「Love Song」</span></div>
+<div id="prof-music-wrap"><span class="prof-music" id="prof-music"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg> 프로필 뮤직 ― 「Love Song」</span></div>
 </div>
 <div class="prof-actions">
-<button id="prof-chat"><span>💬</span>1:1 채팅</button>
-<button id="prof-call2"><span>📞</span>무료통화</button>
-<button id="prof-gift"><span>🎁</span>선물하기</button>
+<button id="prof-chat"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span>1:1 채팅</button>
+<button id="prof-call2"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="currentColor" stroke="none"/></svg></span>무료통화</button>
+<button id="prof-gift"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg></span>선물하기</button>
 </div>
 </div>
 
 <!-- IG (2021) -->
 <div class="view" id="v-ig">
 <div class="ig-head"><button class="back" data-home="1">‹</button><span class="ig-logo">Instagram</span><div class="ig-hicons"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span class="ig-badge-dot"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></span></div></div>
-<div class="ig-switch"><button id="igsw-j" class="on">▦</button><button id="igsw-n">👤</button></div>
+<div class="ig-switch"><button id="igsw-j" class="on"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg></button><button id="igsw-n"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></button></div>
 <div class="abody" id="ig-body"></div>
-<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム">🏠</button><button data-ignav="search" aria-label="検索">🔍</button></div>
+<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button></div>
 </div>
 
 <!-- IG SEARCH (v74) -->
 <div class="view" id="v-igsearch">
 <div class="igs-head"><button class="back" id="igs-back">‹</button><input class="igs-in" id="igs-in" type="text" placeholder="검색（検索）" autocomplete="off"></div>
 <div class="abody" id="igs-body" style="background:#fff"></div>
-<div class="ig-nav"><button data-ignav="home" aria-label="ホーム">🏠</button><button data-ignav="search" class="on" aria-label="検索">🔍</button></div>
+<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" class="on" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button></div>
 </div>
 
 <!-- NEWS (v75) -->
@@ -819,14 +870,14 @@ img{-webkit-user-drag:none}
 <div class="call-sub" id="call-sub">……</div>
 <div class="call-hint">字幕をタップすると会話が進みます</div>
 <div class="ui-incoming">
-<div class="ci-opts"><div class="ci-opt"><span>⏰</span>미리 알림</div><div class="ci-opt"><span>💬</span>메시지</div></div>
+<div class="ci-opts"><div class="ci-opt"><span><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>미리 알림</div><div class="ci-opt"><span><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span>메시지</div></div>
 <div class="ci-btns"><button class="cb decline" id="call-decline"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff" transform="rotate(135 12 12)"/></svg></button><button class="cb accept" id="call-accept"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></button></div>
 <div class="ci-lab"><span>거절</span><span>응답</span></div>
 </div>
 <div class="ui-incall">
 <div class="call-grid">
-<div class="cg" data-cg="mute"><i>🔇</i>음소거</div><div class="cg" data-cg="pad"><i>⌨️</i>키패드</div><div class="cg" data-cg="spk"><i>🔊</i>스피커</div>
-<div class="cg" data-cg="add"><i>➕</i>통화 추가</div><div class="cg" data-cg="ft"><i>📹</i>FaceTime</div><div class="cg" data-cg="ct"><i>👤</i>연락처</div>
+<div class="cg" data-cg="mute"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M16 9.8l5 5M21 9.8l-5 5"/></svg></i>음소거</div><div class="cg" data-cg="pad"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="7" r="1.35" fill="currentColor" stroke="none"/><circle cx="17" cy="7" r="1.35" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.35" fill="currentColor" stroke="none"/><circle cx="17" cy="17" r="1.35" fill="currentColor" stroke="none"/></svg></i>키패드</div><div class="cg" data-cg="spk"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9.5a4 4 0 0 1 0 5M18 7a7.5 7.5 0 0 1 0 10"/></svg></i>스피커</div>
+<div class="cg" data-cg="add"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></i>통화 추가</div><div class="cg" data-cg="ft"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="2.5"/><path d="M16 10.8 20.5 7.8v8.4L16 13.2"/></svg></i>FaceTime</div><div class="cg" data-cg="ct"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></i>연락처</div>
 </div>
 <button class="cb end" id="call-next"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff" transform="rotate(135 12 12)"/></svg></button>
 </div>
@@ -838,7 +889,7 @@ img{-webkit-user-drag:none}
 <div class="ahead"><button class="back" data-home="1">‹</button><h2>사진</h2><span class="sub" id="gal-count"></span></div>
 <div class="abody" id="gal-body"></div>
 <div id="gal-view">
-<div class="gal-top"><div class="gal-top-tx"><div id="gal-date"></div><div id="gal-wday"></div></div><button id="gal-close">✕</button></div>
+<div class="gal-top"><div class="gal-top-tx"><div id="gal-date"></div><div id="gal-wday"></div></div><button id="gal-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <img id="gal-img" src="" alt="">
 <div class="gal-meta"><div id="gal-cap"></div></div>
 <div class="gal-bar">
@@ -878,9 +929,9 @@ img{-webkit-user-drag:none}
 <div class="view" id="v-story">
 <img class="story-img" id="story-img" src="" alt="">
 <div class="story-progs" id="story-progs"></div>
-<div class="story-head"><img id="story-av" src="" alt=""><b id="story-user"></b><span id="story-ago"></span><button class="sx" id="story-close">✕</button></div>
+<div class="story-head"><img id="story-av" src="" alt=""><b id="story-user"></b><span id="story-ago"></span><button class="sx" id="story-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <div class="story-cap" id="story-cap"></div>
-<div id="story-pause-ind">⏸ 一時停止中</div>
+<div id="story-pause-ind"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 5v14M15 5v14"/></svg> 一時停止中</div>
 <div class="story-foot"><span class="sf-in">メッセージを送信…</span><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></div>
 <button class="story-zone l" id="story-prev"></button>
 <button class="story-zone r" id="story-next"></button>
@@ -1001,6 +1052,35 @@ const SOLA=[
 ];
 </script>
 <script>
+/* ===== v76：UIアイコン基盤（インラインSVG・currentColor） ===== */
+const IC={
+search:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg>',
+lock:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></svg>',
+unlock:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 7.8-1.2"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></svg>',
+chat:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg>',
+note:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg>',
+group:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3.2"/><path d="M3.5 19.5c.6-3 2.9-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><path d="M15.5 6.3a3.2 3.2 0 0 1 0 5.9M17.8 15.3c1.6.7 2.6 2 3 4.2"/></svg>',
+speaker:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9.5a4 4 0 0 1 0 5M18 7a7.5 7.5 0 0 1 0 10"/></svg>',
+mute:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M16 9.8l5 5M21 9.8l-5 5"/></svg>',
+bell:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.5v-5.5a6 6 0 0 1 12 0v5.5l1.2 2.7H4.8z"/><path d="M10 21.2a2.2 2.2 0 0 0 4 0"/></svg>',
+check:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>',
+trophy:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 5.8H4.6A2.6 2.6 0 0 0 7.3 9M17 5.8h2.4A2.6 2.6 0 0 1 16.7 9M12 14v2.6M8.8 20.5c.3-1.7 1.5-2.6 3.2-2.6s2.9.9 3.2 2.6z"/></svg>',
+cake:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20.5h15M5.5 20.5v-5.8h13v5.8"/><path d="M5.5 14.7c1.6 1.3 3.2-1.1 4.8 0 1.5 1.1 3-.1 4.4 0 1.4.1 2.6 1.1 3.8 0"/><path d="M12 10.2V8"/><circle cx="12" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>',
+bowl:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5h16a8 8 0 0 1-16 0z"/><path d="M8.5 8.8c1.2-1.4 2.8 1 4.2 0 1.2-.9 2.6.8 3.8-.2M15.5 3.5 19 8.8M18.5 2.8 21 7.8"/></svg>',
+letter:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4.2 7.8 12 13.2l7.8-5.4"/></svg>',
+sunrise:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9.5v-5M12 4.5 9.9 6.6M12 4.5l2.1 2.1"/><path d="M6.8 16.5a5.2 5.2 0 0 1 10.4 0"/><path d="M3 16.5h18M5.5 20h13"/></svg>',
+leaf:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 18.5C5.5 10.5 11.5 5 19.8 4.4c-.5 8-4.8 14.1-13 14.1z"/><path d="M5.5 18.5c1.8-4.8 5.2-8.3 9.7-10.3"/></svg>',
+book:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.8C10.2 5.1 7.2 4.7 4 5.3v13.2c3.2-.6 6.2-.2 8 1.5 1.8-1.7 4.8-2.1 8-1.5V5.3c-3.2-.6-6.2-.2-8 1.5z"/><path d="M12 6.8v13.2"/></svg>',
+cap:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5 2.8 9.5 12 14l9.2-4.5z"/><path d="M6.5 11.6v4.2c0 1.5 2.5 2.7 5.5 2.7s5.5-1.2 5.5-2.7v-4.2M21.2 9.5v5.3"/></svg>',
+box:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>',
+sun:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8"/></svg>',
+partly:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7.5" r="2.7"/><path d="M8 2.2v1.6M2.7 7.5h1.6M4.2 3.7l1.1 1.1"/><path d="M10.5 20h7a3.9 3.9 0 0 0 .7-7.7A5.6 5.6 0 0 0 7.6 13.7 3.3 3.3 0 0 0 10.5 20z"/></svg>',
+cloud:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19h10a4.2 4.2 0 0 0 .8-8.3A6.2 6.2 0 0 0 6 12.2 3.8 3.8 0 0 0 7 19z"/></svg>',
+rain:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14.5h10a4.2 4.2 0 0 0 .8-8.3A6.2 6.2 0 0 0 6 7.7 3.8 3.8 0 0 0 7 14.5z"/><path d="M9 17l-1 2.6M13.5 17l-1 2.6M18 17l-1 2.6"/></svg>',
+rainsun:'<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="2.5"/><path d="M8 2v1.5M2.9 7h1.5"/><path d="M10.5 17.5h6.8a3.7 3.7 0 0 0 .6-7.3A5.3 5.3 0 0 0 7.8 11a3.1 3.1 0 0 0 2.7 6.5z"/><path d="M10 19.2l-.7 1.9M14.5 19.2l-.7 1.9"/></svg>',
+butterfly:'<svg class="icx" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/></svg>'
+};
+
 /* ================= STORY ================= */
 /* k: date/scene/j/scene choice/call/fade/memo/ig/sys/chap/end */
 const STORY=[
@@ -1217,7 +1297,16 @@ const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 /* ===== v74：メッセージ反応の基盤（start の replay より前に必要） ===== */
 let curMsgKey=null, playKeyPfx='x', playKeyN=0;
 function tagMsg(r){ if(!r) return; const k=curMsgKey; if(k){ r.dataset.rk=k; drawChip(r); } }
-function drawChip(r){ if(!r||!r.dataset||!r.dataset.rk) return; const old=r.querySelector('.rchip'); if(old) old.remove(); if(!S.reactions||typeof S.reactions!=='object') return; const e=S.reactions[r.dataset.rk]; if(!e) return; const bub=r.querySelector('.bub'); if(!bub) return; const c=document.createElement('span'); c.className='rchip'; c.textContent=e; bub.insertAdjacentElement('afterend',c); }
+/* v76：RT_SVG は drawChip（第2ブロック）からも使うため、ここで定義する（第4ブロックのトレーも同じ定義を参照） */
+const RT_SVG={
+'❤️':'<svg viewBox="0 0 24 24"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z" fill="#f43f5e"/></svg>',
+'😂':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="#ffd93b"/><path d="M7.5 10.2c.8-.9 2-.9 2.8 0M14.7 10.2c.8-.9 2-.9 2.8 0" stroke="#8a6d1a" fill="none" stroke-width="1.6" stroke-linecap="round"/><path d="M7.8 13.8c.9 2.3 2.4 3.4 4.2 3.4s3.3-1.1 4.2-3.4c-1.4.5-2.8.7-4.2.7s-2.8-.2-4.2-.7z" fill="#8a6d1a"/><path d="M20.2 11.8c1 1.7.7 3.5-.7 4.4-1.1-1-1.4-2.8-.7-4.2.3-.7 1.1-.8 1.4 0zM3.8 11.8c-1 1.7-.7 3.5.7 4.4 1.1-1 1.4-2.8.7-4.2-.3-.7-1.1-.8-1.4 0z" fill="#7cc7e8"/></svg>',
+'😮':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="#ffd93b"/><circle cx="9" cy="10" r="1.2" fill="#8a6d1a"/><circle cx="15" cy="10" r="1.2" fill="#8a6d1a"/><ellipse cx="12" cy="15.5" rx="1.7" ry="2.1" fill="#8a6d1a"/><path d="M7.8 6.8c.9-.8 2-.9 2.9-.3M13.3 6.5c.9-.6 2-.5 2.9.3" stroke="#8a6d1a" fill="none" stroke-width="1.4" stroke-linecap="round"/></svg>',
+'😢':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="#ffd93b"/><circle cx="9" cy="10.4" r="1.1" fill="#8a6d1a"/><circle cx="15" cy="10.4" r="1.1" fill="#8a6d1a"/><path d="M8.8 16.8c.9-1.2 2-1.8 3.2-1.8s2.3.6 3.2 1.8" stroke="#8a6d1a" fill="none" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M18.4 12.6c.9 1.4 1.3 2.4 1.3 3.2a1.3 1.3 0 1 1-2.6 0c0-.8.4-1.8 1.3-3.2z" fill="#7cc7e8"/></svg>',
+'😡':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="#ff8a5c"/><path d="M7.4 8.4l3.2 1.5M16.6 8.4l-3.2 1.5" stroke="#7a2d12" stroke-width="1.7" stroke-linecap="round"/><circle cx="9.2" cy="11.8" r="1.1" fill="#7a2d12"/><circle cx="14.8" cy="11.8" r="1.1" fill="#7a2d12"/><path d="M8.8 17.2c.9-1.2 2-1.8 3.2-1.8s2.3.6 3.2 1.8" stroke="#7a2d12" fill="none" stroke-width="1.6" stroke-linecap="round"/></svg>',
+'👍':'<svg viewBox="0 0 24 24"><path d="M7 11.2V20H4.6v-8.8zM7 11.2 11.3 3.6c1.6 0 2.6 1.2 2.4 2.8L13 9.2h5.3a2 2 0 0 1 2 2.4l-.9 5.9A2 2 0 0 1 17.4 19.4H7z" fill="#ffcf5c" stroke="#c79a2d" stroke-width="1" stroke-linejoin="round"/></svg>'
+};
+function drawChip(r){ if(!r||!r.dataset||!r.dataset.rk) return; const old=r.querySelector('.rchip'); if(old) old.remove(); if(!S.reactions||typeof S.reactions!=='object') return; const e=S.reactions[r.dataset.rk]; if(!e) return; const bub=r.querySelector('.bub'); if(!bub) return; const c=document.createElement('span'); c.className='rchip'; c.innerHTML=RT_SVG[e]||''; bub.insertAdjacentElement('afterend',c); }
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -1260,8 +1349,8 @@ function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class
 let feedStick=true, advForce=false;
 feed.addEventListener('scroll',()=>{ feedStick=(feed.scrollHeight-feed.scrollTop-feed.clientHeight)<160; },{passive:true});
 function scrollFeed(force){ if(force||advForce||feedStick){ feed.scrollTop=feed.scrollHeight; feedStick=true; } advForce=false; }
-function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('🔍 解剖メモが解放されました（ホームの「解剖メモ」）');}}
-function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('📷 Instagramに新しい投稿が解放されました（ホームの「Instagram」）');}}
+function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('解剖メモが解放されました（ホームの「解剖メモ」）');}}
+function unlockIG(id,quiet){if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('Instagramに新しい投稿が解放されました（ホームの「Instagram」）');}}
 function applyItem(it,quiet){
  switch(it.k){
   case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); if(typeof it.cal==='number'&&typeof setAmb==='function') setAmb(it.cal); if(!quiet&&typeof it.cal==='number'&&typeof showNoise==='function') showNoise(it.cal); break;
@@ -1372,7 +1461,7 @@ $('#call-accept').addEventListener('click',()=>{ if(callPhase==='incoming') star
 $('#call-decline').addEventListener('click',()=>{ toast('応答すると物語が進みます'); });
 $('#call-sub').addEventListener('click',()=>{ if(callPhase==='incall') advanceCall(); });
 /* v69：通話中ボタン群の実挙動。ミュート／スピーカーは見た目の状態表示のみで音声には干渉せず、キーパッドは数字表示だけを行う。台詞行送り（advanceCall）とボイス連動には触れない */
-const CALLGRID_HTML='<div class="cg" data-cg="mute"><i>🔇</i>음소거</div><div class="cg" data-cg="pad"><i>⌨️</i>키패드</div><div class="cg" data-cg="spk"><i>🔊</i>스피커</div><div class="cg" data-cg="add"><i>➕</i>통화 추가</div><div class="cg" data-cg="ft"><i>📹</i>FaceTime</div><div class="cg" data-cg="ct"><i>👤</i>연락처</div>';
+const CALLGRID_HTML='<div class="cg" data-cg="mute"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M16 9.8l5 5M21 9.8l-5 5"/></svg></i>음소거</div><div class="cg" data-cg="pad"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="7" r="1.35" fill="currentColor" stroke="none"/><circle cx="17" cy="7" r="1.35" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.35" fill="currentColor" stroke="none"/><circle cx="17" cy="17" r="1.35" fill="currentColor" stroke="none"/></svg></i>키패드</div><div class="cg" data-cg="spk"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9.5a4 4 0 0 1 0 5M18 7a7.5 7.5 0 0 1 0 10"/></svg></i>스피커</div><div class="cg" data-cg="add"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></i>통화 추가</div><div class="cg" data-cg="ft"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="2.5"/><path d="M16 10.8 20.5 7.8v8.4L16 13.2"/></svg></i>FaceTime</div><div class="cg" data-cg="ct"><i><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></i>연락처</div>';
 function renderCallGrid(){
  const g=document.querySelector('.call-grid'); if(!g) return;
  const cv=$('#v-call'); if(cv) cv.dataset.pad=callPad?'1':''; /* v69：キーパッド表示中の圧縮レイアウト切替 */
@@ -1477,7 +1566,7 @@ function renderFinal(it){
  FINAL_OPTS.forEach((op,oi)=>{
    const locked=op.req && S.kai<op.req;
    const b=document.createElement('button'); b.className='choice-btn'+(locked?' locked':'');
-   b.textContent=locked?('🔒 ？？？（解明度'+op.req+'以上で解放される選択肢）'):op.t;
+   if(locked){ b.innerHTML=IC.lock+' ？？？（解明度'+op.req+'以上で解放される選択肢）'; } else { b.textContent=op.t; }
    if(!locked) b.addEventListener('click',()=>{
      choiceOpen=false; wrap.remove();
      S.picks[S.idx]=oi; curMsgKey='s'+S.idx+'a'; addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
@@ -1513,7 +1602,7 @@ function replay(){
 /* ================= SIDE VIEWS ================= */
 function threadRow(img,name,prev,time,ub,onclick,avc){
  const b=document.createElement('button'); b.className='thread';
- b.innerHTML=(img?'<img class="av" src="'+img+'">':'<span class="avc" style="background:'+avc+'">👥</span>')+'<span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(prev)+'</span></span>'+'<span class="tr"><time>'+time+'</time>'+(ub?'<span class="ub">'+ub+'</span>':'')+'</span>';
+ b.innerHTML=(img?'<img class="av" src="'+img+'">':'<span class="avc" style="background:'+avc+'">'+IC.group+'</span>')+'<span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(prev)+'</span></span>'+'<span class="tr"><time>'+time+'</time>'+(ub?'<span class="ub">'+ub+'</span>':'')+'</span>';
  b.addEventListener('click',onclick); return b;
 }
 function renderThreads(){
@@ -1549,7 +1638,7 @@ function openSide(name,img,log){
  const f=sideView.querySelector('#side-feed'); f.innerHTML='';
  log.forEach(([who,txt])=>{
    if(who==='なお'){ f.appendChild(el('<div class="row me"><div class="bub">'+esc(txt)+'</div></div>')); }
-   else{ f.appendChild(el('<div class="row">'+(img?'<img class="av" src="'+img+'">':'<span class="avc" style="width:36px;height:36px;border-radius:13px;background:#7fb2d9;display:flex;align-items:center;justify-content:center;color:#fff;flex:none">👥</span>')+'<div><div class="nm">'+esc(who)+'</div><div class="bub">'+esc(txt)+'</div></div></div>')); }
+   else{ f.appendChild(el('<div class="row">'+(img?'<img class="av" src="'+img+'">':'<span class="avc" style="width:36px;height:36px;border-radius:13px;background:#7fb2d9;display:flex;align-items:center;justify-content:center;color:#fff;flex:none">'+IC.group+'</span>')+'<div><div class="nm">'+esc(who)+'</div><div class="bub">'+esc(txt)+'</div></div></div>')); }
  });
  showView('v-side');
 }
@@ -1582,7 +1671,7 @@ function renderIG(){
  h+= isJ ? '<div class="ig-folbtn"><span class="ghost" data-gf="follow">フォロー中</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
  if(isJ||igNTab==='grid'){
-  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">🔒 物語で解放</span></button>':'')+'</div>';
+  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">'+IC.lock+' 物語で解放</span></button>':'')+'</div>';
  }else{
   const sv=S.igSaves.slice().reverse().map(id=>{ const pj=IG_J.find(x=>x.id===id); if(pj&&vis(pj)) return {p:pj,o:'j'}; const pn=IG_N.find(x=>x.id===id); if(pn&&vis(pn)) return {p:pn,o:'n'}; return null; }).filter(Boolean);
   h+= sv.length ? '<div class="ig-grid">'+sv.map(x=>'<button data-spost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>' : '<div class="ig-saved-empty">保存した投稿はまだありません。<br>投稿のブックマークボタンから保存できます。</div>';
@@ -1665,14 +1754,14 @@ function renderNotes(){
  const b=$('#notes-body');
  b.innerHTML=MEMOS.map(m=>{
    const un=S.memos.includes(m.id);
-   return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:'🔒 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3>'+(un&&MEMO_DATES[m.id]?'<div class="memo-date">'+MEMO_DATES[m.id]+'</div>':'')+'<p>'+(un?esc(m.body):'物語のキー場面を読み進めると、解剖メモが解放されます。')+'</p></div>';
+   return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:IC.lock+' 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3>'+(un&&MEMO_DATES[m.id]?'<div class="memo-date">'+MEMO_DATES[m.id]+'</div>':'')+'<p>'+(un?esc(m.body):'物語のキー場面を読み進めると、解剖メモが解放されます。')+'</p></div>';
   }).join('')+endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>'; /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
 }
 function endsHTML(){
  const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
  return '<div class="cal-m" style="margin-top:4px">エンディングコレクション（'+S.ends.length+' / 3）</div>'+defs.map(d=>{
    const got=S.ends.includes(d[0]);
-   return '<div class="endslot'+(got?' got':'')+'">'+(got?'🏆 '+d[1]:(d[0]==='nao'?'🔒 ？？？（解明度55以上で見えてくる、もう一つの結末）':'🔒 未到達のエンディング'))+'</div>';
+   return '<div class="endslot'+(got?' got':'')+'">'+(got?IC.trophy+' '+d[1]:(d[0]==='nao'?IC.lock+' ？？？（解明度55以上で見えてくる、もう一つの結末）':IC.lock+' 未到達のエンディング'))+'</div>';
  }).join('');
 }
 /* call log */
@@ -1715,19 +1804,19 @@ $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直
 /* v6：ステータスバーとロック画面の時計は実時刻ではなく物語内時刻（chatMin）に連動する（updClock は v6 セクションで定義し、updParams から呼ばれる） */
 /* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
 let lockOpening=false;
-$('#v-lock').addEventListener('click',()=>{ if(lockOpening) return; lockOpening=true; if(typeof sfxPlay==='function') sfxPlay('unlock'); const lt=document.querySelector('.lock-top'); if(lt) lt.textContent='🔓'; setTimeout(()=>{ showView('v-home'); if(lt) lt.textContent='🔒'; lockOpening=false; },380); }); /* v69：実物どおり、錠が開く表示を挟んでからホームへ移る */
+$('#v-lock').addEventListener('click',()=>{ if(lockOpening) return; lockOpening=true; if(typeof sfxPlay==='function') sfxPlay('unlock'); const lt=document.querySelector('.lock-top'); if(lt) lt.innerHTML=IC.unlock; setTimeout(()=>{ showView('v-home'); if(lt) lt.innerHTML=IC.lock; lockOpening=false; },380); }); /* v69：実物どおり、錠が開く表示を挟んでからホームへ移る */
 function renderFriends(){
  const F=$('#friend-list'); if(!F) return;
  const bday=S.calU===4;
- let h='<div class="fr-sec first">내 프로필</div><button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar.jpg"><span><span class="fn">なお'+(bday?' 🎂':'')+'</span><div class="fs">'+(bday?'오늘 생일이에요 🎂':'졸업 제작 중… 🦋')+'</div></span></button>';
- if(bday) h+='<div class="fr-sec">생일인 친구</div><button class="thread fr-row" data-fr="なお"><img class="av" src="assets/nao-avatar.jpg"><span class="tt"><span class="tn">なお 🎂</span><span class="tp">오늘 생일이에요</span></span></button>';
+ let h='<div class="fr-sec first">내 프로필</div><button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar.jpg"><span><span class="fn">なお'+(bday?' '+IC.cake:'')+'</span><div class="fs">'+(bday?'오늘 생일이에요 ' + IC.cake:'졸업 제작 중… 🦋')+'</div></span></button>';
+ if(bday) h+='<div class="fr-sec">생일인 친구</div><button class="thread fr-row" data-fr="なお"><img class="av" src="assets/nao-avatar.jpg"><span class="tt"><span class="tn">なお ' + IC.cake + '</span><span class="tp">오늘 생일이에요</span></span></button>';
  const cnt=1+(S.chap>=1?1:0)+(S.chap>=4?1:0)+(S.chap>=5?1:0);
  h+='<div class="fr-sec">친구 '+cnt+'</div>';
- const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(st||'')+'</span></span>'+(mus?'<span class="fr-mus">♪ '+esc(mus)+'</span>':'')+'</button>';
+ const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+(st==='RAMEN'?IC.bowl:esc(st||''))+'</span></span>'+(mus?'<span class="fr-mus">'+IC.note+' '+esc(mus)+'</span>':'')+'</button>';
  const jm=(profStage().mus.match(/「([^」]+)」/)||[])[1]||'';
  h+=row(cav(),'パク・ジェオン',profStage().st,jm);
  if(S.chap>=1) h+=row('assets/av-bitna.jpg','ビンナ','');
- if(S.chap>=4) h+=row('assets/av-dohyuk.jpg','ヤン・ドヒョク','🍜');
+ if(S.chap>=4) h+=row('assets/av-dohyuk.jpg','ヤン・ドヒョク','RAMEN');
  if(S.chap>=5) h+=row('assets/av-sola.jpg','ユン・ソルア','');
  F.innerHTML=h;
  const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>toast('自分のプロフィールです'));
@@ -1741,8 +1830,8 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
  document.querySelectorAll('.kk-tabbar [data-tab]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
  const T=$('#kk-title');
  const ic2=$('#kk-ico2');
- if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; if(ic2) ic2.textContent='👤+'; }
- else if(t==='chats'){ $('#friend-list').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.textContent='💬'; }
+ if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M3.8 19.5c.7-3.2 3.2-4.8 6.2-4.8 1.4 0 2.7.3 3.8 1M17.5 14.5v6M14.5 17.5h6"/></svg>'; }
+ else if(t==='chats'){ $('#friend-list').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.innerHTML=IC.chat; }
  else{ toast('（このタブは2021年仕様の演出用です）'); }
 }));
 $('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
@@ -1784,16 +1873,16 @@ function rampBgmTo(target,ms,done){
    if(p>=1){ stopBgmFade(); if(done)done(); }
  },40);
 }
-function updMusicUI(){ const np=$('#mus-now'); if(np) np.textContent=curTrack?('♪ '+TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a):''; const tg=$('#mus-toggle'); if(tg){ tg.textContent=S.sndOn?'🔊 ON':'🔇 OFF'; tg.classList.toggle('on',!!S.sndOn); } /* v70：実物トグルスイッチの状態表示（表示のみ） */ const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
+function updMusicUI(){ const np=$('#mus-now'); if(np) np.innerHTML=curTrack?(IC.note+' '+esc(TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a)):''; const tg=$('#mus-toggle'); if(tg){ tg.innerHTML=S.sndOn?(IC.speaker+' ON'):(IC.mute+' OFF'); tg.classList.toggle('on',!!S.sndOn); } /* v70：実物トグルスイッチの状態表示（表示のみ） */ const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
 function syncMusic(){ const want=CHAP_TRACK[S.chap]||'butterfly'; const a=ensureBgm(); if(!a) return; if(want!==curTrack){ curTrack=want; if(musicStarted&&S.sndOn&&!a.paused){ /* 再生中の曲替わりはクロスフェード（フェードアウト→差し替え→フェードイン） */ rampBgmTo(0,450,()=>{ a.src=TRACKS[want].f; a.play().catch(()=>{}); rampBgmTo(effVol(),750); }); } else { stopBgmFade(); a.src=TRACKS[want].f; a.volume=effVol(); if(musicStarted&&S.sndOn) a.play().catch(()=>{}); } } updMusicUI(); }
 function startMusic(){ musicStarted=true; const a=ensureBgm(); if(!a) return; if(!curTrack) syncMusic(); stopBgmFade(); if(S.sndOn&&a.paused){ a.volume=0; a.play().catch(()=>{}); rampBgmTo(effVol(),800); } else { a.volume=effVol(); if(S.sndOn) a.play().catch(()=>{}); } }
 function duckMusic(on){ ducked=on; const a=ensureBgm(); if(a) rampBgmTo(effVol(),on?350:600); }
 document.addEventListener('pointerdown',function h(){ document.removeEventListener('pointerdown',h); startMusic(); });
 $('#mus-toggle').addEventListener('click',()=>{ S.sndOn=!S.sndOn; save(); const a=ensureBgm(); if(a){ stopBgmFade(); a.volume=effVol(); if(S.sndOn) startMusic(); else a.pause(); } updMusicUI(); });
 $('#mus-vol').addEventListener('input',e=>{ S.sndVol=+e.target.value; save(); const a=ensureBgm(); if(a){ stopBgmFade(); a.volume=effVol(); } });
-function musicCreditHTML(){ return '<div class="mus-credit"><b>♪ BGMクレジット（v4追加）</b><br>ドラマ『わかっていても』OST ― Apple Music公式プレビュー音源（30秒・ループ再生）<br>・「Butterfly」JUNHA PARK (J.UNA)<br>・「Love Me Like That」SAM KIM<br>・「We\'re Already」KIMMUSEUM<br>・「Heavy Heart」RIO<br>・「Whisper」Park Ji Woo<br>楽曲の権利は各権利者に帰属します。音源は assets/music/ に配置し、同名ファイルへの差し替えで長尺版にも対応できる構造にしています。</div>'
- +'<div class="mus-credit"><b>🔔 効果音・生活音クレジット（v7追加）</b><br>効果音と環境音はすべて本作のために合成したオリジナル音です（カカオ公式音・iOS標準音などの既存音源は使用していません）。正弦波のポップ音／マリンバ風の着信フレーズ／フィルタノイズによる雨音・海辺・店内・室内のアンビエントを、波形合成スクリプトで生成しました。音源は assets/sfx/ に配置し、同名ファイルへの差し替えが可能な構造にしています。</div>'
- +'<div class="mus-credit"><b>🎙 通話ボイス（v9追加）</b><br>通話シーン（看病の夜／ブレスレットの夜）のジェオンの核セリフに、韓国語ボイスを付けています（日本語字幕と併用）。声はAnyVoiceの既製ボイス「호기요」（実在俳優のクローンではありません）。音源は assets/voice/ に配置しています。</div>'; }
+function musicCreditHTML(){ return '<div class="mus-credit"><b>'+IC.note+' BGMクレジット（v4追加）</b><br>ドラマ『わかっていても』OST ― Apple Music公式プレビュー音源（30秒・ループ再生）<br>・「Butterfly」JUNHA PARK (J.UNA)<br>・「Love Me Like That」SAM KIM<br>・「We\'re Already」KIMMUSEUM<br>・「Heavy Heart」RIO<br>・「Whisper」Park Ji Woo<br>楽曲の権利は各権利者に帰属します。音源は assets/music/ に配置し、同名ファイルへの差し替えで長尺版にも対応できる構造にしています。</div>'
+ +'<div class="mus-credit"><b>'+IC.bell+' 効果音・生活音クレジット（v7追加）</b><br>効果音と環境音はすべて本作のために合成したオリジナル音です（カカオ公式音・iOS標準音などの既存音源は使用していません）。正弦波のポップ音／マリンバ風の着信フレーズ／フィルタノイズによる雨音・海辺・店内・室内のアンビエントを、波形合成スクリプトで生成しました。音源は assets/sfx/ に配置し、同名ファイルへの差し替えが可能な構造にしています。</div>'
+ +'<div class="mus-credit"><b><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg> 通話ボイス（v9追加）</b><br>通話シーン（看病の夜／ブレスレットの夜）のジェオンの核セリフに、韓国語ボイスを付けています（日本語字幕と併用）。声はAnyVoiceの既製ボイス「호기요」（実在俳優のクローンではありません）。音源は assets/voice/ に配置しています。</div>'; }
 /* ================= v4 : POV ================= */
 const POVS=[
 {id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n\n泣いた跡。ライムのカクテル。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
@@ -1809,7 +1898,7 @@ function renderPOV(){
  POVS.forEach(p=>{
    const un=p.unlock();
    const btn=document.createElement('button'); btn.className='povrow'+(un?'':' lock');
-   btn.innerHTML='<span class="pic">'+(un?'🦋':'🔒')+'</span><span><span class="pt">'+(un?esc(p.title):'？？？')+'</span><div class="ps">'+(un?esc(p.sub)+(S.pov.includes(p.id)?'　<span class="epi-done">✓ 読了（読み返せます）</span>':''):'物語を進めると解放されます')+'</div></span>'; /* v70：既読マーカーを後日談一覧の作法に統一（表示のみ） */
+   btn.innerHTML='<span class="pic">'+(un?IC.butterfly:IC.lock)+'</span><span><span class="pt">'+(un?esc(p.title):'？？？')+'</span><div class="ps">'+(un?esc(p.sub)+(S.pov.includes(p.id)?'　<span class="epi-done">'+IC.check+' 読了（読み返せます）</span>':''):'物語を進めると解放されます')+'</div></span>'; /* v70：既読マーカーを後日談一覧の作法に統一（表示のみ） */
    if(un) btn.addEventListener('click',()=>{ if(!S.pov.includes(p.id)){S.pov.push(p.id); save();} $('#povread-body').innerHTML='<div class="pr-t">'+esc(p.title)+'</div>'+esc(p.body); showView('v-povread'); });
    b.appendChild(btn);
  });
@@ -1905,12 +1994,12 @@ function updFreeSend(){ const b=$('#free-send'); if(b) b.classList.toggle('on',!
 $('#free-in').addEventListener('input',updFreeSend);
 
 /* ================= v5 : DAILY-LIFE NOISE & SETTINGS ================= */
-const NOISE={2:['📚','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['🌦','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['💬','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['🎓','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['📦','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
+const NOISE={2:['book','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['rain','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['chat','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['cap','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['box','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
 let noiseTimer=null;
 function showNoise(cal){
  const n=NOISE[cal]; if(!n||S.noise.includes(cal)) return; S.noise.push(cal); save();
  const b=$('#noise'); if(!b) return;
- b.innerHTML='<span class="n-ic">'+n[0]+'</span><div style="flex:1;min-width:0"><div class="n-t">'+n[1]+'</div><div class="n-b">'+n[2]+'</div></div>';
+ b.innerHTML='<span class="n-ic">'+(IC[n[0]]||'')+'</span><div style="flex:1;min-width:0"><div class="n-t">'+n[1]+'</div><div class="n-b">'+n[2]+'</div></div>';
  b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify'); if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
 }
 $('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); });
@@ -1939,7 +2028,7 @@ function updProfile(){ const p=profStage();
  const bg=$('#prof-bg'); if(bg&&bg.getAttribute('src')!==p.bg) bg.src=p.bg;
  const st=$('#prof-status'); if(st) st.textContent=p.st;
  const mw=$('#prof-music-wrap'); if(mw) mw.style.display=p.mus?'':'none';
- const mu=$('#prof-music'); if(mu&&p.mus) mu.textContent='♪ '+p.mus.replace(/[「」]/g,'').replace(/―/g,' - ');
+ const mu=$('#prof-music'); if(mu&&p.mus) mu.innerHTML=IC.note+' '+esc(p.mus.replace(/[「」]/g,'').replace(/―/g,' - '));
  const ch=document.querySelector('#chat-prof-btn img'); if(ch&&ch.getAttribute('src')!==p.av) ch.src=p.av;
 }
 /* ステータスバー／ロック画面の時計とバッテリーは物語内時刻（chatMin）に連動 */
@@ -2001,7 +2090,7 @@ document.querySelectorAll('.gal-bar [data-ga]').forEach(btn=>btn.addEventListene
 
 /* start */
 replay(); updParams();
-$('#bdg-kakao').textContent=S.done?'✓':'1'; const kbd=$('#bdg-kakao-d'); if(kbd) kbd.textContent=S.done?'✓':'1'; /* v69：ドック側にも同じバッジを出す（実物iOSのドック内バッジ） */
+const bdgv=S.done?IC.check:'1'; $('#bdg-kakao').innerHTML=bdgv; const kbd=$('#bdg-kakao-d'); if(kbd) kbd.innerHTML=bdgv; /* v69：ドック側にも同じバッジを出す（実物iOSのドック内バッジ） */
 </script>
 <script>
 /* ================= v7 : SFX & AMBIENCE =================
@@ -2108,17 +2197,17 @@ function updSfxUI(){
 }
 const sfxBtn=$('#set-sfx'); if(sfxBtn) sfxBtn.addEventListener('click',()=>{ S.sfxOn=!S.sfxOn; save(); updSfxUI(); if(!S.sfxOn){ sfxRing(false); } updAmb(); if(S.sfxOn) sfxPlay('tap'); toast('効果音：'+(S.sfxOn?'ON':'OFF')); });
 const sfxVolEl=$('#sfx-vol'); if(sfxVolEl) sfxVolEl.addEventListener('input',e=>{ S.sfxVol=+e.target.value; save(); updAmb(); if(ringEl&&ringing) ringEl.volume=(S.sfxVol/100)*0.8; });
-const muteBtn=$('#set-mute'); if(muteBtn) muteBtn.addEventListener('click',()=>{ S.mute=!S.mute; save(); updSfxUI(); const a=ensureBgm(); if(a){ stopBgmFade(); a.volume=effVol(); } if(S.mute){ sfxRing(false); } updAmb(); toast(S.mute?'🔇 全体ミュートON（BGM・効果音とも無音）':'🔊 ミュート解除'); });
+const muteBtn=$('#set-mute'); if(muteBtn) muteBtn.addEventListener('click',()=>{ S.mute=!S.mute; save(); updSfxUI(); const a=ensureBgm(); if(a){ stopBgmFade(); a.volume=effVol(); } if(S.mute){ sfxRing(false); } updAmb(); toast(S.mute?'全体ミュートON（BGM・効果音とも無音）':'ミュート解除'); });
 updSfxUI();
 
 /* ================= v8 : EPILOGUES（後日談） =================
    エンディング到達で解放される、その先の短編。
    チャット劇は本編と同じタップ送りで再生され、履歴はフリーチャットのログに残る。 */
 const EPIS=[
-{id:'drama',icon:'🦋',title:'後日談 ― その後の庭',sub:'END「わかっていても」の数週間後',type:'chat',unlock:()=>S.ends.includes('drama')},
-{id:'gen',icon:'✉️',title:'後日談 ― パリからの手紙（未達）',sub:'END「一人で進む」の、その先',type:'letter',unlock:()=>S.ends.includes('gen')},
-{id:'nao',icon:'🌅',title:'後日談 ― 入隊の朝',sub:'特別END「好きにはならない」の、その先',type:'chat',unlock:()=>S.ends.includes('nao')},
-{id:'drama2',icon:'🍂',title:'後日談 ― その後の庭・続',sub:'「その後の庭」の、その先',type:'chat',lockNote:'後日談「その後の庭」を読み終えると解放されます',unlock:()=>S.ends.includes('drama')&&S.epiSeen.includes('drama')}
+{id:'drama',icon:'butterfly',title:'後日談 ― その後の庭',sub:'END「わかっていても」の数週間後',type:'chat',unlock:()=>S.ends.includes('drama')},
+{id:'gen',icon:'letter',title:'後日談 ― パリからの手紙（未達）',sub:'END「一人で進む」の、その先',type:'letter',unlock:()=>S.ends.includes('gen')},
+{id:'nao',icon:'sunrise',title:'後日談 ― 入隊の朝',sub:'特別END「好きにはならない」の、その先',type:'chat',unlock:()=>S.ends.includes('nao')},
+{id:'drama2',icon:'leaf',title:'後日談 ― その後の庭・続',sub:'「その後の庭」の、その先',type:'chat',lockNote:'後日談「その後の庭」を読み終えると解放されます',unlock:()=>S.ends.includes('drama')&&S.epiSeen.includes('drama')}
 ];
 const EPI_ITEMS={
 drama:[
@@ -2224,7 +2313,7 @@ function renderEpi(){
    const un=e.unlock();
    const seen=S.epiSeen.includes(e.id);
    const btn=document.createElement('button'); btn.className='povrow'+(un?'':' lock');
-   btn.innerHTML='<span class="pic">'+(un?e.icon:'🔒')+'</span><span><span class="pt">'+(un?esc(e.title):'？？？')+'</span><div class="ps">'+(un?esc(e.sub)+(seen?'　<span class="epi-done">✓ 読了（読み返せます）</span>':''):(e.lockNote||'対応するエンディングに到達すると解放されます'))+'</div></span>';
+   btn.innerHTML='<span class="pic">'+(un?(IC[e.icon]||IC.butterfly):IC.lock)+'</span><span><span class="pt">'+(un?esc(e.title):'？？？')+'</span><div class="ps">'+(un?esc(e.sub)+(seen?'　<span class="epi-done">'+IC.check+' 読了（読み返せます）</span>':''):(e.lockNote||'対応するエンディングに到達すると解放されます'))+'</div></span>';
    if(un) btn.addEventListener('click',()=>{ if(e.type==='letter') openEpiLetter(); else playEpi(e.id); });
    b.appendChild(btn);
  });
@@ -2243,7 +2332,7 @@ let proBusy=false;
 function showProBanner(msgs){
  const b=$('#noise'); if(!b) return;
  const last=[...msgs].reverse().find(m=>m.t);
- b.innerHTML='<span class="n-ic">💬</span><div style="flex:1;min-width:0"><div class="n-t">카카오톡 ― パク・ジェオン ・ 지금</div><div class="n-b">'+esc(last?last.t:'写真を送信しました')+'</div></div>';
+ b.innerHTML='<span class="n-ic">'+IC.chat+'</span><div style="flex:1;min-width:0"><div class="n-t">카카오톡 ― パク・ジェオン ・ 지금</div><div class="n-b">'+esc(last?last.t:'写真を送信しました')+'</div></div>';
  b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify');
  if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
 }
@@ -2292,14 +2381,14 @@ feed.addEventListener('scroll',updBottomBtn,{passive:true});
 if(chatBottomBtn) chatBottomBtn.addEventListener('click',()=>{ feed.scrollTo({top:feed.scrollHeight,behavior:'smooth'}); setTimeout(()=>scrollFeed(true),320); });
 
 /* ---------- P2: メッセージ反応（カカオ風・長押しトレー・保存） ---------- */
-const RT_EMO=['❤️','😂','😮','😢','😡','👍'];
+const RT_EMO=['❤️','😂','😮','😢','😡','👍']; /* v76：保存値（S.reactions）は従来どおり絵文字文字列のまま互換を保ち、表示だけ RT_SVG のSVGに置き換える */
 let rtrayRow=null, suppressTap=false, lpTimer=null;
 function closeTray(){ const t=$('#rtray'); if(t) t.classList.remove('on'); rtrayRow=null; }
 function renderReactionTray(row){
  const t=$('#rtray'); if(!t||!row) return;
  const key=row.dataset.rk; if(!key) return;
  const cur=S.reactions[key]||'';
- t.innerHTML=RT_EMO.map(e=>'<button data-re="'+e+'" class="'+(e===cur?'sel':'')+'" aria-label="反応 '+e+'">'+e+'</button>').join('');
+ t.innerHTML=RT_EMO.map(e=>'<button data-re="'+e+'" class="'+(e===cur?'sel':'')+'" aria-label="反応">'+(RT_SVG[e]||'')+'</button>').join('');
  rtrayRow=row; t.classList.add('on');
  const bub=row.querySelector('.bub'); const chat=$('#v-chat');
  if(bub&&chat){ const br=bub.getBoundingClientRect(), cr=chat.getBoundingClientRect();
@@ -2435,12 +2524,13 @@ const NEWS=[
  {id:'a5',u:99,cat:'문화',press:'아트인사이트',date:'7월 20일',hot:99,title:'[리뷰] 끝나지 않는 것에 대한, 하나의 대답',sub:'졸업전시를 보고 — 파손과 복원을 거친 작품 앞에서',body:['이번 졸업전시에서 가장 오래 머물게 되는 작품 앞에서는, 누구나 말이 적어진다. 파손과 복원을 거쳤다는 설명을 읽기 전부터, 형태가 먼저 무언가를 말하고 있기 때문이다.','완벽하게 매끈한 작품은 많다. 그러나 깨진 자리를 끌어안고 다시 선 작품은, 보는 사람에게도 자신의 깨진 자리를 떠올리게 한다. 그것이 이 전시가 남긴 가장 긴 여운이다.']}
 ];
 function newsVis(a){ return a.u===99 ? !!S.done : S.calU>=a.u; }
-const NW_WX=[['☀️','24°','맑고 따뜻한 봄날'],['☀️','25°','전시 보기 좋은 날'],['🌤️','23°','작업실 나들이 날씨'],['🌤️','22°','바람 조금, 대체로 맑음'],['🌥️','21°','꽃가루 주의'],['🌤️','26°','초여름 같은 더위'],['☀️','28°','한낮 더위 주의'],['☀️','29°','MT 가기 좋은 날'],['🌧️','23°','장마, 강한 비'],['🌦️','27°','비 그치고 맑아짐'],['☀️','30°','전시 준비 막바지'],['☀️','31°','졸업전시 개막일'],['☀️','30°','전시 기간, 맑음']];
+const NW_WX=[['sun','24°','맑고 따뜻한 봄날'],['sun','25°','전시 보기 좋은 날'],['partly','23°','작업실 나들이 날씨'],['partly','22°','바람 조금, 대체로 맑음'],['cloud','21°','꽃가루 주의'],['partly','26°','초여름 같은 더위'],['sun','28°','한낮 더위 주의'],['sun','29°','MT 가기 좋은 날'],['rain','23°','장마, 강한 비'],['rainsun','27°','비 그치고 맑아짐'],['sun','30°','전시 준비 막바지'],['sun','31°','졸업전시 개막일'],['sun','30°','전시 기간, 맑음']];
+const NW_IC={sun:IC.sun,partly:IC.partly,cloud:IC.cloud,rain:IC.rain,rainsun:IC.rainsun};
 function renderNews(){
  const b=$('#news-body'); if(!b) return;
  const list=NEWS.filter(newsVis);
  const wx=NW_WX[Math.min(S.calU,NW_WX.length-1)]||NW_WX[0];
- let h='<div class="nw-weather"><span style="font-size:24px">'+wx[0]+'</span><span>서울 <b>'+wx[1]+'</b><br>'+wx[2]+'</span></div>';
+ let h='<div class="nw-weather"><span class="nw-wx">'+(NW_IC[wx[0]]||'')+'</span><span>서울 <b>'+wx[1]+'</b><br>'+wx[2]+'</span></div>';
  const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
  if(rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
  const latest=list.slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
