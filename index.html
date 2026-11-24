@@ -690,13 +690,23 @@ img{-webkit-user-drag:none}
 .lt-main{font-family:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:21px;font-weight:600;letter-spacing:.11em;line-height:1.55;margin-top:8px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .lt-rule{width:44px;height:1px;background:linear-gradient(90deg,transparent,rgba(230,205,150,.9),transparent);margin:12px auto 0}
 @media (max-height:720px){.lt-main{font-size:17px}.lock-title{margin-top:11px}.lt-rule{margin-top:8px}}
+/* ===== v77：ニュースのカテゴリタブ／写真フィルムストリップ ===== */
+.nw-tabs{display:flex;gap:2px;padding:9px 10px 3px;overflow-x:auto;scrollbar-width:none;background:#fff}
+.nw-tabs::-webkit-scrollbar{display:none}
+.nw-tabs button{flex:none;font-size:13.5px;font-weight:600;color:#888;padding:6px 11px;border-radius:999px;background:#f4f4f6}
+.nw-tabs button.on{background:#03c75a;color:#fff}
+.gal-strip{display:flex;gap:5px;overflow-x:auto;padding:8px 12px 2px;scrollbar-width:none;flex:none}
+.gal-strip::-webkit-scrollbar{display:none}
+.gal-strip button{flex:none;width:42px;height:42px;padding:0;border-radius:7px;overflow:hidden;opacity:.45;border:2px solid transparent;background:#222}
+.gal-strip button.on{opacity:1;border-color:#fff}
+.gal-strip img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>パク・ジェオンを好きにならない件</h1><div class="ph-rule"></div>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v76：UIの絵文字を全廃し、インラインSVGアイコンに置き換えました（ホームのアプリアイコン、カカオ・Instagram・電話・ニュース等のボタン類、メッセージ反応のトレーとチップ、天気アイコンまで）。反応の保存形式は従来どおりのため、既存セーブの反応もそのまま表示されます。あわせてタイトル画面を刷新しました：ページ見出しとロック画面に、作品の世界観（蝶・夜・美大）に合わせた明朝タイポグラフィと金の蝶のモチーフ、金色の差し色と夜色のグラデーションを入れています。導線（タップで開く／各アプリへの遷移）とセーブ判定は変更していません。前版 v75：韓国ポータル風ニュースアプリ（P7）を追加しました。ホームの「뉴스」から、作中の時期に合わせた天気・大学・美術展などの記事と、アクセスランキングが読めます。記事は物語の進行に連動して増え、まだ来ていない時期の出来事は出ません。あわせて自己監査で見つけた不整合を1件直しました：Instagramの検索で、物語にまだ登場していない人物のアカウントが序盤から表示されていたため、登場に合わせて表示されるよう統一しました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v77：実物寄せの追加と、案内文の言い回しの微調整です。ニュースに韓国ポータルの実物と同じカテゴリタブ（전체／날씨／문화／대학／생활／여행）を付け、タブで記事を絞り込めるようにしました（ランキングは全体タブのときだけ表示）。写真ビューアには iOS「写真」と同じフィルムストリップを追加し、下部のサムネイルから前後の写真へ直接移動できます（左右スワイプと連動）。あわせて、後日談と電話履歴の案内文の言い回しを少し自然な日本語に整えました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。前版 v76：UIの絵文字を全廃し、インラインSVGアイコンに置き換えました（ホームのアプリアイコン、カカオ・Instagram・電話・ニュース等のボタン類、メッセージ反応のトレーとチップ、天気アイコンまで）。反応の保存形式は従来どおりのため、既存セーブの反応もそのまま表示されます。あわせてタイトル画面を刷新しました：ページ見出しとロック画面に、作品の世界観（蝶・夜・美大）に合わせた明朝タイポグラフィと金の蝶のモチーフ、金色の差し色と夜色のグラデーションを入れています。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -892,6 +902,7 @@ img{-webkit-user-drag:none}
 <div class="gal-top"><div class="gal-top-tx"><div id="gal-date"></div><div id="gal-wday"></div></div><button id="gal-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <img id="gal-img" src="" alt="">
 <div class="gal-meta"><div id="gal-cap"></div></div>
+<div class="gal-strip" id="gal-strip"></div>
 <div class="gal-bar">
 <button data-ga="share" aria-label="共有"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M12 15V4.2M12 4.2 8.2 8M12 4.2 15.8 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 11.5H5.4a1.9 1.9 0 0 0-1.9 1.9v5.2a1.9 1.9 0 0 0 1.9 1.9h13.2a1.9 1.9 0 0 0 1.9-1.9v-5.2a1.9 1.9 0 0 0-1.9-1.9h-.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
 <button data-ga="fav" aria-label="お気に入り"><svg width="23" height="23" viewBox="0 0 24 24"><path class="ic-heart" d="M12 20.3C7.2 16.6 3.8 13.4 3.8 9.7 3.8 7.2 5.7 5.2 8.1 5.2c1.6 0 3.1.9 3.9 2.2.8-1.3 2.3-2.2 3.9-2.2 2.4 0 4.3 2 4.3 4.5 0 3.7-3.4 6.9-8.2 10.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
@@ -1772,7 +1783,7 @@ function renderCallLog(){
  if(S.call2) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 03:47 ― ブレスレットの夜。言わないと決めたこと</span></span><span class="cii">i</span></div>';
  /* 雨の夜の痕跡：言い争いのあと、彼は一度だけ電話をかけた。出られなかった（出なかった）一本だけが履歴に残る */
  if(RAIN_IDX>=0&&S.idx>RAIN_IDX) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn"><span class="missed">パク・ジェオン</span><time>6月</time></span><span class="tp">부재중 전화（不在着信）― 6월 26일 오전 2:47</span></span><span class="cii">i</span></div>';
- $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話の内容は物語の中で再生されます（核となるセリフにはボイス付き）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
+ $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話は物語の中で再生されます（大事なセリフにはボイス付き）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
 }
 /* nav */
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
@@ -2317,7 +2328,7 @@ function renderEpi(){
    if(un) btn.addEventListener('click',()=>{ if(e.type==='letter') openEpiLetter(); else playEpi(e.id); });
    b.appendChild(btn);
  });
- const note=document.createElement('p'); note.className='locknote'; note.textContent='後日談は、到達したエンディングごとに解放されます。チャット劇はカカオトークのトーク画面で、タップ送りで再生されます'; b.appendChild(note);
+ const note=document.createElement('p'); note.className='locknote'; note.textContent='後日談は、到達したエンディングごとに開きます。チャット劇はトーク画面で、タップしながら読み進めます'; b.appendChild(note);
 }
 $('#epiread-back').addEventListener('click',()=>{ renderEpi(); showView('v-epi'); });
 
@@ -2452,15 +2463,23 @@ function storyResume(){ storyState.paused=false; const v=$('#v-story'); if(v) v.
 /* ---------- P5: 写真ビューア 左右スワイプ送り ---------- */
 let galList=[], galIdx=0;
 const galBodyEl=$('#gal-body');
-if(galBodyEl) galBodyEl.addEventListener('click',e=>{ const b=e.target.closest?e.target.closest('[data-gal]'):null; galList=GAL.filter(g=>S.calU>=g.u); if(b) galIdx=+b.dataset.gal; });
-function galSwipe(d){
+if(galBodyEl) galBodyEl.addEventListener('click',e=>{ const b=e.target.closest?e.target.closest('[data-gal]'):null; galList=GAL.filter(g=>S.calU>=g.u); if(b){ galIdx=+b.dataset.gal; renderGalStrip(); } });
+function galShow(n){
  if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u);
- const n=galIdx+d; if(n<0||n>=galList.length) return;
+ if(n<0||n>=galList.length) return;
  galIdx=n; const g=galList[n]; galCur=g;
  $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d;
  const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':'';
- $('#gal-cap').textContent=g.cap; updGalFav();
+ $('#gal-cap').textContent=g.cap; updGalFav(); renderGalStrip();
 }
+function renderGalStrip(){
+ const st=$('#gal-strip'); if(!st) return;
+ if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u);
+ st.innerHTML=galList.map((g,i)=>'<button data-gs="'+i+'" class="'+(i===galIdx?'on':'')+'" aria-label="写真 '+(i+1)+'"><img src="'+g.img+'"></button>').join('');
+ st.querySelectorAll('[data-gs]').forEach(b=>b.addEventListener('click',()=>galShow(+b.dataset.gs)));
+ const on=st.querySelector('button.on'); if(on&&on.scrollIntoView) on.scrollIntoView({inline:'center',block:'nearest'});
+}
+function galSwipe(d){ galShow(galIdx+d); }
 (function(){ const gv=$('#gal-view'); if(!gv) return; let sx=0;
  gv.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; },{passive:true});
  gv.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(dx<-52) galSwipe(1); else if(dx>52) galSwipe(-1); },{passive:true});
@@ -2526,18 +2545,23 @@ const NEWS=[
 function newsVis(a){ return a.u===99 ? !!S.done : S.calU>=a.u; }
 const NW_WX=[['sun','24°','맑고 따뜻한 봄날'],['sun','25°','전시 보기 좋은 날'],['partly','23°','작업실 나들이 날씨'],['partly','22°','바람 조금, 대체로 맑음'],['cloud','21°','꽃가루 주의'],['partly','26°','초여름 같은 더위'],['sun','28°','한낮 더위 주의'],['sun','29°','MT 가기 좋은 날'],['rain','23°','장마, 강한 비'],['rainsun','27°','비 그치고 맑아짐'],['sun','30°','전시 준비 막바지'],['sun','31°','졸업전시 개막일'],['sun','30°','전시 기간, 맑음']];
 const NW_IC={sun:IC.sun,partly:IC.partly,cloud:IC.cloud,rain:IC.rain,rainsun:IC.rainsun};
+let nwCat='전체';
 function renderNews(){
  const b=$('#news-body'); if(!b) return;
  const list=NEWS.filter(newsVis);
  const wx=NW_WX[Math.min(S.calU,NW_WX.length-1)]||NW_WX[0];
  let h='<div class="nw-weather"><span class="nw-wx">'+(NW_IC[wx[0]]||'')+'</span><span>서울 <b>'+wx[1]+'</b><br>'+wx[2]+'</span></div>';
+ const cats=['전체'].concat(['날씨','문화','대학','생활','여행'].filter(c=>list.some(a=>a.cat===c)));
+ if(!cats.includes(nwCat)) nwCat='전체';
+ h+='<div class="nw-tabs">'+cats.map(c=>'<button data-nwcat="'+c+'" class="'+(c===nwCat?'on':'')+'">'+c+'</button>').join('')+'</div>';
  const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
- if(rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
- const latest=list.slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
+ if(nwCat==='전체'&&rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
+ const latest=list.filter(a=>nwCat==='전체'||a.cat===nwCat).slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
  h+='<div class="nw-sec">최신 뉴스</div>'+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'"><span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div></button>').join('');
  h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
  b.innerHTML=h;
  b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
+ b.querySelectorAll('[data-nwcat]').forEach(btn=>btn.addEventListener('click',()=>{ nwCat=btn.dataset.nwcat; renderNews(); }));
 }
 function openNews(id){
  const a=NEWS.find(x=>x.id===id); if(!a) return;
