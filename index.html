@@ -609,13 +609,44 @@ img{-webkit-user-drag:none}
 .igs-acct .un{font-weight:700;font-size:14px;color:#191919}
 .igs-acct .dn{font-size:12.5px;color:#8e8e8e}
 .igs-sec{padding:13px 14px 7px;font-size:13.5px;font-weight:700;color:#262626;background:#fff}
+/* ===== v75：ニュースアプリ（P7） ===== */
+.ic-news{background:#03c75a;color:#fff;font-weight:800;font-size:29px;font-style:italic;letter-spacing:-1px}
+#v-news,#v-newsread{background:#fff}
+.nw-head{padding:max(48px,calc(var(--sat) + 6px)) 14px 10px;background:#03c75a;color:#fff;display:flex;align-items:center;gap:9px;flex:none}
+.nw-head .back{font-size:24px;color:#fff;padding:0 4px}
+.nw-logo{font-size:21px;font-weight:800;font-style:italic;letter-spacing:-.5px}
+.nw-logo small{font-style:normal;font-weight:700;font-size:15px;margin-left:5px;letter-spacing:0}
+.nw-weather{display:flex;align-items:center;gap:10px;padding:11px 16px;background:#f4faf6;border-bottom:1px solid #e6efe8;font-size:13px;color:#333}
+.nw-weather b{font-size:19px;color:#111}
+.nw-sec{padding:14px 16px 6px;font-size:14.5px;font-weight:800;color:#111;display:flex;align-items:baseline;gap:7px}
+.nw-sec span{font-size:11px;color:#03c75a;font-weight:700}
+.nw-rank{margin:2px 12px 4px;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden}
+.nw-rank button{display:flex;gap:11px;align-items:baseline;width:100%;text-align:left;padding:10px 13px;background:#fff;border-bottom:1px solid #f1f1f3;font-size:13.5px;color:#222}
+.nw-rank button:last-child{border-bottom:0}
+.nw-rank .no{font-style:italic;font-weight:800;color:#03c75a;font-size:15px;min-width:15px}
+.nw-rank .vw{margin-left:auto;font-size:11px;color:#9a9a9e;flex:none}
+.nw-item{display:block;width:100%;text-align:left;padding:12px 16px;border-bottom:1px solid #f1f1f3;background:#fff}
+.nw-item .cat{font-size:11px;color:#03c75a;font-weight:700}
+.nw-item .ti{font-size:15px;font-weight:600;color:#111;line-height:1.45;margin:2px 0}
+.nw-item .sub{font-size:12.5px;color:#777;line-height:1.5}
+.nw-item .meta{font-size:11px;color:#aaa;margin-top:4px}
+.nwr-head{padding:max(48px,calc(var(--sat) + 6px)) 14px 10px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;flex:none}
+.nwr-head .back{font-size:24px;padding:7px 11px;color:#333}
+.nwr-head h2{font-size:16px;font-weight:700}
+.nwr-body{padding:18px 20px 30px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;flex:1}
+.nwr-body::-webkit-scrollbar{display:none}
+.nwr-cat{font-size:12px;color:#03c75a;font-weight:700}
+.nwr-title{font-size:20px;font-weight:800;line-height:1.5;color:#111;margin:6px 0 8px}
+.nwr-meta{font-size:12px;color:#999;padding-bottom:13px;border-bottom:1px solid #eee}
+.nwr-body p{font-size:15px;line-height:1.85;color:#333;margin-top:15px}
+.nwr-foot{margin-top:26px;padding-top:12px;border-top:1px solid #eee;font-size:11.5px;color:#aaa;line-height:1.7}
 </style>
 </head>
 <body>
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v74：姉妹作『現役アイドル、Tinderやってた件』から実物寄せの仕組みを移植しました。チャットの「一番下へ戻る」ボタン、カカオ風のメッセージ反応（長押しで付けられ、保存されます）、フリーチャットでの写真送信、Instagramストーリーの長押し一時停止と下スワイプ閉じ、写真の左右スワイプ送り、Instagramの検索・探索タブを追加しました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブには反応の保存フィールドを足しましたが、既存セーブはそのまま読み込めます。前版 v73：登場人物の関係を原作（ドラマ『わかっていても』）の設定に合わせ直しました。主要人物は全員23歳の同い年で、学年だけが異なります（ユ・ナビは彫塑科4年、オ・ビンナは3年、パク・ジェオンは2年）。ビンナは「1学年下だが同い年の親友」という原作の関係に合わせ、彼女がジェオンを「先輩」と呼んでいた箇所（学年は彼女のほうが上です）を名前呼びに直し、主人公への「先輩」呼びも、同い年の親友同士の名前呼び・タメ口に改めました。本編の物語・出来事・選択肢・数値・解放条件・エンディング3種・通話の台詞とボイスの連動は変更しておらず、セーブの形式も変えていないので、既存セーブはそのまま継続できます。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v75：韓国ポータル風ニュースアプリ（P7）を追加しました。ホームの「뉴스」から、作中の時期に合わせた天気・大学・美術展などの記事と、アクセスランキングが読めます。記事は物語の進行に連動して増え、まだ来ていない時期の出来事は出ません。あわせて自己監査で見つけた不整合を1件直しました：Instagramの検索で、物語にまだ登場していない人物のアカウントが序盤から表示されていたため、登場に合わせて表示されるよう統一しました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブ形式も変えていないので、既存セーブはそのまま読み込めます。前版 v74：姉妹作『現役アイドル、Tinderやってた件』から実物寄せの仕組みを移植しました。チャットの「一番下へ戻る」ボタン、カカオ風のメッセージ反応（長押しで付けられ、保存されます）、フリーチャットでの写真送信、Instagramストーリーの長押し一時停止と下スワイプ閉じ、写真の左右スワイプ送り、Instagramの検索・探索タブを追加しました。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -657,6 +688,7 @@ img{-webkit-user-drag:none}
 <button class="app" data-open="pov"><span class="ic ic-pov">🦋</span>彼視点<span class="bdg" id="bdg-pov" style="display:none">0</span></button>
 <button class="app" data-open="epi"><span class="ic ic-epi">🌙</span>後日談<span class="bdg" id="bdg-epi" style="display:none">0</span></button>
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span>電話</button>
+<button class="app" data-open="news"><span class="ic ic-news">N</span>뉴스</button>
 <button class="app" id="app-reset"><span class="ic ic-set">⚙️</span>最初から</button>
 </div>
 <div class="wid-set"><div class="set-head">⚙️ 演出設定</div>
@@ -744,6 +776,18 @@ img{-webkit-user-drag:none}
 <div class="igs-head"><button class="back" id="igs-back">‹</button><input class="igs-in" id="igs-in" type="text" placeholder="검색（検索）" autocomplete="off"></div>
 <div class="abody" id="igs-body" style="background:#fff"></div>
 <div class="ig-nav"><button data-ignav="home" aria-label="ホーム">🏠</button><button data-ignav="search" class="on" aria-label="検索">🔍</button></div>
+</div>
+
+<!-- NEWS (v75) -->
+<div class="view" id="v-news">
+<div class="nw-head"><button class="back" data-home="1">‹</button><span class="nw-logo">NAVER<small>뉴스</small></span></div>
+<div class="abody" id="news-body" style="background:#fff"></div>
+</div>
+
+<!-- NEWS ARTICLE (v75) -->
+<div class="view" id="v-newsread">
+<div class="nwr-head"><button class="back" id="newsread-back">‹</button><h2>뉴스</h2></div>
+<div class="nwr-body" id="newsread-body"></div>
 </div>
 
 <!-- CALENDAR -->
@@ -1179,7 +1223,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-igsearch','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -1653,6 +1697,7 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
  if(k==='pov'){renderPOV(); showView('v-pov');}
  if(k==='epi'){renderEpi(); showView('v-epi');}
  if(k==='gallery'){renderGallery(); showView('v-gallery');}
+ if(k==='news'){renderNews(); showView('v-news');}
 }));
 document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>showView('v-home')));
 $('#homebar').addEventListener('click',()=>{ if(callResolve) return; showView('v-home'); }); /* v38：通話中はホームへ離脱できない（離脱すると通話が宙に浮いて進行不能＋BGMダッキングが残るため） */
@@ -2336,14 +2381,14 @@ function galSwipe(d){
 const IGS_ACCTS=[
  {u:'park_jaeon.sculpt',d:'パク・ジェオン',img:'assets/av-jaeon.jpg',who:'j'},
  {u:'nao_sculpt',d:'なお',img:'assets/nao-avatar.jpg',who:'n'},
- {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna.jpg',who:null},
- {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola.jpg',who:null}
+ {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna.jpg',who:null,min:1},
+ {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola.jpg',who:null,min:5}
 ];
 function igPostVis(p){ return S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); }
 function renderIGSearch(){
  const body=$('#igs-body'); if(!body) return;
  const q=(($('#igs-in')||{}).value||'').trim().toLowerCase();
- const accts=IGS_ACCTS.filter(a=>!q||a.u.toLowerCase().includes(q)||a.d.includes(q));
+ const accts=IGS_ACCTS.filter(a=>S.chap>=(a.min||0)&&(!q||a.u.toLowerCase().includes(q)||a.d.includes(q))); /* v75：未登場の人物は検索に出さない（スレッド／友達一覧の解放条件と一致） */
  let h='';
  if(accts.length) h+='<div class="igs-sec">アカウント</div>'+accts.map(a=>'<button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button>').join('');
  if(!q){
@@ -2373,6 +2418,44 @@ document.addEventListener('click',e=>{
 });
 const igsBack=$('#igs-back'); if(igsBack) igsBack.addEventListener('click',()=>showView('v-ig'));
 const igsIn=$('#igs-in'); if(igsIn) igsIn.addEventListener('input',renderIGSearch);
+/* ================= v75 : NEWS APP (P7) =================
+   韓国ポータル風ニュース。解放は作中カレンダー進行 S.calU（写真ギャラリーと同基準）に連動し、
+   後半の出来事を匂わせる記事は、その時期が来るまで出ない。セーブ項目は追加しない（全て導出）。 */
+const NEWS=[
+ {id:'w1',u:0,cat:'날씨',press:'날씨와생활',date:'3월 5일',hot:42,title:'주말, 서울 낮 24도까지 오른다… 나들이 좋은 봄날씨',sub:'완연한 봄기운, 캠퍼스에도 산책 인파',body:['이번 주말 서울의 낮 최고기온이 24도까지 오르며 완연한 봄 날씨를 보이겠다. 아침과 저녁으로는 쌀쌀하니 가벼운 겉옷을 챙기는 것이 좋겠다.','기상청은 "고기압의 영향으로 맑은 날이 이어지겠다"며 "캠퍼스와 공원 등 야외 활동에 좋은 주말이 될 것"이라고 전했다.']},
+ {id:'a1',u:0,cat:'문화',press:'아트인사이트',date:'3월 5일',hot:55,title:'젊은 조각가들의 개인전, 봄 전시 시즌 개막',sub:'졸업을 앞둔 작가들의 신작에 미술계 주목',body:['봄 전시 시즌이 시작되며 젊은 조각가들의 개인전이 잇따라 열리고 있다. 졸업을 앞둔 작가들의 신작이 대거 공개되면서 미술계의 관심이 쏠린다.','전시를 찾은 한 관람객은 "완성되지 않은 듯한 형태에서 오히려 강한 인상을 받았다"고 말했다. 전시는 이달 말까지 이어진다.']},
+ {id:'c1',u:1,cat:'대학',press:'캠퍼스뉴스',date:'3월 12일',hot:38,title:'홍익대 조소과, 졸업작품 제작 본격 시작',sub:'작업실 불빛, 새벽까지 이어져',body:['홍익대학교 조소과 4학년 학생들의 졸업작품 제작이 본격적으로 시작됐다. 작업실에는 새벽까지 불이 꺼지지 않는 날이 이어지고 있다.','학과 관계자는 "올해는 예년보다 완성도 높은 작품이 많을 것으로 기대한다"고 밝혔다.']},
+ {id:'c2',u:2,cat:'대학',press:'캠퍼스뉴스',date:'3월 26일',hot:61,title:'조소과 작업실 야간 개방 연장… "마감 전의 열기"',sub:'재료 냄새와 커피, 그리고 끝나지 않는 것들',body:['조소과 작업실의 야간 개방 시간이 연장됐다. 마감을 앞둔 학생들이 늦은 시간까지 작품과 씨름하는 모습이 이어지고 있다.','한 학생은 "집중하다 보면 시간 가는 줄 모른다"며 "끝나지 않는 게 아니라, 끝내고 싶지 않은 것일지도 모른다"고 웃었다.']},
+ {id:'w2',u:4,cat:'생활',press:'날씨와생활',date:'4월 25일',hot:47,title:'4월 마지막 주, 꽃가루·미세먼지 주의보',sub:'야외 활동 시 마스크 착용 권고',body:['4월 마지막 주에는 꽃가루 농도가 높고 미세먼지가 유입되면서 대기 질이 나쁠 것으로 예상된다. 야외 활동이 많은 시민들의 주의가 필요하다.','전문가들은 "알레르기 증상이 있는 경우 외출 시 마스크를 착용하고, 귀가 후에는 손과 얼굴을 깨끗이 씻는 것이 좋다"고 조언했다.']},
+ {id:'a2',u:6,cat:'문화',press:'아트인사이트',date:'5월 19일',hot:73,title:'여름 기획전 라인업 공개… 신예 작가 대거 참여',sub:'7월 개막, 대학 조소과 작가들의 작품도 포함',body:['오는 7월 개막하는 여름 기획전의 참여 작가 라인업이 공개됐다. 신예 작가들이 대거 이름을 올린 가운데, 대학 조소과 출신 작가들의 작품도 포함돼 눈길을 끈다.','갤러리 측은 "젊은 작가들의 실험적인 시도를 한자리에서 볼 수 있는 전시가 될 것"이라고 전했다.']},
+ {id:'t1',u:8,cat:'여행',press:'트래블투데이',date:'6월 18일',hot:66,title:'대학생 MT 시즌… 바닷가 마을 숙소 예약 활황',sub:'합숙 명소로 떠오른 작은 어촌 마을',body:['대학생들의 MT 시즌을 맞아 바닷가 마을의 숙소 예약이 활황을 보이고 있다. 학과 단위 합숙 장소로 작은 어촌 마을이 인기를 끌고 있다.','현지 상인들은 "젊은 손님들이 마을에 활기를 불어넣는다"며 반기는 분위기다.']},
+ {id:'w3',u:9,cat:'날씨',press:'날씨와생활',date:'6월 25일',hot:88,title:'장마 시작… 주말까지 강한 비 주의',sub:'밤사이 시간당 30mm 넘는 집중호우 가능성',body:['장마전선의 영향으로 전국에 비가 내리겠다. 특히 밤사이에는 시간당 30mm가 넘는 강한 비가 쏟아지는 곳이 있겠다.','기상청은 "하천 주변과 지하 공간 출입을 자제하고, 빗길 교통안전에 각별히 유의해 달라"고 당부했다.']},
+ {id:'a3',u:10,cat:'문화',press:'아트인사이트',date:'7월 9일',hot:79,title:'파손된 작품, 복원의 손길로 다시 서다',sub:'"깨진 자리가 오히려 작품의 일부가 됐다"',body:['전시를 앞두고 파손됐던 작품이 복원을 거쳐 다시 전시장에 설 준비를 하고 있다. 복원 과정에는 작가가 직접 참여해 파손 부위를 작품의 일부로 받아들인 것으로 알려졌다.','복원 관계자는 "깨진 자리를 감추는 대신, 그 흔적을 어떻게 남길지가 이번 복원의 핵심이었다"고 말했다.']},
+ {id:'a4',u:11,cat:'문화',press:'아트인사이트',date:'7월 16일',hot:95,title:'홍익대 조소과 졸업전시 개막, 첫날부터 관람객 몰려',sub:'신예 작가들의 데뷔 무대에 긴 줄',body:['홍익대학교 조소과 졸업전시가 막을 올렸다. 개막 첫날부터 전시장을 찾은 관람객들로 긴 줄이 이어졌다.','한 관람객은 "학생들의 전시라고 믿기 어려울 만큼 완성도가 높다"며 "특히 한 작품 앞에서는 발길이 한동안 떨어지지 않았다"고 말했다.']},
+ {id:'a5',u:99,cat:'문화',press:'아트인사이트',date:'7월 20일',hot:99,title:'[리뷰] 끝나지 않는 것에 대한, 하나의 대답',sub:'졸업전시를 보고 — 파손과 복원을 거친 작품 앞에서',body:['이번 졸업전시에서 가장 오래 머물게 되는 작품 앞에서는, 누구나 말이 적어진다. 파손과 복원을 거쳤다는 설명을 읽기 전부터, 형태가 먼저 무언가를 말하고 있기 때문이다.','완벽하게 매끈한 작품은 많다. 그러나 깨진 자리를 끌어안고 다시 선 작품은, 보는 사람에게도 자신의 깨진 자리를 떠올리게 한다. 그것이 이 전시가 남긴 가장 긴 여운이다.']}
+];
+function newsVis(a){ return a.u===99 ? !!S.done : S.calU>=a.u; }
+const NW_WX=[['☀️','24°','맑고 따뜻한 봄날'],['☀️','25°','전시 보기 좋은 날'],['🌤️','23°','작업실 나들이 날씨'],['🌤️','22°','바람 조금, 대체로 맑음'],['🌥️','21°','꽃가루 주의'],['🌤️','26°','초여름 같은 더위'],['☀️','28°','한낮 더위 주의'],['☀️','29°','MT 가기 좋은 날'],['🌧️','23°','장마, 강한 비'],['🌦️','27°','비 그치고 맑아짐'],['☀️','30°','전시 준비 막바지'],['☀️','31°','졸업전시 개막일'],['☀️','30°','전시 기간, 맑음']];
+function renderNews(){
+ const b=$('#news-body'); if(!b) return;
+ const list=NEWS.filter(newsVis);
+ const wx=NW_WX[Math.min(S.calU,NW_WX.length-1)]||NW_WX[0];
+ let h='<div class="nw-weather"><span style="font-size:24px">'+wx[0]+'</span><span>서울 <b>'+wx[1]+'</b><br>'+wx[2]+'</span></div>';
+ const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
+ if(rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
+ const latest=list.slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
+ h+='<div class="nw-sec">최신 뉴스</div>'+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'"><span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div></button>').join('');
+ h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
+ b.innerHTML=h;
+ b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
+}
+function openNews(id){
+ const a=NEWS.find(x=>x.id===id); if(!a) return;
+ $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+' · 홍대 앞 소식</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
+ showView('v-newsread');
+}
+const nwBack=$('#newsread-back'); if(nwBack) nwBack.addEventListener('click',()=>{ renderNews(); showView('v-news'); });
+
 </script>
 </body>
 </html>
