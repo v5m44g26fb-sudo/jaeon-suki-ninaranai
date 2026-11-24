@@ -574,13 +574,48 @@ input,textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:d
 img{-webkit-user-drag:none}
 #side-feed{-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}
 .abody::-webkit-scrollbar,#feed::-webkit-scrollbar,.home-scroll::-webkit-scrollbar,#side-feed::-webkit-scrollbar,#povread-body::-webkit-scrollbar,#epiread-body::-webkit-scrollbar,.ig-stories::-webkit-scrollbar{display:none} /* 実物アプリ同様スクロールバーは出さない */
+
+/* ===== v74：移植（P1〜P6） ===== */
+#chat-bottom-btn{position:absolute;right:12px;bottom:158px;z-index:55;display:none;align-items:center;gap:4px;background:rgba(255,255,255,.97);border:1px solid #e3e3e6;border-radius:999px;padding:8px 13px;font-size:12px;color:#333;box-shadow:0 4px 14px rgba(20,30,45,.18);font-family:inherit}
+#chat-bottom-btn.on{display:flex}
+#chat-bottom-btn:active{transform:scale(.95)}
+.rchip{display:inline-flex;align-items:center;background:#fff;border:1px solid #e8e8ea;border-radius:999px;font-size:11.5px;line-height:1;padding:2px 7px;margin:0 2px;box-shadow:0 1px 3px rgba(0,0,0,.10);align-self:flex-end}
+#rtray{position:absolute;z-index:220;display:none;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.30);padding:7px 9px;gap:2px}
+#rtray.on{display:flex}
+#rtray button{font-size:21px;padding:4px 5px;border-radius:9px;background:none;border:0}
+#rtray button:active{background:#f1f1f3}
+#rtray button.sel{background:#ffe9ec}
+#story-pause-ind{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);font-size:14.5px;color:#fff;background:rgba(0,0,0,.48);border-radius:999px;padding:9px 17px;display:none;z-index:6;pointer-events:none}
+#v-story.paused #story-pause-ind{display:block}
+#v-story.paused .story-img{filter:brightness(.8)}
+#albumpick{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:230;display:none;align-items:flex-end}
+#albumpick.on{display:flex}
+#albumpick .ap-sheet{background:#fff;width:100%;max-height:64%;overflow-y:auto;border-radius:16px 16px 0 0;padding:14px 12px calc(16px + var(--sab))}
+#albumpick .ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:10px}
+#albumpick .ap-grid button{padding:0;aspect-ratio:1;overflow:hidden;border:0;background:#eee}
+#albumpick .ap-grid img{width:100%;height:100%;object-fit:cover;display:block}
+#albumpick .ap-head{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14.5px;color:#191919}
+#albumpick .ap-x{font-size:17px;color:#666;padding:4px 8px;background:none;border:0}
+#btn-plus2{font-size:21px;color:#9a9a9e;width:40px;height:40px;flex:none;background:none;border:0;transition:transform .18s}
+#btn-plus2.on{transform:rotate(45deg)}
+.ig-nav{display:flex;border-top:1px solid #e6e6e6;background:#fff;padding:6px 0 max(8px,var(--sab));flex:none}
+.ig-nav button{flex:1;font-size:20px;color:#8e8e8e;padding:4px 0;background:none;border:0}
+.ig-nav button.on{color:#000}
+.igs-head{display:flex;align-items:center;gap:9px;padding:max(48px,calc(var(--sat) + 6px)) 12px 9px;background:#fff;flex:none}
+.igs-head .back{font-size:24px;color:#262626;background:none;border:0;padding:0 4px}
+.igs-in{flex:1;background:#f1f1f3;border-radius:10px;padding:8px 12px;font-size:16px;font-family:inherit;border:0;min-width:0;color:#191919}
+.igs-acct{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:9px 14px;background:#fff;border:0}
+.igs-acct img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none}
+.igs-acct .un{font-weight:700;font-size:14px;color:#191919}
+.igs-acct .dn{font-size:12.5px;color:#8e8e8e}
+.igs-sec{padding:13px 14px 7px;font-size:13.5px;font-weight:700;color:#262626;background:#fff}
 </style>
 </head>
 <body>
 <div class="page-head">
 <h1>パク・ジェオンを好きにならない件</h1>
 <p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v73：登場人物の関係を原作（ドラマ『わかっていても』）の設定に合わせ直しました。主要人物は全員23歳の同い年で、学年だけが異なります（ユ・ナビは彫塑科4年、オ・ビンナは3年、パク・ジェオンは2年）。ビンナは「1学年下だが同い年の親友」という原作の関係に合わせ、彼女がジェオンを「先輩」と呼んでいた箇所（学年は彼女のほうが上です）を名前呼びに直し、主人公への「先輩」呼びも、同い年の親友同士の名前呼び・タメ口に改めました。本編の物語・出来事・選択肢・数値・解放条件・エンディング3種・通話の台詞とボイスの連動は変更しておらず、セーブの形式も変えていないので、既存セーブはそのまま継続できます。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v74：姉妹作『現役アイドル、Tinderやってた件』から実物寄せの仕組みを移植しました。チャットの「一番下へ戻る」ボタン、カカオ風のメッセージ反応（長押しで付けられ、保存されます）、フリーチャットでの写真送信、Instagramストーリーの長押し一時停止と下スワイプ閉じ、写真の左右スワイプ送り、Instagramの検索・探索タブを追加しました。本編の物語・台詞・選択肢・数値・解放条件・通話の台詞とボイス連動は変更しておらず、セーブには反応の保存フィールドを足しましたが、既存セーブはそのまま読み込めます。前版 v73：登場人物の関係を原作（ドラマ『わかっていても』）の設定に合わせ直しました。主要人物は全員23歳の同い年で、学年だけが異なります（ユ・ナビは彫塑科4年、オ・ビンナは3年、パク・ジェオンは2年）。ビンナは「1学年下だが同い年の親友」という原作の関係に合わせ、彼女がジェオンを「先輩」と呼んでいた箇所（学年は彼女のほうが上です）を名前呼びに直し、主人公への「先輩」呼びも、同い年の親友同士の名前呼び・タメ口に改めました。本編の物語・出来事・選択肢・数値・解放条件・エンディング3種・通話の台詞とボイスの連動は変更しておらず、セーブの形式も変えていないので、既存セーブはそのまま継続できます。カカオトーク風UIの配色・レイアウトは、MITライセンスの公開アプリ「Virtual Phone Studio」（omowomomo）を参考に自作実装しています。登場人物の画像はPinterest等で公開されていたファン素材を出典注記のうえ使用しています（詳細はREADME参照）。これまでの変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -667,11 +702,14 @@ img{-webkit-user-drag:none}
 <div id="feed"></div>
 <div id="tap-hint">▼</div>
 <div id="noise"></div>
+<button id="chat-bottom-btn" aria-label="一番下へ戻る">⬇ 一番下へ戻る</button>
 <div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo">😊</span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
-<div id="free-row"><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send">▶</button></div>
+<div id="free-row"><button id="btn-plus2" aria-label="添付">＋</button><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send">▶</button></div>
 <div class="plus-panel" id="plus-panel">
 <div data-pp="album"><span>🖼️</span>앨범</div><div data-pp="camera"><span>📷</span>카메라</div><div data-pp="gift"><span>🎁</span>선물하기</div><div data-pp="pay"><span>💸</span>송금</div><div data-pp="voice"><span>🎤</span>음성메시지</div><div data-pp="contact"><span>👤</span>연락처</div><div data-pp="file"><span>📁</span>파일</div><div data-pp="cal"><span>📅</span>일정</div>
 </div>
+<div id="rtray" role="dialog" aria-label="メッセージ反応"></div>
+<div id="albumpick"><div class="ap-sheet"><div class="ap-head"><span>사진 선택（写真を選ぶ）</span><button class="ap-x" id="ap-close">✕</button></div><div class="ap-grid" id="ap-grid"></div></div></div>
 </div>
 
 <!-- KAKAO PROFILE (2021) -->
@@ -698,6 +736,14 @@ img{-webkit-user-drag:none}
 <div class="ig-head"><button class="back" data-home="1">‹</button><span class="ig-logo">Instagram</span><div class="ig-hicons"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span class="ig-badge-dot"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></span></div></div>
 <div class="ig-switch"><button id="igsw-j" class="on">▦</button><button id="igsw-n">👤</button></div>
 <div class="abody" id="ig-body"></div>
+<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム">🏠</button><button data-ignav="search" aria-label="検索">🔍</button></div>
+</div>
+
+<!-- IG SEARCH (v74) -->
+<div class="view" id="v-igsearch">
+<div class="igs-head"><button class="back" id="igs-back">‹</button><input class="igs-in" id="igs-in" type="text" placeholder="검색（検索）" autocomplete="off"></div>
+<div class="abody" id="igs-body" style="background:#fff"></div>
+<div class="ig-nav"><button data-ignav="home" aria-label="ホーム">🏠</button><button data-ignav="search" class="on" aria-label="検索">🔍</button></div>
 </div>
 
 <!-- CALENDAR -->
@@ -790,6 +836,7 @@ img{-webkit-user-drag:none}
 <div class="story-progs" id="story-progs"></div>
 <div class="story-head"><img id="story-av" src="" alt=""><b id="story-user"></b><span id="story-ago"></span><button class="sx" id="story-close">✕</button></div>
 <div class="story-cap" id="story-cap"></div>
+<div id="story-pause-ind">⏸ 一時停止中</div>
 <div class="story-foot"><span class="sf-in">メッセージを送信…</span><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></div>
 <button class="story-zone l" id="story-prev"></button>
 <button class="story-zone r" id="story-next"></button>
@@ -1091,7 +1138,7 @@ const STORY=[
 /* ================= ENGINE ================= */
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
-let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[]}; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{}} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
 /* v31：壊れたセーブ（JSON破損・非オブジェクト）は LSKEY+'.bak' へ退避し、初期状態で起動する */
 try{const raw=localStorage.getItem(LSKEY); if(raw){ try{const p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) S=Object.assign(S,p); else try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} }catch(pe){ try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} } }}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
@@ -1123,11 +1170,16 @@ if(S.done&&S.endId!=='drama'&&S.endId!=='gen'&&S.endId!=='nao'){ S.done=false; S
 S.idx=Math.floor(__fin(S.idx,0)); if(S.idx<0) S.idx=0; if(S.idx>STORY.length) S.idx=STORY.length; if(!S.done&&S.idx>=STORY.length) S.idx=STORY.length-1;
 let playing=false, replaying=false, choiceOpen=false;
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
+/* ===== v74：メッセージ反応の基盤（start の replay より前に必要） ===== */
+let curMsgKey=null, playKeyPfx='x', playKeyN=0;
+function tagMsg(r){ if(!r) return; const k=curMsgKey; if(k){ r.dataset.rk=k; drawChip(r); } }
+function drawChip(r){ if(!r||!r.dataset||!r.dataset.rk) return; const old=r.querySelector('.rchip'); if(old) old.remove(); if(!S.reactions||typeof S.reactions!=='object') return; const e=S.reactions[r.dataset.rk]; if(!e) return; const bub=r.querySelector('.bub'); if(!bub) return; const c=document.createElement('span'); c.className='rchip'; c.textContent=e; bub.insertAdjacentElement('afterend',c); }
+
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-igsearch','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -1157,8 +1209,8 @@ function addSys(v){feed.appendChild(el('<div class="sys">'+esc(v)+'</div>'));}
 function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</span>'+esc(v)+'</div>'); feed.appendChild(d);}
 function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
 function scheduleRead(){ if(readTimer) clearTimeout(readTimer); const d=ffMode?60:(900+Math.random()*700)*paceMul()*ambientMul(); readTimer=setTimeout(()=>{ clearUnread(); },d); }
-function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r); }
-function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); feed.appendChild(r);}
+function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); }
+function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); tagMsg(r); feed.appendChild(r);}
 /* v23：追随スクロール。最下部付近にいるときだけ新着へ追随し、読み返し中の位置は奪わない。
    操作の起点（選択肢・カード表示、明示タップで進めた直後）は最新へ寄せる */
 let feedStick=true, advForce=false;
@@ -1227,7 +1279,7 @@ async function paceStep(it){
 }
 async function playItems(items,quiet){
  if(!quiet) inSeq=true;
- for(const it of items){
+ for(const it of items){ curMsgKey=playKeyPfx+(playKeyN++);
    if(it.k==='call'){ if(!quiet){ await doCall(it.lines); S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; } continue; }
    if(quiet){ applyItem(it,true); continue; }
    await paceStep(it);
@@ -1313,7 +1365,7 @@ $('#call-digits').addEventListener('click',e=>{ if(e.target.id==='call-del'){ ca
 async function run(){
  if(playing) return; playing=true; inSeq=true;
  while(S.idx<STORY.length){
-   const it=STORY[S.idx];
+   const it=STORY[S.idx]; curMsgKey='s'+S.idx;
    if(it.k==='choice'){
      if(replaying){ S.idx++; continue; }
      if(choiceOpen){ playing=false; inSeq=false; return; }
@@ -1334,10 +1386,10 @@ function renderChoice(it){
    b.addEventListener('click',async()=>{
      choiceOpen=false; wrap.remove();
      S.picks[S.idx]=oi;
-     addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
+     curMsgKey='s'+S.idx+'a'; addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
      S.kai=clamp(S.kai+(op.kai||0),0,100); S.kyo=clamp(S.kyo+(op.kyo||0),5,95);
      updParams(); S.idx++; save();
-     await playItems(op.then||[],false);
+     playKeyPfx='s'+S.idx+'b'; playKeyN=0; await playItems(op.then||[],false);
      save(); run();
    });
    wrap.appendChild(b);
@@ -1384,7 +1436,7 @@ function renderFinal(it){
    b.textContent=locked?('🔒 ？？？（解明度'+op.req+'以上で解放される選択肢）'):op.t;
    if(!locked) b.addEventListener('click',()=>{
      choiceOpen=false; wrap.remove();
-     S.picks[S.idx]=oi; addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
+     S.picks[S.idx]=oi; curMsgKey='s'+S.idx+'a'; addMe(op.t); if(typeof sfxPlay==='function') sfxPlay('send');
      S.idx++; S.endId=op.end; S.done=true; S.calU=Math.max(S.calU,12);
      if(!S.ends.includes(op.end)) S.ends.push(op.end);
      if(op.end==='nao' && !S.igs.includes('army')) S.igs.push('army');
@@ -1402,13 +1454,13 @@ function replay(){
  for(let i=0;i<S.idx && i<STORY.length;i++){
    const it=STORY[i];
    if(it.k==='choice'){
-     const oi=picks[i]; if(oi!=null && it.opts[oi]){ const op=it.opts[oi]; addMe(op.t); (op.then||[]).forEach(t2=>{ if(t2.k!=='call') applyItem(t2,true); }); }
+     const oi=picks[i]; if(oi!=null && it.opts[oi]){ const op=it.opts[oi]; curMsgKey='s'+i+'a'; addMe(op.t); (op.then||[]).forEach((t2,j2)=>{ if(t2.k!=='call'){ curMsgKey='s'+i+'b'+j2; applyItem(t2,true); } }); }
      continue;
    }
-   if(it.k==='final'){ const oi=picks[i]; if(oi!=null && FINAL_OPTS[oi]) addMe(FINAL_OPTS[oi].t); continue; }
+   if(it.k==='final'){ const oi=picks[i]; if(oi!=null && FINAL_OPTS[oi]){ curMsgKey='s'+i+'a'; addMe(FINAL_OPTS[oi].t); } continue; }
    if(it.k==='call'){ S.callSeen=true; if(it.id==='c1')S.call1=true; if(it.id==='c2')S.call2=true; continue; }
    if(it.k==='end') continue;
-   applyItem(it,true);
+   curMsgKey='s'+i; applyItem(it,true);
  }
  replaying=false; updParams();
  if(S.done && S.endId){ renderEnding(S.endId); renderFreeLog(); }
@@ -1613,7 +1665,7 @@ btnNext.addEventListener('pointerleave',()=>{ if(nextPressT) clearTimeout(nextPr
 btnNext.addEventListener('pointercancel',()=>{ if(nextPressT) clearTimeout(nextPressT); });
 btnNext.addEventListener('click',()=>{ if(nextFFired){ nextFFired=false; return; } if(S.done) return; if(onTap) fireTap(); else run(); });
 /* v5：チャット画面のタップで次へ（選択肢・ボタンのタップは除外） */
-feed.addEventListener('click',e=>{ if(choiceOpen) return; if(e.target.closest('button')) return; fireTap(); });
+feed.addEventListener('click',e=>{ if(suppressTap){ suppressTap=false; return; } if(rtrayRow){ closeTray(); return; } if(choiceOpen) return; if(e.target.closest('button')) return; fireTap(); });
 $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（本編の進行状況がリセットされます。エンディングコレクション・後日談・彼視点の既読と、設定は残ります）')){ const ns=Object.assign({},S,{idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,endId:null,call1:false,call2:false,free:[],freeN:0,freeClosed:false,noise:[],proN:0,proOps:0,proUnread:0,chatOpened:false}); try{localStorage.setItem(LSKEY,JSON.stringify(ns));}catch(e){} location.reload(); }});
 /* v6：ステータスバーとロック画面の時計は実時刻ではなく物語内時刻（chatMin）に連動する（updClock は v6 セクションで定義し、updParams から呼ばれる） */
 /* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
@@ -1651,7 +1703,7 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
 $('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
 /* v66：＋パネルは実物の1ページ目の構成（앨범／카메라／선물하기／송금／음성메시지／연락처／파일／일정）に統一。項目ごとに実物らしいフィードバックを返す（物語の進行には影響しない） */
 const PP_T={album:'（送信は演出用です。▶で物語が進みます）',camera:'（送信は演出用です。▶で物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
-document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='camera'&&typeof sfxPlay==='function') sfxPlay('shutter'); toast(PP_T[k]||'（送信は演出用です。▶で物語が進みます）'); }));
+document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='camera'&&typeof sfxPlay==='function') sfxPlay('shutter'); if(k==='album'&&S.done){ openAlbumPick(); return; } toast(PP_T[k]||'（送信は演出用です。▶で物語が進みます）'); }));
 let profFrom='v-chat'; /* v48：プロフィールを開いた画面を覚えておき、✕では元の画面へ戻る */
 $('#chat-prof-btn').addEventListener('click',()=>{ profFrom='v-chat'; showView('v-profile'); });
 $('#prof-close').addEventListener('click',()=>showView(profFrom));
@@ -1745,11 +1797,11 @@ $('#story-prev').addEventListener('click',()=>storyStep(-1));
 /* ================= v4 : FREE CHAT ================= */
 function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); const bp=$('#btn-plus'); if(bp) bp.classList.remove('on'); } }
 /* v66：フリーチャットでも本編と同じ実物様式にする。自分の送信には時刻と既読「1」を付け、彼の返信が来た時点で「1」が消える（既読化）。時刻・既読は S.free の並びから導出するのでセーブ形式は不変 */
-function freeAddMe(t,unsent,unread){ const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+'<div class="bub">'+esc(t)+'</div></div>'); feed.appendChild(r); scrollFeed(); }
-function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
+function freeAddMe(t,unsent,unread){ const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+'<div class="bub">'+esc(t)+'</div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
+function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
 function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
 function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); feed.appendChild(r); scrollFeed(); }
-function renderFreeLog(){ const F=S.free||[]; /* v66：自分の送信より後に彼の返信（j／jimg）があれば既読（「1」なし）、なければ未読（「1」あり）として描き直す */ const later=F.map((m,i)=>F.slice(i+1).some(x=>x.w==='j'||x.w==='jimg')); F.forEach((m,i)=>{ if(m.w==='me') freeAddMe(m.t,false,!later[i]); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
+function renderFreeLog(){ const F=S.free||[]; /* v66：自分の送信より後に彼の返信（j／jimg）があれば既読（「1」なし）、なければ未読（「1」あり）として描き直す */ const later=F.map((m,i)=>F.slice(i+1).some(x=>x.w==='j'||x.w==='jimg')); F.forEach((m,i)=>{ curMsgKey='f'+i; if(m.w==='meimg') freeAddMeImg(m.img); else if(m.w==='me') freeAddMe(m.t,false,!later[i]); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
 function pickFreeReplies(txt){
  if(S.endId==='gen'){ if(S.freeN===2) return ['……見たよ']; if(S.freeN===5) return ['……元気で']; return null; }
  const R=[
@@ -1784,11 +1836,11 @@ async function sendFree(){
  if(freeBusy||!S.done) return;
  const inp=$('#free-in'); const txt=(inp.value||'').trim(); if(!txt) return; inp.value=''; updFreeSend();
  if(S.endId==='nao'){
-   freeAddMe(txt,true); S.free.push({w:'mu',t:txt}); S.freeN++;
+   curMsgKey='f'+S.free.length; freeAddMe(txt,true); S.free.push({w:'mu',t:txt}); S.freeN++;
    if(S.freeN>=2&&!S.freeClosed){ S.freeClosed=true; const m='―― このトークは終了しています ――'; addSys(m); S.free.push({w:'sys',t:m}); }
    save(); return;
  }
- freeAddMe(txt,false,true); if(typeof sfxPlay==='function') sfxPlay('send'); S.free.push({w:'me',t:txt}); S.freeN++; save();
+ curMsgKey='f'+S.free.length; freeAddMe(txt,false,true); if(typeof sfxPlay==='function') sfxPlay('send'); S.free.push({w:'me',t:txt}); S.freeN++; save();
  const cap=S.endId==='gen'?6:15;
  if(S.freeN>cap){ if(!S.freeClosed){ S.freeClosed=true; const m=S.endId==='gen'?'（それきり、返信は来なかった）':'―― 今日のトークはここまで ――'; addSys(m); S.free.push({w:'sys',t:m}); save(); } return; }
  const reps=pickFreeReplies(txt);
@@ -1798,7 +1850,7 @@ async function sendFree(){
  await sleep(Math.round((950+Math.min(reps.join('').length*22,1500))*paceMul())); ty.remove();
  feed.querySelectorAll('.row.fr .unread').forEach(e=>e.remove()); /* v66：彼の返信が届いた時点で、自分の送信の「1」が消える（既読化） */
  let firstRep=true;
- for(const r of reps){ freeAddJ(r); if(firstRep){ firstRep=false; if(typeof vib==='function') vib(25); if(typeof sfxPlay==='function') sfxPlay('recv'); } S.free.push({w:'j',t:r}); await sleep(Math.round(680*paceMul())); }
+ for(const r of reps){ curMsgKey='f'+S.free.length; freeAddJ(r); if(firstRep){ firstRep=false; if(typeof vib==='function') vib(25); if(typeof sfxPlay==='function') sfxPlay('recv'); } S.free.push({w:'j',t:r}); await sleep(Math.round(680*paceMul())); }
  save(); freeBusy=false;
 }
 $('#free-send').addEventListener('click',sendFree);
@@ -2180,6 +2232,147 @@ try{
 }catch(e){}
 try{ updParams(); }catch(e){} /* v69：EPIS の定義後に後日談バッジ（bdg-epi）を確定させる */
 
+</script>
+<script>
+/* ================= v74 : PORTED FEATURES (P1〜P6) =================
+   姉妹作『現役アイドル、Tinderやってた件』の実物寄せ機構を、本作の様式に合わせて移植。
+   P1 一番下へ戻るボタン / P2 メッセージ反応（保存つき） / P3 ＋パネル拡張（フリーチャット写真送信）
+   P4 ストーリー長押し一時停止＋下スワイプ閉じ / P5 写真スワイプ送り / P6 IG検索・探索タブ */
+if(!S.reactions||typeof S.reactions!=='object'||Array.isArray(S.reactions)) S.reactions={};
+
+/* ---------- P1: 一番下へ戻るボタン ---------- */
+const chatBottomBtn=$('#chat-bottom-btn');
+function updBottomBtn(){ if(!chatBottomBtn) return; const need=!feedStick&&(feed.scrollHeight-feed.clientHeight>80); chatBottomBtn.classList.toggle('on',need); }
+feed.addEventListener('scroll',updBottomBtn,{passive:true});
+if(chatBottomBtn) chatBottomBtn.addEventListener('click',()=>{ feed.scrollTo({top:feed.scrollHeight,behavior:'smooth'}); setTimeout(()=>scrollFeed(true),320); });
+
+/* ---------- P2: メッセージ反応（カカオ風・長押しトレー・保存） ---------- */
+const RT_EMO=['❤️','😂','😮','😢','😡','👍'];
+let rtrayRow=null, suppressTap=false, lpTimer=null;
+function closeTray(){ const t=$('#rtray'); if(t) t.classList.remove('on'); rtrayRow=null; }
+function renderReactionTray(row){
+ const t=$('#rtray'); if(!t||!row) return;
+ const key=row.dataset.rk; if(!key) return;
+ const cur=S.reactions[key]||'';
+ t.innerHTML=RT_EMO.map(e=>'<button data-re="'+e+'" class="'+(e===cur?'sel':'')+'" aria-label="反応 '+e+'">'+e+'</button>').join('');
+ rtrayRow=row; t.classList.add('on');
+ const bub=row.querySelector('.bub'); const chat=$('#v-chat');
+ if(bub&&chat){ const br=bub.getBoundingClientRect(), cr=chat.getBoundingClientRect();
+   let x=br.left-cr.left, y=br.top-cr.top-t.offsetHeight-8;
+   if(y<46) y=br.bottom-cr.top+8;
+   x=Math.max(6,Math.min(x,cr.width-t.offsetWidth-6));
+   t.style.left=x+'px'; t.style.top=y+'px'; }
+ t.querySelectorAll('[data-re]').forEach(b=>b.addEventListener('click',ev=>{
+   ev.stopPropagation();
+   const e=b.dataset.re;
+   if(S.reactions[key]===e) delete S.reactions[key]; else S.reactions[key]=e;
+   save(); drawChip(row); closeTray();
+ }));
+}
+feed.addEventListener('pointerdown',e=>{
+ const bub=e.target.closest?e.target.closest('.bub'):null; if(!bub) return;
+ const row=bub.closest('.row'); if(!row||!row.dataset.rk) return;
+ if(lpTimer) clearTimeout(lpTimer);
+ lpTimer=setTimeout(()=>{ suppressTap=true; renderReactionTray(row); if(typeof vib==='function') vib(18); },480);
+});
+['pointerup','pointercancel'].forEach(ev=>feed.addEventListener(ev,()=>{ if(lpTimer){ clearTimeout(lpTimer); lpTimer=null; } },{passive:true}));
+feed.addEventListener('pointermove',()=>{ if(lpTimer){ clearTimeout(lpTimer); lpTimer=null; } },{passive:true});
+feed.addEventListener('contextmenu',e=>{ if(e.target.closest&&e.target.closest('.bub')) e.preventDefault(); });
+document.addEventListener('pointerdown',e=>{ if(rtrayRow&&!e.target.closest('#rtray')&&!(e.target.closest&&e.target.closest('.bub'))) closeTray(); });
+
+/* ---------- P3: フリーチャット用＋ボタン＋写真ピッカー送信 ---------- */
+const btnPlus2=$('#btn-plus2');
+if(btnPlus2) btnPlus2.addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); btnPlus2.classList.toggle('on',on); const bp=$('#btn-plus'); if(bp) bp.classList.toggle('on',on); });
+function freeAddMeImg(img){ const r=el('<div class="row me fr"><div class="bmeta"><span class="tm">'+fmtTime()+'</span></div><img class="msgimg" src="'+img+'" style="max-width:62%;border-radius:14px"></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
+function openAlbumPick(){
+ const g=$('#ap-grid'); if(!g) return;
+ const imgs=[]; const seen=new Set();
+ GAL.filter(x=>S.calU>=x.u).forEach(x=>{ if(!seen.has(x.img)){ seen.add(x.img); imgs.push(x.img); } });
+ IG_J.concat(IG_N).forEach(p=>{ const vis=S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); if(vis&&!seen.has(p.img)){ seen.add(p.img); imgs.push(p.img); } });
+ g.innerHTML=imgs.map(s=>'<button data-ap="'+s+'"><img src="'+s+'"></button>').join('')||'<p style="grid-column:1/-1;color:#888;font-size:13px">まだ写真がありません</p>';
+ g.querySelectorAll('[data-ap]').forEach(b=>b.addEventListener('click',()=>{
+   const img=b.dataset.ap;
+   $('#albumpick').classList.remove('on'); $('#plus-panel').classList.remove('on'); if(btnPlus2) btnPlus2.classList.remove('on');
+   if(S.endId==='nao'){ curMsgKey='f'+S.free.length; freeAddMeImg(img); S.free.push({w:'meimg',img:img}); save(); return; }
+   curMsgKey='f'+S.free.length; freeAddMeImg(img); if(typeof sfxPlay==='function') sfxPlay('send');
+   S.free.push({w:'meimg',img:img}); S.freeN++; save();
+ }));
+ $('#albumpick').classList.add('on');
+}
+const apClose=$('#ap-close'); if(apClose) apClose.addEventListener('click',()=>$('#albumpick').classList.remove('on'));
+const apWrap=$('#albumpick'); if(apWrap) apWrap.addEventListener('click',e=>{ if(e.target===apWrap) apWrap.classList.remove('on'); });
+
+/* ---------- P4: ストーリー 長押し一時停止＋下スワイプ閉じ ---------- */
+function storyPause(){ storyState.paused=true; const v=$('#v-story'); if(v) v.classList.add('paused'); }
+function storyResume(){ storyState.paused=false; const v=$('#v-story'); if(v) v.classList.remove('paused'); }
+(function(){
+ const v=$('#v-story'); if(!v) return;
+ let holdT=null, sy=0, suppress=false;
+ v.addEventListener('pointerdown',e=>{ sy=e.clientY; if(holdT) clearTimeout(holdT); holdT=setTimeout(()=>{ storyPause(); suppress=true; },320); });
+ const release=()=>{ if(holdT){ clearTimeout(holdT); holdT=null; } if(storyState.paused) storyResume(); };
+ v.addEventListener('pointerup',release); v.addEventListener('pointercancel',release);
+ v.addEventListener('touchmove',e=>{ if(e.touches&&e.touches.length){ const dy=e.touches[0].clientY-sy; if(dy>72){ if(holdT){ clearTimeout(holdT); holdT=null; } storyResume(); closeStory(); } } },{passive:true});
+ v.addEventListener('click',e=>{ if(suppress){ suppress=false; e.stopPropagation(); e.preventDefault(); } },true);
+})();
+
+/* ---------- P5: 写真ビューア 左右スワイプ送り ---------- */
+let galList=[], galIdx=0;
+const galBodyEl=$('#gal-body');
+if(galBodyEl) galBodyEl.addEventListener('click',e=>{ const b=e.target.closest?e.target.closest('[data-gal]'):null; galList=GAL.filter(g=>S.calU>=g.u); if(b) galIdx=+b.dataset.gal; });
+function galSwipe(d){
+ if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u);
+ const n=galIdx+d; if(n<0||n>=galList.length) return;
+ galIdx=n; const g=galList[n]; galCur=g;
+ $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d;
+ const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':'';
+ $('#gal-cap').textContent=g.cap; updGalFav();
+}
+(function(){ const gv=$('#gal-view'); if(!gv) return; let sx=0;
+ gv.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; },{passive:true});
+ gv.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(dx<-52) galSwipe(1); else if(dx>52) galSwipe(-1); },{passive:true});
+})();
+
+/* ---------- P6: IG 検索・探索タブ ---------- */
+const IGS_ACCTS=[
+ {u:'park_jaeon.sculpt',d:'パク・ジェオン',img:'assets/av-jaeon.jpg',who:'j'},
+ {u:'nao_sculpt',d:'なお',img:'assets/nao-avatar.jpg',who:'n'},
+ {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna.jpg',who:null},
+ {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola.jpg',who:null}
+];
+function igPostVis(p){ return S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); }
+function renderIGSearch(){
+ const body=$('#igs-body'); if(!body) return;
+ const q=(($('#igs-in')||{}).value||'').trim().toLowerCase();
+ const accts=IGS_ACCTS.filter(a=>!q||a.u.toLowerCase().includes(q)||a.d.includes(q));
+ let h='';
+ if(accts.length) h+='<div class="igs-sec">アカウント</div>'+accts.map(a=>'<button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button>').join('');
+ if(!q){
+   const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p));
+   if(posts.length) h+='<div class="igs-sec">探索</div><div class="ig-grid">'+posts.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>';
+ }
+ if(!h) h='<div class="igs-sec">「'+esc(q)+'」の結果はありません</div>';
+ body.innerHTML=h;
+ body.querySelectorAll('[data-acct]').forEach(b=>b.addEventListener('click',()=>{
+   const a=IGS_ACCTS.find(x=>x.u===b.dataset.acct);
+   if(!a||!a.who){ toast('このアカウントのプロフィールは、物語の中で表示されます'); return; }
+   igWho=a.who; igNTab='grid';
+   $('#igsw-j').classList.toggle('on',igWho==='j'); $('#igsw-n').classList.toggle('on',igWho==='n');
+   showView('v-ig'); renderIG();
+ }));
+ body.querySelectorAll('[data-xpost]').forEach(b=>b.addEventListener('click',()=>{
+   igWho=b.dataset.owner; igNTab='grid';
+   $('#igsw-j').classList.toggle('on',igWho==='j'); $('#igsw-n').classList.toggle('on',igWho==='n');
+   showView('v-ig'); renderIG();
+   const btn=$('#ig-body').querySelector('[data-post="'+b.dataset.xpost+'"]'); if(btn) btn.click();
+ }));
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest?e.target.closest('[data-ignav]'):null; if(!b) return;
+ if(b.dataset.ignav==='search'){ renderIGSearch(); showView('v-igsearch'); }
+ else { showView('v-ig'); }
+});
+const igsBack=$('#igs-back'); if(igsBack) igsBack.addEventListener('click',()=>showView('v-ig'));
+const igsIn=$('#igs-in'); if(igsIn) igsIn.addEventListener('input',renderIGSearch);
 </script>
 </body>
 </html>
