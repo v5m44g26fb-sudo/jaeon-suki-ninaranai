@@ -963,7 +963,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v94：リアル化の全解禁ラウンド（2）です。Instagramのヘッダーが機能するようになりました。ハートからはアクティビティ画面が開き、自分の投稿へのコメントが時系列で並びます（未解放の内容は表示されません）。＋からは作成シート、紙飛行機は従来どおりカカオトークへの案内です。未読のアクティビティがある間はハートに赤いドットが付きます。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v95：リアル化の全解禁ラウンド（3）です。自分のプロフィール（nao_sculpt）が実際に編集できるようになりました。「プロフィールを編集」から名前と自己紹介を変更すると保存され、プロフィール画面にそのまま反映されます（ユーザーネームはコメント等の名義に使うため固定です）。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1122,6 +1122,20 @@ img{-webkit-user-drag:none}
 <div class="iga-head"><button class="back" id="iga-back">‹</button><h2>アクティビティ</h2></div>
 <div class="abody" id="iga-body" style="background:#fff"></div>
 <div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
+</div>
+
+<!-- IG PROFILE EDIT (v95) -->
+<div class="view" id="v-igedit">
+<div class="ipe-head"><button class="ipe-x" id="ipe-cancel">キャンセル</button><h2>プロフィールを編集</h2><button class="ipe-ok" id="ipe-done">完了</button></div>
+<div class="abody" style="background:#fff">
+<div class="ipe-av"><img src="assets/nao-avatar.jpg" alt=""><button id="ipe-avbtn" type="button">プロフィール写真を変更</button></div>
+<div class="ipe-form">
+<label class="ipe-row"><span>名前</span><input id="ipe-name" type="text" maxlength="30" autocomplete="off"></label>
+<label class="ipe-row"><span>ユーザーネーム</span><input id="ipe-user" type="text" value="nao_sculpt" disabled></label>
+<label class="ipe-row"><span>自己紹介</span><textarea id="ipe-bio" rows="3" maxlength="150"></textarea></label>
+</div>
+<p class="ipe-note">名前と自己紹介は、プロフィール画面にそのまま表示されます。ユーザーネームは変更できません。</p>
+</div>
 </div>
 
 <!-- NEWS (v75) -->
@@ -1625,7 +1639,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-igedit','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -2110,7 +2124,7 @@ function renderIG(){
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>',
   grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
  let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
- h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b>'+(prof.cat?'<br><span class="ig-cat">'+prof.cat+'</span>':'')+'<br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
+ h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+(isJ?prof.name:esc(profN().name))+'</b>'+(prof.cat?'<br><span class="ig-cat">'+prof.cat+'</span>':'')+'<br>'+(isJ?prof.bio:esc(profN().bio)).replace(/\n/g,'<br>')+'</div>'; /* v95：自分のプロフィールは編集内容（名前・自己紹介）を表示 */
  h+= isJ ? '<div class="ig-folbtn"><span class="'+(S.igFolJ===false?'':'ghost')+'" data-gf="follow">'+(S.igFolJ===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  const hls=(typeof igHighlights==='function')?igHighlights(isJ?'park_jaeon':'nao_sculpt'):[]; /* v93：ハイライト行（解放済みストーリーから構成） */
  if(hls.length) h+='<div class="ig-hls">'+hls.map((g,i)=>'<button class="ig-hl" data-hl="'+i+'"><span class="hl-ring'+(g.allSeen?' seen':'')+'"><img src="'+g.cover+'" alt=""></span><span class="hl-t">'+esc(g.t)+'</span></button>').join('')+'</div>';
@@ -2124,7 +2138,7 @@ function renderIG(){
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
  body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,isJ,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
- body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); if(typeof vib==='function') vib(10); renderIG(); } else openFolSheet(); return; } toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':'（プロフィールの編集は演出用です）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
+ body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); if(typeof vib==='function') vib(10); renderIG(); } else openFolSheet(); return; } if(k==='edit'){ if(typeof openProfEdit==='function') openProfEdit(); return; } toast('（メッセージはカカオトークのトークで進みます）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  body.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>{ const g=hls[+b.dataset.hl]; if(g&&g.list.length&&typeof openStoryHL==='function') openStoryHL(g.list); })); /* v93：ハイライトはそのグループだけを再生 */
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
@@ -3611,6 +3625,54 @@ function closeMkSheet(){ const s=$('#mk-sheet'); if(s) s.classList.remove('on');
  const _f=renderIGFeed; renderIGFeed=function(){ _f(); updActDot(); };
  const _r=renderIG; renderIG=function(){ _r(); updActDot(); };
  updActDot();
+})();
+</script>
+
+<script>
+/* ================= v95 : IG PROFILE EDIT =================
+   自分のプロフィール（nao_sculpt）の名前・自己紹介を実際に編集して保存できる実フォーム。
+   表示は renderIG のプロフィール文に連動（ユーザーネームはコメント等の名義に使うため固定）。
+   セーブ項目 profN は既定値方式＋正規化（profN()）で旧セーブ互換。本編・数値・解放条件は不変。 */
+(function(){
+ const st=document.createElement('style'); st.textContent=
+ '.ipe-head{padding:max(50px,calc(var(--sat) + 6px)) 13px 9px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #efefef}'
+ +'.ipe-head h2{flex:1;text-align:center;font-size:16.5px;font-weight:700;color:#262626}'
+ +'.ipe-head button{background:none;border:0;font-size:15px;color:#262626;cursor:pointer;padding:4px 2px;font-family:inherit}'
+ +'.ipe-head .ipe-ok{color:#0095f6;font-weight:700}'
+ +'.ipe-av{display:flex;flex-direction:column;align-items:center;gap:9px;padding:20px 0 6px}'
+ +'.ipe-av img{width:84px;height:84px;border-radius:50%;object-fit:cover}'
+ +'.ipe-av button{background:none;border:0;color:#0095f6;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}'
+ +'.ipe-form{margin-top:10px;border-top:1px solid #efefef}'
+ +'.ipe-row{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;border-bottom:1px solid #efefef}'
+ +'.ipe-row span{width:108px;flex:none;font-size:14.5px;color:#262626;padding-top:2px}'
+ +'.ipe-row input,.ipe-row textarea{flex:1;min-width:0;border:0;outline:none;font-size:16px;color:#262626;font-family:inherit;background:none;resize:none;line-height:1.5;padding:0}'
+ +'.ipe-row input:disabled{color:#8e8e8e}'
+ +'.ipe-note{padding:14px 16px;font-size:12.5px;color:#8e8e8e;line-height:1.7}';
+ document.head.appendChild(st);
+})();
+function profN(){
+ if(!S.profN||typeof S.profN!=='object'||Array.isArray(S.profN)) S.profN={name:'なお',bio:'홍서대 조소과 4학년｜卒業制作中'};
+ if(typeof S.profN.name!=='string'||!S.profN.name.trim()) S.profN.name='なお';
+ if(typeof S.profN.bio!=='string') S.profN.bio='';
+ return S.profN;
+}
+function openProfEdit(){
+ const p=profN();
+ const ni=$('#ipe-name'); if(ni) ni.value=p.name;
+ const bi=$('#ipe-bio'); if(bi) bi.value=p.bio;
+ showView('v-igedit');
+}
+(function(){
+ const dn=$('#ipe-done'); if(dn) dn.addEventListener('click',()=>{
+   const ni=$('#ipe-name'), bi=$('#ipe-bio');
+   const name=((ni&&ni.value)||'').trim()||'なお';
+   const bio=((bi&&bi.value)||'').trim();
+   S.profN={name:name,bio:bio}; save();
+   igWho='n'; igTab='prof'; renderIG(); showView('v-ig');
+   toast('プロフィールを保存しました');
+ });
+ const cx=$('#ipe-cancel'); if(cx) cx.addEventListener('click',()=>{ igWho='n'; igTab='prof'; renderIG(); showView('v-ig'); });
+ const av=$('#ipe-avbtn'); if(av) av.addEventListener('click',()=>toast('（プロフィール写真の変更は演出用です）'));
 })();
 </script>
 
