@@ -1092,7 +1092,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v129：ニュース記事の作り込みをしました。コメントが記事のカテゴリに合う内容だけから選ばれるようになり（展示の記事に天気へのお礼が付くようなズレを解消。復元の記事には専用のコメントを維持）、記事の末尾に同じカテゴリの「관련 뉴스（関連ニュース）」が付き、タップでその記事へ移動できるようになりました。未解放の記事は関連にも出ません。本編・台詞・数値・解放条件・写真は変えていません。</p>
+<p class="src">v130：カカオトークのサイドトーク（ビンナ／彫塑科グループ／ドヒョク／ソルア）の作り込みをしました。これまで吹き出しに時刻が無く日付の区切りもありませんでしたが、本編チャットと同じ作法で、その会話の作中日付のチップと、各メッセージの時刻（오전／오후 h:mm）が付くようになりました。時刻は開くたびに変わらない決定的な値で、同じ人の連続メッセージでは最後の吹き出しにだけ表示されます。本編・台詞・数値・解放条件・写真は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2116,15 +2116,20 @@ function renderThreads(){
  L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,mainDate,kkUnreadTotal(),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
- if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna-gen2.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna-gen2.jpg',BITNA[si(BITNA)])));
- if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),tmon(si(GROUP)),0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
- if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk-gen.jpg',DOHYUK[si(DOHYUK)])));
- if(S.chap>=5) L.appendChild(threadRow('assets/av-sola-gen2.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola-gen2.jpg',SOLA[si(SOLA)])));
+ if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna-gen2.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna-gen2.jpg',BITNA[si(BITNA)],si(BITNA))));
+ if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),tmon(si(GROUP)),0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)],si(GROUP)),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
+ if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk-gen.jpg',DOHYUK[si(DOHYUK)],si(DOHYUK))));
+ if(S.chap>=5) L.appendChild(threadRow('assets/av-sola-gen2.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola-gen2.jpg',SOLA[si(SOLA)],si(SOLA))));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
  updKkBadge(); /* v104：一覧を描くたびにタブバッジも実未読へ同期する */
 }
 let sideView=null;
-function openSide(name,img,log){
+/* v130：サイドトークにも本編チャットと同じ作法で日付チップと時刻を付ける。ステージ→作中日付の対応は
+   一覧の月ラベル（v51/v83）と同じ CHAPCAL 対応を使い、日付は KDATE、開始時刻は相手名からの決定的ハッシュで
+   その日の日中に置く（再表示しても変わらない）。時刻は実物カカオどおり、同じ人の同じ分の連続では最後の吹き出しにだけ付ける */
+const SIDE_CAL=[0,1,2,3,4,5,6,8,10];
+function sideFmtMin(t){ const h24=Math.floor(t/60)%24, m=t%60; const ap=h24<12?'오전':'오후'; let h=h24%12; if(h===0) h=12; return ap+' '+h+':'+String(m).padStart(2,'0'); }
+function openSide(name,img,log,stageIdx){
  if(!sideView){
    sideView=document.createElement('div'); sideView.className='view'; sideView.id='v-side';
    sideView.innerHTML='<div class="chat-head"><button class="back" id="side-back">‹</button><div class="cn"><b id="side-name"></b><div class="csub">読み取り専用（物語の進行には影響しません）</div></div></div><div id="side-feed" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:7px;background:var(--kakao-bg)"></div>';
@@ -2133,11 +2138,17 @@ function openSide(name,img,log){
  }
  $('#side-name').textContent=name;
  const f=sideView.querySelector('#side-feed'); f.innerHTML='';
+ const cal=(typeof stageIdx==='number')?SIDE_CAL[Math.min(Math.max(stageIdx,0),SIDE_CAL.length-1)]:null;
+ if(cal!=null&&KDATE[cal]) f.appendChild(el('<div class="dchip"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>'+esc(KDATE[cal])+'</div>'));
+ let hash=0; const hseed=name+'|'+(log.length?log[0][1]:''); for(let i=0;i<hseed.length;i++) hash=(hash*31+hseed.charCodeAt(i))>>>0;
+ let tmin=9*60+(hash%660); const times=log.map((m,i)=>{ const t=tmin; tmin+=1+((hash+i*7)%3); return sideFmtMin(t); });
+ const showTm=i=>(i===log.length-1||log[i+1][0]!==log[i][0]||times[i+1]!==times[i]);
  let prevWho=null;
- log.forEach(([who,txt])=>{
-   if(who==='なお'){ f.appendChild(el('<div class="row me"><div class="bub">'+esc(txt)+'</div></div>')); }
-   else if(who===prevWho){ f.appendChild(el('<div class="row grp"><div><div class="bub">'+esc(txt)+'</div></div></div>')); } /* v83：サイドトークでも連続メッセージはアバター・名前を省く */
-   else{ f.appendChild(el('<div class="row">'+(img?'<img class="av" src="'+img+'">':'<span class="avc" style="width:36px;height:36px;border-radius:13px;background:#7fb2d9;display:flex;align-items:center;justify-content:center;color:#fff;flex:none">'+IC.group+'</span>')+'<div><div class="nm">'+esc(who)+'</div><div class="bub">'+esc(txt)+'</div></div></div>')); }
+ log.forEach(([who,txt],i)=>{
+   const tm=showTm(i)?times[i]:'';
+   if(who==='なお'){ f.appendChild(el('<div class="row me">'+(tm?'<div class="bmeta"><span class="tm">'+tm+'</span></div>':'')+'<div class="bub">'+esc(txt)+'</div></div>')); }
+   else if(who===prevWho){ f.appendChild(el('<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(txt)+'</div>'+(tm?'<span class="tm">'+tm+'</span>':'')+'</div></div></div>')); } /* v83：サイドトークでも連続メッセージはアバター・名前を省く */
+   else{ f.appendChild(el('<div class="row">'+(img?'<img class="av" src="'+img+'">':'<span class="avc" style="width:36px;height:36px;border-radius:13px;background:#7fb2d9;display:flex;align-items:center;justify-content:center;color:#fff;flex:none">'+IC.group+'</span>')+'<div><div class="nm">'+esc(who)+'</div><div class="brow2"><div class="bub">'+esc(txt)+'</div>'+(tm?'<span class="tm">'+tm+'</span>':'')+'</div></div></div>')); }
    prevWho=who;
  });
  showView('v-side');
