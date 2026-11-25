@@ -967,7 +967,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v116：本人が生成した写真2枚を組み込みました。粘土の胸像を両手で形作る制作風景の写真で、消えていた なお側のストーリー1件・写真ギャラリーの1件（4月16日）・プロフィールのハイライト「제작」を復活（日付やキャプションは元のまま、写真だけ新しい生成写真に差し替え）。もう1枚、夜の作業室にランプと粘土の胸像と蝶の飼育ケースが並ぶ写真を、タイトル画面（ロック画面）の背景に敷きました。タイトルの文字組みはそのまま、物語の内容・数値・他の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v117：アバター5人分を、本人が生成したポートレートに差し替えました。ジェオン・なお・ビンナ・ドヒョク・ソラの顔が、カカオトーク・Instagram・通話・検索など全ての画面で新しい生成写真になっています（物語の後半でジェオンのプロフィール画像になる投稿写真と、プロフィールの背景写真は今までどおり）。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1056,10 +1056,10 @@ img{-webkit-user-drag:none}
 
 <!-- CHAT -->
 <div class="view" id="v-chat">
-<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons"><button id="chat-search-btn" aria-label="トーク内検索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button id="chat-menu-btn" aria-label="チャットルームメニュー"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span></div>
+<div class="chat-head"><button class="back" data-open="kakao">‹</button><button class="ch-prof" id="chat-prof-btn"><img src="assets/av-jaeon-gen.jpg" alt=""></button><div class="cn"><b id="chat-name">パク・ジェオン</b><div class="csub" id="chat-sub">ホンソ大 彫塑科2年</div></div><span class="ch-icons"><button id="chat-search-btn" aria-label="トーク内検索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button id="chat-menu-btn" aria-label="チャットルームメニュー"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span></div>
 <div id="chat-search"><input id="cs-in" type="text" placeholder="대화 내용 검색（トーク内検索）" autocomplete="off"><span id="cs-count"></span><button id="cs-up" aria-label="前の結果"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14.5 12 8l6.5 6.5"/></svg></button><button id="cs-dn" aria-label="次の結果"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 9.5 12 16l6.5-6.5"/></svg></button><button id="cs-close" aria-label="検索を閉じる"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <div id="chat-drawer-bg"></div>
-<div id="chat-drawer"><div class="cd-sec">대화 상대（メンバー）</div><button class="cd-mrow" id="cd-m-j"><img src="assets/av-jaeon.jpg" alt=""><span>パク・ジェオン</span></button><div class="cd-mrow"><img src="assets/nao-avatar.jpg" alt=""><span>なお</span></div><div class="cd-sec">채팅방（このトーク）</div><button class="cd-item" id="cd-photos"><span>사진 보기（写真を見る）</span></button><button class="cd-item" id="cd-search2"><span>대화 내용 검색（トーク内検索）</span></button><div class="cd-item"><span>채팅방 알림（通知）</span><span class="ios-sw on" id="cd-notif-sw"></span></div><button class="cd-item" id="cd-bg"><span>채팅방 배경（背景）</span><span class="cd-bgname" id="cd-bgname">기본</span></button></div>
+<div id="chat-drawer"><div class="cd-sec">대화 상대（メンバー）</div><button class="cd-mrow" id="cd-m-j"><img src="assets/av-jaeon-gen.jpg" alt=""><span>パク・ジェオン</span></button><div class="cd-mrow"><img src="assets/nao-avatar-gen.jpg" alt=""><span>なお</span></div><div class="cd-sec">채팅방（このトーク）</div><button class="cd-item" id="cd-photos"><span>사진 보기（写真を見る）</span></button><button class="cd-item" id="cd-search2"><span>대화 내용 검색（トーク内検索）</span></button><div class="cd-item"><span>채팅방 알림（通知）</span><span class="ios-sw on" id="cd-notif-sw"></span></div><button class="cd-item" id="cd-bg"><span>채팅방 배경（背景）</span><span class="cd-bgname" id="cd-bgname">기본</span></button></div>
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
 <div id="tap-hint">▼</div>
@@ -1083,7 +1083,7 @@ img{-webkit-user-drag:none}
 <button class="prof-x" id="prof-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
 <span class="prof-gear"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span>
 <div class="prof-main">
-<img class="prof-av" id="prof-av" src="assets/av-jaeon.jpg" alt="">
+<img class="prof-av" id="prof-av" src="assets/av-jaeon-gen.jpg" alt="">
 <div class="prof-nm">パク・ジェオン</div>
 <div class="prof-status" id="prof-status">작업 중. 끝나지 않는 것</div>
 <div id="prof-music-wrap"><span class="prof-music" id="prof-music"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg> 프로필 뮤직 ― 「Love Song」</span></div>
@@ -1112,28 +1112,28 @@ img{-webkit-user-drag:none}
 <div class="view" id="v-ig">
 <div class="ig-head"><button class="back" data-home="1">‹</button><span class="ig-logo">Instagram</span><div class="ig-hicons"><button class="igh-btn" id="igh-plus" aria-label="作成"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg></button><button class="igh-btn" id="igh-heart" aria-label="アクティビティ"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span class="igh-dot" id="igh-dot" style="display:none"></span></button><button class="igh-btn" id="igh-msg" aria-label="メッセージ"><span class="ig-badge-dot"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></span></button></div></div>
 <div class="abody" id="ig-body"></div>
-<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
+<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar-gen.jpg" alt=""></button></div>
 </div>
 
 <!-- IG SEARCH (v74) -->
 <div class="view" id="v-igsearch">
 <div class="igs-head"><button class="back" id="igs-back">‹</button><input class="igs-in" id="igs-in" type="text" placeholder="검색（検索）" autocomplete="off"></div>
 <div class="abody" id="igs-body" style="background:#fff"></div>
-<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" class="on" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
+<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" class="on" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar-gen.jpg" alt=""></button></div>
 </div>
 
 <!-- IG ACTIVITY (v94) -->
 <div class="view" id="v-igact">
 <div class="iga-head"><button class="back" id="iga-back">‹</button><h2>アクティビティ</h2></div>
 <div class="abody" id="iga-body" style="background:#fff"></div>
-<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
+<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar-gen.jpg" alt=""></button></div>
 </div>
 
 <!-- IG PROFILE EDIT (v95) -->
 <div class="view" id="v-igedit">
 <div class="ipe-head"><button class="ipe-x" id="ipe-cancel">キャンセル</button><h2>プロフィールを編集</h2><button class="ipe-ok" id="ipe-done">完了</button></div>
 <div class="abody" style="background:#fff">
-<div class="ipe-av"><img src="assets/nao-avatar.jpg" alt=""><button id="ipe-avbtn" type="button">プロフィール写真を変更</button></div>
+<div class="ipe-av"><img src="assets/nao-avatar-gen.jpg" alt=""><button id="ipe-avbtn" type="button">プロフィール写真を変更</button></div>
 <div class="ipe-form">
 <label class="ipe-row"><span>名前</span><input id="ipe-name" type="text" maxlength="30" autocomplete="off"></label>
 <label class="ipe-row"><span>ユーザーネーム</span><input id="ipe-user" type="text" value="nao_sculpt" disabled></label>
@@ -1183,9 +1183,9 @@ img{-webkit-user-drag:none}
 
 <!-- CALL (iOS 14) -->
 <div class="view" id="v-call" data-phase="incoming">
-<div class="call-bg"><img src="assets/av-jaeon.jpg" alt=""></div>
+<div class="call-bg"><img src="assets/av-jaeon-gen.jpg" alt=""></div>
 <div class="call-main">
-<img class="call-av" src="assets/av-jaeon.jpg" alt="">
+<img class="call-av" src="assets/av-jaeon-gen.jpg" alt="">
 <div class="call-nm">パク・ジェオン</div>
 <div class="call-tm" id="call-timer">iPhone</div>
 <div class="call-digits" id="call-digits"></div>
@@ -1261,7 +1261,7 @@ img{-webkit-user-drag:none}
 <button class="story-zone r" id="story-next"></button>
 </div>
 
-<div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
+<div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar-gen.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
 <div id="fol-sheet"><div class="fol-bg" id="fol-bg"></div><div class="fol-panel"><div class="fol-box"><button class="danger" id="fol-unfollow" type="button">フォローをやめる</button></div><div class="fol-box"><button class="cancel" id="fol-cancel" type="button">キャンセル</button></div></div></div>
 <div id="ppl-sheet"><div class="ppl-bg" id="ppl-bg"></div><div class="ppl-panel"><div class="cm-grab"></div><div class="ppl-head" id="ppl-title">いいね！</div><div class="ppl-list" id="ppl-list"></div></div></div>
 <div id="shr-sheet"><div class="sh-bg" id="shr-bg"></div><div class="sh-panel"><div class="cm-grab"></div><div class="sh-head" id="shr-title">投稿を送信</div><div id="shr-list"></div></div></div>
@@ -1987,10 +1987,10 @@ function renderThreads(){
  L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,mainDate,kkUnreadTotal(),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
- if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
+ if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna-gen.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna-gen.jpg',BITNA[si(BITNA)])));
  if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),tmon(si(GROUP)),0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
- if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[si(DOHYUK)])));
- if(S.chap>=5) L.appendChild(threadRow('assets/av-sola.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola.jpg',SOLA[si(SOLA)])));
+ if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk-gen.jpg',DOHYUK[si(DOHYUK)])));
+ if(S.chap>=5) L.appendChild(threadRow('assets/av-sola-gen.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola-gen.jpg',SOLA[si(SOLA)])));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
  updKkBadge(); /* v104：一覧を描くたびにタブバッジも実未読へ同期する */
 }
@@ -2032,22 +2032,22 @@ const IG_IC={
 function igAgoMin(s){ if(!s||s==='たった今') return 0; let m; if(m=s.match(/(\d+)分前/)) return +m[1]; if(m=s.match(/(\d+)時間前/)) return +m[1]*60; if(m=s.match(/(\d+)日前/)) return +m[1]*1440; if(m=s.match(/(\d+)週間前/)) return +m[1]*10080; return 99999; }
 function igStoryCm(p){ return (p.cm||[]).concat(S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]); }
 function igAllCm(p){ const mine=(S.igMyCmts&&Array.isArray(S.igMyCmts[p.id]))?S.igMyCmts[p.id]:[]; return igStoryCm(p).concat(mine.map(t=>['nao_sculpt',t])); }
-function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar.jpg'; if(name==='b1nna_') return 'assets/av-bitna.jpg'; if(name==='s0l_a') return 'assets/av-sola.jpg'; return ''; }
+function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar-gen.jpg'; if(name==='b1nna_') return 'assets/av-bitna-gen.jpg'; if(name==='s0l_a') return 'assets/av-sola-gen.jpg'; return ''; }
 function igBaseLikes(p){ return parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13; }
 function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
 function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' seen'; const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
-function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
+function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar-gen.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna-gen.jpg'],['s0l_a','assets/av-sola-gen.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
 function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast(b.dataset.suser==='nao_sculpt'?'（ストーリーの追加は演出用です）':'このユーザーのストーリーは、物語の進行で追加されます'); })); }
 function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':'nao_sculpt'):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
 function igPostHTML(p,owner){
- const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar.jpg',name:'nao_sculpt'};
+ const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar-gen.jpg',name:'nao_sculpt'};
  const allCm=igAllCm(p);
  const base=igBaseLikes(p);
  const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
  const prev=allCm.slice(0,2).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
  const cimgs=(Array.isArray(p.imgs)&&p.imgs.length>1)?p.imgs:null; /* v93：複数枚投稿は実物作法のカルーセル */
  const media= cimgs ? '<div class="ig-imgwrap car"><div class="ig-track">'+cimgs.map(s=>'<img src="'+s+'" draggable="false" alt="">').join('')+'</div><span class="ig-cnt">1/'+cimgs.length+'</span><div class="ig-dots">'+cimgs.map((s,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join('')+'</div><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>' : '<div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>';
- return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>'+media+'<div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
+ return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>'+media+'<div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar-gen.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
 }
 function igWireCard(dp,p,owner,inFeed){
  const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
@@ -2151,7 +2151,7 @@ function renderIG(){
  const locked=posts.length-unlocked.length;
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',cat:'아티스트',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
-  :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
+  :{img:'assets/nao-avatar-gen.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
  if(isJ&&S.igFolJ===false) prof.fol=(parseInt(prof.fol.replace(/,/g,''),10)-1).toLocaleString('en-US'); /* v86：フォロー解除中は実物どおりフォロワー数が1少ない表示 */
  const IC={
   heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
@@ -2303,16 +2303,16 @@ $('#v-lock').addEventListener('click',unlockPhone);
 function renderFriends(){
  const F=$('#friend-list'); if(!F) return;
  const bday=S.calU===4;
- let h='<div class="fr-sec first">내 프로필</div><button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar.jpg"><span><span class="fn">なお'+(bday?' '+IC.cake:'')+'</span><div class="fs">'+(bday?'오늘 생일이에요 ' + IC.cake:'졸업 제작 중… 🦋')+'</div></span></button>';
- if(bday) h+='<div class="fr-sec">생일인 친구</div><button class="thread fr-row" data-fr="なお"><img class="av" src="assets/nao-avatar.jpg"><span class="tt"><span class="tn">なお ' + IC.cake + '</span><span class="tp">오늘 생일이에요</span></span></button>';
+ let h='<div class="fr-sec first">내 프로필</div><button class="fr-my" id="fr-myprof"><img src="assets/nao-avatar-gen.jpg"><span><span class="fn">なお'+(bday?' '+IC.cake:'')+'</span><div class="fs">'+(bday?'오늘 생일이에요 ' + IC.cake:'졸업 제작 중… 🦋')+'</div></span></button>';
+ if(bday) h+='<div class="fr-sec">생일인 친구</div><button class="thread fr-row" data-fr="なお"><img class="av" src="assets/nao-avatar-gen.jpg"><span class="tt"><span class="tn">なお ' + IC.cake + '</span><span class="tp">오늘 생일이에요</span></span></button>';
  const cnt=1+(S.chap>=1?1:0)+(S.chap>=4?1:0)+(S.chap>=5?1:0);
  h+='<div class="fr-sec">친구 '+cnt+'</div>';
  const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+(st==='RAMEN'?IC.bowl:esc(st||''))+'</span></span>'+(mus?'<span class="fr-mus">'+IC.note+' '+esc(mus)+'</span>':'')+'</button>';
  const jm=(profStage().mus.match(/「([^」]+)」/)||[])[1]||'';
  h+=row(cav(),'パク・ジェオン',profStage().st,jm).replace('ジェオン</span>','ジェオン</span>'+profDotHTML());
- if(S.chap>=1) h+=row('assets/av-bitna.jpg','ビンナ','');
- if(S.chap>=4) h+=row('assets/av-dohyuk.jpg','ヤン・ドヒョク','RAMEN');
- if(S.chap>=5) h+=row('assets/av-sola.jpg','ユン・ソルア','');
+ if(S.chap>=1) h+=row('assets/av-bitna-gen.jpg','ビンナ','');
+ if(S.chap>=4) h+=row('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク','RAMEN');
+ if(S.chap>=5) h+=row('assets/av-sola-gen.jpg','ユン・ソルア','');
  F.innerHTML=h;
  const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>openFProf('なお'));
  F.querySelectorAll('.fr-row').forEach(b=>b.addEventListener('click',()=>{
@@ -2344,15 +2344,15 @@ $('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出�
 /* 友達プロフィール：実物カカオのプロフィール画面（背景・アバター・名前・状態・下部ボタン）を汎用化。
    状態メッセージと解放条件は友達一覧の既存データと一致させ、新しい人物情報は作らない */
 const FPROF={
- 'ビンナ':{av:'assets/av-bitna.jpg',bg:'linear-gradient(160deg,#7d6a99,#4c3d63)',st:'',log:()=>BITNA[Math.min(Math.max(S.chap,0),BITNA.length-1)]},
- 'ヤン・ドヒョク':{av:'assets/av-dohyuk.jpg',bg:'linear-gradient(160deg,#a8815c,#755334)',st:'RAMEN',log:()=>DOHYUK[Math.min(Math.max(S.chap,0),DOHYUK.length-1)]},
- 'ユン・ソルア':{av:'assets/av-sola.jpg',bg:'linear-gradient(160deg,#6d87a0,#42586e)',st:'',log:()=>SOLA[Math.min(Math.max(S.chap,0),SOLA.length-1)]}
+ 'ビンナ':{av:'assets/av-bitna-gen.jpg',bg:'linear-gradient(160deg,#7d6a99,#4c3d63)',st:'',log:()=>BITNA[Math.min(Math.max(S.chap,0),BITNA.length-1)]},
+ 'ヤン・ドヒョク':{av:'assets/av-dohyuk-gen.jpg',bg:'linear-gradient(160deg,#a8815c,#755334)',st:'RAMEN',log:()=>DOHYUK[Math.min(Math.max(S.chap,0),DOHYUK.length-1)]},
+ 'ユン・ソルア':{av:'assets/av-sola-gen.jpg',bg:'linear-gradient(160deg,#6d87a0,#42586e)',st:'',log:()=>SOLA[Math.min(Math.max(S.chap,0),SOLA.length-1)]}
 };
 const FP_IC={chat:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg>',call:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="currentColor" stroke="none"/></svg>',gift:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg>',gear:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg>'};
 let fpName=null;
 function openFProf(name){
  const isMe=(name==='なお');
- const d=isMe?{av:'assets/nao-avatar.jpg',bg:'url(assets/nao-post1.jpg) center / cover no-repeat',st:(S.calU===4?'오늘 생일이에요':'졸업 제작 중… 🦋')}:FPROF[name];
+ const d=isMe?{av:'assets/nao-avatar-gen.jpg',bg:'url(assets/nao-post1.jpg) center / cover no-repeat',st:(S.calU===4?'오늘 생일이에요':'졸업 제작 중… 🦋')}:FPROF[name];
  if(!d) return; fpName=name;
  const bgEl=$('#fp-bg'); if(bgEl) bgEl.style.background=d.bg;
  const avEl=$('#fp-av'); if(avEl) avEl.src=d.av;
@@ -2464,14 +2464,14 @@ function renderPOV(){
 $('#povread-back').addEventListener('click',()=>{ renderPOV(); showView('v-pov'); });
 /* ================= v4 : IG STORIES ================= */
 const STORIES=[
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier-main.jpg',cap:'작업 중',ago:'2시간',unlock:2},
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly-main.jpg',cap:'나비',ago:'5시간',unlock:4},
-{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-making-main.jpg',cap:'작업 중 잠깐 ☕',ago:'1시간',unlock:3},
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-jaeon3-main.jpg',cap:'전시 준비',ago:'3시간',unlock:6},
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-wheel-main.jpg',cap:'관람차',ago:'1시간',unlock:8},
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-rain-main.jpg',cap:'비',ago:'30분',unlock:9},
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-hands-main.jpg',cap:'고치는 중',ago:'1시간',unlock:10},
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-gallery-main.jpg',cap:'전시 D-day',ago:'방금',unlock:11}
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-atelier-main.jpg',cap:'작업 중',ago:'2시간',unlock:2},
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-butterfly-main.jpg',cap:'나비',ago:'5시간',unlock:4},
+{user:'nao_sculpt',av:'assets/nao-avatar-gen.jpg',img:'assets/nao-making-main.jpg',cap:'작업 중 잠깐 ☕',ago:'1시간',unlock:3},
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-jaeon3-main.jpg',cap:'전시 준비',ago:'3시간',unlock:6},
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-wheel-main.jpg',cap:'관람차',ago:'1시간',unlock:8},
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-rain-main.jpg',cap:'비',ago:'30분',unlock:9},
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-hands-main.jpg',cap:'고치는 중',ago:'1시간',unlock:10},
+{user:'park_jaeon',av:'assets/av-jaeon-gen.jpg',img:'assets/ig-gallery-main.jpg',cap:'전시 D-day',ago:'방금',unlock:11}
 ]; /* v116：nao_sculpt のストーリーも生成写真（nao-making-main）で復活し全8件に（cap／ago／unlock は v110 時点の値のまま） */
 let storyState={list:[],i:0,timer:null,remain:0,startedAt:0,paused:false,user:null}; let storyFrom='prof'; const STORY_DUR=5000; /* v81：実物どおり5秒自動送り＋既読管理（Tinder版のストーリー機構を移植） */
 const STORY_ORDER=['nao_sculpt','park_jaeon','b1nna_','s0l_a']; /* v88：トレイの表示順（次ユーザー自動遷移の順序） */
@@ -2600,9 +2600,9 @@ function profStage(){ const u=S.calU;
  if(S.epiProf&&S.endId==='drama') return {st:'정원에, 가끔 간다',mus:'「Butterfly」― JUNHA PARK (J.UNA)',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
  if(u>=11) return {st:'나비. 이제는 잡지 않는다',mus:'「Love Me Like That」― SAM KIM',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
  if(u>=10) return {st:'',mus:'',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-jaeon2.jpg'};
- if(u>=6)  return {st:'전시 준비 중',mus:'「We\'re Already」― KIMMUSEUM',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon2.jpg'};
- if(u>=3)  return {st:'',mus:'「Whisper」― Park Ji Woo',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon1.jpg'};
- return {st:'작업 중. 끝나지 않는 것',mus:'「Love Song」',av:'assets/av-jaeon.jpg',bg:'assets/ig-jaeon1.jpg'};
+ if(u>=6)  return {st:'전시 준비 중',mus:'「We\'re Already」― KIMMUSEUM',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon2.jpg'};
+ if(u>=3)  return {st:'',mus:'「Whisper」― Park Ji Woo',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon1.jpg'};
+ return {st:'작업 중. 끝나지 않는 것',mus:'「Love Song」',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon1.jpg'};
 }
 function cav(){ return profStage().av; }
 function updProfile(){ const p=profStage();
@@ -3119,10 +3119,10 @@ function galSwipe(d){ galShow(galIdx+d); }
 
 /* ---------- P6: IG 検索・探索タブ ---------- */
 const IGS_ACCTS=[
- {u:'park_jaeon.sculpt',d:'パク・ジェオン',img:'assets/av-jaeon.jpg',who:'j'},
- {u:'nao_sculpt',d:'なお',img:'assets/nao-avatar.jpg',who:'n'},
- {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna.jpg',who:null,min:1},
- {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola.jpg',who:null,min:5}
+ {u:'park_jaeon.sculpt',d:'パク・ジェオン',img:'assets/av-jaeon-gen.jpg',who:'j'},
+ {u:'nao_sculpt',d:'なお',img:'assets/nao-avatar-gen.jpg',who:'n'},
+ {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna-gen.jpg',who:null,min:1},
+ {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola-gen.jpg',who:null,min:5}
 ];
 function igPostVis(p){ return S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); }
 function renderIGSearch(){
@@ -3267,7 +3267,7 @@ function renderMore(){
   ['메모',ICN.note,()=>{ renderNotes(); showView('v-notes'); }],
   ['전화',ICN.tel,()=>{ renderCallLog(); showView('v-calllog'); }],
   ['설정',ICN.gear,()=>{ showView('v-home'); toast('（設定はホーム画面の下部にあります）'); }]];
- b.innerHTML='<button class="more-prof" id="more-prof"><img src="assets/nao-avatar.jpg" alt=""><span class="mp-tx"><b>なお</b><span>'+(bday?'오늘 생일이에요':'졸업 제작 중… 🦋')+'</span></span><span class="mp-ch">›</span></button>'
+ b.innerHTML='<button class="more-prof" id="more-prof"><img src="assets/nao-avatar-gen.jpg" alt=""><span class="mp-tx"><b>なお</b><span>'+(bday?'오늘 생일이에요':'졸업 제작 중… 🦋')+'</span></span><span class="mp-ch">›</span></button>'
   +'<div class="more-sec">서비스</div><div class="more-grid">'
   +items.map((it,i)=>'<button class="more-item" data-mi="'+i+'"><span class="mi-ic">'+it[1]+'</span>'+it[0]+'</button>').join('')
   +'</div><p class="locknote">카카오톡 더보기（2021）― 送金・決済系のサービスは、物語に合わせて外しています</p>';
@@ -3318,7 +3318,7 @@ async function sendSticker(id){
 })();
 /* IG共有シート：実物どおり送信先を選んで送る（送信済み表示つき）。相手は作中に登場するアカウントのみ・解放条件に連動 */
 let shrPost=null; const shrSent=new Set();
-function shrTargets(){ const list=[['park_jaeon.sculpt',cav()]]; if(S.chap>=1) list.push(['b1nna_','assets/av-bitna.jpg']); if(S.chap>=5) list.push(['s0l_a','assets/av-sola.jpg']); return list; }
+function shrTargets(){ const list=[['park_jaeon.sculpt',cav()]]; if(S.chap>=1) list.push(['b1nna_','assets/av-bitna-gen.jpg']); if(S.chap>=5) list.push(['s0l_a','assets/av-sola-gen.jpg']); return list; }
 function openShareSheet(p){ shrPost=p||null; const sh=$('#shr-sheet'); if(!sh) return; const t=$('#shr-title'); if(t) t.textContent=p?'投稿を送信':'ストーリーを送信'; renderShrList(); sh.classList.add('on'); }
 function closeShareSheet(){ const sh=$('#shr-sheet'); if(sh) sh.classList.remove('on'); }
 function renderShrList(){ const key=shrPost?shrPost.id:'story'; const w=$('#shr-list'); if(!w) return;
