@@ -461,7 +461,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 #tap-hint{position:absolute;right:15px;bottom:82px;width:36px;height:36px;border-radius:50%;background:rgba(28,38,52,.78);color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;z-index:60;pointer-events:none;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);box-shadow:0 3px 10px rgba(20,30,45,.35)}
 #tap-hint.on{display:flex;animation:hintb 1.5s ease-in-out infinite}
 @keyframes hintb{0%,100%{transform:translateY(0);opacity:.8}50%{transform:translateY(5px);opacity:1}}
-#noise{position:absolute;top:100px;left:10px;right:10px;background:rgba(26,26,32,.95);color:#fff;border-radius:17px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;z-index:90;transform:translateY(-160%);opacity:0;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s,visibility 0s linear .5s;box-shadow:0 10px 26px rgba(0,0,0,.38);cursor:pointer;pointer-events:none;visibility:hidden}
+#noise{position:absolute;top:100px;left:10px;right:10px;background:rgba(26,26,32,.95);color:#fff;border-radius:17px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;z-index:150; /* v90：バナーはロック画面より上に重なり、どの画面でもタップできる */transform:translateY(-160%);opacity:0;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s,visibility 0s linear .5s;box-shadow:0 10px 26px rgba(0,0,0,.38);cursor:pointer;pointer-events:none;visibility:hidden}
 #noise.on{transform:translateY(0);opacity:1;pointer-events:auto;visibility:visible;transition:transform .45s cubic-bezier(.25,.9,.3,1.05),opacity .3s,visibility 0s}
 #noise .n-ic{font-size:19px;flex:none;line-height:1.3}
 #noise .n-t{font-size:11px;color:#c6c6cf;letter-spacing:.02em}
@@ -948,7 +948,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v89：リアル化の第7弾です。カカオトークの「더보기」タブが実物の構成で開くようになり、トークの背景色はチャットルームのドロワーから変更できます。物語クリア後のフリートークではスタンプが送れるようになりました。Instagramの共有は送信先シートから実際に送れ、プロフィールにはカテゴリ表示が付きました。電話にはキーパッドを追加し、ホーム画面のアイコンは長押しで実物どおり揺れます。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v90：リアル化の第8弾です。ロック画面のライト／カメラは長押しで実物どおり反応し、通知バナーをタップすると該当アプリが開きます。写真はお気に入りが保存されるようになり、共有シート・削除（最近削除した項目から復元できます）・ダブルタップズームに対応しました。ニュースには検索と記事の文字サイズ変更、カレンダーには予定の詳細表示を追加し、触感フィードバックのオン／オフも設定に加わりました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -966,7 +966,7 @@ img{-webkit-user-drag:none}
 <div class="lnotif stack"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
 <div class="lnotif"><span class="ln-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>解剖メモ</b><span>1시간 전</span></div><div class="ln-t">新しい解剖メモが解放されました</div></div></div>
 </div>
-<div class="lock-btns"><span class="lk-btn"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 2.5h7l.8 5.5H7.7z"/><rect x="10" y="8" width="4" height="12.5" rx="1.8"/></svg></span><span class="lk-btn"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span></div>
+<div class="lock-btns"><span class="lk-btn" id="lk-light" role="button" aria-label="ライト"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 2.5h7l.8 5.5H7.7z"/><rect x="10" y="8" width="4" height="12.5" rx="1.8"/></svg></span><span class="lk-btn" id="lk-cam" role="button" aria-label="カメラ"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span></div>
 <div class="lock-hint">タップして開く</div>
 </div>
 
@@ -1002,6 +1002,7 @@ img{-webkit-user-drag:none}
 <div class="setrow"><span class="sl">効果音</span><button class="isw" id="set-sfx" aria-label="効果音のオン・オフ">ON</button></div>
 <div class="setrow"><span class="sl">効果音量</span><input type="range" id="sfx-vol" min="0" max="100" value="70" aria-label="効果音量"></div>
 <div class="setrow"><span class="sl">全体ミュート（マナーモード）</span><button class="isw" id="set-mute" aria-label="全体ミュートのオン・オフ">OFF</button></div>
+<div class="setrow"><span class="sl">触感フィードバック</span><button class="isw" id="set-vib" aria-label="触感フィードバックのオン・オフ">ON</button></div>
 </div>
 <div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャット下部の送信ボタンを長押しすると早送りモード（ON／OFF）になります。選択肢を選ぶと「解明度」と「心の距離」が変わります。解明度は彼を見抜くほど上がり、55以上で特別な結末への選択肢が開きます。効果音と生活音はすべてオリジナル合成音です（詳細は解剖メモ下部のクレジット）。</div>
 </div>
@@ -1041,7 +1042,6 @@ img{-webkit-user-drag:none}
 <div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
 <div id="tap-hint">▼</div>
-<div id="noise"></div>
 <button id="chat-bottom-btn" aria-label="一番下へ戻る"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v13M6 11.5l6 6 6-6"/></svg> 一番下へ戻る</button>
 <div class="chat-input"><button id="btn-plus" aria-label="添付"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="fakein">메시지를 입력하세요</div><span class="in-emo"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="9" cy="10" r="1.05" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.05" fill="currentColor" stroke="none"/><path d="M8.5 14c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><span class="in-hash">#</span><button class="sendb" id="btn-next" aria-label="進む"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button></div>
 <div id="quote-bar"><div class="qb-main"><b id="qb-name"></b><span class="qb-t" id="qb-text"></span></div><button id="qb-x" aria-label="引用をやめる"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
@@ -1109,7 +1109,7 @@ img{-webkit-user-drag:none}
 
 <!-- NEWS ARTICLE (v75) -->
 <div class="view" id="v-newsread">
-<div class="nwr-head"><button class="back" id="newsread-back">‹</button><h2>뉴스</h2></div>
+<div class="nwr-head"><button class="back" id="newsread-back">‹</button><h2>뉴스</h2><button id="nwr-font" aria-label="글자 크기 변경">가</button></div>
 <div class="nwr-body" id="newsread-body"></div>
 </div>
 
@@ -1217,6 +1217,10 @@ img{-webkit-user-drag:none}
 <div id="shr-sheet"><div class="sh-bg" id="shr-bg"></div><div class="sh-panel"><div class="cm-grab"></div><div class="sh-head" id="shr-title">投稿を送信</div><div id="shr-list"></div></div></div>
 <div id="bg-sheet"><div class="sh-bg" id="bg-bg"></div><div class="sh-panel"><div class="cm-grab"></div><div class="sh-head">채팅방 배경（トークの背景）</div><div id="bg-sw"></div></div></div>
 <div id="act-sheet"><div class="act-bg" id="act-bg"></div><div class="act-panel"><div class="act-group"><button data-act="share">投稿を共有する</button><button data-act="about">この投稿について</button></div><button data-act="cancel" class="act-cancel">キャンセル</button></div></div>
+<div id="gsh-sheet"><div class="sh-bg" id="gsh-bg"></div><div class="sh-panel"><div class="cm-grab"></div><div class="gsh-head"><img id="gsh-thumb" alt=""><div class="gsh-tx"><b id="gsh-date"></b><span id="gsh-cap"></span></div></div><div class="gsh-acts"><button id="gsh-kakao">カカオトークで送信</button><button id="gsh-copy">リンクをコピー</button></div></div></div>
+<div id="cal-sheet"><div class="sh-bg" id="cal-bg2"></div><div class="sh-panel"><div class="cm-grab"></div><div class="cal-d-t" id="cal-d-title"></div><div class="cal-d-row"><span>일시</span><b id="cal-d-when"></b></div><div class="cal-d-row"><span>메모</span><b id="cal-d-note"></b></div><button class="cal-d-close" id="cal-d-close">閉じる</button></div></div>
+<div id="cam-view"><div class="cam-top"><span>사진</span><button id="cam-close" aria-label="閉じる">✕</button></div><div class="cam-vf"><div class="cam-grid"></div></div><div class="cam-modes"><span>슬로모션</span><span>비디오</span><span class="on">사진</span><span>인물</span><span>파노라마</span></div><div class="cam-bar"><span class="cam-thumb"></span><button id="cam-shutter" aria-label="撮影"></button><span class="cam-flip">⇋</span></div><div id="cam-flash"></div></div>
+<div id="noise"></div>
 <div id="ios-alert"><div class="ia-bg"></div><div class="ia-card"><div class="ia-t" id="ia-title"></div><div class="ia-m" id="ia-msg"></div><div class="ia-btns"><button id="ia-cancel">キャンセル</button><button id="ia-ok" class="dest">OK</button></div></div></div>
 <audio id="bgm" loop preload="auto" style="display:none"></audio>
 <div id="toast"></div>
@@ -1565,7 +1569,8 @@ if(!S.picks||typeof S.picks!=='object'||Array.isArray(S.picks)) S.picks={};
 S.free=S.free.filter(m=>!!m&&typeof m==='object');
 S.free.forEach(m=>{ if(m.w==='jimg'){ if(typeof m.img!=='string') m.img=''; if(typeof m.cap!=='string') m.cap=m.cap==null?'':String(m.cap); } else if(typeof m.t!=='string') m.t=m.t==null?'':String(m.t); });
 S.free.forEach(m=>{ if(m.q){ if(typeof m.q!=='object'||typeof m.q.t!=='string') delete m.q; else m.q={n:typeof m.q.n==='string'?m.q.n:'',t:m.q.t}; } }); /* v87: 引用データの正規化（壊れた q は落とす） */
-if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def'; /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
+if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def';
+if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
 const __fin=(v,d)=>(typeof v==='number'&&isFinite(v))?v:d;
 S.kai=Math.max(0,Math.min(100,__fin(S.kai,0)));
 S.kyo=Math.max(0,Math.min(100,__fin(S.kyo,62)));
@@ -2117,7 +2122,7 @@ function renderCal(){
    }
    mo.e.forEach((e,ei)=>{
      const locked=lockedE[ei];
-     h+='<div class="cal-e'+(locked?' lock':'')+'" id="cale-'+mi+'-'+ei+'"><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+(locked?'？？？':esc(e.s))+'</small></span></div>';
+     h+='<div class="cal-e'+(locked?' lock':'')+'" id="cale-'+mi+'-'+ei+'"'+(locked?'':' data-calev="'+mi+'-'+ei+'" role="button"')+'><span class="cd"><b>'+(locked?'？':e.d.replace(/[^0-9]/g,'')||'')+'</b>'+e.d+'</span><span class="ct">'+(locked?'（まだ解放されていません）':esc(e.t))+'<small>'+(locked?'？？？':esc(e.s))+'</small></span></div>';
    });
  });
  b.innerHTML=h+'<p class="locknote">物語の進行に合わせて解放されます</p>';
@@ -2476,12 +2481,12 @@ $('#free-in').addEventListener('input',updFreeSend);
 const NOISE={2:['book','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['rain','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['chat','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['cap','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['box','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
 let noiseTimer=null;
 function showNoise(cal){
- const n=NOISE[cal]; if(!n||S.noise.includes(cal)) return; S.noise.push(cal); save();
+ const n=NOISE[cal]; if(!n||S.noise.includes(cal)) return; S.noise.push(cal); save(); window.noiseGo=({chat:'kakao',book:'cal',cap:'cal',rain:'news'})[n[0]]||null; /* v90：バナーの遷移先 */
  const b=$('#noise'); if(!b) return;
  b.innerHTML='<span class="n-ic">'+(IC[n[0]]||'')+'</span><div style="flex:1;min-width:0"><div class="n-t">'+n[1]+'</div><div class="n-b">'+n[2]+'</div></div>';
  b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify'); if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
 }
-$('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); });
+$('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); const g=window.noiseGo; window.noiseGo=null; if(g==='chat'){ showView('v-chat'); } else if(g==='kakao'){ if(typeof kkTabReset==='function') kkTabReset(); showView('v-kakao'); } else if(g==='cal'){ renderCal(); showView('v-cal'); } else if(g==='news'){ renderNews(); showView('v-news'); } }); /* v90：実物どおり、バナーをタップすると該当アプリが開く */
 function updSetUI(){ const st=$('#set-tap'); if(st) st.textContent=S.tap?'タップで進む':'自動で進む'; const sp=$('#set-pace'); if(sp) sp.textContent=S.pace==='slow'?'ゆっくり':'ふつう'; }
 const setTapBtn=$('#set-tap'); if(setTapBtn) setTapBtn.addEventListener('click',()=>{ S.tap=!S.tap; save(); updSetUI(); toast(S.tap?'メッセージはタップで進みます':'メッセージは自動で進みます'); if(!S.tap) fireTap(); });
 const setPaceBtn=$('#set-pace'); if(setPaceBtn) setPaceBtn.addEventListener('click',()=>{ S.pace=S.pace==='slow'?'normal':'slow'; save(); updSetUI(); toast('メッセージ速度：'+(S.pace==='slow'?'ゆっくり':'ふつう')); });
@@ -2490,7 +2495,7 @@ updSetUI();
 /* ================= v6 : LIVING WORLD =================
    人と世界の変化のリアルさ。プロフィール・時計・バッテリー・写真は
    すべて物語の進行（S.calU／chatMin）から導出するので、セーブ形式は不変。 */
-function vib(p){ try{ if(navigator&&navigator.vibrate) navigator.vibrate(p); }catch(e){} }
+function vib(p){ try{ if(typeof S!=='undefined'&&S.vibOn===false) return; if(navigator&&navigator.vibrate) navigator.vibrate(p); }catch(e){} } /* v90：触感フィードバック設定に従う */
 /* ジェオンのプロフィールは章の進行で変わる。変化の節目は解剖メモ／彼視点の解放と緩く連動：
    calU3=メモ03の頃（曖昧な関係）、6=助手復帰（メモ06）、10=雨の章のあと（メモ07／彼視点04を過ぎて）、11=最終章（メモ09／彼視点05） */
 function profStage(){ const u=S.calU;
@@ -2539,11 +2544,11 @@ const GAL=[
  {img:'assets/ig-gallery.jpg',d:'7월 16일',cap:'ギャラリー展当日',u:11}
 ];
 /* v68：写真詳細のお気に入りはセッション内のみ（セーブに持たせない）。galCur はツールバー操作の対象 */
-let galCur=null; const galFav=new Set();
+let galCur=null; const galFav=new Set(Array.isArray(S.galFav)?S.galFav:[]); /* v90：お気に入りをセーブと連動（旧セーブは空で補完） */
 function galWeekday(g){ const md=g.d.match(/(\d+)월\s*(\d+)일/); return md?['일','월','화','수','목','금','토'][new Date(2021,+md[1]-1,+md[2]).getDay()]:''; }
 function updGalFav(){ const fb=document.querySelector('.gal-bar [data-ga="fav"]'); if(fb) fb.classList.toggle('on',!!(galCur&&galFav.has(galCur.img))); }
 function renderGallery(){
- const un=GAL.filter(g=>S.calU>=g.u);
+ const un=GAL.filter(g=>S.calU>=g.u&&!(Array.isArray(S.galDel)&&S.galDel.includes(g.img))); /* v90：削除済みは表示フィルタで隠す（解放条件は不変） */
  const cnt=$('#gal-count'); if(cnt) cnt.textContent='사진 '+un.length+'장';
  const b=$('#gal-body');
  /* v68：iOS写真風に月グループ見出し（2021년 N월）を挟む。data-gal は従来どおり un の通し番号 */
@@ -2554,17 +2559,17 @@ function renderGallery(){
    h+='<button data-gal="'+i+'"><img src="'+g.img+'"></button>';
  });
  if(lastD) h+='</div>';
- b.innerHTML=h+(un.length<GAL.length?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>');
+ const unAll=GAL.filter(g=>S.calU>=g.u); b.innerHTML=h+(unAll.length<GAL.length?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>')+((Array.isArray(S.galDel)&&S.galDel.length)?'<button class="gal-trash-row" id="gal-trash-row">最近削除した項目<span>'+S.galDel.length+'件 ›</span></button>':''); const trw=b.querySelector('#gal-trash-row'); if(trw) trw.addEventListener('click',()=>{ if(typeof renderGalTrash==='function') renderGalTrash(); });
  b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; galCur=g; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':''; $('#gal-cap').textContent=g.cap; updGalFav(); $('#gal-view').classList.add('on'); }));
 }
 $('#gal-close').addEventListener('click',()=>$('#gal-view').classList.remove('on'));
 /* v68：写真詳細の下部ツールバー（共有／お気に入り／情報／削除）。実物様式のフィードバックのみで、物語・セーブには影響しない。削除は実際に消さない */
 document.querySelectorAll('.gal-bar [data-ga]').forEach(btn=>btn.addEventListener('click',()=>{
  const k=btn.dataset.ga; if(!galCur) return;
- if(k==='share') toast('（共有は演出用です）');
- else if(k==='fav'){ if(galFav.has(galCur.img)) galFav.delete(galCur.img); else galFav.add(galCur.img); updGalFav(); }
+ if(k==='share'){ if(typeof openGalShare==='function') openGalShare(); }
+ else if(k==='fav'){ if(galFav.has(galCur.img)) galFav.delete(galCur.img); else galFav.add(galCur.img); S.galFav=[...galFav]; save(); updGalFav(); }
  else if(k==='info'){ const wd=galWeekday(galCur); toast('2021년 '+galCur.d+(wd?'（'+wd+'요일）':'')+' ・ '+galCur.cap); }
- else if(k==='trash') toast('（削除は演出用です）');
+ else if(k==='trash'){ const g=galCur; iosAlert('写真を削除','この写真を「最近削除した項目」に移動しますか？','削除',()=>{ if(!Array.isArray(S.galDel)) S.galDel=[]; if(!S.galDel.includes(g.img)) S.galDel.push(g.img); save(); galList=[]; $('#gal-view').classList.remove('on'); renderGallery(); }); }
 }));
 
 /* start */
@@ -2809,6 +2814,7 @@ const PRO_MSGS=[
 ];
 let proBusy=false;
 function showProBanner(msgs){
+ window.noiseGo='chat'; /* v90：バナータップでトークが開く */
  const b=$('#noise'); if(!b) return;
  const last=[...msgs].reverse().find(m=>m.t);
  b.innerHTML='<span class="n-ic">'+IC.chat+'</span><div style="flex:1;min-width:0"><div class="n-t">카카오톡 ― パク・ジェオン ・ 지금</div><div class="n-b">'+esc(last?last.t:'写真を送信しました')+'</div></div>';
@@ -2937,16 +2943,16 @@ let galList=[], galIdx=0;
 const galBodyEl=$('#gal-body');
 if(galBodyEl) galBodyEl.addEventListener('click',e=>{ const b=e.target.closest?e.target.closest('[data-gal]'):null; galList=GAL.filter(g=>S.calU>=g.u); if(b){ galIdx=+b.dataset.gal; renderGalStrip(); } });
 function galShow(n){
- if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u);
+ if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u&&!(Array.isArray(S.galDel)&&S.galDel.includes(g.img)));
  if(n<0||n>=galList.length) return;
- galIdx=n; const g=galList[n]; galCur=g;
+ galIdx=n; const g=galList[n]; galCur=g; const gv90=$('#gal-view'); if(gv90) gv90.classList.remove('zoom'); /* v90：写真が替わったらズーム解除 */
  $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d;
  const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':'';
  $('#gal-cap').textContent=g.cap; updGalFav(); renderGalStrip();
 }
 function renderGalStrip(){
  const st=$('#gal-strip'); if(!st) return;
- if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u);
+ if(!galList.length) galList=GAL.filter(g=>S.calU>=g.u&&!(Array.isArray(S.galDel)&&S.galDel.includes(g.img)));
  st.innerHTML=galList.map((g,i)=>'<button data-gs="'+i+'" class="'+(i===galIdx?'on':'')+'" aria-label="写真 '+(i+1)+'"><img src="'+g.img+'"></button>').join('');
  st.querySelectorAll('[data-gs]').forEach(b=>b.addEventListener('click',()=>galShow(+b.dataset.gs)));
  const on=st.querySelector('button.on'); if(on&&on.scrollIntoView) on.scrollIntoView({inline:'center',block:'nearest'});
@@ -2954,7 +2960,7 @@ function renderGalStrip(){
 function galSwipe(d){ galShow(galIdx+d); }
 (function(){ const gv=$('#gal-view'); if(!gv) return; let sx=0;
  gv.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; },{passive:true});
- gv.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(dx<-52) galSwipe(1); else if(dx>52) galSwipe(-1); },{passive:true});
+ gv.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(gv.classList.contains('zoom')) return; const now90=Date.now(); if(Math.abs(dx)<=10&&now90-(gv._lt||0)<320){ gv._lt=0; if(typeof galToggleZoom==='function') galToggleZoom(e.changedTouches[0]); return; } gv._lt=now90; if(dx<-52) galSwipe(1); else if(dx>52) galSwipe(-1); },{passive:true}); /* v90：ダブルタップでズーム、ズーム中はスワイプ送りを止める */
 })();
 
 /* ---------- P6: IG 検索・探索タブ ---------- */
@@ -3022,23 +3028,24 @@ const NEWS=[
 function newsVis(a){ return a.u===99 ? !!S.done : S.calU>=a.u; }
 const NW_WX=[['sun','24°','맑고 따뜻한 봄날'],['sun','25°','전시 보기 좋은 날'],['partly','23°','작업실 나들이 날씨'],['partly','22°','바람 조금, 대체로 맑음'],['cloud','21°','꽃가루 주의'],['partly','26°','초여름 같은 더위'],['sun','28°','한낮 더위 주의'],['sun','29°','MT 가기 좋은 날'],['rain','23°','장마, 강한 비'],['rainsun','27°','비 그치고 맑아짐'],['sun','30°','전시 준비 막바지'],['sun','31°','졸업전시 개막일'],['sun','30°','전시 기간, 맑음']];
 const NW_IC={sun:IC.sun,partly:IC.partly,cloud:IC.cloud,rain:IC.rain,rainsun:IC.rainsun};
-let nwCat='전체';
+let nwCat='전체'; let nwQuery=''; let nwQFocus=false; /* v90：ニュース検索（画面状態のみ・保存しない） */
 function renderNews(){
  const b=$('#news-body'); if(!b) return;
- const list=NEWS.filter(newsVis);
+ const list=NEWS.filter(newsVis).filter(a=>!nwQuery||(a.title+' '+a.sub+' '+a.press+' '+a.cat).indexOf(nwQuery)>=0); /* v90：検索は解放済み記事の中だけ（未解放は漏らさない） */
  const wx=NW_WX[Math.min(S.calU,NW_WX.length-1)]||NW_WX[0];
  let h='<div class="nw-weather"><span class="nw-wx">'+(NW_IC[wx[0]]||'')+'</span><span>서울 <b>'+wx[1]+'</b><br>'+wx[2]+'</span></div>';
  const cats=['전체'].concat(['날씨','문화','대학','생활','여행'].filter(c=>list.some(a=>a.cat===c)));
  if(!cats.includes(nwCat)) nwCat='전체';
- h+='<div class="nw-tabs">'+cats.map(c=>'<button data-nwcat="'+c+'" class="'+(c===nwCat?'on':'')+'">'+c+'</button>').join('')+'</div>';
+ h+='<div class="nw-search"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg><input id="nw-q" type="text" placeholder="뉴스 검색" autocomplete="off"></div><div class="nw-tabs">'+cats.map(c=>'<button data-nwcat="'+c+'" class="'+(c===nwCat?'on':'')+'">'+c+'</button>').join('')+'</div>';
  const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
- if(nwCat==='전체'&&rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
+ if(nwCat==='전체'&&!nwQuery&&rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
  const latest=list.filter(a=>nwCat==='전체'||a.cat===nwCat).slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
- h+='<div class="nw-sec">최신 뉴스</div>'+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
+ h+='<div class="nw-sec">'+(nwQuery?('검색 결과 '+latest.length+'건'):'최신 뉴스')+'</div>'+(nwQuery&&!latest.length?'<div class="nw-empty">검색 결과가 없습니다<br><span>다른 검색어를 입력해 보세요</span></div>':'')+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
  h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
  b.innerHTML=h;
  b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
  b.querySelectorAll('[data-nwcat]').forEach(btn=>btn.addEventListener('click',()=>{ nwCat=btn.dataset.nwcat; renderNews(); }));
+ const qi=b.querySelector('#nw-q'); if(qi){ qi.value=nwQuery; qi.addEventListener('input',()=>{ nwQuery=qi.value.trim(); nwQFocus=true; renderNews(); }); qi.addEventListener('blur',()=>{ nwQFocus=false; }); if(nwQFocus){ qi.focus(); try{ qi.setSelectionRange(qi.value.length,qi.value.length); }catch(e){} } } /* v90：検索欄（再描画後も入力を継続できるようフォーカスを戻す） */
 }
 const NW_CM_POOL=[['campus_cat','조소과 건물 불빛 진짜 새벽까지 켜져 있더라',12],['seoul_daily','날씨 정보 감사합니다 덕분에 일정 잡기 좋네요',4],['art_lover_21','젊은 작가들 전시 꼭 가보고 싶다',27],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['rainy_day','다들 우산 챙기세요',15],['gallery_goer','복원 얘기는 들을수록 대단하다 싶음',31]];
 function nwCmts(a){ let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*31+id.charCodeAt(i))>>>0; return [0,1,2].map(k=>NW_CM_POOL[(h+k*2)%NW_CM_POOL.length]); }
@@ -3180,14 +3187,200 @@ function kpRender(){ const d=$('#kp-disp'); if(d) d.textContent=kpNum; }
  const call=$('#kp-call'); if(call) call.addEventListener('click',()=>{ if(!kpNum) return; const d=$('#kp-disp'); if(!d) return; const num=kpNum; d.textContent='발신 중…'; setTimeout(()=>{ d.textContent='통화할 수 없습니다'; setTimeout(()=>{ if(kpNum===num){ kpNum=''; kpRender(); } },1300); },1100); });
 })();
 /* ホーム画面の長押し編集モード：実物 iOS どおりアイコンが揺れ、タップで終了する（削除はできない作法） */
-(function(){ const hv=$('#v-home'); if(!hv) return; let timer=null, jigOn=false;
+(function(){ const hv=$('#v-home'); if(!hv) return; let timer=null, jigOn=false, jigAt=0; /* v90：ジグル開始時刻（開始した長押し自体の離しクリックでは終了させない） */
  function jigEnd(){ jigOn=false; hv.classList.remove('jig'); }
  hv.querySelectorAll('.app').forEach(a=>{
-  a.addEventListener('pointerdown',()=>{ if(jigOn) return; if(timer) clearTimeout(timer); timer=setTimeout(()=>{ jigOn=true; hv.classList.add('jig'); if(typeof vib==='function') vib(15); },550); });
+  a.addEventListener('pointerdown',()=>{ if(jigOn) return; if(timer) clearTimeout(timer); timer=setTimeout(()=>{ jigOn=true; jigAt=Date.now(); hv.classList.add('jig'); if(typeof vib==='function') vib(15); },550); });
   ['pointerup','pointerleave','pointercancel','pointermove'].forEach(ev=>a.addEventListener(ev,()=>{ if(timer){ clearTimeout(timer); timer=null; } }));
  });
- hv.addEventListener('click',e=>{ if(jigOn){ e.stopPropagation(); e.preventDefault(); jigEnd(); } },true);
+ hv.addEventListener('click',e=>{ if(jigOn){ e.stopPropagation(); e.preventDefault(); if(Date.now()-jigAt>350) jigEnd(); } },true); /* v90：実物どおり、長押しを離しただけでは終わらず、次のタップ/完了で終了する */
  const dn=$('#jig-done'); if(dn) dn.addEventListener('click',e=>{ e.stopPropagation(); jigEnd(); });
+})();
+</script>
+<script>
+/* ================= v90 : REALISM ROUND 8 =================
+   ロック画面ボタン（長押し作法）／バナータップで該当アプリ／ギャラリー（お気に入り永続化・
+   iOS風共有シート・削除→最近削除した項目・ダブルタップズーム）／ニュース検索・記事の文字サイズ／
+   カレンダー予定詳細／触感フィードバック設定。本編・台詞・数値・解放条件・LSKEYは不変。
+   新規セーブ項目（galFav/galDel/nwFont/vibOn）は既定値方式＋正規化で旧セーブ互換。 */
+(function(){
+ const st=document.createElement('style'); st.textContent=
+ '#gsh-sheet,#cal-sheet{position:absolute;inset:0;z-index:243;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}'
+ +'#gsh-sheet .sh-bg,#cal-sheet .sh-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}'
+ +'#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}'
+ +'#gsh-sheet.on,#cal-sheet.on{pointer-events:auto}'
+ +'#gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg{opacity:1}'
+ +'#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transform:translateY(0)}'
+ +'#gsh-sheet.dragging .sh-panel,#cal-sheet.dragging .sh-panel{transition:none!important}'
+ +'.gsh-head{display:flex;gap:12px;align-items:center;padding:10px 0 12px;border-bottom:1px solid #eee}'
+ +'.gsh-head img{width:52px;height:52px;object-fit:cover;border-radius:8px;flex:none}'
+ +'.gsh-tx{display:flex;flex-direction:column;min-width:0}'
+ +'.gsh-tx b{font-size:14px;color:#111}'
+ +'.gsh-tx span{font-size:12px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+ +'.gsh-acts{display:flex;flex-direction:column}'
+ +'.gsh-acts button{background:none;border:none;border-bottom:1px solid #f0f0f0;padding:14px 2px;font-size:15px;color:#111;text-align:left;cursor:pointer}'
+ +'.gsh-acts button:last-child{border-bottom:none}'
+ +'.gsh-acts button.dis{color:#bbb}'
+ +'.cal-d-t{font-size:17px;font-weight:700;color:#111;padding:10px 0 6px;line-height:1.5}'
+ +'.cal-d-row{display:flex;gap:14px;padding:9px 0;border-top:1px solid #f0f0f0;font-size:13.5px}'
+ +'.cal-d-row span{color:#888;width:38px;flex:none}'
+ +'.cal-d-row b{font-weight:500;color:#222;line-height:1.55}'
+ +'.cal-d-close{margin-top:12px;background:#f2f2f7;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:600;color:#111;cursor:pointer}'
+ +'.cal-e[data-calev]{cursor:pointer}'
+ +'.gal-trash-row{display:flex;justify-content:space-between;align-items:center;width:calc(100% - 32px);margin:14px 16px 6px;background:#fff;border:1px solid #e6e6ea;border-radius:12px;padding:13px 15px;font-size:14px;color:#c72c41;cursor:pointer}'
+ +'.gal-trash-row span{color:#999;font-size:12.5px}'
+ +'.gal-trash-hd{display:flex;align-items:center;gap:10px;padding:12px 16px 2px}'
+ +'.gal-trash-hd button{background:none;border:none;font-size:14px;color:#007aff;cursor:pointer;padding:4px 0}'
+ +'.gal-trash-hd b{font-size:15px;color:#111}'
+ +'.nw-search{display:flex;align-items:center;gap:7px;background:#f2f4f6;border-radius:9px;margin:10px 14px 2px;padding:8px 11px;color:#8a94a0}'
+ +'.nw-search input{flex:1;border:none;background:none;outline:none;font-size:16px;color:#111;min-width:0}'
+ +'.nw-empty{padding:38px 20px;text-align:center;color:#555;font-size:15px;line-height:1.7}'
+ +'.nw-empty span{font-size:12.5px;color:#999}'
+ +'#nwr-font{margin-left:auto;background:#f2f2f7;border:none;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;color:#111;cursor:pointer;flex:none}'
+ +'.nwr-body.fs-s p{font-size:13.5px}'
+ +'.nwr-body.fs-l p{font-size:18px;line-height:1.9}'
+ +'.nwr-body.fs-s .nwr-title{font-size:18px}'
+ +'.nwr-body.fs-l .nwr-title{font-size:22px}'
+ +'#gal-img{transition:transform .32s cubic-bezier(.32,.72,0,1)}'
+ +'#gal-view.zoom #gal-img{transform:scale(2.05)}'
+ +'.lk-btn{cursor:pointer;touch-action:none}'
+ +'.lk-btn.lit{background:#f5f5f7;color:#111;box-shadow:0 0 22px rgba(255,244,190,.55)}'
+ +'#cam-view{position:absolute;inset:0;background:#000;z-index:300;display:none;flex-direction:column;color:#fff}'
+ +'#cam-view.on{display:flex}'
+ +'.cam-top{display:flex;justify-content:space-between;align-items:center;padding:max(52px,calc(var(--sat) + 10px)) 18px 8px;font-size:13px}'
+ +'.cam-top button{background:rgba(255,255,255,.16);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:14px;cursor:pointer}'
+ +'.cam-vf{flex:1;position:relative;background:radial-gradient(120% 60% at 78% -10%,rgba(216,180,110,.25) 0%,rgba(216,180,110,0) 55%),radial-gradient(130% 70% at 12% 108%,rgba(64,110,140,.45) 0%,rgba(64,110,140,0) 55%),linear-gradient(168deg,#1d3a52 0%,#2c2a4e 46%,#12101f 100%);overflow:hidden}'
+ +'.cam-grid{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent calc(33.33% - 1px),rgba(255,255,255,.14) calc(33.33% - 1px),rgba(255,255,255,.14) 33.33%),repeating-linear-gradient(90deg,transparent 0,transparent calc(33.33% - 1px),rgba(255,255,255,.14) calc(33.33% - 1px),rgba(255,255,255,.14) 33.33%)}'
+ +'.cam-modes{display:flex;gap:18px;justify-content:center;padding:12px 0 4px;font-size:12.5px;color:#c9c9cf}'
+ +'.cam-modes .on{color:#ffd60a;font-weight:700}'
+ +'.cam-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 42px max(30px,calc(var(--sab) + 8px))}'
+ +'.cam-thumb{width:42px;height:42px;border-radius:7px;background:linear-gradient(150deg,#2c2a4e,#1d3a52);border:1.5px solid rgba(255,255,255,.7)}'
+ +'.cam-flip{font-size:21px;color:#fff;background:rgba(255,255,255,.16);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center}'
+ +'#cam-shutter{width:66px;height:66px;border-radius:50%;background:#fff;border:5px solid #000;outline:2.5px solid #fff;cursor:pointer;flex:none;padding:0}'
+ +'#cam-shutter:active{transform:scale(.94)}'
+ +'#cam-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:5}'
+ +'#cam-flash.go{animation:camflash90 .38s ease-out}'
+ +'@keyframes camflash90{0%{opacity:.95}100%{opacity:0}}';
+ document.head.appendChild(st);
+})();
+
+/* ---------- ギャラリー：削除済み（最近削除した項目） ---------- */
+function renderGalTrash(){
+ const b=$('#gal-body'); if(!b) return;
+ const del=(Array.isArray(S.galDel)?S.galDel:[]).map(img=>GAL.find(g=>g.img===img)).filter(g=>g&&S.calU>=g.u);
+ if(!del.length){ renderGallery(); return; }
+ const cnt=$('#gal-count'); if(cnt) cnt.textContent='최근 삭제된 항목 '+del.length+'장';
+ let h='<div class="gal-trash-hd"><button id="gal-trash-back">‹ 사진</button><b>最近削除した項目</b></div><div class="gal-grid" style="padding:10px 2px 0">';
+ del.forEach((g,i)=>{ h+='<button data-gtrash="'+i+'"><img src="'+g.img+'"></button>'; });
+ h+='</div><p class="locknote">タップすると復元できます。物語の解放状況は変わりません</p>';
+ b.innerHTML=h;
+ const bk=b.querySelector('#gal-trash-back'); if(bk) bk.addEventListener('click',()=>renderGallery());
+ b.querySelectorAll('[data-gtrash]').forEach(btn=>btn.addEventListener('click',()=>{ const g=del[+btn.dataset.gtrash]; iosAlert('写真を復元','この写真を「사진」に戻しますか？','復元',()=>{ S.galDel=S.galDel.filter(x=>x!==g.img); save(); renderGalTrash(); }); }));
+}
+
+/* ---------- ギャラリー：iOS風共有シート ---------- */
+let galShareImg=null;
+function openGalShare(){
+ if(!galCur) return; galShareImg=galCur.img;
+ const t=$('#gsh-thumb'); if(t) t.src=galCur.img;
+ const d=$('#gsh-date'); if(d) d.textContent='2021년 '+galCur.d;
+ const c=$('#gsh-cap'); if(c) c.textContent=galCur.cap;
+ const kb=$('#gsh-kakao'); if(kb) kb.classList.toggle('dis',!S.done);
+ const sh=$('#gsh-sheet'); if(sh) sh.classList.add('on');
+}
+function closeGalShare(){ const sh=$('#gsh-sheet'); if(sh) sh.classList.remove('on'); }
+(function(){
+ const bg=$('#gsh-bg'); if(bg) bg.addEventListener('click',closeGalShare);
+ if(typeof sheetDrag==='function') sheetDrag($('#gsh-sheet'),$('#gsh-sheet .sh-panel'),[$('#gsh-sheet .cm-grab'),$('#gsh-sheet .gsh-head')],closeGalShare);
+ const kb=$('#gsh-kakao'); if(kb) kb.addEventListener('click',()=>{
+   if(!S.done){ toast('物語クリア後のフリートークで送れます'); return; }
+   if(!galShareImg) return;
+   S.free.push({w:'meimg',img:galShareImg}); save();
+   closeGalShare(); const gv=$('#gal-view'); if(gv) gv.classList.remove('on');
+   renderThreads(); if(typeof kkTabReset==='function') kkTabReset(); showView('v-kakao');
+   toast('カカオトークに送信しました');
+ });
+ const cp=$('#gsh-copy'); if(cp) cp.addEventListener('click',()=>{ if(typeof fallbackCopy==='function') fallbackCopy(location.origin+location.pathname+'#photo'); closeGalShare(); toast('リンクをコピーしました'); });
+})();
+
+/* ---------- ギャラリー：ダブルタップズーム ---------- */
+function galToggleZoom(e){
+ const gv=$('#gal-view'); if(!gv) return;
+ const img=$('#gal-img'); const on=gv.classList.toggle('zoom');
+ if(img){
+   if(on&&e&&img.getBoundingClientRect){ const r=img.getBoundingClientRect(); const cx=(e.clientX!=null)?e.clientX:(r.left+r.width/2); const cy=(e.clientY!=null)?e.clientY:(r.top+r.height/2); img.style.transformOrigin=Math.max(0,Math.min(100,(cx-r.left)/Math.max(1,r.width)*100))+'% '+Math.max(0,Math.min(100,(cy-r.top)/Math.max(1,r.height)*100))+'%'; }
+   else img.style.transformOrigin='50% 50%';
+ }
+ if(typeof vib==='function') vib(8);
+}
+(function(){
+ const gi=$('#gal-img'); if(gi) gi.addEventListener('dblclick',e=>galToggleZoom(e));
+ const gc=$('#gal-close'); if(gc) gc.addEventListener('click',()=>{ const gv=$('#gal-view'); if(gv) gv.classList.remove('zoom'); });
+})();
+
+/* ---------- ニュース：記事の文字サイズ（NAVERの読者設定） ---------- */
+function applyNwFont(){
+ const b=$('#newsread-body'); if(b){ b.classList.remove('fs-s','fs-m','fs-l'); b.classList.add('fs-'+(((S.nwFont==='s'||S.nwFont==='l'))?S.nwFont:'m')); }
+}
+(function(){
+ const fb=$('#nwr-font'); if(fb) fb.addEventListener('click',()=>{ const order=['m','l','s']; const nx=order[(order.indexOf(S.nwFont)+1)%3]; S.nwFont=nx; save(); applyNwFont(); toast('글자 크기: '+(nx==='s'?'작게':nx==='l'?'크게':'보통')); });
+ applyNwFont();
+})();
+
+/* ---------- カレンダー：予定詳細シート ---------- */
+function openCalDetail(key){
+ const pr=String(key).split('-'); const mo=CAL[+pr[0]]; if(!mo||!mo.e[+pr[1]]) return; const e=mo.e[+pr[1]];
+ const t=$('#cal-d-title'); if(t) t.textContent=e.t;
+ const w=$('#cal-d-when'); if(w) w.textContent='2021年 '+mo.m+' '+e.d;
+ const n=$('#cal-d-note'); if(n) n.textContent=e.s||'';
+ const sh=$('#cal-sheet'); if(sh) sh.classList.add('on');
+}
+function closeCalSheet(){ const sh=$('#cal-sheet'); if(sh) sh.classList.remove('on'); }
+(function(){
+ const bg=$('#cal-bg2'); if(bg) bg.addEventListener('click',closeCalSheet);
+ const cl=$('#cal-d-close'); if(cl) cl.addEventListener('click',closeCalSheet);
+ if(typeof sheetDrag==='function') sheetDrag($('#cal-sheet'),$('#cal-sheet .sh-panel'),[$('#cal-sheet .cm-grab'),$('#cal-sheet .cal-d-t')],closeCalSheet);
+})();
+
+/* ---------- 委譲クリック：予定詳細／写真を開くときのズーム解除 ---------- */
+document.addEventListener('click',e=>{
+ const r=(e.target&&e.target.closest)?e.target.closest('[data-calev]'):null;
+ if(r){ openCalDetail(r.dataset.calev); return; }
+ if(e.target&&e.target.closest&&e.target.closest('[data-gal]')){ const gv=$('#gal-view'); if(gv) gv.classList.remove('zoom'); }
+});
+
+/* ---------- ロック画面の下部ボタン：実物の長押し作法 ---------- */
+(function(){
+ const light=$('#lk-light'), cam=$('#lk-cam'); let lkT=null;
+ function bind(btn,fn){ if(!btn) return;
+   btn.addEventListener('pointerdown',()=>{ if(lkT) clearTimeout(lkT); lkT=setTimeout(()=>{ lkT=null; fn(); },480); });
+   ['pointerup','pointerleave','pointercancel'].forEach(ev=>btn.addEventListener(ev,()=>{ if(lkT){ clearTimeout(lkT); lkT=null; } }));
+   btn.addEventListener('click',e=>{ e.stopPropagation(); });
+ }
+ bind(light,()=>{ light.classList.toggle('lit'); if(typeof vib==='function') vib(12); });
+ bind(cam,()=>{ const cv=$('#cam-view'); if(cv) cv.classList.add('on'); if(typeof vib==='function') vib(12); });
+ const cc=$('#cam-close'); if(cc) cc.addEventListener('click',()=>{ const cv=$('#cam-view'); if(cv) cv.classList.remove('on'); });
+ const shb=$('#cam-shutter'); if(shb) shb.addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('shutter'); if(typeof vib==='function') vib(10); const f=$('#cam-flash'); if(f){ f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); } });
+})();
+
+/* ---------- 設定：触感フィードバック ---------- */
+function updVibUI(){ const b=$('#set-vib'); if(b){ b.textContent=S.vibOn?'ON':'OFF'; b.classList.toggle('on',!!S.vibOn); } }
+(function(){
+ const vb=$('#set-vib'); if(vb) vb.addEventListener('click',()=>{ S.vibOn=!S.vibOn; save(); updVibUI(); if(S.vibOn&&typeof vib==='function') vib(15); toast('触感フィードバック：'+(S.vibOn?'ON':'OFF')); });
+ updVibUI();
+})();
+
+/* ---------- 画面遷移に合わせた後始末 ---------- */
+window.noiseGo=null;
+(function(){
+ const sv=showView;
+ showView=function(id){ sv(id);
+   if(id!=='v-news'&&typeof nwQFocus!=='undefined') nwQFocus=false;
+   if(id==='v-newsread') applyNwFont();
+   if(id!=='v-gallery'){ closeGalShare(); }
+   if(id!=='v-cal'){ closeCalSheet(); }
+   if(id!=='v-lock'){ const cv=$('#cam-view'); if(cv) cv.classList.remove('on'); }
+ };
 })();
 </script>
 
