@@ -962,12 +962,36 @@ img{-webkit-user-drag:none}
 .gal-seg{display:flex;gap:2px;background:#e8e8ec;border-radius:9px;padding:2px;margin:10px 14px 0}
 .gal-seg button{flex:1;background:none;border:0;padding:5px 0;font-size:12.5px;border-radius:7px;color:#555}
 .gal-seg button.on{background:#fff;color:#111;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+/* ===== v120 : TINDER PORT — foundation / home / lock =====
+   参照元 hiroto-tinder の共通機構を移植：
+   (1) fadeup 行出現アニメーション（Tinder版 .post/.newsrow/.cmt 等と同一キー
+       フレーム）を、ニュース／カレンダー／メモ／POV／IG投稿の行へ適用
+   (2) ロック画面ヒントのパルス（Tinder版 pulseHint）
+   (3) ホームのメーターを Tinder版のグラデーション＋1.2s 遷移へ
+   (4) 通知バナー（#noise）のスプリングを Tinder版 .push の
+       .55s cubic-bezier(.2,.9,.25,1) へ
+   (5) 操作系ポリッシュ（Tinder版末尾ブロック）：manipulation／ドラッグ抑止 */
+@keyframes fadeup{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.nw-item,.cal-e,.memo,.povrow{animation:fadeup .35s ease}
+.nw-rank button{animation:fadeup .35s ease}
+.ig-post{animation:fadeup .4s ease}
+@keyframes pulseHint{0%,100%{opacity:.55}50%{opacity:1}}
+.lock-hint{animation:pulseHint 2.2s ease infinite}
+.meterbar i{background:linear-gradient(90deg,#ffd60a,#ff9500,#ff3b30);transition:width 1.2s ease}
+#noise{transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .3s,visibility 0s linear .5s}
+#noise.on{transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .3s,visibility 0s}
+button,input,textarea{touch-action:manipulation}
+img{-webkit-user-drag:none;user-select:none}
+@media (prefers-reduced-motion: reduce){
+ .nw-item,.cal-e,.memo,.povrow,.nw-rank button,.ig-post{animation:none !important}
+ .lock-hint{animation:none !important}
+}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v119：ビンナとユン・ソルアのアバター写真の割り当てが逆になっていたのを、本人の確認どおり入れ替えました（ビンナ＝黒髪に赤のインナーカラー、ユン・ソルア＝赤茶のウェーブ髪）。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v120：全体の底上げ第1弾。姉妹作『現役アイドル、Tinderやってた件』の共通機構を移植し、行の出現アニメーション、ロック画面ヒントの明滅、ホームのメーターのグラデーション、通知バナーのばねの効き、操作の反応を揃えました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
