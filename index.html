@@ -164,7 +164,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .paramline .mb{flex:1;height:5px;background:#d7dee6;border-radius:3px;overflow:hidden}
 .paramline .mb i{display:block;height:100%;background:#f2b705;transition:width .5s}
 #feed{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;padding:6px 12px 14px;display:flex;flex-direction:column;gap:7px}
-.dchip{align-self:center;background:rgba(70,86,102,.45);color:#fff;font-size:11px;padding:4.5px 13px;border-radius:12px;margin:8px 0 4px}
+.dchip{align-self:center;background:rgba(70,86,102,.45);color:#fff;font-size:11px;padding:4.5px 13px;border-radius:12px;margin:8px 0 4px;display:inline-flex;align-items:center;gap:5px} /* v80：実物カカオの日付チップにはカレンダーアイコンが付く */
 .chapdiv{align-self:stretch;text-align:center;color:#35516e;font-size:12.5px;letter-spacing:.24em;border-top:1px solid rgba(143,166,188,.22);padding:14px 0 0;margin:20px 6px 0}
 .sys{align-self:center;font-size:11px;color:#3e5265;text-align:center;max-width:88%;line-height:1.5;margin:2px 0}
 .scene{align-self:stretch;background:rgba(25,32,44,.88);color:#eef2f7;border-radius:14px;padding:13px 15px;font-size:13.5px;line-height:1.85;margin:4px 0;white-space:pre-wrap}
@@ -173,14 +173,14 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .row img.av{width:38px;height:38px;border-radius:14px;object-fit:cover;flex:none}
 .row .nm{font-size:11.5px;color:#36485a;margin-bottom:3px}
 .brow2{display:flex;align-items:flex-end;gap:5px}
-.bub{background:#fff;border-radius:12px;padding:7.5px 10.5px;font-size:14px;line-height:1.5;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.07);color:#191919}
+.bub{background:#fff;border-radius:14px;border-top-left-radius:3px;padding:7.5px 10.5px;font-size:14px;line-height:1.5;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.07);color:#191919} /* v80：カカオ実物の吹き出しは外側の上隅だけ角が小さい */
 .row.me{align-self:flex-end}
-.row.me .bub{background:var(--me)}
+.row.me .bub{background:var(--me);border-top-left-radius:14px;border-top-right-radius:3px}
 .row .tm{font-size:10px;color:#4d5f70;flex:none;padding-bottom:1px}
 .bmeta{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex:none;padding-bottom:1px;margin-right:1px}
 .bmeta .tm{padding-bottom:0}
 .unread{color:#f6a500;font-size:11.5px;font-weight:700;line-height:1;text-shadow:0 0 2px rgba(255,255,255,.35)}
-.typing{background:#fff;border-radius:12px;padding:11px 13px;font-size:14px;color:#999;display:inline-flex;gap:4px;align-items:center}
+.typing{background:#fff;border-radius:14px;border-top-left-radius:3px;padding:11px 13px;font-size:14px;color:#999;display:inline-flex;gap:4px;align-items:center}
 .typing i{width:6px;height:6px;border-radius:50%;background:#aeb9c4;display:block;animation:tyb 1.15s ease-in-out infinite}
 .typing i:nth-child(2){animation-delay:.18s}
 .typing i:nth-child(3){animation-delay:.36s}
@@ -253,6 +253,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ig-post{padding-bottom:22px;background:#fff}
 .ig-post .ph{display:flex;gap:9px;align-items:center;padding:8px 11px;font-size:13.5px;font-weight:600;color:#262626}
 .ig-post .ph img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.ig-post .ph .phring{width:38px;height:38px;border-radius:50%;padding:2px;background:conic-gradient(from 210deg,#feda75,#fa7e1e,#d62976,#962fbf,#feda75);flex:none;display:block} /* v80：実物IGの投稿ヘッダーのアバターにはストーリーリングが付く */
+.ig-post .ph .phring img{width:100%;height:100%;border:2px solid #fff;display:block}
 .ig-post .ph .dots{margin-left:auto;color:#262626;font-size:15px;letter-spacing:1px}
 .ig-post>img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
 .ig-actions{display:flex;gap:17px;align-items:center;padding:9px 12px 0}
@@ -380,7 +382,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 #free-row{display:none;padding:7px 8px max(22px,var(--sab));background:#fff;gap:7px;align-items:center;border-top:1px solid #eee}
 #free-in{flex:1;background:#f7f7f8;border:1px solid #e6e6e8;border-radius:18px;padding:8px 13px;font-size:16px;color:#191919;font-family:inherit;min-width:0}
 #free-send{background:#e9e9eb;border-radius:50%;width:40px;height:40px;font-size:15px;flex:none;color:#b4b4ba;transition:background .15s,color .15s}
-#free-send.on{background:var(--kakao);color:#3a1d1d}
+#free-send.on{background:var(--kakao);color:#fff} /* v80：実物カカオの送信矢印は白 */
 .row.me.unsent .bub{background:#e9e9ec;color:#8a8a90}
 .unsent-lab{font-size:10px;color:#93291b;flex:none;padding-bottom:2px;font-weight:700}
 #v-story{background:#000;color:#fff;z-index:140}
@@ -580,7 +582,7 @@ img{-webkit-user-drag:none}
 #chat-bottom-btn.on{display:flex}
 #chat-bottom-btn:active{transform:scale(.95)}
 .rchip{display:inline-flex;align-items:center;background:#fff;border:1px solid #e8e8ea;border-radius:999px;font-size:11.5px;line-height:1;padding:2px 7px;margin:0 2px;box-shadow:0 1px 3px rgba(0,0,0,.10);align-self:flex-end}
-#rtray{position:absolute;z-index:220;display:none;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.30);padding:7px 9px;gap:2px}
+#rtray{position:absolute;z-index:220;display:none;background:#fff;border-radius:24px;box-shadow:0 10px 32px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.12);padding:8px 10px;gap:2px} /* v80：実物カカオの反応トレイは大きめの角丸ピル */
 #rtray.on{display:flex}
 #rtray button{font-size:21px;padding:4px 5px;border-radius:9px;background:none;border:0}
 #rtray button:active{background:#f1f1f3}
@@ -623,6 +625,7 @@ img{-webkit-user-drag:none}
 .nw-rank{margin:2px 12px 4px;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden}
 .nw-rank button{display:flex;gap:11px;align-items:baseline;width:100%;text-align:left;padding:10px 13px;background:#fff;border-bottom:1px solid #f1f1f3;font-size:13.5px;color:#222}
 .nw-rank button:last-child{border-bottom:0}
+.nw-rank button:active,.nw-item:active{background:#f5f6f7} /* v80：ニュース一覧の押下フィードバック */
 .nw-rank .no{font-style:italic;font-weight:800;color:#03c75a;font-size:15px;min-width:15px}
 .nw-rank .vw{margin-left:auto;font-size:11px;color:#9a9a9e;flex:none}
 .nw-item{display:block;width:100%;text-align:left;padding:12px 16px;border-bottom:1px solid #f1f1f3;background:#fff}
@@ -693,8 +696,8 @@ img{-webkit-user-drag:none}
 /* ===== v77：ニュースのカテゴリタブ／写真フィルムストリップ ===== */
 .nw-tabs{display:flex;gap:2px;padding:9px 10px 3px;overflow-x:auto;scrollbar-width:none;background:#fff}
 .nw-tabs::-webkit-scrollbar{display:none}
-.nw-tabs button{flex:none;font-size:13.5px;font-weight:600;color:#888;padding:6px 11px;border-radius:999px;background:#f4f4f6}
-.nw-tabs button.on{background:#03c75a;color:#fff}
+.nw-tabs button{flex:none;font-size:13.5px;font-weight:500;color:#666;padding:6px 9px;background:none;border-bottom:2px solid transparent;border-radius:0} /* v80：NAVER実物のカテゴリタブは下線式 */
+.nw-tabs button.on{background:none;color:#03c75a;font-weight:800;border-bottom-color:#03c75a}
 .gal-strip{display:flex;gap:5px;overflow-x:auto;padding:8px 12px 2px;scrollbar-width:none;flex:none}
 .gal-strip::-webkit-scrollbar{display:none}
 .gal-strip button{flex:none;width:42px;height:42px;padding:0;border-radius:7px;overflow:hidden;opacity:.45;border:2px solid transparent;background:#222}
@@ -710,8 +713,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p>韓国ドラマ『わかっていても』の世界を題材にした、スマホ風SNSファンゲーム（完結編）。<br>これは創作フィクション／ファンメイド作品です。実在の人物・団体とは関係ありません。</p>
-<p class="src">v79：題名を『わかっていても』に改題し、実機でタイトル画面が下まで届かない問題を直しました。本編・セーブ形式は不変で、既存セーブはそのまま読み込めます。変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v80：タイトル画面の説明文を削除し、カカオ・Instagram・ロック画面・ニュースの見た目を実物に寄せました。本編・セーブ形式は不変で、既存セーブはそのまま読み込めます。変更履歴はREADMEの「バージョン」にまとめました。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -725,8 +727,8 @@ img{-webkit-user-drag:none}
 <div class="lock-clock"><div class="lock-date" id="lock-date">3月12日 金曜日</div><div class="lock-time" id="lock-time">9:41</div></div>
 <div class="lock-title"><div class="lt-over">알고 있어도</div><div class="lt-main">わかっていても</div><div class="lt-rule"></div></div>
 <div class="lock-notifs">
-<div class="lnotif"><img src="assets/av-jaeon.jpg" alt=""><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>지금</span></div><div class="ln-t"><b>박재언</b>： ……蝶、見に行く？</div></div></div>
-<div class="lnotif stack"><img src="assets/av-jaeon.jpg" alt=""><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
+<div class="lnotif"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>지금</span></div><div class="ln-t"><b>박재언</b>： ……蝶、見に行く？</div></div></div>
+<div class="lnotif stack"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
 <div class="lnotif"><span class="ln-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>解剖メモ</b><span>1시간 전</span></div><div class="ln-t">新しい解剖メモが解放されました</div></div></div>
 </div>
 <div class="lock-btns"><span class="lk-btn"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 2.5h7l.8 5.5H7.7z"/><rect x="10" y="8" width="4" height="12.5" rx="1.8"/></svg></span><span class="lk-btn"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span></div>
@@ -766,7 +768,7 @@ img{-webkit-user-drag:none}
 <div class="setrow"><span class="sl">効果音量</span><input type="range" id="sfx-vol" min="0" max="100" value="70" aria-label="効果音量"></div>
 <div class="setrow"><span class="sl">全体ミュート（マナーモード）</span><button class="isw" id="set-mute" aria-label="全体ミュートのオン・オフ">OFF</button></div>
 </div>
-<div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャットの ▶ ボタンを長押しすると早送りモード（ON／OFF）になります。選択肢を選ぶと「解明度」と「心の距離」が変わります。解明度は彼を見抜くほど上がり、55以上で特別な結末への選択肢が開きます。効果音と生活音はすべてオリジナル合成音です（詳細は解剖メモ下部のクレジット）。</div>
+<div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャット下部の送信ボタンを長押しすると早送りモード（ON／OFF）になります。選択肢を選ぶと「解明度」と「心の距離」が変わります。解明度は彼を見抜くほど上がり、55以上で特別な結末への選択肢が開きます。効果音と生活音はすべてオリジナル合成音です（詳細は解剖メモ下部のクレジット）。</div>
 </div>
 </div>
 <div class="pagedots"><i class="on"></i><i></i></div>
@@ -802,8 +804,8 @@ img{-webkit-user-drag:none}
 <div id="tap-hint">▼</div>
 <div id="noise"></div>
 <button id="chat-bottom-btn" aria-label="一番下へ戻る"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v13M6 11.5l6 6 6-6"/></svg> 一番下へ戻る</button>
-<div class="chat-input"><button id="btn-plus">＋</button><div class="fakein">메시지를 입력하세요</div><span class="in-emo"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="9" cy="10" r="1.05" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.05" fill="currentColor" stroke="none"/><path d="M8.5 14c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><span class="in-hash">#</span><button class="sendb" id="btn-next">▶</button></div>
-<div id="free-row"><button id="btn-plus2" aria-label="添付">＋</button><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send">▶</button></div>
+<div class="chat-input"><button id="btn-plus" aria-label="添付"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="fakein">메시지를 입력하세요</div><span class="in-emo"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="9" cy="10" r="1.05" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.05" fill="currentColor" stroke="none"/><path d="M8.5 14c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><span class="in-hash">#</span><button class="sendb" id="btn-next" aria-label="進む"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button></div>
+<div id="free-row"><button id="btn-plus2" aria-label="添付"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><input id="free-in" type="text" placeholder="메시지를 입력하세요（自由入力）" autocomplete="off"><button id="free-send" aria-label="送信"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button></div>
 <div class="plus-panel" id="plus-panel">
 <div data-pp="album"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17.5 9.5 12l3.5 3.5 3-3 4.5 4.5"/></svg></span>앨범</div><div data-pp="camera"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span>카메라</div><div data-pp="gift"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg></span>선물하기</div><div data-pp="pay"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.9a2.3 2.3 0 0 1 0 4.2M17.8 9.9a2.3 2.3 0 0 0 0 4.2"/></svg></span>송금</div><div data-pp="voice"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg></span>음성메시지</div><div data-pp="contact"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></span>연락처</div><div data-pp="file"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg></span>파일</div><div data-pp="cal"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span>일정</div>
 </div>
@@ -958,7 +960,6 @@ img{-webkit-user-drag:none}
 <div id="toast"></div>
 <div class="homebar" id="homebar"></div>
 </div></div>
-<p class="small-note">二次創作ファンゲームです。登場人物の画像はPinterest等で公開されていたファン素材を使用しています（出典はREADMEに記載）。</p>
 
 <script>
 /* ================= DATA ================= */
@@ -1354,7 +1355,7 @@ const KTIME={0:18*60+24,1:21*60+41,2:19*60+38,3:23*60+26,4:11*60+42,5:16*60+18,6
 let chatMin=KTIME[0], msgSeq=0;
 function fmtTime(){const t=chatMin; chatMin+=1+(msgSeq++%3); const h24=Math.floor(t/60)%24, m=t%60; const ap=h24<12?'\uc624\uc804':'\uc624\ud6c4'; let h=h24%12; if(h===0)h=12; return ap+' '+h+':'+String(m).padStart(2,'0');}
 function clearUnread(){feed.querySelectorAll('.unread').forEach(e=>e.remove());}
-function addDate(v,cal){feed.appendChild(el('<div class="dchip">'+esc(KDATE[cal]||v)+'</div>')); if(typeof cal==='number'&&KTIME[cal]!=null){chatMin=KTIME[cal]; msgSeq=0;}}
+function addDate(v,cal){feed.appendChild(el('<div class="dchip"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>'+esc(KDATE[cal]||v)+'</div>')); if(typeof cal==='number'&&KTIME[cal]!=null){chatMin=KTIME[cal]; msgSeq=0;}}
 function addSys(v){feed.appendChild(el('<div class="sys">'+esc(v)+'</div>'));}
 function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</span>'+esc(v)+'</div>'); feed.appendChild(d);}
 function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
@@ -1705,7 +1706,7 @@ function renderIG(){
    const cm=allCm.map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
    const base=parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13;
    const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
-   body.querySelector('#ig-detail').innerHTML='<div class="ig-post"><div class="ph"><img src="'+pr.img+'">'+pr.name+'<span class="dots">•••</span></div><div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IC.heartBig+'</span></div><div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm">コメント'+allCm.length+'件をすべて見る</div>':'')+cm+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(AGO[p.id]||'1日前')+'</div></div>';
+   body.querySelector('#ig-detail').innerHTML='<div class="ig-post"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span>'+pr.name+'<span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div><div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IC.heartBig+'</span></div><div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm">コメント'+allCm.length+'件をすべて見る</div>':'')+cm+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(AGO[p.id]||'1日前')+'</div></div>';
    const dp=body.querySelector('#ig-detail .ig-post');
    const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
    const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
@@ -1853,8 +1854,8 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
 }));
 $('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
 /* v66：＋パネルは実物の1ページ目の構成（앨범／카메라／선물하기／송금／음성메시지／연락처／파일／일정）に統一。項目ごとに実物らしいフィードバックを返す（物語の進行には影響しない） */
-const PP_T={album:'（送信は演出用です。▶で物語が進みます）',camera:'（送信は演出用です。▶で物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
-document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='camera'&&typeof sfxPlay==='function') sfxPlay('shutter'); if(k==='album'&&S.done){ openAlbumPick(); return; } toast(PP_T[k]||'（送信は演出用です。▶で物語が進みます）'); }));
+const PP_T={album:'（送信は演出用です。送信ボタンで物語が進みます）',camera:'（送信は演出用です。送信ボタンで物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
+document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='camera'&&typeof sfxPlay==='function') sfxPlay('shutter'); if(k==='album'&&S.done){ openAlbumPick(); return; } toast(PP_T[k]||'（送信は演出用です。送信ボタンで物語が進みます）'); }));
 let profFrom='v-chat'; /* v48：プロフィールを開いた画面を覚えておき、✕では元の画面へ戻る */
 $('#chat-prof-btn').addEventListener('click',()=>{ profFrom='v-chat'; showView('v-profile'); });
 $('#prof-close').addEventListener('click',()=>showView(profFrom));
