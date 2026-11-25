@@ -962,7 +962,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v112：生成した写真で、取り除いた投稿のうち4件を復活させました（作業室の投稿とストーリー・ギャラリー、展示準備の投稿、入隊の投稿2件）。キャプションやコメントは元のまま、写真だけが新しい生成写真になっています。物語の内容・数値・他の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v113：生成した写真で、取り除いた投稿のうち4件をさらに復活させました（バーの投稿、蝶の投稿、空の投稿、雨の投稿と、連動するストーリー・ギャラリー・ハイライト）。キャプションやコメントは元のまま、写真だけが新しい生成写真になっています。物語の内容・数値・他の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1295,7 +1295,11 @@ const IG_J=[
 {id:'atelier',img:'assets/ig-atelier-main.jpg',imgs:['assets/ig-atelier-main.jpg','assets/ig-atelier-wide.jpg'],cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','재온아 작업실에서 살아?'],['park_jaeon','끝나지 않으니까']],cmL:[['b1nna_','재온이 요즘 작업실에서 살아']]},
 {id:'jaeon2',img:'assets/ig-jaeon2-main.jpg',cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
 {id:'walk',img:'assets/ig-jaeon-walk.jpg',cap:'수업 끝나고',likes:'402',unlock:3,cm:[['b1nna_','その笑顔、誰に向けたの'],['park_jaeon','……別に']]},
+{id:'jaeon1',img:'assets/ig-jaeon1-main.jpg',cap:'☁️',likes:'529',unlock:4,cm:[['b1nna_','좋아요 테러 갑니다'],['nao_sculpt','（……見てるだけ）']],cmL:[['s0l_a','……']]},
+{id:'butterfly',img:'assets/ig-butterfly-main.jpg',imgs:['assets/ig-butterfly-main.jpg','assets/ig-butterfly-room.jpg'],cap:'나비. 잡으면 죽는다',likes:'601',unlock:4,cm:[['s0l_a','相変わらずだね'],['park_jaeon','飛んでる時が一番きれいだから']],cmL:[['b1nna_','蝶の写真、前より増えたね']]},
+{id:'bar',img:'assets/ig-bar-main.jpg',imgs:['assets/ig-bar-main.jpg','assets/ig-lime.jpg'],cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]},
 {id:'stairs',img:'assets/ig-stairs.jpg',cap:'계단. 오후의 그림자',likes:'418',unlock:5,cm:[['b1nna_','この階段、学校の？ 影がすごい'],['park_jaeon','……光のせい']]},
+{id:'rain',img:'assets/ig-rain-main.jpg',cap:'비. 우산은 없었다',likes:'692',unlock:9,cm:[['b1nna_','誰と？ どこで？'],['park_jaeon','秘密']],cmL:[['s0l_a','……元気？']]},
 {id:'pottery',img:'assets/ig-jaeon-pottery.jpg',cap:'밤. 손이 먼저 안다',likes:'365',unlock:7,cm:[['b1nna_','ろくろ？ めずらしい'],['park_jaeon','……気分で']],cmL:[['nao_sculpt','（……見てしまった）']]},
 {id:'store',img:'assets/ig-store.jpg',cap:'밤. 편의점 앞',likes:'388',unlock:8,cm:[['b1nna_','この時間にコンビニ？'],['park_jaeon','……帰り道']]},
 {id:'sunset',img:'assets/ig-atelier-sunset.jpg',cap:'작업실. 해가 진다',likes:'455',unlock:9,cm:[['b1nna_','夕日の作業室、きれいすぎない？'],['park_jaeon','……光だけだよ']]},
@@ -2003,7 +2007,7 @@ let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿
 /* ================= v81 : IGフィード／コメントシート／既読リング =================
    姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
    自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
-const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',army:'たった今',enlist:'たった今',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前'};
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',rain:'12時間前',army:'たった今',enlist:'たった今',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前'};
 let igTab='feed';
 let igFeedY=0, igFeedHold=false; /* v88：フィードのスクロール位置保持（実物どおり、詳細・プロフィール・ストーリーから戻っても元の位置） */
 (function(){ const b=$('#ig-body'); if(b) b.addEventListener('scroll',()=>{ if(igTab==='feed'&&!igFeedHold) igFeedY=b.scrollTop; },{passive:true}); })();
@@ -2448,8 +2452,10 @@ function renderPOV(){
 $('#povread-back').addEventListener('click',()=>{ renderPOV(); showView('v-pov'); });
 /* ================= v4 : IG STORIES ================= */
 const STORIES=[
-{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier-main.jpg',cap:'작업 중',ago:'2시간',unlock:2}
-]; /* v112：生成写真で atelier のストーリーを復活（他は実写真系のため削除のまま） */
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier-main.jpg',cap:'작업 중',ago:'2시간',unlock:2},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly-main.jpg',cap:'나비',ago:'5시간',unlock:4},
+{user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-rain-main.jpg',cap:'비',ago:'30분',unlock:9},
+]; /* v113：生成写真で atelier／나비／비 のストーリーを復活（他は実写真系のため削除のまま） */
 let storyState={list:[],i:0,timer:null,remain:0,startedAt:0,paused:false,user:null}; let storyFrom='prof'; const STORY_DUR=5000; /* v81：実物どおり5秒自動送り＋既読管理（Tinder版のストーリー機構を移植） */
 const STORY_ORDER=['nao_sculpt','park_jaeon','b1nna_','s0l_a']; /* v88：トレイの表示順（次ユーザー自動遷移の順序） */
 function storyStartIdx(list){ const seen=Array.isArray(S.storySeen)?S.storySeen:[]; const ix=list.findIndex(x=>!seen.includes(storyKey(x))); return ix<0?0:ix; } /* v88：未見の先頭から再開（すべて見た場合は先頭から再生＝実物の作法） */
@@ -2607,8 +2613,11 @@ function updClock(){
 }
 /* ================= v6 : GALLERY ================= */
 const GAL=[
- {img:'assets/ig-atelier-main.jpg',d:'3월 26일',cap:'作業室 ― 彼の制作風景',u:2}
-]; /* v112：生成写真で作業室の1件を復活（他は実写真系のため削除のまま） */
+ {img:'assets/ig-bar-main.jpg',d:'3월 12일',cap:'初めてのバー。ライムのカクテル',u:1},
+ {img:'assets/ig-atelier-main.jpg',d:'3월 26일',cap:'作業室 ― 彼の制作風景',u:2},
+ {img:'assets/ig-butterfly-main.jpg',d:'4월 25일',cap:'誕生日 ― 温室の蝶',u:4},
+ {img:'assets/ig-rain-main.jpg',d:'6월 25일',cap:'雨の夜',u:9},
+]; /* v113：生成写真でバー／作業室／蝶／雨の4件を復活（他は実写真系のため削除のまま） */
 /* v68：写真詳細のお気に入りはセッション内のみ（セーブに持たせない）。galCur はツールバー操作の対象 */
 let galCur=null; const galFav=new Set(Array.isArray(S.galFav)?S.galFav:[]); /* v90：お気に入りをセーブと連動（旧セーブは空で補完） */
 function galWeekday(g){ const md=g.d.match(/(\d+)월\s*(\d+)일/); return md?['일','월','화','수','목','금','토'][new Date(2021,+md[1]-1,+md[2]).getDay()]:''; }
@@ -3536,7 +3545,13 @@ window.noiseGo=null;
 })();
 /* ハイライトのグループ定義：作中ストーリーの画像でテーマ分け。解放済みの分だけで構成する */
 function igHighlights(user){
- const DEFS={ park_jaeon:[], nao_sculpt:[] }; /* v111：ハイライトは全グループ実写真系のみだったため全て削除 */
+ const DEFS={
+  park_jaeon:[
+   {t:'나비',imgs:['assets/ig-butterfly-main.jpg']},
+   {t:'비',imgs:['assets/ig-rain-main.jpg']}
+  ],
+  nao_sculpt:[]
+ }; /* v113：生成写真で復活した 나비／비 のハイライト（他グループは実写真系のため削除のまま） */
  const seen=Array.isArray(S.storySeen)?S.storySeen:[];
  return (DEFS[user]||[]).map(g=>{
    const list=STORIES.filter(s=>s.user===user&&g.imgs.indexOf(s.img)>=0&&S.calU>=s.unlock);
