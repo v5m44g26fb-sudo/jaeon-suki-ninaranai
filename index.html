@@ -1078,12 +1078,21 @@ img{-webkit-user-drag:none;user-select:none}
 .gal-grid button.g-first{grid-column:1/-1;aspect-ratio:16/10}
 .gal-mh.gm-day{font-size:19px;font-weight:800;padding:22px 14px 8px}
 .gal-mh.gm-month{font-size:16.5px;padding:20px 12px 7px}
+
+/* v129：記事末尾の関連ニュース（NAVER実物の作り） */
+.nwr-rel{margin-top:26px;border-top:1px solid #eee;padding-top:16px}
+.nwr-rel-h{font-size:15px;font-weight:800;color:#191919;margin-bottom:6px}
+.nwr-rel-it{display:flex;gap:11px;width:100%;padding:10px 0;background:none;border:0;border-bottom:1px solid #f2f2f4;text-align:left;font-family:inherit;align-items:center}
+.nwr-rel-it .tx{flex:1;min-width:0}
+.nwr-rel-it .ti{display:block;font-size:14.5px;font-weight:600;color:#191919;line-height:1.4}
+.nwr-rel-it .meta{display:block;font-size:11.5px;color:#8e8e93;margin-top:3px}
+.nwr-rel-it img{width:56px;height:56px;border-radius:9px;object-fit:cover;flex:none;background:#eee}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v128：写真（ギャラリー）の「日／月／年」表示を作り込みました。これまでは全表示モード共通の3列グリッドで、1日1枚の日付では写真が小さく左に寄って空白が目立ちましたが、iOSの写真アプリの日表示のように、各日付の先頭の写真が全幅の大きなタイルで表示されるようになりました。日の見出しも大きくしています。本編・台詞・数値・解放条件・写真そのものは変えていません。</p>
+<p class="src">v129：ニュース記事の作り込みをしました。コメントが記事のカテゴリに合う内容だけから選ばれるようになり（展示の記事に天気へのお礼が付くようなズレを解消。復元の記事には専用のコメントを維持）、記事の末尾に同じカテゴリの「관련 뉴스（関連ニュース）」が付き、タップでその記事へ移動できるようになりました。未解放の記事は関連にも出ません。本編・台詞・数値・解放条件・写真は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -3337,12 +3346,23 @@ function renderNews(){
  b.querySelectorAll('[data-nwcat]').forEach(btn=>btn.addEventListener('click',()=>{ nwCat=btn.dataset.nwcat; renderNews(); }));
  const qi=b.querySelector('#nw-q'); if(qi){ qi.value=nwQuery; qi.addEventListener('input',()=>{ nwQuery=qi.value.trim(); nwQFocus=true; renderNews(); }); qi.addEventListener('blur',()=>{ nwQFocus=false; }); if(nwQFocus){ qi.focus(); try{ qi.setSelectionRange(qi.value.length,qi.value.length); }catch(e){} } } /* v90：検索欄（再描画後も入力を継続できるようフォーカスを戻す） */
 }
-const NW_CM_POOL=[['campus_cat','조소과 건물 불빛 진짜 새벽까지 켜져 있더라',12],['seoul_daily','날씨 정보 감사합니다 덕분에 일정 잡기 좋네요',4],['art_lover_21','젊은 작가들 전시 꼭 가보고 싶다',27],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['rainy_day','다들 우산 챙기세요',15],['gallery_goer','복원 얘기는 들을수록 대단하다 싶음',31]];
-function nwCmts(a){ let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*31+id.charCodeAt(i))>>>0; return [0,1,2].map(k=>NW_CM_POOL[(h+k*2)%NW_CM_POOL.length]); }
+/* v129：コメントはカテゴリ別のプールから引く（従来は全記事共通プールのため、展示記事に天気への礼など話題の合わないコメントが付くことがあった） */
+const NW_CM_POOLS={
+ '날씨':[['seoul_daily','날씨 정보 감사합니다 덕분에 일정 잡기 좋네요',4],['rainy_day','다들 우산 챙기세요',15],['hongdae_local','이번 주는 날씨 보고 일정 잡아야겠다',7]],
+ '문화':[['art_lover_21','젊은 작가들 전시 꼭 가보고 싶다',27],['gallery_goer','전시장에서 직접 보면 사진이랑은 또 다르다',18],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9]],
+ '대학':[['campus_cat','조소과 건물 불빛 진짜 새벽까지 켜져 있더라',12],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['art_lover_21','학생들 작품 수준이 해마다 오른다',11]],
+ '생활':[['seoul_daily','정보 감사합니다 덕분에 일정 잡기 좋네요',4],['rainy_day','야외 나갈 때 마스크 꼭 챙기세요',13],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9]],
+ '여행':[['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['seoul_daily','사진만 봐도 가고 싶어지네요',16],['rainy_day','여행 가서 비만 안 오면 좋겠다',8]]
+};
+const NW_CM_SPECIAL={a3:[['gallery_goer','복원 얘기는 들을수록 대단하다 싶음',31],['art_lover_21','깨진 자리가 오히려 이야기가 되네요',22],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9]]}; /* v129：復元記事 a3 には、その記事のために書かれたコメントをそのまま使う */
+const NW_CM_FALLBACK=[['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['art_lover_21','직접 가서 보고 싶어지는 기사네요',14],['seoul_daily','좋은 정보 감사합니다',6]];
+function nwCmts(a){ const pool=NW_CM_SPECIAL[a.id]||NW_CM_POOLS[a.cat]||NW_CM_FALLBACK; let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*31+id.charCodeAt(i))>>>0; return [0,1,2].map(k=>pool[(h+k)%pool.length]); }
 function nwInput(a){ let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*33+id.charCodeAt(i))>>>0; const mins=9*60+(h%620); const hh=Math.floor(mins/60), mm=mins%60; const ap=hh<12?'오전':'오후'; let h12=hh%12; if(h12===0) h12=12; const md=String(a.date).match(/(\d+)월\s*(\d+)일/); const ds=md?('2021.'+String(md[1]).padStart(2,'0')+'.'+String(md[2]).padStart(2,'0')+'.'):''; return ds+' '+ap+' '+h12+':'+String(mm).padStart(2,'0'); } /* v84：NAVER記事のバイライン書式（입력 YYYY.MM.DD. 오전/오후 H:MM）。時刻は記事IDから決定的に導く */
+function nwRelHTML(a){ const rel=NEWS.filter(x=>x.id!==a.id&&x.cat===a.cat&&newsVis(x)).slice().sort((x,y)=>y.hot-x.hot).slice(0,3); if(!rel.length) return ''; return '<div class="nwr-rel"><div class="nwr-rel-h">관련 뉴스</div>'+rel.map(r=>'<button class="nwr-rel-it" data-nwrel="'+r.id+'"><span class="tx"><span class="ti">'+esc(r.title)+'</span><span class="meta">'+esc(r.press)+' · 2021년 '+esc(r.date)+'</span></span>'+(r.th?'<img loading="lazy" decoding="async" src="'+r.th+'" alt="">':'')+'</button>').join('')+'</div>'; } /* v129：同じカテゴリの解放済み記事だけを関連に出す（未解放は漏らさない） */
 function openNews(id){
  const a=NEWS.find(x=>x.id===id); if(!a) return;
- $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 입력 '+nwInput(a)+'</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwc"><div class="nwc-h">댓글 <span>'+nwCmts(a).length+'</span></div>'+nwCmts(a).map((c,i)=>'<div class="nwc-row"><div class="nwc-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'</div><button class="nwc-like" data-nwl="'+i+'" data-n="'+c[2]+'"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span>'+c[2]+'</span></button></div>').join('')+'</div>'+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
+ $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 입력 '+nwInput(a)+'</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwc"><div class="nwc-h">댓글 <span>'+nwCmts(a).length+'</span></div>'+nwCmts(a).map((c,i)=>'<div class="nwc-row"><div class="nwc-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'</div><button class="nwc-like" data-nwl="'+i+'" data-n="'+c[2]+'"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span>'+c[2]+'</span></button></div>').join('')+'</div>'+nwRelHTML(a)+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
+ $('#newsread-body').querySelectorAll('[data-nwrel]').forEach(b=>b.addEventListener('click',()=>openNews(b.dataset.nwrel))); const nb=$('#newsread-body'); if(nb) nb.scrollTop=0;
  $('#newsread-body').querySelectorAll('[data-nwl]').forEach(b=>b.addEventListener('click',()=>{ const on=b.classList.toggle('on'); const sp=b.querySelector('span'); if(sp) sp.textContent=+b.dataset.n+(on?1:0); }));
  showView('v-newsread');
 }
