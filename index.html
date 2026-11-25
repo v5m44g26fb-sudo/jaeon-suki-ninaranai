@@ -388,8 +388,8 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 #v-story{background:#000;color:#fff;z-index:140}
 .story-progs{position:absolute;top:max(48px,calc(var(--sat) + 4px));left:8px;right:8px;display:flex;gap:4px;z-index:3}
 .story-progs i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;position:relative}
-.story-progs i.done{background:#fff}
-.story-progs i.cur{background:#fff}
+.story-progs i.done b{width:100%}
+.story-progs i.cur b{animation:storyFill 5s linear forwards}
 .story-head{position:absolute;top:max(58px,calc(var(--sat) + 14px));left:12px;right:12px;display:flex;align-items:center;gap:8px;z-index:3;pointer-events:none} /* v48：ヘッダ帯はタップを透過させ、下の送りゾーンを塞がない */
 .story-head img{width:33px;height:33px;border-radius:50%;object-fit:cover}
 .story-head b{font-size:13.5px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
@@ -463,10 +463,10 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .msgimg{width:180px;max-width:62vw;border-radius:14px;display:block;box-shadow:0 2px 8px rgba(20,30,45,.18)}
 .epi-done{color:#7a6a2f;font-weight:700}
 /* ===== v23 : touch feel ===== */
-@keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.view.on{animation:vin .18s ease-out}
-#gal-view.on{animation:vin .18s ease-out}
-.plus-panel.on{animation:vin .18s ease-out}
+@keyframes vin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+.view.on{animation:vin .26s cubic-bezier(.32,.72,0,1)}
+#gal-view.on{animation:vin .26s cubic-bezier(.32,.72,0,1)}
+.plus-panel.on{animation:vin .26s cubic-bezier(.32,.72,0,1)}
 .app:active{opacity:.55}
 .setbtn:active{background:#d9e4ef}
 @media (prefers-reduced-motion: reduce){
@@ -708,12 +708,75 @@ img{-webkit-user-drag:none}
 .wn-tag{flex:none;background:#03c75a;color:#fff;font-size:10.5px;font-weight:800;font-style:italic;border-radius:6px;padding:3px 7px;letter-spacing:.02em}
 .wn-title{flex:1;min-width:0;font-size:12.5px;font-weight:600;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .wn-press{flex:none;font-size:10.5px;color:#9a9a9e}
+
+/* ===== v81 : IGフィード／コメントシート／ストーリー自動送り／UIレイヤー ===== */
+.story-progs i b{display:block;height:100%;width:0;background:#fff;border-radius:2px}
+@keyframes storyFill{from{width:0}to{width:100%}}
+#v-story.paused .story-progs i.cur b{animation-play-state:paused}
+.ig-feed .ig-post{border-bottom:1px solid #efefef}
+.ig-nav .ig-nav-av{width:24px;height:24px;border-radius:50%;object-fit:cover;display:block;margin:0 auto}
+.ig-nav button.on .ig-nav-av{box-shadow:0 0 0 1.5px #000}
+.ig-post .allcm{cursor:pointer}
+#cm-sheet{position:absolute;inset:0;z-index:240;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
+#cm-sheet .cm-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#cm-sheet .cm-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;height:74%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -6px 28px rgba(0,0,0,.18)}
+#cm-sheet.on{pointer-events:auto}
+#cm-sheet.on .cm-bg{opacity:1}
+#cm-sheet.on .cm-panel{transform:translateY(0)}
+.cm-grab{width:38px;height:4.5px;border-radius:3px;background:#dbdbdb;margin:8px auto 2px;flex:none}
+.cm-head{display:flex;align-items:center;justify-content:center;position:relative;padding:9px 12px 11px;border-bottom:1px solid #efefef;font-weight:700;font-size:14.5px;color:#262626;flex:none}
+.cm-head button{position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:6px;color:#262626;display:flex}
+.cm-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:4px 14px;scrollbar-width:none}
+.cm-list::-webkit-scrollbar{display:none}
+.cm-row{display:flex;gap:10px;padding:8px 0;align-items:flex-start}
+.cm-row>img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+.cm-row .cm-ava{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex:none}
+.cm-row .cm-tx{flex:1;font-size:13.5px;line-height:1.5;color:#262626;min-width:0;word-break:break-word}
+.cm-row .cm-tx b{margin-right:5px}
+.cm-row .cm-meta{font-size:11.5px;color:#8e8e8e;margin-top:2px}
+.cm-like{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;color:#8e8e8e;font-size:10px;padding-top:5px}
+.cm-like.liked{color:#ff3040}
+.cm-empty{color:#8e8e8e;font-size:13px;text-align:center;padding:28px 0}
+.cm-bar{display:flex;align-items:center;gap:9px;padding:9px 12px calc(10px + var(--sab));border-top:1px solid #efefef;background:#fff;flex:none}
+.cm-bar>img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+.cm-bar input{flex:1;border:1px solid #dbdbdb;border-radius:999px;padding:9px 14px;font-size:16px;font-family:inherit;min-width:0;color:#262626;background:#fff}
+.cm-bar button{color:#0095f6;font-weight:700;font-size:14px;flex:none;padding:4px 2px}
+.homebar.dk{background:rgba(25,25,25,.85);box-shadow:none}
+.app .ic{transition:transform .18s cubic-bezier(.32,.72,0,1),filter .18s}
+.app:active .ic{transform:scale(.85);filter:brightness(.72)}
+.thread:active,.igs-acct:active{background:#f5f5f7}
+#v-lock.opening{transform:scale(1.06);opacity:0;transition:transform .38s cubic-bezier(.32,.72,0,1),opacity .38s ease}
+@keyframes appIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+#v-home.fresh .apps .app{animation:appIn .38s cubic-bezier(.32,.72,0,1) both}
+#v-home.fresh .apps .app:nth-child(2){animation-delay:.03s}
+#v-home.fresh .apps .app:nth-child(3){animation-delay:.06s}
+#v-home.fresh .apps .app:nth-child(4){animation-delay:.09s}
+#v-home.fresh .apps .app:nth-child(5){animation-delay:.12s}
+#v-home.fresh .apps .app:nth-child(6){animation-delay:.15s}
+#v-home.fresh .apps .app:nth-child(7){animation-delay:.18s}
+#v-home.fresh .apps .app:nth-child(8){animation-delay:.21s}
+#v-home.fresh .dock .app{animation:appIn .38s .22s cubic-bezier(.32,.72,0,1) both}
+@media (min-width:431px){.screen{box-shadow:inset 0 0 0 2px #05070a,inset 0 0 18px rgba(0,0,0,.25)}}
+.nwc{margin-top:26px;border-top:1px solid #e8e8e8;padding-top:14px}
+.nwc-h{font-size:14px;font-weight:700;color:#191919;margin-bottom:4px}
+.nwc-h span{color:#03c75a}
+.nwc-row{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f2f2f2}
+.nwc-tx{flex:1;font-size:13px;line-height:1.55;color:#333;min-width:0}
+.nwc-tx b{margin-right:6px;color:#191919}
+.nwc-like{flex:none;display:flex;align-items:center;gap:3px;font-size:11.5px;color:#8e8e93;border:1px solid #e6e6e6;border-radius:999px;padding:3px 8px;background:#fff}
+.nwc-like.on{color:#ff3040;border-color:#ffb3ba}
+.nwc-like.on svg{fill:#ff3040;stroke:#ff3040}
+@media (prefers-reduced-motion: reduce){
+ .story-progs i.cur b{animation:none !important;width:100%}
+ #v-home.fresh .apps .app,#v-home.fresh .dock .app{animation:none !important}
+ #cm-sheet .cm-panel{transition-duration:.01s !important}
+}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v80：タイトル画面の説明文を削除し、カカオ・Instagram・ロック画面・ニュースの見た目を実物に寄せました。本編・セーブ形式は不変で、既存セーブはそのまま読み込めます。変更履歴はREADMEの「バージョン」にまとめました。</p>
+<p class="src">v81：Instagramを実物化（ホーム＝フィード、コメントシートで自分の投稿も可能、ストーリーは自動送り＋既読リング）、ニュースにコメント欄を追加し、画面遷移・ロック解除・ホームバーなどUI全体も実物に寄せました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -837,14 +900,14 @@ img{-webkit-user-drag:none}
 <div class="ig-head"><button class="back" data-home="1">‹</button><span class="ig-logo">Instagram</span><div class="ig-hicons"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span class="ig-badge-dot"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></span></div></div>
 <div class="ig-switch"><button id="igsw-j" class="on"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg></button><button id="igsw-n"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></button></div>
 <div class="abody" id="ig-body"></div>
-<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button></div>
+<div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
 </div>
 
 <!-- IG SEARCH (v74) -->
 <div class="view" id="v-igsearch">
 <div class="igs-head"><button class="back" id="igs-back">‹</button><input class="igs-in" id="igs-in" type="text" placeholder="검색（検索）" autocomplete="off"></div>
 <div class="abody" id="igs-body" style="background:#fff"></div>
-<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" class="on" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button></div>
+<div class="ig-nav"><button data-ignav="home" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" class="on" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
 </div>
 
 <!-- NEWS (v75) -->
@@ -956,6 +1019,7 @@ img{-webkit-user-drag:none}
 <button class="story-zone r" id="story-next"></button>
 </div>
 
+<div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
 <audio id="bgm" loop preload="auto" style="display:none"></audio>
 <div id="toast"></div>
 <div class="homebar" id="homebar"></div>
@@ -1280,7 +1344,7 @@ const STORY=[
 /* ================= ENGINE ================= */
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
-let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{}} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{},igMyCmts:{},igCmLikes:[],storySeen:[]} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
 /* v31：壊れたセーブ（JSON破損・非オブジェクト）は LSKEY+'.bak' へ退避し、初期状態で起動する */
 try{const raw=localStorage.getItem(LSKEY); if(raw){ try{const p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) S=Object.assign(S,p); else try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} }catch(pe){ try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} } }}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
@@ -1330,7 +1394,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',['v-kakao','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id)); }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -1663,7 +1727,85 @@ function openSide(name,img,log){
 /* IG */
 let igWho='j';
 let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿／saved＝保存済み）。表示状態のみでセーブしない */
+/* ================= v81 : IGフィード／コメントシート／既読リング =================
+   姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
+   自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
+let igTab='feed';
+const IG_IC={
+ heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
+ heartBig:'<svg width="92" height="92" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
+ cmt:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.5-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>',
+ shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
+ bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>'};
+function igAgoMin(s){ if(!s||s==='たった今') return 0; let m; if(m=s.match(/(\d+)分前/)) return +m[1]; if(m=s.match(/(\d+)時間前/)) return +m[1]*60; if(m=s.match(/(\d+)日前/)) return +m[1]*1440; if(m=s.match(/(\d+)週間前/)) return +m[1]*10080; return 99999; }
+function igStoryCm(p){ return (p.cm||[]).concat(S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]); }
+function igAllCm(p){ const mine=(S.igMyCmts&&Array.isArray(S.igMyCmts[p.id]))?S.igMyCmts[p.id]:[]; return igStoryCm(p).concat(mine.map(t=>['nao_sculpt',t])); }
+function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar.jpg'; if(name==='b1nna_') return 'assets/av-bitna.jpg'; if(name==='s0l_a') return 'assets/av-sola.jpg'; return ''; }
+function igBaseLikes(p){ return parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13; }
+function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
+function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' seen'; const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
+function igStoriesRowHTML(){ const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>'<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>').join('')+'</div>'; }
+function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast('このユーザーのストーリーは、物語の進行で追加されます'); })); }
+function syncIgChrome(){ const sw=document.querySelector('.ig-switch'); if(sw) sw.style.display=(igTab==='feed')?'none':'flex'; document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const j=$('#igsw-j'),n=$('#igsw-n'); if(j) j.classList.toggle('on',igWho==='j'); if(n) n.classList.toggle('on',igWho==='n'); }
+function igPostHTML(p,owner){
+ const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar.jpg',name:'nao_sculpt'};
+ const allCm=igAllCm(p);
+ const base=igBaseLikes(p);
+ const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
+ const prev=allCm.slice(0,2).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
+ return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div><div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div><div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
+}
+function igWireCard(dp,p,owner,inFeed){
+ const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
+ const base=igBaseLikes(p);
+ const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
+ likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
+ let lastTap=0;
+ const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
+ imgW.addEventListener('dblclick',dbl);
+ imgW.addEventListener('click',()=>{ const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
+ saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); save(); });
+ dp.querySelector('.ig-cmtb').addEventListener('click',()=>openCmSheet(p,owner,false));
+ dp.querySelector('.ig-shrb').addEventListener('click',()=>toast('（共有は演出用です）'));
+ const ca=dp.querySelector('.ig-cmtadd'); if(ca) ca.addEventListener('click',()=>openCmSheet(p,owner,true));
+ const ac=dp.querySelector('.allcm'); if(ac) ac.addEventListener('click',()=>openCmSheet(p,owner,false));
+ if(inFeed){ const ph=dp.querySelector('.ph'); if(ph) ph.addEventListener('click',e=>{ if(e.target.closest('.dots')) return; igWho=owner; igTab='prof'; renderIG(); const btn=$('#ig-body').querySelector('[data-post="'+p.id+'"]'); if(btn) btn.click(); }); }
+}
+function renderIGFeed(){
+ igTab='feed';
+ const body=$('#ig-body'); if(!body) return;
+ if(!Array.isArray(S.igLikes)) S.igLikes=[];
+ if(!Array.isArray(S.igSaves)) S.igSaves=[];
+ syncIgChrome();
+ let h=igStoriesRowHTML();
+ const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)).sort((a,b)=>igAgoMin(IG_AGO[a.p.id])-igAgoMin(IG_AGO[b.p.id]));
+ h+='<div class="ig-feed">'+posts.map(x=>igPostHTML(x.p,x.o)).join('')+'</div>';
+ body.innerHTML=h; body.scrollTop=0;
+ wireStoriesRow(body);
+ body.querySelectorAll('.ig-feed .ig-post').forEach(dp=>{ const pool=dp.dataset.owner==='j'?IG_J:IG_N; const p=pool.find(x=>x.id===dp.dataset.pid); if(p) igWireCard(dp,p,dp.dataset.owner,true); });
+}
+/* コメントシート：実物の作法どおり下からせり上がり、全コメント＋自分の投稿＋コメントへのいいね */
+let cmPost=null, cmOwner='j';
+function cmLikeKey(p,c){ return p.id+'::'+c[0]+'::'+c[1]; }
+function renderCmList(){
+ const list=$('#cm-list'); if(!list||!cmPost) return;
+ const story=igStoryCm(cmPost).map(c=>({c:c,mine:false}));
+ const mine=((S.igMyCmts&&Array.isArray(S.igMyCmts[cmPost.id]))?S.igMyCmts[cmPost.id]:[]).map(t=>({c:['nao_sculpt',t],mine:true}));
+ const all=story.concat(mine);
+ if(!all.length){ list.innerHTML='<div class="cm-empty">まだコメントがありません</div>'; return; }
+ list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':(IG_AGO[cmPost.id]||'1日前'))+'</span></div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+(liked?'<span>1</span>':'')+'</button></div>'; }).join('');
+ list.querySelectorAll('[data-cmk]').forEach(b=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); if(i>=0) S.igCmLikes.splice(i,1); else S.igCmLikes.push(k); save(); renderCmList(); }));
+}
+function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
+function closeCmSheet(){ const sh=$('#cm-sheet'); if(sh) sh.classList.remove('on'); cmPost=null; }
+function sendCm(){ const inp=$('#cm-in'); if(!inp||!cmPost) return; const v=(inp.value||'').trim(); if(!v) return; inp.value=''; if(!S.igMyCmts||typeof S.igMyCmts!=='object'||Array.isArray(S.igMyCmts)) S.igMyCmts={}; if(!Array.isArray(S.igMyCmts[cmPost.id])) S.igMyCmts[cmPost.id]=[]; S.igMyCmts[cmPost.id].push(v); save(); renderCmList(); const list=$('#cm-list'); if(list) list.scrollTop=list.scrollHeight; const n=igAllCm(cmPost).length; document.querySelectorAll('[data-cmpid="'+cmPost.id+'"]').forEach(e2=>{ e2.textContent='コメント'+n+'件をすべて見る'; }); }
+$('#cm-close').addEventListener('click',closeCmSheet);
+$('#cm-bg').addEventListener('click',closeCmSheet);
+$('#cm-send').addEventListener('click',sendCm);
+$('#cm-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendCm(); });
 function renderIG(){
+ syncIgChrome();
  const body=$('#ig-body');
  if(!Array.isArray(S.igLikes)) S.igLikes=[]; /* v67：旧セーブ・破損値への防御（既定は S の初期値リテラル側） */
  if(!Array.isArray(S.igSaves)) S.igSaves=[];
@@ -1675,7 +1817,6 @@ function renderIG(){
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
- const AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前'};
  const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']];
  const IC={
   heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
@@ -1684,48 +1825,33 @@ function renderIG(){
   shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>',
   grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
- let h='<div class="ig-stories">'+SUBAR.map(s=>{const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock);return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+(has?'':' seen')+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>';}).join('')+'</div>';
+ let h=igStoriesRowHTML();
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
  h+= isJ ? '<div class="ig-folbtn"><span class="ghost" data-gf="follow">フォロー中</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
  if(isJ||igNTab==='grid'){
-  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk">'+IC.lock+' 物語で解放</span></button>':'')+'</div>';
+  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
  }else{
   const sv=S.igSaves.slice().reverse().map(id=>{ const pj=IG_J.find(x=>x.id===id); if(pj&&vis(pj)) return {p:pj,o:'j'}; const pn=IG_N.find(x=>x.id===id); if(pn&&vis(pn)) return {p:pn,o:'n'}; return null; }).filter(Boolean);
   h+= sv.length ? '<div class="ig-grid">'+sv.map(x=>'<button data-spost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>' : '<div class="ig-saved-empty">保存した投稿はまだありません。<br>投稿のブックマークボタンから保存できます。</div>';
  }
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
- body.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast('このユーザーのストーリーは、物語の進行で追加されます'); }));
+ wireStoriesRow(body);
  body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':k==='follow'?'（フォローは演出用です）':'（プロフィールの編集は演出用です）'); })); /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
  function openDetail(p,owner){
-   const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar.jpg',name:'nao_sculpt'};
-   const allCm=(p.cm||[]).concat(S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]);
-   const cm=allCm.map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
-   const base=parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13;
-   const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
-   body.querySelector('#ig-detail').innerHTML='<div class="ig-post"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span>'+pr.name+'<span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div><div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IC.heartBig+'</span></div><div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm">コメント'+allCm.length+'件をすべて見る</div>':'')+cm+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(AGO[p.id]||'1日前')+'</div></div>';
+   body.querySelector('#ig-detail').innerHTML=igPostHTML(p,owner);
    const dp=body.querySelector('#ig-detail .ig-post');
-   const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
-   const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
-   likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
-   let lastTap=0;
-   const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
-   imgW.addEventListener('dblclick',dbl);
-   imgW.addEventListener('click',()=>{ const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
-   saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); save(); });
-   dp.querySelector('.ig-cmtb').addEventListener('click',()=>toast('（コメントは演出用です）'));
-   dp.querySelector('.ig-shrb').addEventListener('click',()=>toast('（共有は演出用です）'));
-   dp.querySelector('.ig-cmtadd').addEventListener('click',()=>toast('（コメントは演出用です）'));
-   const sc=()=>{ body.scrollTop+=dp.getBoundingClientRect().top-body.getBoundingClientRect().top-4; }; sc(); const di=imgW.querySelector('img'); if(di&&!di.complete) di.addEventListener('load',sc);
+   igWireCard(dp,p,owner,false);
+   const sc=()=>{ body.scrollTop+=dp.getBoundingClientRect().top-body.getBoundingClientRect().top-4; }; sc(); const di=dp.querySelector('.ig-imgwrap img'); if(di&&!di.complete) di.addEventListener('load',sc);
  }
  body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{ const p=posts.find(x=>x.id===b.dataset.post); openDetail(p,igWho); }));
  body.querySelectorAll('[data-spost]').forEach(b=>b.addEventListener('click',()=>{ const o=b.dataset.owner; const p=(o==='j'?IG_J:IG_N).find(x=>x.id===b.dataset.spost); openDetail(p,o); }));
 }
-$('#igsw-j').addEventListener('click',()=>{igWho='j'; igNTab='grid'; $('#igsw-j').classList.add('on'); $('#igsw-n').classList.remove('on'); renderIG();});
-$('#igsw-n').addEventListener('click',()=>{igWho='n'; igNTab='grid'; $('#igsw-n').classList.add('on'); $('#igsw-j').classList.remove('on'); renderIG();});
+$('#igsw-j').addEventListener('click',()=>{igWho='j'; igTab='prof'; igNTab='grid'; $('#igsw-j').classList.add('on'); $('#igsw-n').classList.remove('on'); renderIG();});
+$('#igsw-n').addEventListener('click',()=>{igWho='n'; igTab='prof'; igNTab='grid'; $('#igsw-n').classList.add('on'); $('#igsw-j').classList.remove('on'); renderIG();});
 
 /* calendar */
 function renderCal(){
@@ -1797,7 +1923,7 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
  if(typeof sfxPlay==='function') sfxPlay('tap');
  const k=b.dataset.open;
  if(k==='kakao'){renderThreads(); showView('v-kakao');}
- if(k==='ig'){renderIG(); showView('v-ig');}
+ if(k==='ig'){igTab='feed'; renderIGFeed(); showView('v-ig');}
  if(k==='cal'){renderCal(); showView('v-cal');}
  if(k==='notes'){renderNotes(); showView('v-notes');}
  if(k==='calllog'){renderCallLog(); showView('v-calllog');}
@@ -1822,7 +1948,9 @@ $('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直
 /* v6：ステータスバーとロック画面の時計は実時刻ではなく物語内時刻（chatMin）に連動する（updClock は v6 セクションで定義し、updParams から呼ばれる） */
 /* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
 let lockOpening=false;
-$('#v-lock').addEventListener('click',()=>{ if(lockOpening) return; lockOpening=true; if(typeof sfxPlay==='function') sfxPlay('unlock'); const lt=document.querySelector('.lock-top'); if(lt) lt.innerHTML=IC.unlock; setTimeout(()=>{ showView('v-home'); if(lt) lt.innerHTML=IC.lock; lockOpening=false; },380); }); /* v69：実物どおり、錠が開く表示を挟んでからホームへ移る */
+function unlockPhone(){ if(lockOpening) return; lockOpening=true; if(typeof sfxPlay==='function') sfxPlay('unlock'); const lt=document.querySelector('.lock-top'); if(lt) lt.innerHTML=IC.unlock; const lv=$('#v-lock'); lv.classList.add('opening'); setTimeout(()=>{ showView('v-home'); const hv=$('#v-home'); hv.classList.add('fresh'); setTimeout(()=>hv.classList.remove('fresh'),950); lv.classList.remove('opening'); if(lt) lt.innerHTML=IC.lock; lockOpening=false; },380); } /* v69：実物どおり、錠が開く表示を挟んでからホームへ移る */
+$('#v-lock').addEventListener('click',unlockPhone);
+(function(){ const lv=$('#v-lock'); let sy=null; lv.addEventListener('touchstart',e=>{ sy=e.touches[0].clientY; },{passive:true}); lv.addEventListener('touchmove',e=>{ if(sy==null) return; if(sy-e.touches[0].clientY>64){ sy=null; unlockPhone(); } },{passive:true}); })(); /* v81：実物どおり上スワイプでも開ける（タップも従来どおり有効） */
 function renderFriends(){
  const F=$('#friend-list'); if(!F) return;
  const bday=S.calU===4;
@@ -1935,14 +2063,16 @@ const STORIES=[
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-hands.jpg',cap:'고치는 중',ago:'1시간',unlock:10},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-gallery.jpg',cap:'전시 D-day',ago:'방금',unlock:11}
 ];
-let storyState={list:[],i:0,timer:null};
-function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return; storyState.list=list; storyState.i=0; showView('v-story'); renderStory(); }
+let storyState={list:[],i:0,timer:null,remain:0,startedAt:0,paused:false}; let storyFrom='prof'; const STORY_DUR=5000; /* v81：実物どおり5秒自動送り＋既読管理（Tinder版のストーリー機構を移植） */
+function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return; storyFrom=igTab; storyState.list=list; storyState.i=0; showView('v-story'); renderStory(); }
 function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ closeStory(); return; }
  $('#story-img').src=s.img; $('#story-av').src=s.av; $('#story-user').textContent=s.user; $('#story-ago').textContent=s.ago; $('#story-cap').textContent=s.cap;
- $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"></i>').join('');
- if(st.timer) clearTimeout(st.timer); st.timer=null; /* v5：ストーリーは自動で進まない（タップ送り） */ }
+ $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"><b></b></i>').join('');
+ if(Array.isArray(S.storySeen)){ const key=storyKey(s); if(!S.storySeen.includes(key)){ S.storySeen.push(key); save(); } }
+ if(st.timer) clearTimeout(st.timer); st.timer=null; st.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused');
+ st.remain=STORY_DUR; st.startedAt=Date.now(); st.timer=setTimeout(()=>storyStep(1),STORY_DUR); /* v81：自動送り（タップ送り・長押し一時停止は従来どおり併存） */ }
 function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>=st.list.length){ closeStory(); return; } renderStory(); }
-function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); showView('v-ig'); }
+function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
 $('#story-close').addEventListener('click',closeStory);
 $('#story-next').addEventListener('click',()=>storyStep(1));
 $('#story-prev').addEventListener('click',()=>storyStep(-1));
@@ -2455,8 +2585,8 @@ const apClose=$('#ap-close'); if(apClose) apClose.addEventListener('click',()=>$
 const apWrap=$('#albumpick'); if(apWrap) apWrap.addEventListener('click',e=>{ if(e.target===apWrap) apWrap.classList.remove('on'); });
 
 /* ---------- P4: ストーリー 長押し一時停止＋下スワイプ閉じ ---------- */
-function storyPause(){ storyState.paused=true; const v=$('#v-story'); if(v) v.classList.add('paused'); }
-function storyResume(){ storyState.paused=false; const v=$('#v-story'); if(v) v.classList.remove('paused'); }
+function storyPause(){ const st=storyState; if(st.paused||!st.list.length) return; st.paused=true; const v=$('#v-story'); if(v) v.classList.add('paused'); if(st.timer){ clearTimeout(st.timer); st.timer=null; st.remain=Math.max(0,(st.remain||STORY_DUR)-(Date.now()-(st.startedAt||Date.now()))); } }
+function storyResume(){ const st=storyState; if(!st.paused) return; st.paused=false; const v=$('#v-story'); if(v) v.classList.remove('paused'); if(!st.list.length) return; const sv=$('#v-story'); if(!sv||!sv.classList.contains('on')) return; if(st.timer) clearTimeout(st.timer); st.startedAt=Date.now(); st.timer=setTimeout(()=>storyStep(1),Math.max(60,st.remain||STORY_DUR)); }
 (function(){
  const v=$('#v-story'); if(!v) return;
  let holdT=null, sy=0, suppress=false;
@@ -2515,12 +2645,12 @@ function renderIGSearch(){
  body.querySelectorAll('[data-acct]').forEach(b=>b.addEventListener('click',()=>{
    const a=IGS_ACCTS.find(x=>x.u===b.dataset.acct);
    if(!a||!a.who){ toast('このアカウントのプロフィールは、物語の中で表示されます'); return; }
-   igWho=a.who; igNTab='grid';
+   igTab='prof'; igWho=a.who; igNTab='grid';
    $('#igsw-j').classList.toggle('on',igWho==='j'); $('#igsw-n').classList.toggle('on',igWho==='n');
    showView('v-ig'); renderIG();
  }));
  body.querySelectorAll('[data-xpost]').forEach(b=>b.addEventListener('click',()=>{
-   igWho=b.dataset.owner; igNTab='grid';
+   igTab='prof'; igWho=b.dataset.owner; igNTab='grid';
    $('#igsw-j').classList.toggle('on',igWho==='j'); $('#igsw-n').classList.toggle('on',igWho==='n');
    showView('v-ig'); renderIG();
    const btn=$('#ig-body').querySelector('[data-post="'+b.dataset.xpost+'"]'); if(btn) btn.click();
@@ -2528,8 +2658,9 @@ function renderIGSearch(){
 }
 document.addEventListener('click',e=>{
  const b=e.target.closest?e.target.closest('[data-ignav]'):null; if(!b) return;
- if(b.dataset.ignav==='search'){ renderIGSearch(); showView('v-igsearch'); }
- else { showView('v-ig'); }
+ if(b.dataset.ignav==='search'){ igTab='search'; renderIGSearch(); showView('v-igsearch'); syncIgChrome(); }
+ else if(b.dataset.ignav==='prof'){ igWho='n'; igTab='prof'; renderIG(); showView('v-ig'); }
+ else { igTab='feed'; renderIGFeed(); showView('v-ig'); }
 });
 const igsBack=$('#igs-back'); if(igsBack) igsBack.addEventListener('click',()=>showView('v-ig'));
 const igsIn=$('#igs-in'); if(igsIn) igsIn.addEventListener('input',renderIGSearch);
@@ -2570,9 +2701,12 @@ function renderNews(){
  b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
  b.querySelectorAll('[data-nwcat]').forEach(btn=>btn.addEventListener('click',()=>{ nwCat=btn.dataset.nwcat; renderNews(); }));
 }
+const NW_CM_POOL=[['campus_cat','조소과 건물 불빛 진짜 새벽까지 켜져 있더라',12],['seoul_daily','날씨 정보 감사합니다 덕분에 일정 잡기 좋네요',4],['art_lover_21','젊은 작가들 전시 꼭 가보고 싶다',27],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['rainy_day','다들 우산 챙기세요',15],['gallery_goer','복원 얘기는 들을수록 대단하다 싶음',31]];
+function nwCmts(a){ let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*31+id.charCodeAt(i))>>>0; return [0,1,2].map(k=>NW_CM_POOL[(h+k*2)%NW_CM_POOL.length]); }
 function openNews(id){
  const a=NEWS.find(x=>x.id===id); if(!a) return;
- $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+' · 홍대 앞 소식</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
+ $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+' · 홍대 앞 소식</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwc"><div class="nwc-h">댓글 <span>'+nwCmts(a).length+'</span></div>'+nwCmts(a).map((c,i)=>'<div class="nwc-row"><div class="nwc-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'</div><button class="nwc-like" data-nwl="'+i+'" data-n="'+c[2]+'"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span>'+c[2]+'</span></button></div>').join('')+'</div>'+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
+ $('#newsread-body').querySelectorAll('[data-nwl]').forEach(b=>b.addEventListener('click',()=>{ const on=b.classList.toggle('on'); const sp=b.querySelector('span'); if(sp) sp.textContent=+b.dataset.n+(on?1:0); }));
  showView('v-newsread');
 }
 const nwBack=$('#newsread-back'); if(nwBack) nwBack.addEventListener('click',()=>{ renderNews(); showView('v-news'); });
