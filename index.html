@@ -967,7 +967,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v118：プロフィールの背景写真や、物語の後半でジェオンのプロフィール画像になる投稿写真、サイトのアイコンなど、残っていた写真も全て本人が生成した写真に差し替えました。これでゲーム内の写真は全て生成写真です。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v119：ビンナとユン・ソルアのアバター写真の割り当てが逆になっていたのを、本人の確認どおり入れ替えました（ビンナ＝黒髪に赤のインナーカラー、ユン・ソルア＝赤茶のウェーブ髪）。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1987,10 +1987,10 @@ function renderThreads(){
  L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,mainDate,kkUnreadTotal(),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
- if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna-gen.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna-gen.jpg',BITNA[si(BITNA)])));
+ if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna-gen2.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna-gen2.jpg',BITNA[si(BITNA)])));
  if(S.chap>=2) L.appendChild(threadRow(null,'彫塑科グループ',lastT(GROUP),tmon(si(GROUP)),0,()=>openSide('彫塑科グループ',null,GROUP[si(GROUP)]),'linear-gradient(135deg,#7fb2d9,#4a6fa5)'));
  if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk-gen.jpg',DOHYUK[si(DOHYUK)])));
- if(S.chap>=5) L.appendChild(threadRow('assets/av-sola-gen.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola-gen.jpg',SOLA[si(SOLA)])));
+ if(S.chap>=5) L.appendChild(threadRow('assets/av-sola-gen2.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola-gen2.jpg',SOLA[si(SOLA)])));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
  updKkBadge(); /* v104：一覧を描くたびにタブバッジも実未読へ同期する */
 }
@@ -2032,11 +2032,11 @@ const IG_IC={
 function igAgoMin(s){ if(!s||s==='たった今') return 0; let m; if(m=s.match(/(\d+)分前/)) return +m[1]; if(m=s.match(/(\d+)時間前/)) return +m[1]*60; if(m=s.match(/(\d+)日前/)) return +m[1]*1440; if(m=s.match(/(\d+)週間前/)) return +m[1]*10080; return 99999; }
 function igStoryCm(p){ return (p.cm||[]).concat(S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]); }
 function igAllCm(p){ const mine=(S.igMyCmts&&Array.isArray(S.igMyCmts[p.id]))?S.igMyCmts[p.id]:[]; return igStoryCm(p).concat(mine.map(t=>['nao_sculpt',t])); }
-function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar-gen.jpg'; if(name==='b1nna_') return 'assets/av-bitna-gen.jpg'; if(name==='s0l_a') return 'assets/av-sola-gen.jpg'; return ''; }
+function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar-gen.jpg'; if(name==='b1nna_') return 'assets/av-bitna-gen2.jpg'; if(name==='s0l_a') return 'assets/av-sola-gen2.jpg'; return ''; }
 function igBaseLikes(p){ return parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13; }
 function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
 function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' seen'; const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
-function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar-gen.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna-gen.jpg'],['s0l_a','assets/av-sola-gen.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
+function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar-gen.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna-gen2.jpg'],['s0l_a','assets/av-sola-gen2.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
 function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast(b.dataset.suser==='nao_sculpt'?'（ストーリーの追加は演出用です）':'このユーザーのストーリーは、物語の進行で追加されます'); })); }
 function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':'nao_sculpt'):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
 function igPostHTML(p,owner){
@@ -2310,9 +2310,9 @@ function renderFriends(){
  const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+(st==='RAMEN'?IC.bowl:esc(st||''))+'</span></span>'+(mus?'<span class="fr-mus">'+IC.note+' '+esc(mus)+'</span>':'')+'</button>';
  const jm=(profStage().mus.match(/「([^」]+)」/)||[])[1]||'';
  h+=row(cav(),'パク・ジェオン',profStage().st,jm).replace('ジェオン</span>','ジェオン</span>'+profDotHTML());
- if(S.chap>=1) h+=row('assets/av-bitna-gen.jpg','ビンナ','');
+ if(S.chap>=1) h+=row('assets/av-bitna-gen2.jpg','ビンナ','');
  if(S.chap>=4) h+=row('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク','RAMEN');
- if(S.chap>=5) h+=row('assets/av-sola-gen.jpg','ユン・ソルア','');
+ if(S.chap>=5) h+=row('assets/av-sola-gen2.jpg','ユン・ソルア','');
  F.innerHTML=h;
  const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>openFProf('なお'));
  F.querySelectorAll('.fr-row').forEach(b=>b.addEventListener('click',()=>{
@@ -2344,9 +2344,9 @@ $('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出�
 /* 友達プロフィール：実物カカオのプロフィール画面（背景・アバター・名前・状態・下部ボタン）を汎用化。
    状態メッセージと解放条件は友達一覧の既存データと一致させ、新しい人物情報は作らない */
 const FPROF={
- 'ビンナ':{av:'assets/av-bitna-gen.jpg',bg:'linear-gradient(160deg,#7d6a99,#4c3d63)',st:'',log:()=>BITNA[Math.min(Math.max(S.chap,0),BITNA.length-1)]},
+ 'ビンナ':{av:'assets/av-bitna-gen2.jpg',bg:'linear-gradient(160deg,#7d6a99,#4c3d63)',st:'',log:()=>BITNA[Math.min(Math.max(S.chap,0),BITNA.length-1)]},
  'ヤン・ドヒョク':{av:'assets/av-dohyuk-gen.jpg',bg:'linear-gradient(160deg,#a8815c,#755334)',st:'RAMEN',log:()=>DOHYUK[Math.min(Math.max(S.chap,0),DOHYUK.length-1)]},
- 'ユン・ソルア':{av:'assets/av-sola-gen.jpg',bg:'linear-gradient(160deg,#6d87a0,#42586e)',st:'',log:()=>SOLA[Math.min(Math.max(S.chap,0),SOLA.length-1)]}
+ 'ユン・ソルア':{av:'assets/av-sola-gen2.jpg',bg:'linear-gradient(160deg,#6d87a0,#42586e)',st:'',log:()=>SOLA[Math.min(Math.max(S.chap,0),SOLA.length-1)]}
 };
 const FP_IC={chat:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg>',call:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="currentColor" stroke="none"/></svg>',gift:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg>',gear:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg>'};
 let fpName=null;
@@ -3121,8 +3121,8 @@ function galSwipe(d){ galShow(galIdx+d); }
 const IGS_ACCTS=[
  {u:'park_jaeon.sculpt',d:'パク・ジェオン',img:'assets/av-jaeon-gen.jpg',who:'j'},
  {u:'nao_sculpt',d:'なお',img:'assets/nao-avatar-gen.jpg',who:'n'},
- {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna-gen.jpg',who:null,min:1},
- {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola-gen.jpg',who:null,min:5}
+ {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna-gen2.jpg',who:null,min:1},
+ {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola-gen2.jpg',who:null,min:5}
 ];
 function igPostVis(p){ return S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); }
 function renderIGSearch(){
@@ -3318,7 +3318,7 @@ async function sendSticker(id){
 })();
 /* IG共有シート：実物どおり送信先を選んで送る（送信済み表示つき）。相手は作中に登場するアカウントのみ・解放条件に連動 */
 let shrPost=null; const shrSent=new Set();
-function shrTargets(){ const list=[['park_jaeon.sculpt',cav()]]; if(S.chap>=1) list.push(['b1nna_','assets/av-bitna-gen.jpg']); if(S.chap>=5) list.push(['s0l_a','assets/av-sola-gen.jpg']); return list; }
+function shrTargets(){ const list=[['park_jaeon.sculpt',cav()]]; if(S.chap>=1) list.push(['b1nna_','assets/av-bitna-gen2.jpg']); if(S.chap>=5) list.push(['s0l_a','assets/av-sola-gen2.jpg']); return list; }
 function openShareSheet(p){ shrPost=p||null; const sh=$('#shr-sheet'); if(!sh) return; const t=$('#shr-title'); if(t) t.textContent=p?'投稿を送信':'ストーリーを送信'; renderShrList(); sh.classList.add('on'); }
 function closeShareSheet(){ const sh=$('#shr-sheet'); if(sh) sh.classList.remove('on'); }
 function renderShrList(){ const key=shrPost?shrPost.id:'story'; const w=$('#shr-list'); if(!w) return;
