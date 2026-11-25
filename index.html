@@ -1029,12 +1029,56 @@ img{-webkit-user-drag:none;user-select:none}
  .cal-grid,.cal-pager,.endcard.fincard,.fin-credits .fc-l{animation:none !important}
  #v-call[data-phase="incoming"] .cb.accept{animation:none !important}
 }
+
+/* v127：カカオ # タブ／쇼핑 タブの実物化 */
+.ksh{padding:14px 16px 34px;background:#fff}
+.ksh-search{display:flex;align-items:center;gap:8px;background:#f1f1f4;border-radius:10px;padding:9px 12px;color:#8e8e93}
+.ksh-search input{flex:1;border:0;background:none;font-size:14.5px;color:#191919;outline:none;font-family:inherit}
+.ksh-sec{font-size:15px;font-weight:800;color:#191919;margin:22px 0 8px}
+.ksh-tags{display:flex;flex-direction:column}
+.ksh-tag{display:flex;align-items:center;gap:12px;padding:9px 2px;background:none;border:0;border-bottom:1px solid #f2f2f4;font-size:14.5px;font-weight:600;color:#191919;text-align:left;font-family:inherit}
+.ksh-tag .no{font-size:14px;font-weight:800;width:16px;color:#191919}
+.ksh-tag.on{color:#d99a06}
+.ksh-tag.on .no{color:#d99a06}
+.ksh-card{display:flex;gap:12px;width:100%;padding:11px 0;background:none;border:0;border-bottom:1px solid #f2f2f4;text-align:left;font-family:inherit;align-items:center}
+.ksh-card .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.ksh-card .cat{font-size:11px;font-weight:700;color:#03c75a}
+.ksh-card .ti{font-size:14.5px;font-weight:600;color:#191919;line-height:1.4}
+.ksh-card .meta{font-size:11.5px;color:#8e8e93}
+.ksh-card img{width:64px;height:64px;border-radius:10px;object-fit:cover;flex:none;background:#eee}
+.ksh-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.ksh-photos button{padding:0;border:0;aspect-ratio:1;overflow:hidden;background:#eee}
+.ksh-photos img{width:100%;height:100%;object-fit:cover;display:block}
+.ksp{padding:12px 14px 34px;background:#f7f7f8;min-height:100%}
+.ksp-cart{display:flex;align-items:center;gap:8px;background:#191919;color:#fff;border-radius:12px;padding:12px 14px;font-size:13.5px;font-weight:600}
+.ksp-cart b{color:#fee500}
+.ksp-cart .tot{margin-left:auto;font-weight:800}
+.ksp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ksp-card{background:#fff;border-radius:14px;overflow:hidden;text-align:left;padding:0;border:0;box-shadow:0 1px 4px rgba(0,0,0,.06);font-family:inherit}
+.ksp-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#eee}
+.ksp-info{padding:9px 11px 11px}
+.ksp-name{font-size:13.5px;font-weight:600;color:#191919;line-height:1.35}
+.ksp-price{font-size:14.5px;font-weight:800;color:#191919;margin-top:4px}
+.ksp-add{margin-top:8px;width:100%;padding:7px 0;border-radius:8px;border:1px solid #e3e3e6;background:#fff;font-size:12.5px;font-weight:700;color:#191919;font-family:inherit}
+.ksp-add.on{background:#fee500;border-color:#fee500}
+#ksp-sheet{position:absolute;inset:0;z-index:90;display:none}
+#ksp-sheet.on{display:block}
+.ksp-bg{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.ksp-panel{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:18px 18px 0 0;padding:12px 18px calc(20px + var(--sab,0px));animation:kspUp .3s cubic-bezier(.32,.72,.24,1)}
+@keyframes kspUp{from{transform:translateY(56px);opacity:.3}to{transform:translateY(0);opacity:1}}
+.ksp-panel img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;background:#eee}
+.ksp-pname{font-size:16.5px;font-weight:800;color:#191919;margin-top:13px}
+.ksp-pdesc{font-size:13px;color:#666;line-height:1.55;margin-top:5px}
+.ksp-prow{display:flex;align-items:center;margin-top:13px}
+.ksp-pprice{font-size:18px;font-weight:800;color:#191919}
+.ksp-pbtn{margin-left:auto;padding:11px 20px;border-radius:10px;border:0;background:#fee500;font-size:14px;font-weight:800;color:#191919;font-family:inherit}
+.ksp-pbtn.on{background:#191919;color:#fee500}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v126：通知の全件監査を行いました。本編・カレンダー・天気データのどこにも実物が無い通知（大学ポータルの締切告知、審査日程の公開告知、宅配便の到着予告）を削除し、天気の通知はゲーム内の天気データと食い違っていたため、実データに一致する内容へ差し替えました。これで、届く通知はすべてゲーム内の実物（実際のメッセージ・予定・天気）と対応します。本編・台詞・数値・解放条件・写真は変えていません。</p>
+<p class="src">v127：カカオトークの「#」タブと「쇼핑」タブを実物化しました。これまでは「演出用です」の表示だけでしたが、「#」ではトレンドタグと、その時期に読めるニュース・写真へ実際に移動でき、「쇼핑」では 선물하기 風の商品一覧とカート（保存されます）が使えます。本編・台詞・数値・解放条件・写真は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1111,7 +1155,10 @@ img{-webkit-user-drag:none;user-select:none}
 <div id="thread-list"></div>
 <div id="friend-list" style="display:none"></div>
 <div id="more-body" style="display:none"></div>
+<div id="sharp-body" style="display:none"></div>
+<div id="shop-body" style="display:none"></div>
 </div>
+<div id="ksp-sheet"><div class="ksp-bg" id="ksp-bg"></div><div class="ksp-panel" id="ksp-panel"></div></div>
 <div class="kk-tabbar">
 <button data-tab="friends"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></span>친구</button>
 <button data-tab="chats" class="on"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span>채팅<span class="kbadge" id="kk-badge" style="display:none"></span></button>
@@ -1708,7 +1755,7 @@ S.free=S.free.filter(m=>!!m&&typeof m==='object');
 S.free.forEach(m=>{ if(m.w==='jimg'){ if(typeof m.img!=='string') m.img=''; if(typeof m.cap!=='string') m.cap=m.cap==null?'':String(m.cap); } else if(typeof m.t!=='string') m.t=m.t==null?'':String(m.t); });
 S.free.forEach(m=>{ if(m.q){ if(typeof m.q!=='object'||typeof m.q.t!=='string') delete m.q; else m.q={n:typeof m.q.n==='string'?m.q.n:'',t:m.q.t}; } }); /* v87: 引用データの正規化（壊れた q は落とす） */
 if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def';
-if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; if(!['day','month','year','all'].includes(S.galMode)) S.galMode='day'; /* v91：ギャラリー表示モードの正規化（profSeen は renderFriends で遅延初期化） */ /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
+if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; if(!['day','month','year','all'].includes(S.galMode)) S.galMode='day'; if(!Array.isArray(S.kkCart)) S.kkCart=[]; else S.kkCart=S.kkCart.filter(x=>typeof x==='string'); /* v127：カカオショッピングのカート正規化 */ /* v91：ギャラリー表示モードの正規化（profSeen は renderFriends で遅延初期化） */ /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
 const __fin=(v,d)=>(typeof v==='number'&&isFinite(v))?v:d;
 S.kai=Math.max(0,Math.min(100,__fin(S.kai,0)));
 S.kyo=Math.max(0,Math.min(100,__fin(S.kyo,62)));
@@ -2394,10 +2441,10 @@ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener
  document.querySelectorAll('.kk-tabbar [data-tab]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
  const T=$('#kk-title');
  const ic2=$('#kk-ico2');
- if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#more-body').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M3.8 19.5c.7-3.2 3.2-4.8 6.2-4.8 1.4 0 2.7.3 3.8 1M17.5 14.5v6M14.5 17.5h6"/></svg>'; }
- else if(t==='chats'){ $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.innerHTML=IC.chat; }
- else if(t==='more'){ renderMore(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#more-body').style.display=''; T.textContent='더보기'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg>'; }
- else{ toast('（このタブは2021年仕様の演出用です）'); }
+ if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#more-body').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M3.8 19.5c.7-3.2 3.2-4.8 6.2-4.8 1.4 0 2.7.3 3.8 1M17.5 14.5v6M14.5 17.5h6"/></svg>'; }
+ else if(t==='chats'){ $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.innerHTML=IC.chat; }
+ else if(t==='more'){ renderMore(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display='none'; $('#more-body').style.display=''; T.textContent='더보기'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg>'; }
+ else if(t==='sharp'){ renderSharp(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#shop-body').style.display='none'; $('#sharp-body').style.display=''; T.textContent='#'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4 7 20M17 4l-2 16M4.5 9h16M3.5 15h16"/></svg>'; } else if(t==='shop'){ renderShop(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display=''; T.textContent='쇼핑'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 3.5h2.2l2.3 11h10.3l2-8H6"/></svg>'; }
 }));
 $('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
 /* v66：＋パネルは実物の1ページ目の構成（앨범／카메라／선물하기／송금／음성메시지／연락처／파일／일정）に統一。項目ごとに実物らしいフィードバックを返す（物語の進行には影響しない） */
@@ -3330,6 +3377,59 @@ updNewsWidget();
 /* ================= v89 : 더보기 / CHAT BACKGROUND / STICKERS / SHARE SHEET / KEYPAD / JIGGLE ================= */
 /* カカオ「더보기」タブ：実物（2021）の構成＝自分のプロフィールカード＋サービスグリッド。
    送金・決済系は物語に合わせて外し、既存の画面へ実際に遷移するサービスだけを置く */
+
+/* ================= v127 : KAKAO # / SHOPPING TABS =================
+   これまで # と 쇼핑 は「演出用です」のトーストだけだった。2021年当時のカカオの作りに合わせ、
+   # はトレンドタグ＋解放済みニュース／写真への実導線、쇼핑 は 선물하기 風の商品グリッド＋
+   カート（S.kkCart に保存）として実物化する。物語・台詞・数値・解放条件は不変 */
+const KSH_TAGS=[['졸업전시','졸업전시'],['홍익대 조소과','조소과'],['나비','나비'],['작품 복원','복원'],['여름 기획전','기획전'],['관람차','관람차'],['장마','장마'],['여름 MT','MT']];
+let kshKey='';
+function renderSharp(){
+ const b=$('#sharp-body'); if(!b) return;
+ const vis=NEWS.filter(newsVis);
+ const list=(kshKey?vis.filter(a=>(a.title+' '+a.sub+' '+a.cat).indexOf(kshKey)>=0):vis.slice().sort((x,y)=>y.hot-x.hot)).slice(0,6);
+ const igs=(typeof IG_J!=='undefined'?IG_J.concat(IG_N):[]).filter(p=>S.calU>=p.unlock).slice(0,6);
+ b.innerHTML='<div class="ksh"><div class="ksh-search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg><input id="ksh-q" type="text" placeholder="#검색（タグ・ニュース検索）" autocomplete="off"></div>'
+ +'<div class="ksh-sec">실시간 트렌드</div><div class="ksh-tags">'+KSH_TAGS.map((t,i)=>'<button class="ksh-tag'+(kshKey===t[1]?' on':'')+'" data-ksh="'+esc(t[1])+'"><span class="no">'+(i+1)+'</span>'+esc(t[0])+'</button>').join('')+'</div>'
+ +'<div class="ksh-sec">지금 많이 보는 뉴스</div>'+(list.length?list.map(a=>'<button class="ksh-card" data-kshnw="'+a.id+'"><span class="tx"><span class="cat">'+esc(a.cat)+'</span><span class="ti">'+esc(a.title)+'</span><span class="meta">'+esc(a.press)+' · '+(a.hot*137+S.calU*31)+'회</span></span>'+(a.th?'<img loading="lazy" decoding="async" src="'+a.th+'" alt="">':'')+'</button>').join(''):'<p class="locknote">아직 이 태그의 뉴스가 없습니다（このタグのニュースはまだありません）</p>')
+ +(igs.length?'<div class="ksh-sec">인기 사진</div><div class="ksh-photos">'+igs.map(p=>'<button data-kshig="1" aria-label="Instagramを開く"><img loading="lazy" decoding="async" src="'+p.img+'" alt=""></button>').join('')+'</div>':'')
+ +'</div>';
+ const q=b.querySelector('#ksh-q');
+ if(q){ q.value=kshKey; q.addEventListener('input',()=>{ const pos=q.selectionStart; kshKey=q.value.trim(); renderSharp(); const nq=$('#ksh-q'); if(nq){ nq.focus(); try{ nq.setSelectionRange(pos,pos); }catch(e){} } }); }
+ b.querySelectorAll('[data-ksh]').forEach(x=>x.addEventListener('click',()=>{ kshKey=(kshKey===x.dataset.ksh)?'':x.dataset.ksh; renderSharp(); }));
+ b.querySelectorAll('[data-kshnw]').forEach(x=>x.addEventListener('click',()=>openNews(x.dataset.kshnw)));
+ b.querySelectorAll('[data-kshig]').forEach(x=>x.addEventListener('click',()=>{ renderIG(); showView('v-ig'); }));
+}
+const KKSHOP=[
+ {id:'catalog',name:'홍익대 조소과 졸업전시 도록',desc:'졸업전시 공식 도록. 참여 작가 전원의 작품과 평론을 수록.',price:18000,img:'assets/nao-invitation.jpg'},
+ {id:'coffee',name:'아메리카노 1잔 쿠폰',desc:'작업의 합間に. 캠퍼스 앞 카페에서 쓸 수 있는 음료 쿠폰.',price:4500,img:'assets/nao-coffee.jpg'},
+ {id:'lime',name:'라임 에이드 쿠폰',desc:'신맛이 또렷한 라임 에이드. 여름 작업실의 필수품.',price:6000,img:'assets/ig-lime.jpg'},
+ {id:'butterfly',name:'나비 표본 미니 액자',desc:'실제 표본을 본뜬 미니 액자. 책상 위에 두는 작은 전시.',price:32000,img:'assets/ig-butterfly-main.jpg'},
+ {id:'chisel',name:'조각도 6종 세트',desc:'입문용 조각도 세트. 손잡이는 너도밤나무, 날은 고탄소강.',price:24500,img:'assets/ig-jaeon-chisel.jpg'},
+ {id:'pottery',name:'물레 체험 1회권',desc:'도자기 물레 체험 이용권. 구워서 가져갈 수 있습니다.',price:28000,img:'assets/ig-jaeon-pottery.jpg'}
+];
+const won=n=>'₩'+n.toLocaleString('ko-KR');
+function kkCartTotal(){ return (Array.isArray(S.kkCart)?S.kkCart:[]).reduce((s,id)=>{ const p=KKSHOP.find(x=>x.id===id); return s+(p?p.price:0); },0); }
+function kkCartToggle(id){ if(!Array.isArray(S.kkCart)) S.kkCart=[]; const i=S.kkCart.indexOf(id); if(i>=0) S.kkCart.splice(i,1); else S.kkCart.push(id); save(); renderShop(); }
+function renderShop(){
+ const b=$('#shop-body'); if(!b) return;
+ const cart=Array.isArray(S.kkCart)?S.kkCart:[];
+ b.innerHTML='<div class="ksp"><div class="ksp-cart"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#fee500" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 3.5h2.2l2.3 11h10.3l2-8H6"/></svg>장바구니 <b>'+cart.length+'개</b><span class="tot">'+won(kkCartTotal())+'</span></div>'
+ +'<div class="ksp-grid">'+KKSHOP.map(p=>{ const on=cart.includes(p.id); return '<div class="ksp-card" data-ksp="'+p.id+'"><img loading="lazy" decoding="async" src="'+p.img+'" alt=""><div class="ksp-info"><div class="ksp-name">'+esc(p.name)+'</div><div class="ksp-price">'+won(p.price)+'</div><button class="ksp-add'+(on?' on':'')+'" data-kspadd="'+p.id+'">'+(on?'담김 ✓ 빼기':'장바구니 담기')+'</button></div></div>'; }).join('')+'</div>'
+ +'<p class="locknote">선물하기 상품은 이야기 속 세계관의 소품입니다（決済は行われません）</p></div>';
+ b.querySelectorAll('[data-kspadd]').forEach(x=>x.addEventListener('click',e=>{ e.stopPropagation(); kkCartToggle(x.dataset.kspadd); if(typeof vib==='function') vib(6); }));
+ b.querySelectorAll('[data-ksp]').forEach(x=>x.addEventListener('click',()=>openKspSheet(x.dataset.ksp)));
+}
+function openKspSheet(id){
+ const p=KKSHOP.find(x=>x.id===id); if(!p) return;
+ const sh=$('#ksp-sheet'), pn=$('#ksp-panel'); if(!sh||!pn) return;
+ const on=Array.isArray(S.kkCart)&&S.kkCart.includes(p.id);
+ pn.innerHTML='<img src="'+p.img+'" alt=""><div class="ksp-pname">'+esc(p.name)+'</div><div class="ksp-pdesc">'+esc(p.desc)+'</div><div class="ksp-prow"><span class="ksp-pprice">'+won(p.price)+'</span><button class="ksp-pbtn'+(on?' on':'')+'" id="ksp-pbtn">'+(on?'빼기':'장바구니 담기')+'</button></div>';
+ sh.classList.add('on');
+ pn.querySelector('#ksp-pbtn').addEventListener('click',()=>{ kkCartToggle(p.id); openKspSheet(p.id); });
+}
+(function(){ const bg=$('#ksp-bg'); if(bg) bg.addEventListener('click',()=>{ const sh=$('#ksp-sheet'); if(sh) sh.classList.remove('on'); }); })();
+
 function renderMore(){
  const b=$('#more-body'); if(!b) return;
  const bday=S.calU===4;
@@ -3358,7 +3458,7 @@ function renderMore(){
  b.querySelectorAll('[data-mi]').forEach(btn=>btn.addEventListener('click',()=>{ const it=items[+btn.dataset.mi]; if(it) it[2](); }));
 }
 /* カカオをアプリから開き直した時は、実物の初期表示どおり 채팅 タブへ戻す（タイトルと中身の不一致防止） */
-function kkTabReset(){ const t=$('#kk-title'); if(t) t.textContent='채팅'; const tl=$('#thread-list'); if(tl) tl.style.display=''; const fl=$('#friend-list'); if(fl) fl.style.display='none'; const mb=$('#more-body'); if(mb) mb.style.display='none'; document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab==='chats')); }
+function kkTabReset(){ const t=$('#kk-title'); if(t) t.textContent='채팅'; const tl=$('#thread-list'); if(tl) tl.style.display=''; const fl=$('#friend-list'); if(fl) fl.style.display='none'; const mb=$('#more-body'); if(mb) mb.style.display='none'; const shb=$('#sharp-body'); if(shb) shb.style.display='none'; const spb=$('#shop-body'); if(spb) spb.style.display='none'; const kss=$('#ksp-sheet'); if(kss) kss.classList.remove('on'); document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab==='chats')); }
 /* トーク背景：実物カカオの 채팅방 배경。--kakao-bg を差し替えるので本体・サイドトーク・ヘッダーに一括で効く */
 const CHATBGS={def:['기본','#b2c7d9'],sky:['하늘','#a9cdec'],beige:['베이지','#ead9c2'],pink:['핑크','#f2cfd6'],mint:['민트','#c9e6da'],gray:['그레이','#d8d8dc']};
 function chatBgKey(){ return (typeof S.chatBg==='string'&&CHATBGS[S.chatBg])?S.chatBg:'def'; }
