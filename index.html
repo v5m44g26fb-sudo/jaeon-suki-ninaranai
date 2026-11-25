@@ -224,6 +224,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ig-head{padding:max(50px,calc(var(--sat) + 6px)) 13px 7px;display:flex;align-items:center;background:#fff;border-bottom:1px solid #efefef}
 .ig-head .back{font-size:23px;padding:7px 11px;color:#262626}
 .ig-logo{font-size:21px;flex:1;font-family:"Snell Roundhand","Segoe Script",cursive;font-weight:600;color:#262626;padding-left:2px}
+.ig-logo.uname{font-family:inherit;font-size:19px;font-weight:700;letter-spacing:.1px} /* v82：プロフィールヘッダーのユーザー名表示 */
 .ig-hicons{display:flex;gap:19px;align-items:center}
 .ig-hicons svg{display:block}
 .ig-badge-dot{position:relative}
@@ -243,9 +244,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ig-folbtn{display:flex;gap:6px;padding:0 16px 11px}
 .ig-folbtn span{flex:1;text-align:center;background:#0095f6;color:#fff;font-size:13.5px;font-weight:600;border-radius:6px;padding:6px 0}
 .ig-folbtn span.ghost{background:#fff;border:1px solid #dbdbdb;color:#262626}
-.ig-switch{display:flex;border-top:1px solid var(--line)}
-.ig-switch button{flex:1;padding:11px 8px;font-size:16px;color:#8e8e8e;border-bottom:1.5px solid transparent}
-.ig-switch button.on{color:#111;border-bottom-color:#111}
+/* v82：プロフィール上部のアカウント切替タブバーは実物に無いため廃止（切替はフィード／検索からの遷移に一本化） */
 .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
 .ig-grid button{padding:0;aspect-ratio:1;overflow:hidden;background:#eee;position:relative}
 .ig-grid img{width:100%;height:100%;object-fit:cover;display:block}
@@ -776,7 +775,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v81：Instagramを実物化（ホーム＝フィード、コメントシートで自分の投稿も可能、ストーリーは自動送り＋既読リング）、ニュースにコメント欄を追加し、画面遷移・ロック解除・ホームバーなどUI全体も実物に寄せました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v82：Instagramのプロフィール画面を実物の構成に整理しました（上部にあったストーリー列とアカウント切替タブを外し、ヘッダーはユーザー名表示に）。ストーリーはフィード側で従来どおり見られます。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -898,7 +897,6 @@ img{-webkit-user-drag:none}
 <!-- IG (2021) -->
 <div class="view" id="v-ig">
 <div class="ig-head"><button class="back" data-home="1">‹</button><span class="ig-logo">Instagram</span><div class="ig-hicons"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span class="ig-badge-dot"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></span></div></div>
-<div class="ig-switch"><button id="igsw-j" class="on"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg></button><button id="igsw-n"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></button></div>
 <div class="abody" id="ig-body"></div>
 <div class="ig-nav"><button data-ignav="home" class="on" aria-label="ホーム"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/></svg></button><button data-ignav="search" aria-label="検索"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></button><button data-ignav="prof" aria-label="プロフィール"><img class="ig-nav-av" src="assets/nao-avatar.jpg" alt=""></button></div>
 </div>
@@ -1747,7 +1745,7 @@ function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
 function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' seen'; const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
 function igStoriesRowHTML(){ const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>'<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>').join('')+'</div>'; }
 function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast('このユーザーのストーリーは、物語の進行で追加されます'); })); }
-function syncIgChrome(){ const sw=document.querySelector('.ig-switch'); if(sw) sw.style.display=(igTab==='feed')?'none':'flex'; document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const j=$('#igsw-j'),n=$('#igsw-n'); if(j) j.classList.toggle('on',igWho==='j'); if(n) n.classList.toggle('on',igWho==='n'); }
+function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':'nao_sculpt'):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
 function igPostHTML(p,owner){
  const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar.jpg',name:'nao_sculpt'};
  const allCm=igAllCm(p);
@@ -1817,7 +1815,6 @@ function renderIG(){
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
- const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']];
  const IC={
   heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
   heartBig:'<svg width="92" height="92" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
@@ -1825,7 +1822,7 @@ function renderIG(){
   shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>',
   grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
- let h=igStoriesRowHTML();
+ let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
  h+= isJ ? '<div class="ig-folbtn"><span class="ghost" data-gf="follow">フォロー中</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
@@ -1837,7 +1834,6 @@ function renderIG(){
  }
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
- wireStoriesRow(body);
  body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':k==='follow'?'（フォローは演出用です）':'（プロフィールの編集は演出用です）'); })); /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
@@ -1850,8 +1846,7 @@ function renderIG(){
  body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{ const p=posts.find(x=>x.id===b.dataset.post); openDetail(p,igWho); }));
  body.querySelectorAll('[data-spost]').forEach(b=>b.addEventListener('click',()=>{ const o=b.dataset.owner; const p=(o==='j'?IG_J:IG_N).find(x=>x.id===b.dataset.spost); openDetail(p,o); }));
 }
-$('#igsw-j').addEventListener('click',()=>{igWho='j'; igTab='prof'; igNTab='grid'; $('#igsw-j').classList.add('on'); $('#igsw-n').classList.remove('on'); renderIG();});
-$('#igsw-n').addEventListener('click',()=>{igWho='n'; igTab='prof'; igNTab='grid'; $('#igsw-n').classList.add('on'); $('#igsw-j').classList.remove('on'); renderIG();});
+/* v82：アカウント切替タブバー廃止に伴い、その配線も削除（プロフィール遷移はフィードの投稿ヘッダー／検索／下部ナビに一本化） */
 
 /* calendar */
 function renderCal(){
@@ -2646,12 +2641,10 @@ function renderIGSearch(){
    const a=IGS_ACCTS.find(x=>x.u===b.dataset.acct);
    if(!a||!a.who){ toast('このアカウントのプロフィールは、物語の中で表示されます'); return; }
    igTab='prof'; igWho=a.who; igNTab='grid';
-   $('#igsw-j').classList.toggle('on',igWho==='j'); $('#igsw-n').classList.toggle('on',igWho==='n');
    showView('v-ig'); renderIG();
  }));
  body.querySelectorAll('[data-xpost]').forEach(b=>b.addEventListener('click',()=>{
    igTab='prof'; igWho=b.dataset.owner; igNTab='grid';
-   $('#igsw-j').classList.toggle('on',igWho==='j'); $('#igsw-n').classList.toggle('on',igWho==='n');
    showView('v-ig'); renderIG();
    const btn=$('#ig-body').querySelector('[data-post="'+b.dataset.xpost+'"]'); if(btn) btn.click();
  }));
