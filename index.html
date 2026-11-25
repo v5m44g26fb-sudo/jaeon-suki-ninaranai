@@ -963,7 +963,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v95：リアル化の全解禁ラウンド（3）です。自分のプロフィール（nao_sculpt）が実際に編集できるようになりました。「プロフィールを編集」から名前と自己紹介を変更すると保存され、プロフィール画面にそのまま反映されます（ユーザーネームはコメント等の名義に使うため固定です）。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v96：リアル化の全解禁ラウンド（4）です。解剖メモがiOSメモ風に一覧→詳細の階層になり、カレンダーは月送り（ボタンと横スワイプ）に対応しました。ロック画面の通知はデザインそのままに、中身が物語の進行（直近の出来事・最新の解剖メモ・直近の予定）に連動します。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -976,7 +976,7 @@ img{-webkit-user-drag:none}
 <div class="lock-top"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></svg></div>
 <div class="lock-clock"><div class="lock-date" id="lock-date">3月12日 金曜日</div><div class="lock-time" id="lock-time">9:41</div></div>
 <div class="lock-title"><div class="lt-over">알고 있어도</div><div class="lt-main">わかっていても</div><div class="lt-rule"></div></div>
-<div class="lock-notifs">
+<div class="lock-notifs" id="lock-notifs">
 <div class="lnotif"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>지금</span></div><div class="ln-t"><b>박재언</b>： ……蝶、見に行く？</div></div></div>
 <div class="lnotif stack"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
 <div class="lnotif"><span class="ln-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>解剖メモ</b><span>1시간 전</span></div><div class="ln-t">新しい解剖メモが解放されました</div></div></div>
@@ -1152,7 +1152,7 @@ img{-webkit-user-drag:none}
 
 <!-- CALENDAR -->
 <div class="view" id="v-cal">
-<div class="ahead"><button class="back" data-home="1">‹</button><h2>カレンダー</h2><span class="sub">2021年 一学期（3月〜7月）</span></div>
+<div class="ahead"><button class="back" data-home="1">‹</button><h2>カレンダー</h2><span class="sub">2021年 3月〜10月</span></div>
 <div class="abody" id="cal-body"></div>
 </div>
 
@@ -1161,6 +1161,12 @@ img{-webkit-user-drag:none}
 <div class="ahead"><button class="back" data-home="1">‹</button><h2>解剖メモ</h2><span class="sub">パク・ジェオン観察記録</span></div>
 <div class="nt-search"><input id="nt-q" type="text" placeholder="メモを検索" autocomplete="off"></div>
 <div class="abody" id="notes-body"></div>
+</div>
+
+<!-- NOTE DETAIL (v96) -->
+<div class="view" id="v-note">
+<div class="ahead"><button class="back" id="note-back">‹</button><h2>解剖メモ</h2><span class="sub">詳細</span></div>
+<div class="abody" id="note-body" style="background:#fff"></div>
 </div>
 
 <!-- CALL LOG -->
@@ -1639,7 +1645,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-igedit','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-igedit','v-news','v-newsread','v-cal','v-notes','v-note','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -2156,10 +2162,12 @@ function renderIG(){
 /* calendar */
 function renderCal(){
  const b=$('#cal-body'); let h='';
+ if(typeof calPage!=='number'||calPage<0||calPage>=CAL.length){ calPage=(typeof curCalIdx==='function')?curCalIdx():0; } /* v96：初回は作中日付（KDATE）の月を開く */
  const WD7=['日','月','火','水','木','金','土'];
  CAL.forEach((mo,mi)=>{
+   if(mi!==calPage) return; /* v96：月ページング（表示中の月だけ描画。ドット→予定スクロールは同月内で従来どおり） */
    const lockedE=mo.e.map(e=>e.u>S.calU&&!(e.cond&&e.cond())); /* v65：cond を持つエントリは u ゲートと OR で解放（後日談連動）。cond なしのエントリは従来どおり */
-   h+='<div class="cal-m">'+mo.m+'</div>';
+   h+='<div class="cal-pager"><button id="cal-prev" aria-label="前の月"'+(mi<=0?' disabled':'')+'>‹</button><span class="cal-pg-t">2021年 '+mo.m+'</span><button id="cal-next" aria-label="次の月"'+(mi>=CAL.length-1?' disabled':'')+'>›</button></div>';
    /* v68：iOSカレンダー風の月グリッド。曜日配列・月末日数は Date(2021,...) から生成し実カレンダーどおりにする。
       ドットは「解放済み」かつ「day（確定日）を持つ」エントリの日だけに置く。未解放エントリの日にはドットを置かない（日付の漏れ防止、v36/v65の伏せ原則） */
    const mnum=parseInt(mo.m,10);
@@ -2188,6 +2196,9 @@ function renderCal(){
    t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash');
    setTimeout(()=>t.classList.remove('flash'),1300);
  }));
+ const pv=$('#cal-prev'), nx2=$('#cal-next'); /* v96：月送りボタン */
+ if(pv) pv.addEventListener('click',()=>{ if(calPage>0){ calPage--; renderCal(); } });
+ if(nx2) nx2.addEventListener('click',()=>{ if(calPage<CAL.length-1){ calPage++; renderCal(); } });
 }
 /* notes */
 function renderNotes(){
@@ -2196,11 +2207,12 @@ function renderNotes(){
  MEMOS.forEach(m=>{ if(m.unlock&&m.unlock()&&!S.memos.includes(m.id)){ unlockMemo(m.id); v59sync=true; } });
  if(v59sync) save();
  const b=$('#notes-body'); const ntq=(typeof ntQuery==='string'?ntQuery:'').trim().toLowerCase(); const ntHit=m=>{ if(!ntq) return true; if(!S.memos.includes(m.id)) return false; return m.title.toLowerCase().includes(ntq)||m.body.toLowerCase().includes(ntq); };
- b.innerHTML=MEMOS.map(m=>{
+ b.innerHTML='<div class="nt-list">'+MEMOS.map(m=>{
    if(!ntHit(m)) return '';
    const un=S.memos.includes(m.id);
-   return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:IC.lock+' 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3>'+(un&&MEMO_DATES[m.id]?'<div class="memo-date">'+MEMO_DATES[m.id]+'</div>':'')+'<p>'+(un?esc(m.body):'物語のキー場面を読み進めると、解剖メモが解放されます。')+'</p></div>';
-  }).join('')+(ntq?('<p class="notes-count">'+MEMOS.filter(ntHit).length+'件ヒット</p>'+(MEMOS.some(ntHit)?'':'<p class="locknote">「'+esc((typeof ntQuery==='string'?ntQuery:'').trim())+'」に一致するメモはありません</p>')):(endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>')); /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
+   if(!un) return '<div class="nt-row lock"><span class="nt-main"><b>？？？</b><span class="nt-sub">未解放 ― 物語のキー場面を読み進めると解放されます</span></span></div>';
+   return '<button class="nt-row" data-note="'+m.id+'"><span class="nt-main"><b>'+esc(m.title)+'</b><span class="nt-sub">'+(MEMO_DATES[m.id]?MEMO_DATES[m.id]+'　':'')+esc(m.body.split('\n')[0]||'')+'</span></span><span class="nt-chev">›</span></button>';
+  }).join('')+'</div>'+ /* v96：iOSメモ風に一覧→詳細へ階層化（未解放は行のみ・中身は出さない） */(ntq?('<p class="notes-count">'+MEMOS.filter(ntHit).length+'件ヒット</p>'+(MEMOS.some(ntHit)?'':'<p class="locknote">「'+esc((typeof ntQuery==='string'?ntQuery:'').trim())+'」に一致するメモはありません</p>')):(endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>')); /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
 }
 function endsHTML(){
  const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
@@ -3673,6 +3685,91 @@ function openProfEdit(){
  });
  const cx=$('#ipe-cancel'); if(cx) cx.addEventListener('click',()=>{ igWho='n'; igTab='prof'; renderIG(); showView('v-ig'); });
  const av=$('#ipe-avbtn'); if(av) av.addEventListener('click',()=>toast('（プロフィール写真の変更は演出用です）'));
+})();
+</script>
+
+<script>
+/* ================= v96 : NOTES / CALENDAR / LOCK NOTIFS =================
+   解剖メモを iOS メモ風に一覧→詳細へ階層化（未解放は行のみで中身は出さない。検索・
+   エンディングコレクション等の既存導線は一覧側に存置）。
+   カレンダーは月ページング（‹ ›ボタン＋横スワイプ）で、ドット→予定スクロールと両立。
+   ロック画面の通知は、タイトル画面のデザイン（v76確定）を変えず、中身だけを物語の進行
+   （直近の通知イベント／最新の解剖メモ／直近の解放済み予定）に連動させる。
+   新規セーブ項目なし（すべて既存の進行データから導出）。本編・台詞・数値・解放条件は不変。 */
+var calPage=-1;
+(function(){
+ const st=document.createElement('style'); st.textContent=
+ '.nt-list{background:#fff;border-top:1px solid #e7e7ea;border-bottom:1px solid #e7e7ea;margin:12px 0 4px}'
+ +'.nt-row{display:flex;align-items:center;gap:8px;width:100%;background:#fff;border:0;border-bottom:1px solid #f0f0f2;padding:11px 16px;text-align:left;font-family:inherit;cursor:pointer}'
+ +'.nt-row:last-child{border-bottom:0}'
+ +'.nt-main{flex:1;min-width:0}'
+ +'.nt-main b{display:block;font-size:15px;color:#111;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+ +'.nt-sub{display:block;font-size:12.5px;color:#8e8e93;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+ +'.nt-row.lock{cursor:default}'
+ +'.nt-row.lock b{color:#aeaeb2}'
+ +'.nt-chev{color:#c7c7cc;font-size:18px;flex:none}'
+ +'.note-d{padding:20px 20px 32px}'
+ +'.note-d .tag{font-size:10.5px;background:var(--kakao);border-radius:8px;padding:2px 8px;font-weight:700;display:inline-block;margin-bottom:10px;color:#262626}'
+ +'.note-d h1{font-size:20px;line-height:1.5;color:#111;margin-bottom:6px}'
+ +'.note-date{font-size:12.5px;color:#8e8e93;margin-bottom:14px}'
+ +'.note-d p{font-size:14px;line-height:1.95;color:#262626;white-space:pre-wrap}'
+ +'.cal-pager{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 4px}'
+ +'.cal-pg-t{font-size:16px;font-weight:700;color:#262626}'
+ +'.cal-pager button{background:#f2f2f7;border:0;width:34px;height:34px;border-radius:50%;font-size:17px;color:#262626;cursor:pointer;font-family:inherit}'
+ +'.cal-pager button:disabled{opacity:.3;cursor:default}';
+ document.head.appendChild(st);
+})();
+/* ---------- 解剖メモ：詳細 ---------- */
+function openNoteDetail(id){
+ const m=MEMOS.find(x=>x.id===id); if(!m||!S.memos.includes(id)) return;
+ const b=$('#note-body'); if(!b) return;
+ b.innerHTML='<div class="note-d"><span class="tag">'+esc(m.tag)+'</span><h1>'+esc(m.title)+'</h1>'+(MEMO_DATES[m.id]?'<div class="note-date">'+MEMO_DATES[m.id]+'</div>':'')+'<p>'+esc(m.body)+'</p></div>';
+ b.scrollTop=0; showView('v-note');
+}
+document.addEventListener('click',e=>{
+ const r=(e.target&&e.target.closest)?e.target.closest('[data-note]'):null;
+ if(r){ openNoteDetail(+r.dataset.note); }
+});
+(function(){ const bk=$('#note-back'); if(bk) bk.addEventListener('click',()=>{ renderNotes(); showView('v-notes'); }); })();
+/* ---------- カレンダー：作中日付の月 ---------- */
+function curCalIdx(){
+ let c=S.calU; while(c>0&&!KDATE[c]) c--;
+ const kd=KDATE[c]||KDATE[0]; const mm=String(kd).match(/(\d+)월/); const mn=mm?+mm[1]:3;
+ const ix=CAL.findIndex(mo=>parseInt(mo.m,10)===mn);
+ return ix<0?0:ix;
+}
+/* ---------- カレンダー：横スワイプで月送り ---------- */
+window.calMove=function(d){ const cur=(typeof calPage==='number'&&calPage>=0)?calPage:0; const n=cur+d; if(n<0||n>=CAL.length) return; calPage=n; renderCal(); const b=$('#cal-body'); if(b) b.scrollTop=0; };
+(function(){
+ const b=$('#cal-body'); if(!b) return; let sx=null;
+ b.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; },{passive:true});
+ b.addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; sx=null; if(Math.abs(dx)>56) window.calMove(dx<0?1:-1); },{passive:true});
+})();
+/* ---------- ロック画面：通知の中身を進行に連動（デザインは不変） ---------- */
+let lockSig='';
+function renderLockNotifs(){
+ const box=$('#lock-notifs'); if(!box) return;
+ const sig=S.calU+'|'+(Array.isArray(S.memos)?S.memos.join(','):'')+'|'+(Array.isArray(S.noise)?S.noise.join(','):'')+'|'+(S.done?1:0)+'|'+(S.endId||'');
+ if(sig===lockSig) return; lockSig=sig;
+ const items=[];
+ if(Array.isArray(S.noise)&&S.noise.length){
+   const cal=Math.max.apply(null,S.noise); const n=NOISE[cal];
+   if(n){ const kd=(KDATE[cal]||'').match(/(\d+)월\s*(\d+)일/);
+     items.push({ic:(IC[n[0]]||''),bg:(n[0]==='chat'?'#fee500':'#fff'),app:String(n[1]).replace(/\s*[・―-]\s*지금$/,''),time:kd?(kd[1]+'월 '+kd[2]+'일'):'',body:n[2]}); }
+ }
+ if(Array.isArray(S.memos)&&S.memos.length){
+   const id=Math.max.apply(null,S.memos); const m=MEMOS.find(x=>x.id===id);
+   if(m) items.push({ic:'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg>',bg:'#fff',app:'解剖メモ',time:MEMO_DATES[id]||'',body:'「'+m.title+'」が解放されました'});
+ }
+ let lastEv=null,lastMo='',lastKey=-1;
+ const lim=(typeof curCalIdx==='function')?curCalIdx():CAL.length-1; /* 作中日付より先の月の予定は「直近」に数えない */
+ CAL.forEach((mo,mi)=>{ if(mi>lim) return; mo.e.forEach(e=>{ const locked=e.u>S.calU&&!(e.cond&&e.cond()); if(locked) return; const key=mi*100+(e.day||0); if(key>=lastKey){ lastKey=key; lastEv=e; lastMo=mo.m; } }); });
+ if(lastEv) items.push({ic:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',bg:'#fff',app:'캘린더',time:'2021年 '+lastMo+' '+lastEv.d,body:lastEv.t});
+ box.innerHTML=items.slice(0,3).map((it,i)=>'<div class="lnotif'+(i===1?' stack':'')+'"><span class="ln-ic" style="background:'+it.bg+';color:#262626">'+it.ic+'</span><div style="flex:1;min-width:0"><div class="ln-h"><b>'+esc(it.app)+'</b><span>'+esc(it.time)+'</span></div><div class="ln-t">'+esc(it.body)+'</div></div></div>').join('');
+}
+(function(){
+ const _uc=updClock; updClock=function(){ _uc(); renderLockNotifs(); };
+ renderLockNotifs();
 })();
 </script>
 
