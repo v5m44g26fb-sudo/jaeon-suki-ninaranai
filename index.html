@@ -1034,7 +1034,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v124：内容の底上げ（色気・緊張感）。ジェオンの口説きと距離の詰め方を、言葉と距離と沈黙だけで濃くしました。バーの指先、作業室の肩越しの距離、観覧車、ブレスレットに触れる指、雨の夜の一歩、彼視点3篇とフリー会話・遅れて来るコメントに手を入れています。夜の場面の線（描写なし・フェードアウト）は不変。数値・解放条件・写真は変えていません。気に入らない箇所は言ってください、ピンポイントで戻せます。</p>
+<p class="src">v125：通知と実配信の不整合を修正。ロック画面とバナーに出るビンナからのカカオトーク通知が、トーク内に実在しない文面（飲み会の誘い）を予告していた問題を直しました。通知文は、届くタイミングで実際にビンナのトークに表示される台詞をそのまま引用するよう統一し、第2章の飲み会の会話にも正しいタイミングで通知が届くようにしています。本編・台詞・数値・解放条件・写真は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2647,15 +2647,24 @@ function updFreeSend(){ const b=$('#free-send'); if(b) b.classList.toggle('on',!
 $('#free-in').addEventListener('input',updFreeSend);
 
 /* ================= v5 : DAILY-LIFE NOISE & SETTINGS ================= */
-const NOISE={2:['book','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],4:['rain','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['chat','카카오톡 ― ビンナ ・ 지금','ねえ、今日の飲み会くる？'],9:['cap','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['box','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
+const NOISE={2:[['book','大学ポータル ・ 지금','「素材研究レポート」の提出締切は明日 23:59 です'],['chat','카카오톡 ― ビンナ ・ 지금','ねえ聞いた？ 今日の会、2年のパク・ジェオン来るって']],4:['rain','天気 ― ソウル ・ 지금','夕方から雨の予報です。傘をお忘れなく'],6:['chat','카카오톡 ― ビンナ ・ 지금','終わりにしたんだって？'],9:['cap','大学ポータル ・ 지금','卒業制作・中間審査の日程が公開されました'],10:['box','宅配便 ・ 지금','ご注文の石膏と材料が、明日届きます']};
 let noiseTimer=null;
-function showNoise(cal){
- const n=NOISE[cal]; if(!n||S.noise.includes(cal)) return; S.noise.push(cal); save(); window.noiseGo=({chat:'kakao',book:'cal',cap:'cal',rain:'news'})[n[0]]||null; /* v90：バナーの遷移先 */
- const b=$('#noise'); if(!b) return;
+/* v125：NOISE の値は単体エントリ、または同じタイミングで届く複数エントリの配列。chat 系の通知文は、発火タイミングで実際に表示されるサイドトークの台詞をそのまま引用する（通知と実配信の一致） */
+function noiseEntries(cal){ const n=NOISE[cal]; if(!n) return []; return Array.isArray(n[0])?n:[n]; }
+let noiseQ=[], noiseBusy=false;
+function pumpNoise(){
+ if(noiseBusy) return; const n=noiseQ.shift(); if(!n) return; noiseBusy=true;
+ window.noiseGo=({chat:'kakao',book:'cal',cap:'cal',rain:'news'})[n[0]]||null; /* v90：バナーの遷移先 */
+ const b=$('#noise'); if(!b){ noiseBusy=false; return; }
  b.innerHTML='<span class="n-ic">'+(IC[n[0]]||'')+'</span><div style="flex:1;min-width:0"><div class="n-t">'+n[1]+'</div><div class="n-b">'+n[2]+'</div></div>';
- b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify'); if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>b.classList.remove('on'),3800);
+ b.classList.add('on'); if(typeof vib==='function') vib(35); if(typeof sfxPlay==='function') sfxPlay('notify');
+ if(noiseTimer) clearTimeout(noiseTimer); noiseTimer=setTimeout(()=>{ b.classList.remove('on'); noiseBusy=false; setTimeout(pumpNoise,400); },3800);
 }
-$('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); const g=window.noiseGo; window.noiseGo=null; if(g==='chat'){ showView('v-chat'); } else if(g==='kakao'){ if(typeof kkTabReset==='function') kkTabReset(); showView('v-kakao'); } else if(g==='cal'){ renderCal(); showView('v-cal'); } else if(g==='news'){ renderNews(); showView('v-news'); } }); /* v90：実物どおり、バナーをタップすると該当アプリが開く */
+function showNoise(cal){
+ const list=noiseEntries(cal); if(!list.length||S.noise.includes(cal)) return; S.noise.push(cal); save();
+ list.forEach(n=>noiseQ.push(n)); pumpNoise();
+}
+$('#noise').addEventListener('click',()=>{ $('#noise').classList.remove('on'); if(noiseTimer) clearTimeout(noiseTimer); noiseBusy=false; setTimeout(()=>{ if(typeof pumpNoise==='function') pumpNoise(); },700); const g=window.noiseGo; window.noiseGo=null; if(g==='chat'){ showView('v-chat'); } else if(g==='kakao'){ if(typeof kkTabReset==='function') kkTabReset(); showView('v-kakao'); } else if(g==='cal'){ renderCal(); showView('v-cal'); } else if(g==='news'){ renderNews(); showView('v-news'); } }); /* v90：実物どおり、バナーをタップすると該当アプリが開く */
 function updSetUI(){ const st=$('#set-tap'); if(st) st.textContent=S.tap?'タップで進む':'自動で進む'; const sp=$('#set-pace'); if(sp) sp.textContent=S.pace==='slow'?'ゆっくり':'ふつう'; }
 const setTapBtn=$('#set-tap'); if(setTapBtn) setTapBtn.addEventListener('click',()=>{ S.tap=!S.tap; save(); updSetUI(); toast(S.tap?'メッセージはタップで進みます':'メッセージは自動で進みます'); if(!S.tap) fireTap(); });
 const setPaceBtn=$('#set-pace'); if(setPaceBtn) setPaceBtn.addEventListener('click',()=>{ S.pace=S.pace==='slow'?'normal':'slow'; save(); updSetUI(); toast('メッセージ速度：'+(S.pace==='slow'?'ゆっくり':'ふつう')); });
@@ -3858,7 +3867,7 @@ function renderLockNotifs(){
  if(sig===lockSig) return; lockSig=sig;
  const items=[];
  if(Array.isArray(S.noise)&&S.noise.length){
-   const cal=Math.max.apply(null,S.noise); const n=NOISE[cal];
+   const cal=Math.max.apply(null,S.noise); const _nl=(typeof noiseEntries==='function')?noiseEntries(cal):[]; const n=_nl.length?_nl[_nl.length-1]:null;
    if(n){ const kd=(KDATE[cal]||'').match(/(\d+)월\s*(\d+)일/);
      items.push({ic:(IC[n[0]]||''),bg:(n[0]==='chat'?'#fee500':'#fff'),app:String(n[1]).replace(/\s*[・―-]\s*지금$/,''),time:kd?(kd[1]+'월 '+kd[2]+'일'):'',body:n[2]}); }
  }
