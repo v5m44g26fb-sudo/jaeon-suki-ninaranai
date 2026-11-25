@@ -963,7 +963,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v101：新しい写真を3枚追加しました。本人提供の写真（アトリエのコーヒー／作業室の全景／窓辺の蝶）で、nao_sculptの新規投稿1件と、park_jaeonの既存投稿へのカルーセル追加2件として組み込んでいます。キャプションとコメントは写真の内容に合わせて書きました。本編・台詞・数値・既存の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v102：新しい写真を3枚追加しました。本人提供の写真（夕日のアトリエ／なおの部屋／展示の招待状とチケット）で、park_jaeonの新規投稿1件とnao_sculptの新規投稿2件として組み込んでいます。キャプションとコメントは写真の内容に合わせて書きました。本編・台詞・数値・既存の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1304,6 +1304,7 @@ const IG_J=[
 {id:'rain',img:'assets/ig-rain.jpg',cap:'비. 우산은 없었다',likes:'692',unlock:9,cm:[['b1nna_','誰と？ どこで？'],['park_jaeon','秘密']],cmL:[['s0l_a','……元気？']]},
 {id:'pottery',img:'assets/ig-jaeon-pottery.jpg',cap:'밤. 손이 먼저 안다',likes:'365',unlock:7,cm:[['b1nna_','ろくろ？ めずらしい'],['park_jaeon','……気分で']],cmL:[['nao_sculpt','（……見てしまった）']]},
 {id:'wheel',img:'assets/ig-wheel.jpg',cap:'관람차. 말하지 못한 것',likes:'447',unlock:8,cm:[['b1nna_','合宿？ 誰と乗ったの'],['park_jaeon','……秘密']]},
+{id:'sunset',img:'assets/ig-atelier-sunset.jpg',cap:'작업실. 해가 진다',likes:'455',unlock:9,cm:[['b1nna_','夕日の作業室、きれいすぎない？'],['park_jaeon','……光だけだよ']]},
 {id:'hands',img:'assets/ig-hands.jpg',cap:'다시 처음부터. 손은 거짓말을 못 한다',likes:'523',unlock:10,cm:[['s0l_a','……本気なんだ'],['nao_sculpt','（見てしまった）']]},
 {id:'gallery',img:'assets/ig-gallery.jpg',imgs:['assets/ig-gallery.jpg','assets/ig-hands.jpg','assets/ig-gallery2.jpg'],cap:'전시. ……와줘서',likes:'766',unlock:11,cm:[['b1nna_','おめでとう！！'],['park_jaeon','ありがとう']]},
 {id:'statue',img:'assets/ig-jaeon-statue.jpg',cap:'전시. 보는 쪽에서',likes:'588',unlock:11,cm:[['b1nna_','今日は見る側なんだ'],['park_jaeon','……たまには']],cmL:[['nao_sculpt','（来てたんだ）']]},
@@ -1321,7 +1322,9 @@ const IG_N=[
 {id:'n7',img:'assets/nao-atelier2.jpg',cap:'卒業制作。顔がいちばん難しい',likes:'86',unlock:5,cm:[['b1nna_','それ、誰の顔？'],['nao_sculpt','……ひみつ']],cmL:[['park_jaeon','……目、まだ違う']]},
 {id:'n8',img:'assets/nao-exhibit.jpg',cap:'展示初日。やっと、ここまで来た',likes:'168',unlock:11,cm:[['b1nna_','おめでとう！！ 黒ワンピ似合ってる'],['nao_sculpt','ありがとう。ずっと緊張してた']],cmL:[['park_jaeon','……作品、良かった']]},
 {id:'n9',img:'assets/nao-classroom.jpg',cap:'窓際の席。カーテン、ずっと揺れてた',likes:'108',unlock:3,cm:[['b1nna_','カーテンふわふわじゃん。いい光'],['nao_sculpt','窓際、特等席だった']]},
-{id:'n10',img:'assets/nao-coffee.jpg',cap:'休憩。コーヒー、熱いうちに',likes:'94',unlock:6,cm:[['b1nna_','カップ、2つあるけど？'],['nao_sculpt','……手伝ってくれてる人の分']],cmL:[['park_jaeon','……砂糖、入れすぎ']]}
+{id:'n10',img:'assets/nao-coffee.jpg',cap:'休憩。コーヒー、熱いうちに',likes:'94',unlock:6,cm:[['b1nna_','カップ、2つあるけど？'],['nao_sculpt','……手伝ってくれてる人の分']],cmL:[['park_jaeon','……砂糖、入れすぎ']]},
+{id:'n11',img:'assets/nao-room.jpg',cap:'私の部屋。窓辺の机がいちばん落ち着く',likes:'105',unlock:7,cm:[['b1nna_','本棚の石膏像、部屋にもあるんだ'],['nao_sculpt','小さいやつ。練習用']]},
+{id:'n12',img:'assets/nao-invitation.jpg',cap:'展示の招待状、届いた。チケットは2枚',likes:'142',unlock:10,cm:[['b1nna_','チケット2枚！ もう1枚は誰の分？'],['nao_sculpt','……まだ、決めてない']]}
 ];
 /* v68：day は月グリッドのドット用。値は新規に作らず、写真アプリ（GAL）の日付・要約内の明記日付など既存データで確定できるものだけに付けた（個展3/5・バー3/12・作業室3/26・曖昧な関係4/16・誕生日4/25・合宿6/18・雨の夜6/25・修復7/9・展示7/16・温室9/17・水やり9/19）。確定できないエントリには付けない */
 const CAL=[
@@ -1999,7 +2002,7 @@ let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿
 /* ================= v81 : IGフィード／コメントシート／既読リング =================
    姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
    自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
-const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前'};
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前'};
 let igTab='feed';
 let igFeedY=0, igFeedHold=false; /* v88：フィードのスクロール位置保持（実物どおり、詳細・プロフィール・ストーリーから戻っても元の位置） */
 (function(){ const b=$('#ig-body'); if(b) b.addEventListener('scroll',()=>{ if(igTab==='feed'&&!igFeedHold) igFeedY=b.scrollTop; },{passive:true}); })();
