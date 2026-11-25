@@ -103,9 +103,6 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ic-note .nl{width:70%;height:3px;background:#d9d9de;border-radius:2px;margin-top:7px}
 .ic-tel{background:linear-gradient(180deg,#67e06a,#29c73a)}
 .ic-set{background:linear-gradient(180deg,#e8e8ec,#b9b9c0);color:#555}
-.pagedots{position:absolute;bottom:104px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
-.pagedots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45)}
-.pagedots i.on{background:#fff}
 .dock{position:absolute;left:11px;right:11px;bottom:9px;height:88px;background:rgba(235,235,240,.34);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);border-radius:27px;display:flex;align-items:center;justify-content:space-around;padding:0 12px;z-index:3}
 .dock .app{text-shadow:none}
 .dock .app .ic{width:60px;height:60px}
@@ -243,6 +240,10 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 /* v84：フィードのストーリートレイは自分のアバターが先頭（未投稿時は＋バッジ） */
 .story .ring{position:relative}
 .story .splus{position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:#0095f6;color:#fff;font-size:16px;line-height:17px;text-align:center;border:2.5px solid #fff;z-index:2}
+/* v85：ニュース一覧のサムネイル付き行 */
+.nw-flex{display:flex;gap:12px;align-items:center}
+.nw-tx{flex:1;min-width:0}
+.nw-th{width:64px;height:64px;border-radius:8px;object-fit:cover;flex:none}
 
 /* v83：iOS風アラート（リセット確認用。ブラウザ標準ダイアログは使わない） */
 #ios-alert{position:absolute;inset:0;z-index:400;display:none;align-items:center;justify-content:center}
@@ -825,7 +826,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v84：リアル化の第3弾（2）です。チャット画面のステータスバーを実物どおり暗色にし、Instagramの投稿メニュー（…）をアクションシート化、フィードのストーリー列は自分のアバターを先頭に（未投稿時は＋バッジ）、ニュース記事の日時をNAVERの「입력」書式に寄せました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v85：リアル化の第3弾（3）です。ホーム画面のページドット（2ページ目が存在しない表示）を外し、ニュース一覧では写真のある記事にNAVER実物どおりサムネイルを付けました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -883,7 +884,6 @@ img{-webkit-user-drag:none}
 <div class="setnote">チャット画面をタップすると、次のメッセージが表示されます。チャット下部の送信ボタンを長押しすると早送りモード（ON／OFF）になります。選択肢を選ぶと「解明度」と「心の距離」が変わります。解明度は彼を見抜くほど上がり、55以上で特別な結末への選択肢が開きます。効果音と生活音はすべてオリジナル合成音です（詳細は解剖メモ下部のクレジット）。</div>
 </div>
 </div>
-<div class="pagedots"><i class="on"></i><i></i></div>
 <div class="dock">
 <button class="app" data-open="calllog"><span class="ic ic-tel"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="#fff"/></svg></span></button>
 <button class="app" data-open="kakao"><span class="ic ic-kakao"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><span class="bdg" id="bdg-kakao-d">1</span></button>
@@ -2752,9 +2752,9 @@ const NEWS=[
  {id:'a2',u:6,cat:'문화',press:'아트인사이트',date:'5월 19일',hot:73,title:'여름 기획전 라인업 공개… 신예 작가 대거 참여',sub:'7월 개막, 대학 조소과 작가들의 작품도 포함',body:['오는 7월 개막하는 여름 기획전의 참여 작가 라인업이 공개됐다. 신예 작가들이 대거 이름을 올린 가운데, 대학 조소과 출신 작가들의 작품도 포함돼 눈길을 끈다.','갤러리 측은 "젊은 작가들의 실험적인 시도를 한자리에서 볼 수 있는 전시가 될 것"이라고 전했다.']},
  {id:'t1',u:8,cat:'여행',press:'트래블투데이',date:'6월 18일',hot:66,title:'대학생 MT 시즌… 바닷가 마을 숙소 예약 활황',sub:'합숙 명소로 떠오른 작은 어촌 마을',body:['대학생들의 MT 시즌을 맞아 바닷가 마을의 숙소 예약이 활황을 보이고 있다. 학과 단위 합숙 장소로 작은 어촌 마을이 인기를 끌고 있다.','현지 상인들은 "젊은 손님들이 마을에 활기를 불어넣는다"며 반기는 분위기다.']},
  {id:'w3',u:9,cat:'날씨',press:'날씨와생활',date:'6월 25일',hot:88,title:'장마 시작… 주말까지 강한 비 주의',sub:'밤사이 시간당 30mm 넘는 집중호우 가능성',body:['장마전선의 영향으로 전국에 비가 내리겠다. 특히 밤사이에는 시간당 30mm가 넘는 강한 비가 쏟아지는 곳이 있겠다.','기상청은 "하천 주변과 지하 공간 출입을 자제하고, 빗길 교통안전에 각별히 유의해 달라"고 당부했다.']},
- {id:'a3',u:10,cat:'문화',press:'아트인사이트',date:'7월 9일',hot:79,title:'파손된 작품, 복원의 손길로 다시 서다',sub:'"깨진 자리가 오히려 작품의 일부가 됐다"',body:['전시를 앞두고 파손됐던 작품이 복원을 거쳐 다시 전시장에 설 준비를 하고 있다. 복원 과정에는 작가가 직접 참여해 파손 부위를 작품의 일부로 받아들인 것으로 알려졌다.','복원 관계자는 "깨진 자리를 감추는 대신, 그 흔적을 어떻게 남길지가 이번 복원의 핵심이었다"고 말했다.']},
- {id:'a4',u:11,cat:'문화',press:'아트인사이트',date:'7월 16일',hot:95,title:'홍익대 조소과 졸업전시 개막, 첫날부터 관람객 몰려',sub:'신예 작가들의 데뷔 무대에 긴 줄',body:['홍익대학교 조소과 졸업전시가 막을 올렸다. 개막 첫날부터 전시장을 찾은 관람객들로 긴 줄이 이어졌다.','한 관람객은 "학생들의 전시라고 믿기 어려울 만큼 완성도가 높다"며 "특히 한 작품 앞에서는 발길이 한동안 떨어지지 않았다"고 말했다.']},
- {id:'a5',u:99,cat:'문화',press:'아트인사이트',date:'7월 20일',hot:99,title:'[리뷰] 끝나지 않는 것에 대한, 하나의 대답',sub:'졸업전시를 보고 — 파손과 복원을 거친 작품 앞에서',body:['이번 졸업전시에서 가장 오래 머물게 되는 작품 앞에서는, 누구나 말이 적어진다. 파손과 복원을 거쳤다는 설명을 읽기 전부터, 형태가 먼저 무언가를 말하고 있기 때문이다.','완벽하게 매끈한 작품은 많다. 그러나 깨진 자리를 끌어안고 다시 선 작품은, 보는 사람에게도 자신의 깨진 자리를 떠올리게 한다. 그것이 이 전시가 남긴 가장 긴 여운이다.']}
+ {id:'a3',u:10,cat:'문화',press:'아트인사이트',th:'assets/ig-hands.jpg',date:'7월 9일',hot:79,title:'파손된 작품, 복원의 손길로 다시 서다',sub:'"깨진 자리가 오히려 작품의 일부가 됐다"',body:['전시를 앞두고 파손됐던 작품이 복원을 거쳐 다시 전시장에 설 준비를 하고 있다. 복원 과정에는 작가가 직접 참여해 파손 부위를 작품의 일부로 받아들인 것으로 알려졌다.','복원 관계자는 "깨진 자리를 감추는 대신, 그 흔적을 어떻게 남길지가 이번 복원의 핵심이었다"고 말했다.']},
+ {id:'a4',u:11,cat:'문화',press:'아트인사이트',th:'assets/ig-gallery.jpg',date:'7월 16일',hot:95,title:'홍익대 조소과 졸업전시 개막, 첫날부터 관람객 몰려',sub:'신예 작가들의 데뷔 무대에 긴 줄',body:['홍익대학교 조소과 졸업전시가 막을 올렸다. 개막 첫날부터 전시장을 찾은 관람객들로 긴 줄이 이어졌다.','한 관람객은 "학생들의 전시라고 믿기 어려울 만큼 완성도가 높다"며 "특히 한 작품 앞에서는 발길이 한동안 떨어지지 않았다"고 말했다.']},
+ {id:'a5',u:99,cat:'문화',press:'아트인사이트',th:'assets/ig-gallery.jpg',date:'7월 20일',hot:99,title:'[리뷰] 끝나지 않는 것에 대한, 하나의 대답',sub:'졸업전시를 보고 — 파손과 복원을 거친 작품 앞에서',body:['이번 졸업전시에서 가장 오래 머물게 되는 작품 앞에서는, 누구나 말이 적어진다. 파손과 복원을 거쳤다는 설명을 읽기 전부터, 형태가 먼저 무언가를 말하고 있기 때문이다.','완벽하게 매끈한 작품은 많다. 그러나 깨진 자리를 끌어안고 다시 선 작품은, 보는 사람에게도 자신의 깨진 자리를 떠올리게 한다. 그것이 이 전시가 남긴 가장 긴 여운이다.']}
 ];
 function newsVis(a){ return a.u===99 ? !!S.done : S.calU>=a.u; }
 const NW_WX=[['sun','24°','맑고 따뜻한 봄날'],['sun','25°','전시 보기 좋은 날'],['partly','23°','작업실 나들이 날씨'],['partly','22°','바람 조금, 대체로 맑음'],['cloud','21°','꽃가루 주의'],['partly','26°','초여름 같은 더위'],['sun','28°','한낮 더위 주의'],['sun','29°','MT 가기 좋은 날'],['rain','23°','장마, 강한 비'],['rainsun','27°','비 그치고 맑아짐'],['sun','30°','전시 준비 막바지'],['sun','31°','졸업전시 개막일'],['sun','30°','전시 기간, 맑음']];
@@ -2771,7 +2771,7 @@ function renderNews(){
  const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
  if(nwCat==='전체'&&rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
  const latest=list.filter(a=>nwCat==='전체'||a.cat===nwCat).slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
- h+='<div class="nw-sec">최신 뉴스</div>'+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'"><span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div></button>').join('');
+ h+='<div class="nw-sec">최신 뉴스</div>'+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
  h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
  b.innerHTML=h;
  b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
