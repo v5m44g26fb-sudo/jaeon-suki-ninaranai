@@ -170,7 +170,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .row img.av{width:38px;height:38px;border-radius:14px;object-fit:cover;flex:none}
 .row .nm{font-size:11.5px;color:#36485a;margin-bottom:3px}
 .brow2{display:flex;align-items:flex-end;gap:5px}
-.bub{background:#fff;border-radius:14px;border-top-left-radius:3px;padding:7.5px 10.5px;font-size:14px;line-height:1.5;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.07);color:#191919} /* v80：カカオ実物の吹き出しは外側の上隅だけ角が小さい */
+.bub{background:#fff;border-radius:14px;border-top-left-radius:3px;padding:7.5px 10.5px;font-size:14px;line-height:1.5;white-space:pre-wrap;box-shadow:0 1px 1px rgba(0,0,0,.07);color:#191919;max-width:252px;overflow-wrap:break-word} /* v92：実物カカオの吹き出し最大幅（画面幅の約65%）に寄せ、長文が横いっぱいに広がらないようにする */ /* v80：カカオ実物の吹き出しは外側の上隅だけ角が小さい */
 .row.me{align-self:flex-end}
 .row.me .bub{background:var(--me);border-top-left-radius:14px;border-top-right-radius:3px}
 .row .tm{font-size:10px;color:#4d5f70;flex:none;padding-bottom:1px}
@@ -262,7 +262,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .prof-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
 .prof-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,0) 34%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42))}
 .prof-x{position:absolute;top:max(52px,calc(var(--sat) + 8px));left:10px;font-size:19px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:12px 14px} /* v48：他の✕ボタン（44×47px）に当たり判定を統一 */
-.prof-gear{position:absolute;top:max(56px,calc(var(--sat) + 12px));right:14px;font-size:18px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:6px}
+.prof-gear{position:absolute;top:max(50px,calc(var(--sat) + 6px));right:8px;font-size:18px;color:#fff;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);padding:12px} /* v92：タップ領域を44px級へ（padding増分だけ位置を戻し、歯車の見た目の位置は不変） */
 .prof-main{position:absolute;left:0;right:0;bottom:158px;text-align:center;z-index:2}
 .prof-av{width:92px;height:92px;border-radius:34px;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .prof-nm{font-size:19px;font-weight:700;margin-top:11px;text-shadow:0 1px 5px rgba(0,0,0,.55)}
@@ -848,6 +848,7 @@ img{-webkit-user-drag:none}
 .cm-bar>img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 .cm-bar input{flex:1;border:1px solid #dbdbdb;border-radius:999px;padding:9px 14px;font-size:16px;font-family:inherit;min-width:0;color:#262626;background:#fff}
 .cm-bar button{color:#0095f6;font-weight:700;font-size:14px;flex:none;padding:4px 2px}
+.cm-bar button.off{opacity:.35} /* v92：実物IGどおり、入力が空の間は投稿ボタンを淡くする */
 .homebar.dk{background:rgba(25,25,25,.85);box-shadow:none}
 .app .ic{transition:transform .18s cubic-bezier(.32,.72,0,1),filter .18s}
 .app:active .ic{transform:scale(.85);filter:brightness(.72)}
@@ -962,7 +963,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v91：リアル化の第9弾です。カカオのヘッダー検索アイコンから友達・トーク一覧を検索できるようになり、ジェオンがプロフィールを更新すると友達一覧に赤いドットが付きます（プロフィールを開くと消えます）。Instagramの探索グリッドは実物どおり大小のタイルが混ざるレイアウトになり、タップするとその投稿の位置からフィードが開きます。解剖メモには検索、写真には年・月・日・すべての写真の切り替えを追加し、グリッド画像は遅延読み込みで軽くしました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v92：リアル化の第10弾です。カカオトークの吹き出しの最大幅を実物の比率に合わせ、長文が画面いっぱいに広がらないようにしました。Instagramのいいね・保存・フォロー、コメントへのいいね、ストーリーのいいね、カカオトークの反応に触感フィードバックを追加し、コメントの投稿ボタンは入力が空の間は淡く表示されます。プロフィールの設定ボタンのタップ領域を広げ、Instagramのホームボタンの再タップでフィードの先頭に戻るようにしました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1990,14 +1991,14 @@ function igPostHTML(p,owner){
 function igWireCard(dp,p,owner,inFeed){
  const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
  const base=igBaseLikes(p);
- const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
+ const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); if(v&&typeof vib==='function') vib(10); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
  lkEl.addEventListener('click',()=>openLikers(p,owner)); /* v83：実物どおり、いいね数タップで「いいねした人」が開く */
  likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
  let lastTap=0;
  const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
  imgW.addEventListener('dblclick',dbl);
  imgW.addEventListener('click',()=>{ const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
- saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); save(); });
+ saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); if(!has&&typeof vib==='function') vib(8); save(); });
  const dots=dp.querySelector('.dots'); if(dots) dots.addEventListener('click',e=>{ e.stopPropagation(); openActSheet(p); }); /* v84：「…」は実物どおりアクションシート */
  dp.querySelector('.ig-cmtb').addEventListener('click',()=>openCmSheet(p,owner,false));
  dp.querySelector('.ig-shrb').addEventListener('click',()=>openShareSheet(p)); /* v89：実物どおり送信先シート */
@@ -2028,16 +2029,16 @@ function renderCmList(){
  const all=story.concat(mine);
  if(!all.length){ list.innerHTML='<div class="cm-empty">まだコメントがありません</div>'; return; }
  list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':(IG_AGO[cmPost.id]||'1日前'))+'</span></div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+(liked?'<span>1</span>':'')+'</button></div>'; }).join('');
- list.querySelectorAll('[data-cmk]').forEach(b=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); if(i>=0) S.igCmLikes.splice(i,1); else S.igCmLikes.push(k); save(); renderCmList(); }));
+ list.querySelectorAll('[data-cmk]').forEach(b=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); if(i>=0) S.igCmLikes.splice(i,1); else { S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } save(); renderCmList(); }));
 }
-function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
+function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); updCmSend(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
 function closeCmSheet(){ const sh=$('#cm-sheet'); if(sh) sh.classList.remove('on'); cmPost=null; }
-function sendCm(){ const inp=$('#cm-in'); if(!inp||!cmPost) return; const v=(inp.value||'').trim(); if(!v) return; inp.value=''; if(!S.igMyCmts||typeof S.igMyCmts!=='object'||Array.isArray(S.igMyCmts)) S.igMyCmts={}; if(!Array.isArray(S.igMyCmts[cmPost.id])) S.igMyCmts[cmPost.id]=[]; S.igMyCmts[cmPost.id].push(v); save(); renderCmList(); const list=$('#cm-list'); if(list) list.scrollTop=list.scrollHeight; const n=igAllCm(cmPost).length; document.querySelectorAll('[data-cmpid="'+cmPost.id+'"]').forEach(e2=>{ e2.textContent='コメント'+n+'件をすべて見る'; }); }
+function sendCm(){ const inp=$('#cm-in'); if(!inp||!cmPost) return; const v=(inp.value||'').trim(); if(!v) return; inp.value=''; updCmSend(); if(!S.igMyCmts||typeof S.igMyCmts!=='object'||Array.isArray(S.igMyCmts)) S.igMyCmts={}; if(!Array.isArray(S.igMyCmts[cmPost.id])) S.igMyCmts[cmPost.id]=[]; S.igMyCmts[cmPost.id].push(v); save(); renderCmList(); const list=$('#cm-list'); if(list) list.scrollTop=list.scrollHeight; const n=igAllCm(cmPost).length; document.querySelectorAll('[data-cmpid="'+cmPost.id+'"]').forEach(e2=>{ e2.textContent='コメント'+n+'件をすべて見る'; }); }
 $('#cm-close').addEventListener('click',closeCmSheet);
 /* v86：コメント／人の一覧シートは、実物どおりグラブ部分を下へドラッグしても閉じられる */
 function sheetDrag(sh,panel,handles,close){ if(!sh||!panel) return; let sy=0,dy=0,act=false;
  handles.forEach(hd=>{ if(!hd) return; hd.style.touchAction='none';
-  hd.addEventListener('pointerdown',e=>{ if(!sh.classList.contains('on')) return; act=true; sy=e.clientY; dy=0; sh.classList.add('dragging'); try{ hd.setPointerCapture(e.pointerId); }catch(err){} });
+  hd.addEventListener('pointerdown',e=>{ if(!sh.classList.contains('on')) return; if(e.target&&e.target.closest&&e.target.closest('button')) return; /* v92：ヘッダー内のボタン（閉じる等）はドラッグ開始から除外し、ポインタキャプチャでクリックが奪われないようにする */ act=true; sy=e.clientY; dy=0; sh.classList.add('dragging'); try{ hd.setPointerCapture(e.pointerId); }catch(err){} });
   hd.addEventListener('pointermove',e=>{ if(!act) return; dy=Math.max(0,e.clientY-sy); panel.style.transform='translateY('+dy+'px)'; });
   const end=()=>{ if(!act) return; act=false; sh.classList.remove('dragging'); panel.style.transform=''; if(dy>90) close(); };
   hd.addEventListener('pointerup',end); hd.addEventListener('pointercancel',end); });
@@ -2049,6 +2050,8 @@ $('#ppl-bg').addEventListener('click',closePplSheet);
 $('#act-bg').addEventListener('click',closeActSheet);
 document.querySelectorAll('#act-sheet [data-act]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.act; const p=actPost; closeActSheet(); if(k==='share'){ if(p) openShareSheet(p); } else if(k==='about'&&p){ const isJ=IG_J.some(x=>x.id===p.id); const nm=isJ?'park_jaeon.sculpt':'nao_sculpt'; const lk=(typeof igBaseLikes==='function'?igBaseLikes(p):0)+(S.igLikes.includes(p.id)?1:0); iosAlert('この投稿について',nm+'\n投稿：'+(IG_AGO[p.id]||'1日前')+' ・ いいね！'+lk.toLocaleString('en-US')+'件','閉じる',null); } })); /* v87: 「この投稿について」は実物どおり投稿情報を出す */
 $('#cm-send').addEventListener('click',sendCm);
+function updCmSend(){ const b=$('#cm-send'), i=$('#cm-in'); if(b) b.classList.toggle('off',!(i&&i.value.trim())); } /* v92：実物IGの作法どおり、空欄の間は投稿ボタンを淡くする */
+$('#cm-in').addEventListener('input',updCmSend);
 $('#cm-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendCm(); });
 /* v83：人の一覧シート（いいねした人／フォロワー／フォロー中）。構成は作中に登場するアカウントのみで、新規の人物名は作らない */
 const PPL_D={'park_jaeon.sculpt':'パク・ジェオン','nao_sculpt':'なお','b1nna_':'オ・ビンナ','s0l_a':'ユン・ソルア'};
@@ -2060,7 +2063,7 @@ function openFolSheet(){ const sh=$('#fol-sheet'); if(sh) sh.classList.add('on')
 function closeFolSheet(){ const sh=$('#fol-sheet'); if(sh) sh.classList.remove('on'); }
 $('#fol-bg').addEventListener('click',closeFolSheet);
 $('#fol-cancel').addEventListener('click',closeFolSheet);
-$('#fol-unfollow').addEventListener('click',()=>{ S.igFolJ=false; save(); closeFolSheet(); renderIG(); });
+$('#fol-unfollow').addEventListener('click',()=>{ S.igFolJ=false; save(); if(typeof vib==='function') vib(8); closeFolSheet(); renderIG(); });
 function openLikers(p,owner){ const ownerU=owner==='j'?'park_jaeon.sculpt':'nao_sculpt'; const norm=u=>u==='park_jaeon'?'park_jaeon.sculpt':u; const seen=[]; igAllCm(p).forEach(c=>{ const u=norm(c[0]); if(u!==ownerU&&!seen.includes(u)) seen.push(u); }); let list=seen.slice(0,6); const liked=S.igLikes.includes(p.id); if(liked) list=['nao_sculpt'].concat(list.filter(u=>u!=='nao_sculpt')); const total=igBaseLikes(p)+(liked?1:0); const rest=total-list.length; openPplSheet('いいね！'+total.toLocaleString('en-US')+'件', list.length?list.map(pplRow).join(''):'<div class="cm-empty">まだいいねがありません</div>', rest>0?'ほか '+rest.toLocaleString('en-US')+' 人':''); }
 /* v84：投稿ヘッダーの「…」から開くアクションシート */
 let actPost=null;
@@ -2101,7 +2104,7 @@ function renderIG(){
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
  body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,isJ,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
- body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); renderIG(); } else openFolSheet(); return; } toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':'（プロフィールの編集は演出用です）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
+ body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); if(typeof vib==='function') vib(10); renderIG(); } else openFolSheet(); return; } toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':'（プロフィールの編集は演出用です）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
  function openDetail(p,owner){
@@ -2409,7 +2412,7 @@ function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>
 function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
 /* v86：ストーリー下部（返信欄／ハート／紙飛行機）を実物どおり反応させる。ハートは実物のストーリーいいねとして保存される */
 (function(){ const foot=document.querySelector('.story-foot'); if(foot) foot.addEventListener('pointerdown',e=>e.stopPropagation());
- const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('tap'); } save(); });
+ const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); if(typeof vib==='function') vib(10); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('tap'); } save(); });
  const ss=$('#sf-send'); if(ss) ss.addEventListener('click',e=>{ e.stopPropagation(); openShareSheet(null); }); /* v89：ストーリーも送信先シート */
  const si=$('#sf-in'); if(si) si.addEventListener('click',e=>{ e.stopPropagation(); toast('（返信はカカオトークのトークで進みます）'); });
 })();
@@ -2963,7 +2966,7 @@ function renderReactionTray(row){
  t.querySelectorAll('[data-re]').forEach(b=>b.addEventListener('click',ev=>{
    ev.stopPropagation();
    const e=b.dataset.re;
-   if(S.reactions[key]===e) delete S.reactions[key]; else S.reactions[key]=e;
+   if(S.reactions[key]===e) delete S.reactions[key]; else { S.reactions[key]=e; if(typeof vib==='function') vib(8); }
    save(); drawChip(row); closeTray();
  }));
 }
@@ -3081,7 +3084,7 @@ document.addEventListener('click',e=>{
  const b=e.target.closest?e.target.closest('[data-ignav]'):null; if(!b) return;
  if(b.dataset.ignav==='search'){ igTab='search'; renderIGSearch(); showView('v-igsearch'); syncIgChrome(); }
  else if(b.dataset.ignav==='prof'){ igWho='n'; igTab='prof'; renderIG(); showView('v-ig'); }
- else { igTab='feed'; renderIGFeed(); showView('v-ig'); }
+ else { const wasFeed=igTab==='feed'&&$('#v-ig').classList.contains('on'); if(wasFeed) igFeedY=0; igTab='feed'; renderIGFeed(); showView('v-ig'); } /* v92：実物IGどおり、フィード表示中にホームを再タップすると先頭へ戻る */
 });
 const igsBack=$('#igs-back'); if(igsBack) igsBack.addEventListener('click',()=>showView('v-ig'));
 const igsIn=$('#igs-in'); if(igsIn) igsIn.addEventListener('input',renderIGSearch);
