@@ -943,12 +943,26 @@ img{-webkit-user-drag:none}
 #v-home.jig .apps .app:nth-child(odd) .ic,#v-home.jig .dock .app:nth-child(odd) .ic{animation-delay:.12s}
 .ig-cat{color:#8e8e8e;font-size:13px}
 
+
+/* v91 */
+#kk-search{display:none;align-items:center;gap:8px;padding:8px 14px;background:#fff}
+#kk-search.on{display:flex}
+#kk-search input{flex:1;background:#f2f2f4;border:0;border-radius:9px;padding:7px 10px;font-size:16px;color:#111;min-width:0}
+#kks-cancel{background:none;border:0;font-size:14px;color:#333;padding:4px 2px;flex:none}
+.fr-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff3b30;margin-left:5px;vertical-align:2px}
+.ig-grid.xp{grid-auto-flow:dense}
+.ig-grid.xp button.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.nt-search{padding:10px 14px 0}
+.nt-search input{width:100%;box-sizing:border-box;background:#f2f2f4;border:0;border-radius:9px;padding:7px 10px;font-size:16px;color:#111}
+.gal-seg{display:flex;gap:2px;background:#e8e8ec;border-radius:9px;padding:2px;margin:10px 14px 0}
+.gal-seg button{flex:1;background:none;border:0;padding:5px 0;font-size:12.5px;border-radius:7px;color:#555}
+.gal-seg button.on{background:#fff;color:#111;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.18)}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v90：リアル化の第8弾です。ロック画面のライト／カメラは長押しで実物どおり反応し、通知バナーをタップすると該当アプリが開きます。写真はお気に入りが保存されるようになり、共有シート・削除（最近削除した項目から復元できます）・ダブルタップズームに対応しました。ニュースには検索と記事の文字サイズ変更、カレンダーには予定の詳細表示を追加し、触感フィードバックのオン／オフも設定に加わりました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v91：リアル化の第9弾です。カカオのヘッダー検索アイコンから友達・トーク一覧を検索できるようになり、ジェオンがプロフィールを更新すると友達一覧に赤いドットが付きます（プロフィールを開くと消えます）。Instagramの探索グリッドは実物どおり大小のタイルが混ざるレイアウトになり、タップするとその投稿の位置からフィードが開きます。解剖メモには検索、写真には年・月・日・すべての写真の切り替えを追加し、グリッド画像は遅延読み込みで軽くしました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1019,6 +1033,7 @@ img{-webkit-user-drag:none}
 <!-- KAKAO (2021) -->
 <div class="view" id="v-kakao">
 <div class="kk-head"><h2 id="kk-title">채팅</h2><div class="kk-icons"><span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><span id="kk-ico2"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span><span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg></span><span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span></div></div>
+<div id="kk-search"><input id="kks-in" type="text" placeholder="친구, 채팅방 검색（友達・トークを検索）" autocomplete="off"><button id="kks-cancel">취소</button></div>
 <div class="abody">
 <div id="thread-list"></div>
 <div id="friend-list" style="display:none"></div>
@@ -1122,6 +1137,7 @@ img{-webkit-user-drag:none}
 <!-- NOTES -->
 <div class="view" id="v-notes">
 <div class="ahead"><button class="back" data-home="1">‹</button><h2>解剖メモ</h2><span class="sub">パク・ジェオン観察記録</span></div>
+<div class="nt-search"><input id="nt-q" type="text" placeholder="メモを検索" autocomplete="off"></div>
 <div class="abody" id="notes-body"></div>
 </div>
 
@@ -1160,6 +1176,7 @@ img{-webkit-user-drag:none}
 <!-- GALLERY (v6) -->
 <div class="view" id="v-gallery">
 <div class="ahead"><button class="back" data-home="1">‹</button><h2>사진</h2><span class="sub" id="gal-count"></span></div>
+<div class="gal-seg" id="gal-seg"><button data-gm="year">연도</button><button data-gm="month">월</button><button data-gm="day" class="on">일</button><button data-gm="all">모든 사진</button></div>
 <div class="abody" id="gal-body"></div>
 <div id="gal-view">
 <div class="gal-top"><div class="gal-top-tx"><div id="gal-date"></div><div id="gal-wday"></div></div><button id="gal-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
@@ -1570,7 +1587,7 @@ S.free=S.free.filter(m=>!!m&&typeof m==='object');
 S.free.forEach(m=>{ if(m.w==='jimg'){ if(typeof m.img!=='string') m.img=''; if(typeof m.cap!=='string') m.cap=m.cap==null?'':String(m.cap); } else if(typeof m.t!=='string') m.t=m.t==null?'':String(m.t); });
 S.free.forEach(m=>{ if(m.q){ if(typeof m.q!=='object'||typeof m.q.t!=='string') delete m.q; else m.q={n:typeof m.q.n==='string'?m.q.n:'',t:m.q.t}; } }); /* v87: 引用データの正規化（壊れた q は落とす） */
 if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def';
-if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
+if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; if(!['day','month','year','all'].includes(S.galMode)) S.galMode='day'; /* v91：ギャラリー表示モードの正規化（profSeen は renderFriends で遅延初期化） */ /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
 const __fin=(v,d)=>(typeof v==='number'&&isFinite(v))?v:d;
 S.kai=Math.max(0,Math.min(100,__fin(S.kai,0)));
 S.kyo=Math.max(0,Math.min(100,__fin(S.kyo,62)));
@@ -2076,10 +2093,10 @@ function renderIG(){
  h+= isJ ? '<div class="ig-folbtn"><span class="'+(S.igFolJ===false?'':'ghost')+'" data-gf="follow">'+(S.igFolJ===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
  if(isJ||igNTab==='grid'){
-  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
+  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img loading="lazy" decoding="async" src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
  }else{
   const sv=S.igSaves.slice().reverse().map(id=>{ const pj=IG_J.find(x=>x.id===id); if(pj&&vis(pj)) return {p:pj,o:'j'}; const pn=IG_N.find(x=>x.id===id); if(pn&&vis(pn)) return {p:pn,o:'n'}; return null; }).filter(Boolean);
-  h+= sv.length ? '<div class="ig-grid">'+sv.map(x=>'<button data-spost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>' : '<div class="ig-saved-empty">保存した投稿はまだありません。<br>投稿のブックマークボタンから保存できます。</div>';
+  h+= sv.length ? '<div class="ig-grid">'+sv.map(x=>'<button data-spost="'+x.p.id+'" data-owner="'+x.o+'"><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>' : '<div class="ig-saved-empty">保存した投稿はまだありません。<br>投稿のブックマークボタンから保存できます。</div>';
  }
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
@@ -2140,11 +2157,12 @@ function renderNotes(){
  let v59sync=false;
  MEMOS.forEach(m=>{ if(m.unlock&&m.unlock()&&!S.memos.includes(m.id)){ unlockMemo(m.id); v59sync=true; } });
  if(v59sync) save();
- const b=$('#notes-body');
+ const b=$('#notes-body'); const ntq=(typeof ntQuery==='string'?ntQuery:'').trim().toLowerCase(); const ntHit=m=>{ if(!ntq) return true; if(!S.memos.includes(m.id)) return false; return m.title.toLowerCase().includes(ntq)||m.body.toLowerCase().includes(ntq); };
  b.innerHTML=MEMOS.map(m=>{
+   if(!ntHit(m)) return '';
    const un=S.memos.includes(m.id);
    return '<div class="memo'+(un?'':' lock')+'"><span class="tag">'+(un?m.tag:IC.lock+' 未解放')+'</span><h3>'+(un?esc(m.title):'？？？')+'</h3>'+(un&&MEMO_DATES[m.id]?'<div class="memo-date">'+MEMO_DATES[m.id]+'</div>':'')+'<p>'+(un?esc(m.body):'物語のキー場面を読み進めると、解剖メモが解放されます。')+'</p></div>';
-  }).join('')+endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>'; /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
+  }).join('')+(ntq?('<p class="notes-count">'+MEMOS.filter(ntHit).length+'件ヒット</p>'+(MEMOS.some(ntHit)?'':'<p class="locknote">「'+esc((typeof ntQuery==='string'?ntQuery:'').trim())+'」に一致するメモはありません</p>')):(endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>')); /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
 }
 function endsHTML(){
  const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
@@ -2210,14 +2228,14 @@ function renderFriends(){
  h+='<div class="fr-sec">친구 '+cnt+'</div>';
  const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+(st==='RAMEN'?IC.bowl:esc(st||''))+'</span></span>'+(mus?'<span class="fr-mus">'+IC.note+' '+esc(mus)+'</span>':'')+'</button>';
  const jm=(profStage().mus.match(/「([^」]+)」/)||[])[1]||'';
- h+=row(cav(),'パク・ジェオン',profStage().st,jm);
+ h+=row(cav(),'パク・ジェオン',profStage().st,jm).replace('ジェオン</span>','ジェオン</span>'+profDotHTML());
  if(S.chap>=1) h+=row('assets/av-bitna.jpg','ビンナ','');
  if(S.chap>=4) h+=row('assets/av-dohyuk.jpg','ヤン・ドヒョク','RAMEN');
  if(S.chap>=5) h+=row('assets/av-sola.jpg','ユン・ソルア','');
  F.innerHTML=h;
  const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>openFProf('なお'));
  F.querySelectorAll('.fr-row').forEach(b=>b.addEventListener('click',()=>{
-   if(b.dataset.fr==='パク・ジェオン'){ profFrom='v-kakao'; showView('v-profile'); return; }
+   if(b.dataset.fr==='パク・ジェオン'){ profFrom='v-kakao'; markProfSeen(); renderFriends(); showView('v-profile'); return; }
    openFProf(b.dataset.fr);
  }));
 }
@@ -2236,7 +2254,7 @@ $('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classLis
 const PP_T={album:'（送信は演出用です。送信ボタンで物語が進みます）',camera:'（送信は演出用です。送信ボタンで物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
 document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='camera'&&typeof sfxPlay==='function') sfxPlay('shutter'); if(k==='album'&&S.done){ openAlbumPick(); return; } if(k==='cal'){ if($('#v-call').classList.contains('on')){ toast('（通話中は開けません）'); return; } $('#plus-panel').classList.remove('on'); renderCal(); showView('v-cal'); return; } /* v87: 日程は実物の共有先としてカレンダーを開く */ toast(PP_T[k]||'（送信は演出用です。送信ボタンで物語が進みます）'); }));
 let profFrom='v-chat'; /* v48：プロフィールを開いた画面を覚えておき、✕では元の画面へ戻る */
-$('#chat-prof-btn').addEventListener('click',()=>{ profFrom='v-chat'; showView('v-profile'); });
+$('#chat-prof-btn').addEventListener('click',()=>{ profFrom='v-chat'; markProfSeen(); showView('v-profile'); });
 $('#prof-close').addEventListener('click',()=>showView(profFrom));
 $('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(onTap) fireTap(); else if(!S.done) run(); });
 $('#prof-call2').addEventListener('click',()=>toast('（無料通話は物語の通話シーンで再生されます）'));
@@ -2292,7 +2310,7 @@ function openDrawer(){ const im=document.querySelector('#cd-m-j img'); if(im) im
 function closeDrawer(){ const d=$('#chat-drawer'); if(d) d.classList.remove('on'); const b=$('#chat-drawer-bg'); if(b) b.classList.remove('on'); }
 $('#chat-menu-btn').addEventListener('click',openDrawer);
 $('#chat-drawer-bg').addEventListener('click',closeDrawer);
-$('#cd-m-j').addEventListener('click',()=>{ closeDrawer(); profFrom='v-chat'; showView('v-profile'); });
+$('#cd-m-j').addEventListener('click',()=>{ closeDrawer(); profFrom='v-chat'; markProfSeen(); showView('v-profile'); });
 $('#cd-photos').addEventListener('click',()=>{ closeDrawer(); renderGallery(); showView('v-gallery'); });
 $('#cd-search2').addEventListener('click',()=>{ openChatSearch(); });
 $('#cd-notif-sw').addEventListener('click',e=>{ e.currentTarget.classList.toggle('on'); });
@@ -2553,12 +2571,17 @@ function renderGallery(){
  const b=$('#gal-body');
  /* v68：iOS写真風に月グループ見出し（2021년 N월）を挟む。data-gal は従来どおり un の通し番号 */
  /* v83：iOS写真の「日」表示に合わせ、月見出し＋サムネイル上の日付重ねをやめて日単位の見出し（日付＋曜日）に組む */
- let h='',lastD='';
+ const gm=['day','month','year','all'].includes(S.galMode)?S.galMode:'day'; /* v91：iOS写真のライブラリ切替（연도/월/일/모든 사진） */
+ const gkey=g=>gm==='day'?g.d:gm==='month'?(g.d.split('월')[0]+'월'):gm==='year'?'2021년':'';
+ const ghead=g=>gm==='day'?('2021년 '+g.d+(galWeekday(g)?' '+galWeekday(g)+'요일':'')):gm==='month'?('2021년 '+(g.d.split('월')[0]+'월')):'2021년';
+ let h='',lastD=null;
  un.forEach((g,i)=>{
-   if(g.d!==lastD){ if(lastD) h+='</div>'; const wd=galWeekday(g); h+='<div class="gal-mh">2021년 '+g.d+(wd?' '+wd+'요일':'')+'</div><div class="gal-grid">'; lastD=g.d; }
-   h+='<button data-gal="'+i+'"><img src="'+g.img+'"></button>';
+   const k=gkey(g);
+   if(k!==lastD){ if(lastD!==null) h+='</div>'; if(gm!=='all') h+='<div class="gal-mh">'+ghead(g)+'</div>'; h+='<div class="gal-grid">'; lastD=k; }
+   h+='<button data-gal="'+i+'"><img loading="lazy" decoding="async" src="'+g.img+'"></button>';
  });
- if(lastD) h+='</div>';
+ if(lastD!==null) h+='</div>';
+ const seg91=$('#gal-seg'); if(seg91) seg91.querySelectorAll('[data-gm]').forEach(x=>x.classList.toggle('on',x.dataset.gm===gm));
  const unAll=GAL.filter(g=>S.calU>=g.u); b.innerHTML=h+(unAll.length<GAL.length?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>')+((Array.isArray(S.galDel)&&S.galDel.length)?'<button class="gal-trash-row" id="gal-trash-row">最近削除した項目<span>'+S.galDel.length+'件 ›</span></button>':''); const trw=b.querySelector('#gal-trash-row'); if(trw) trw.addEventListener('click',()=>{ if(typeof renderGalTrash==='function') renderGalTrash(); });
  b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; galCur=g; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':''; $('#gal-cap').textContent=g.cap; updGalFav(); $('#gal-view').classList.add('on'); }));
 }
@@ -2571,6 +2594,58 @@ document.querySelectorAll('.gal-bar [data-ga]').forEach(btn=>btn.addEventListene
  else if(k==='info'){ const wd=galWeekday(galCur); toast('2021년 '+galCur.d+(wd?'（'+wd+'요일）':'')+' ・ '+galCur.cap); }
  else if(k==='trash'){ const g=galCur; iosAlert('写真を削除','この写真を「最近削除した項目」に移動しますか？','削除',()=>{ if(!Array.isArray(S.galDel)) S.galDel=[]; if(!S.galDel.includes(g.img)) S.galDel.push(g.img); save(); galList=[]; $('#gal-view').classList.remove('on'); renderGallery(); }); }
 }));
+
+/* ================= v91 : KAKAO LIST SEARCH / PROFILE UPDATE DOT / NOTES SEARCH ================= */
+var ntQuery='';
+function profStageKey(){ if(S.epiProf&&S.endId==='drama') return 'epi'; const u=S.calU||0; return u>=11?'u11':u>=10?'u10':u>=6?'u6':u>=3?'u3':'u0'; }
+function profDotHTML(){ if(typeof S.profSeen!=='string'){ S.profSeen=profStageKey(); return ''; } return S.profSeen!==profStageKey()?'<span class="fr-dot"></span>':''; }
+function markProfSeen(){ const k=profStageKey(); if(S.profSeen!==k){ S.profSeen=k; save(); } }
+/* カカオ一覧検索：実物の統合検索アイコンから開き、表示中タブ（友達／トーク）を行単位で絞り込む */
+var kkQuery='';
+function kkSearchApply(){
+ const q=kkQuery.trim().toLowerCase();
+ const run=root=>{
+   if(!root) return;
+   let sec=null,secHas=false,any=false;
+   [...root.children].forEach(ch=>{
+     if(ch.classList.contains('kks-empty')) return;
+     if(ch.classList.contains('fr-sec')){ if(sec) sec.style.display=secHas?'':'none'; sec=ch; secHas=false; ch.style.display=''; return; }
+     if(ch.classList.contains('locknote')){ ch.style.display=q?'none':''; if(!q) any=true; return; }
+     const hit=!q||ch.textContent.toLowerCase().includes(q);
+     ch.style.display=hit?'':'none'; if(hit){ secHas=true; any=true; }
+   });
+   if(sec) sec.style.display=secHas?'':'none';
+   let em=root.querySelector('.kks-empty');
+   if(q&&!any){ if(!em){ em=document.createElement('div'); em.className='locknote kks-empty'; em.textContent='검색 결과가 없습니다（見つかりませんでした）'; root.appendChild(em); } em.style.display=''; }
+   else if(em) em.style.display='none';
+ };
+ const fl=$('#friend-list'), tl=$('#thread-list');
+ if(fl&&fl.style.display!=='none') run(fl);
+ if(tl&&tl.style.display!=='none') run(tl);
+}
+function kkSearchClose(){ const bar=$('#kk-search'); if(bar) bar.classList.remove('on'); kkQuery=''; const inp=$('#kks-in'); if(inp) inp.value=''; kkSearchApply(); }
+(function(){
+ const spans=document.querySelectorAll('.kk-icons > span');
+ const bar=$('#kk-search'), inp=$('#kks-in');
+ if(spans[0]&&bar) spans[0].addEventListener('click',()=>{
+   if(bar.classList.contains('on')){ kkSearchClose(); return; }
+   const mb=$('#more-body'); if(mb&&mb.style.display!=='none'){ const ct=document.querySelector('.kk-tabbar [data-tab="chats"]'); if(ct) ct.click(); }
+   bar.classList.add('on'); if(inp) setTimeout(()=>inp.focus(),60);
+ });
+ if(inp) inp.addEventListener('input',()=>{ kkQuery=inp.value; kkSearchApply(); });
+ const cn=$('#kks-cancel'); if(cn) cn.addEventListener('click',kkSearchClose);
+ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener('click',()=>setTimeout(kkSearchApply,0)));
+ if(spans[2]) spans[2].addEventListener('click',()=>toast('（BGMはホーム画面のウィジェットで切り替えられます）'));
+ if(spans[3]) spans[3].addEventListener('click',()=>showView('v-home'));
+ const ic2=$('#kk-ico2'); if(ic2) ic2.addEventListener('click',()=>{
+   const mb=$('#more-body'), fl=$('#friend-list');
+   if(mb&&mb.style.display!=='none') showView('v-home');
+   else if(fl&&fl.style.display!=='none') toast('（友達の追加は演出用です）');
+   else toast('（新しいトークは物語の中で始まります）');
+ });
+ const ntqEl=$('#nt-q'); if(ntqEl) ntqEl.addEventListener('input',()=>{ ntQuery=ntqEl.value; renderNotes(); });
+ const gseg=$('#gal-seg'); if(gseg) gseg.querySelectorAll('[data-gm]').forEach(b=>b.addEventListener('click',()=>{ S.galMode=b.dataset.gm; save(); renderGallery(); }));
+})();
 
 /* start */
 replay(); updParams();
@@ -2912,7 +2987,7 @@ function openAlbumPick(){
  const imgs=[]; const seen=new Set();
  GAL.filter(x=>S.calU>=x.u).forEach(x=>{ if(!seen.has(x.img)){ seen.add(x.img); imgs.push(x.img); } });
  IG_J.concat(IG_N).forEach(p=>{ const vis=S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); if(vis&&!seen.has(p.img)){ seen.add(p.img); imgs.push(p.img); } });
- g.innerHTML=imgs.map(s=>'<button data-ap="'+s+'"><img src="'+s+'"></button>').join('')||'<p style="grid-column:1/-1;color:#888;font-size:13px">まだ写真がありません</p>';
+ g.innerHTML=imgs.map(s=>'<button data-ap="'+s+'"><img loading="lazy" decoding="async" src="'+s+'"></button>').join('')||'<p style="grid-column:1/-1;color:#888;font-size:13px">まだ写真がありません</p>';
  g.querySelectorAll('[data-ap]').forEach(b=>b.addEventListener('click',()=>{
    const img=b.dataset.ap;
    $('#albumpick').classList.remove('on'); $('#plus-panel').classList.remove('on'); if(btnPlus2) btnPlus2.classList.remove('on');
@@ -2977,12 +3052,12 @@ function renderIGSearch(){
  const accts=IGS_ACCTS.filter(a=>S.chap>=(a.min||0)&&(!q||a.u.toLowerCase().includes(q)||a.d.includes(q))); /* v75：未登場の人物は検索に出さない（スレッド／友達一覧の解放条件と一致） */
  let h='';
  if(accts.length) h+='<div class="igs-sec">アカウント</div>'+accts.map(a=>'<button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button>').join('');
- if(q){ const hits=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)&&x.p.cap.toLowerCase().includes(q)); if(hits.length) h+='<div class="igs-sec">投稿</div><div class="ig-grid">'+hits.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>'; } /* v83：実物どおり、キーワードでは投稿（キャプション）も検索対象にする */
+ if(q){ const hits=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)&&x.p.cap.toLowerCase().includes(q)); if(hits.length) h+='<div class="igs-sec">投稿</div><div class="ig-grid">'+hits.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>'; } /* v83：実物どおり、キーワードでは投稿（キャプション）も検索対象にする */
  if(!q){
    const rec=(Array.isArray(S.igRecent)?S.igRecent:[]).map(u=>IGS_ACCTS.find(a=>a.u===u)).filter(a=>a&&S.chap>=(a.min||0)); /* v88：最近の検索（実物の作法。未登場のアカウントは出さない） */
    if(rec.length) h+='<div class="igs-sec">最近の検索<button class="igs-clear" id="igs-clear">すべて消去</button></div>'+rec.map(a=>'<div class="igs-acctrow"><button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button><button class="igs-x" data-rx="'+a.u+'" aria-label="履歴から削除">✕</button></div>').join('');
    const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p));
-   if(posts.length) h+='<div class="igs-sec">探索</div><div class="ig-grid">'+posts.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>';
+   if(posts.length) h+='<div class="igs-sec">探索</div><div class="ig-grid xp">'+posts.map((x,i)=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"'+(i%5===0?' class="big"':'')+'><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>';
  }
  if(!h) h='<div class="igs-sec">「'+esc(q)+'」の結果はありません</div>';
  body.innerHTML=h;
@@ -2996,9 +3071,10 @@ function renderIGSearch(){
  body.querySelectorAll('[data-rx]').forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); if(Array.isArray(S.igRecent)){ S.igRecent=S.igRecent.filter(u=>u!==b.dataset.rx); save(); } renderIGSearch(); })); /* v88：履歴の個別削除 */
  const igsClr=$('#igs-clear'); if(igsClr) igsClr.addEventListener('click',()=>{ S.igRecent=[]; save(); renderIGSearch(); }); /* v88：履歴の全消去 */
  body.querySelectorAll('[data-xpost]').forEach(b=>b.addEventListener('click',()=>{
-   igTab='prof'; igWho=b.dataset.owner; igNTab='grid';
-   showView('v-ig'); renderIG();
-   const btn=$('#ig-body').querySelector('[data-post="'+b.dataset.xpost+'"]'); if(btn) btn.click();
+   /* v91：実物どおり、探索の投稿はプロフィール経由ではなくフィードで開く（その投稿の位置からスクロールできる） */
+   igTab='feed'; renderIGFeed(); showView('v-ig');
+   const pid=b.dataset.xpost;
+   requestAnimationFrame(()=>{ const bd=$('#ig-body'); const card=bd?bd.querySelector('.ig-post[data-pid="'+pid+'"]'):null; if(bd&&card){ bd.scrollTop+=card.getBoundingClientRect().top-bd.getBoundingClientRect().top-4; igFeedY=bd.scrollTop; } });
  }));
 }
 document.addEventListener('click',e=>{
@@ -3040,7 +3116,7 @@ function renderNews(){
  const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
  if(nwCat==='전체'&&!nwQuery&&rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
  const latest=list.filter(a=>nwCat==='전체'||a.cat===nwCat).slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
- h+='<div class="nw-sec">'+(nwQuery?('검색 결과 '+latest.length+'건'):'최신 뉴스')+'</div>'+(nwQuery&&!latest.length?'<div class="nw-empty">검색 결과가 없습니다<br><span>다른 검색어를 입력해 보세요</span></div>':'')+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
+ h+='<div class="nw-sec">'+(nwQuery?('검색 결과 '+latest.length+'건'):'최신 뉴스')+'</div>'+(nwQuery&&!latest.length?'<div class="nw-empty">검색 결과가 없습니다<br><span>다른 검색어를 입력해 보세요</span></div>':'')+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" loading="lazy" decoding="async" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
  h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
  b.innerHTML=h;
  b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
