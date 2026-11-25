@@ -986,12 +986,31 @@ img{-webkit-user-drag:none;user-select:none}
  .nw-item,.cal-e,.memo,.povrow,.nw-rank button,.ig-post{animation:none !important}
  .lock-hint{animation:none !important}
 }
+/* ===== v122 : TINDER PORT — news / gallery =====
+   ニュース：ヒーローカード（.news-hero）と記事タイポグラフィ（.article の
+   19px/1.55見出し・14.5px/1.95本文）を移植。NAVERの体裁（緑・カテゴリ）は維持。
+   ギャラリー：写真ビューアの前後ナビ（.pv-nav）とグリッドのお気に入り
+   バッジ（.fav-badge）を移植 */
+.news-hero{display:block;width:calc(100% - 28px);margin:12px 14px 4px;border-radius:14px;overflow:hidden;background:#111;color:#fff;animation:fadeup .4s ease;text-align:left;padding:0;cursor:pointer}
+.news-hero img{width:100%;height:170px;object-fit:cover;opacity:.85;display:block}
+.news-hero .in{display:block;padding:11px 13px}
+.news-hero .tag{display:inline-block;background:var(--red);color:#fff;font-size:10.5px;font-weight:800;border-radius:4px;padding:2px 7px}
+.news-hero h3{font-size:16.5px;line-height:1.5;margin-top:6px}
+.news-hero p{font-size:12px;color:#c7c7cc;margin-top:4px;line-height:1.5}
+.news-hero:active{opacity:.82}
+.nwr-title{font-size:19px;line-height:1.55}
+.nwr-body p{font-size:14.5px;line-height:1.95}
+.fav-badge{position:absolute;top:6px;right:6px;color:#ff3040;font-size:15px;text-shadow:0 1px 4px rgba(0,0,0,.45);z-index:2}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.14);color:#fff;border:none;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center}
+.gal-nav.prev{left:10px}
+.gal-nav.next{right:10px}
+.gal-nav:active{background:rgba(255,255,255,.3)}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v121：全体の底上げ第2弾（Instagram）。複数枚投稿のカルーセルを、参照元のスクロールスナップ機構へ置き換えました（旧来のドラッグ方式は廃止。前後の矢印ボタンも追加）。ストーリーの進み具合のバーも、参照元と同じscaleX方式に揃えました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v122：全体の底上げ第3弾（ニュース／ギャラリー）。ニュース一覧の先頭に、参照元のヒーローカード（大きな写真＋見出し）を追加し、記事の文字組みも参照元の大きさ・行間に揃えました。ギャラリーは、写真を開いたときの前後ボタンと、お気に入りのハート印をグリッドにも出すようにしました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1236,6 +1255,7 @@ img{-webkit-user-drag:none;user-select:none}
 <div class="gal-seg" id="gal-seg"><button data-gm="year">연도</button><button data-gm="month">월</button><button data-gm="day" class="on">일</button><button data-gm="all">모든 사진</button></div>
 <div class="abody" id="gal-body"></div>
 <div id="gal-view">
+<button class="gal-nav prev" id="gal-prev" aria-label="前の写真">‹</button><button class="gal-nav next" id="gal-next" aria-label="次の写真">›</button>
 <div class="gal-top"><div class="gal-top-tx"><div id="gal-date"></div><div id="gal-wday"></div></div><button id="gal-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <img id="gal-img" src="" alt="">
 <div class="gal-meta"><div id="gal-cap"></div></div>
@@ -2682,7 +2702,7 @@ function renderGallery(){
  un.forEach((g,i)=>{
    const k=gkey(g);
    if(k!==lastD){ if(lastD!==null) h+='</div>'; if(gm!=='all') h+='<div class="gal-mh">'+ghead(g)+'</div>'; h+='<div class="gal-grid">'; lastD=k; }
-   h+='<button data-gal="'+i+'"><img loading="lazy" decoding="async" src="'+g.img+'"></button>';
+   h+='<button data-gal="'+i+'"><img loading="lazy" decoding="async" src="'+g.img+'">'+(galFav.has(g.img)?'<span class="fav-badge">♥</span>':'')+'</button>'; /* v122：お気に入りバッジ（Tinder版 .fav-badge 移植） */
  });
  if(lastD!==null) h+='</div>';
  const seg91=$('#gal-seg'); if(seg91) seg91.querySelectorAll('[data-gm]').forEach(x=>x.classList.toggle('on',x.dataset.gm===gm));
@@ -2690,11 +2710,12 @@ function renderGallery(){
  b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; galCur=g; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':''; $('#gal-cap').textContent=g.cap; updGalFav(); $('#gal-view').classList.add('on'); }));
 }
 $('#gal-close').addEventListener('click',()=>$('#gal-view').classList.remove('on'));
+$('#gal-prev').addEventListener('click',()=>galSwipe(-1)); $('#gal-next').addEventListener('click',()=>galSwipe(1)); /* v122：写真ビューアの前後ナビ（Tinder版 .pv-nav 移植） */
 /* v68：写真詳細の下部ツールバー（共有／お気に入り／情報／削除）。実物様式のフィードバックのみで、物語・セーブには影響しない。削除は実際に消さない */
 document.querySelectorAll('.gal-bar [data-ga]').forEach(btn=>btn.addEventListener('click',()=>{
  const k=btn.dataset.ga; if(!galCur) return;
  if(k==='share'){ if(typeof openGalShare==='function') openGalShare(); }
- else if(k==='fav'){ if(galFav.has(galCur.img)) galFav.delete(galCur.img); else galFav.add(galCur.img); S.galFav=[...galFav]; save(); updGalFav(); }
+ else if(k==='fav'){ if(galFav.has(galCur.img)) galFav.delete(galCur.img); else galFav.add(galCur.img); S.galFav=[...galFav]; save(); updGalFav(); renderGallery(); }
  else if(k==='info'){ const wd=galWeekday(galCur); toast('2021년 '+galCur.d+(wd?'（'+wd+'요일）':'')+' ・ '+galCur.cap); }
  else if(k==='trash'){ const g=galCur; iosAlert('写真を削除','この写真を「最近削除した項目」に移動しますか？','削除',()=>{ if(!Array.isArray(S.galDel)) S.galDel=[]; if(!S.galDel.includes(g.img)) S.galDel.push(g.img); save(); galList=[]; $('#gal-view').classList.remove('on'); renderGallery(); }); }
 }));
@@ -3220,6 +3241,7 @@ function renderNews(){
  const rank=list.slice().sort((x,y)=>y.hot-x.hot).slice(0,5);
  if(nwCat==='전체'&&!nwQuery&&rank.length){ h+='<div class="nw-sec">많이 본 뉴스 <span>실시간 랭킹</span></div><div class="nw-rank">'+rank.map((a,i)=>'<button data-nw="'+a.id+'"><span class="no">'+(i+1)+'</span><span>'+esc(a.title)+'</span><span class="vw">'+(a.hot*137+S.calU*31)+'회</span></button>').join('')+'</div>'; }
  const latest=list.filter(a=>nwCat==='전체'||a.cat===nwCat).slice().sort((x,y)=>(y.u-x.u)||(y.hot-x.hot));
+ if(nwCat==='전체'&&!nwQuery){ const hero=latest.filter(a=>a.th).slice().sort((x,y)=>y.hot-x.hot)[0]; if(hero) h+='<button class="news-hero" data-nw="'+hero.id+'"><img loading="lazy" decoding="async" src="'+hero.th+'" alt=""><span class="in"><span class="tag">'+esc(hero.cat)+'</span><h3>'+esc(hero.title)+'</h3><p>'+esc(hero.sub)+'</p></span></button>'; } /* v122：参照元（Tinder版）のヒーローカードを移植 */
  h+='<div class="nw-sec">'+(nwQuery?('검색 결과 '+latest.length+'건'):'최신 뉴스')+'</div>'+(nwQuery&&!latest.length?'<div class="nw-empty">검색 결과가 없습니다<br><span>다른 검색어를 입력해 보세요</span></div>':'')+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" loading="lazy" decoding="async" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
  h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
  b.innerHTML=h;
