@@ -963,7 +963,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v103：新しい写真を5枚追加しました。本人提供の写真（バーのライム／雨の日の傘／雨の窓辺／夜のコンビニ／石膏の手）で、park_jaeonの新規投稿1件・既存投稿へのカルーセル追加1件と、nao_sculptの新規投稿3件として組み込んでいます。キャプションとコメントは写真の内容に合わせて書きました。本編・台詞・数値・既存の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v104：新しい写真を3枚追加しました。本人提供の写真（バスの車窓から見た夕方の海／真夏のアトリエ／夕方の地方駅のホーム）で、nao_sculptの新規投稿2件とpark_jaeonの新規投稿1件として組み込んでいます。あわせて、まだ出会っていないのにカカオのタブへ未読バッジ「1」が出ていた問題を直しました（未読が実在する時だけ表示されます）。キャプションとコメントは写真の内容に合わせて書きました。本編・台詞・数値・既存の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1042,7 +1042,7 @@ img{-webkit-user-drag:none}
 </div>
 <div class="kk-tabbar">
 <button data-tab="friends"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></span>친구</button>
-<button data-tab="chats" class="on"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span>채팅<span class="kbadge" id="kk-badge">1</span></button>
+<button data-tab="chats" class="on"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg></span>채팅<span class="kbadge" id="kk-badge" style="display:none"></span></button>
 <button data-tab="sharp"><span class="ti" style="font-weight:700">#</span>#</button>
 <button data-tab="shop"><span class="ti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l-1.1 12.5H6.6z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg></span>쇼핑</button>
 <button data-tab="more"><span class="ti">•••</span>더보기</button>
@@ -1311,7 +1311,8 @@ const IG_J=[
 {id:'statue',img:'assets/ig-jaeon-statue.jpg',cap:'전시. 보는 쪽에서',likes:'588',unlock:11,cm:[['b1nna_','今日は見る側なんだ'],['park_jaeon','……たまには']],cmL:[['nao_sculpt','（来てたんだ）']]},
 {id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]},
 {id:'enlist',img:'assets/ig-enlist.jpg',cap:'……',likes:'1,876',unlock:99,cm:[['b1nna_','見たよ。……元気で']]},
-{id:'atelier2',img:'assets/ig-atelier-night.jpg',cap:'작업실. 밤',likes:'539',unlock:10,cm:[['b1nna_','또 작업실이네'],['park_jaeon','조용하니까']]}
+{id:'atelier2',img:'assets/ig-atelier-night.jpg',cap:'작업실. 밤',likes:'539',unlock:10,cm:[['b1nna_','또 작업실이네'],['park_jaeon','조용하니까']]},
+{id:'summer',img:'assets/ig-atelier-summer.jpg',cap:'작업실. 한여름',likes:'441',unlock:10,cm:[['b1nna_','扇風機と麦茶……夏の作業室って感じ'],['park_jaeon','……粘土が乾く前に終わらせる']]}
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',imgs:['assets/nao-post1.jpg','assets/nao-busan.jpg','assets/nao-busan-me.jpg'],cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','え、そこ足元ガラス！？ 下、海じゃん'],['nao_sculpt','足すくんだけど、いい気分転換になった']],cmL:[['b1nna_','この日、泣いてなかった？']]},
@@ -1328,7 +1329,9 @@ const IG_N=[
 {id:'n12',img:'assets/nao-invitation.jpg',cap:'展示の招待状、届いた。チケットは2枚',likes:'142',unlock:10,cm:[['b1nna_','チケット2枚！ もう1枚は誰の分？'],['nao_sculpt','……まだ、決めてない']]},
 {id:'n13',img:'assets/nao-umbrellas.jpg',cap:'ただいま。傘も靴もびしょ濡れ',likes:'117',unlock:9,cm:[['b1nna_','靴までびしょ濡れじゃん'],['nao_sculpt','ドアの外、まだ降ってる']]},
 {id:'n14',img:'assets/nao-rainwindow.jpg',cap:'雨の日。窓辺で本とコーヒー',likes:'96',unlock:8,cm:[['b1nna_','窓の雨、すごいね'],['nao_sculpt','外の灯りがにじんで見える']]},
-{id:'n15',img:'assets/nao-hand.jpg',cap:'展示作品。手のかたち',likes:'156',unlock:11,cm:[['b1nna_','手のシワまで本物みたい'],['nao_sculpt','石膏だよ。近くで見ると荒い']],cmL:[['park_jaeon','……手が、いちばん残った']]}
+{id:'n15',img:'assets/nao-hand.jpg',cap:'展示作品。手のかたち',likes:'156',unlock:11,cm:[['b1nna_','手のシワまで本物みたい'],['nao_sculpt','石膏だよ。近くで見ると荒い']],cmL:[['park_jaeon','……手が、いちばん残った']]},
+{id:'n16',img:'assets/nao-bus.jpg',cap:'帰りのバス。窓の外、ずっと海だった',likes:'104',unlock:0,cm:[['b1nna_','車窓からの海、夕日がやばい'],['nao_sculpt','帰りたくなくなるやつ']]},
+{id:'n17',img:'assets/nao-station.jpg',cap:'合宿の帰り。ホーム、誰もいなかった',likes:'129',unlock:8,cm:[['b1nna_','夕日のホーム、誰もいなくてエモい'],['nao_sculpt','電車、全然来なかった']]}
 ];
 /* v68：day は月グリッドのドット用。値は新規に作らず、写真アプリ（GAL）の日付・要約内の明記日付など既存データで確定できるものだけに付けた（個展3/5・バー3/12・作業室3/26・曖昧な関係4/16・誕生日4/25・合宿6/18・雨の夜6/25・修復7/9・展示7/16・温室9/17・水やり9/19）。確定できないエントリには付けない */
 const CAL=[
@@ -1957,6 +1960,9 @@ function threadRow(img,name,prev,time,ub,onclick,avc){
  b.innerHTML=(img?'<img class="av" src="'+img+'">':'<span class="avc" style="background:'+avc+'">'+IC.group+'</span>')+'<span class="tt"><span class="tn">'+name+'</span><span class="tp">'+esc(prev)+'</span></span>'+'<span class="tr"><time>'+time+'</time>'+(ub?'<span class="ub">'+ub+'</span>':'')+'</span>';
  b.addEventListener('click',onclick); return b;
 }
+/* v104：カカオ下部タブの未読バッジ集計。一覧のメイン行バッジと同一の式を使い、未読が実在しない間はバッジ自体を出さない（従来はHTMLに「1」が固定表示され、JSから一度も更新されていなかった） */
+function kkUnreadTotal(){ return (S.proUnread>0)?S.proUnread:((S.chap>=2&&!S.done)?1:0); }
+function updKkBadge(){ const b=$('#kk-badge'); if(!b) return; const n=kkUnreadTotal(); if(n>0){ b.style.display='flex'; b.textContent=String(n); } else { b.style.display='none'; b.textContent=''; } }
 function renderThreads(){
  const L=$('#thread-list'); L.innerHTML='';
  const prevJ=S.done?(S.endId==='nao'?'解剖、終わったね':S.endId==='gen'?'……行ってらっしゃい':'君がすごく好きだ')
@@ -1972,7 +1978,7 @@ function renderThreads(){
  const kdMD=c=>{ const kd=KDATE[c]; if(!kd) return ''; const m=kd.match(/(\d+)월\s*(\d+)일/); return m?m[1]+'월 '+m[2]+'일':''; };
  const tmon=i=>kdMD(CHAPCAL[Math.min(Math.max(i,0),CHAPCAL.length-1)]);
  const mainDate=(()=>{ let c=S.calU; while(c>0&&!KDATE[c]) c--; return kdMD(c); })();
- L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,mainDate,S.proUnread>0?S.proUnread:(S.chap>=2&&!S.done?1:0),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
+ L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,mainDate,kkUnreadTotal(),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
  if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
@@ -1980,6 +1986,7 @@ function renderThreads(){
  if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk.jpg',DOHYUK[si(DOHYUK)])));
  if(S.chap>=5) L.appendChild(threadRow('assets/av-sola.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola.jpg',SOLA[si(SOLA)])));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
+ updKkBadge(); /* v104：一覧を描くたびにタブバッジも実未読へ同期する */
 }
 let sideView=null;
 function openSide(name,img,log){
@@ -2006,7 +2013,7 @@ let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿
 /* ================= v81 : IGフィード／コメントシート／既読リング =================
    姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
    自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
-const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前'};
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前'};
 let igTab='feed';
 let igFeedY=0, igFeedHold=false; /* v88：フィードのスクロール位置保持（実物どおり、詳細・プロフィール・ストーリーから戻っても元の位置） */
 (function(){ const b=$('#ig-body'); if(b) b.addEventListener('scroll',()=>{ if(igTab==='feed'&&!igFeedHold) igFeedY=b.scrollTop; },{passive:true}); })();
@@ -2968,7 +2975,7 @@ async function deliverPro(){
  if(proBusy) return; proBusy=true;
  const msgs=PRO_MSGS[S.proN];
  if(!msgs){ proBusy=false; return; }
- S.proN++; S.proUnread++; S.proOps=0; save();
+ S.proN++; S.proUnread++; S.proOps=0; save(); if(typeof updKkBadge==='function') updKkBadge(); /* v104：先行メッセージ着信でタブバッジも増やす */
  showProBanner(msgs);
  for(const m of msgs){
    await sleep(1200);
