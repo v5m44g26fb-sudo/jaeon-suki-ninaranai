@@ -228,6 +228,22 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ppl-tx span{font-size:13px;color:#8e8e93}
 .ppl-foot{padding:8px 14px 16px;color:#8e8e93;font-size:12.5px;text-align:center}
 .ig-stats span[data-stat]{cursor:pointer}
+/* v84：IG投稿の「…」アクションシート（iOS のアクションシート様式） */
+#act-sheet{position:absolute;inset:0;z-index:245;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
+#act-sheet .act-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#act-sheet .act-panel{position:relative;margin:0 8px calc(10px + var(--sab));transform:translateY(110%);transition:transform .34s cubic-bezier(.32,.72,0,1)}
+#act-sheet.on{pointer-events:auto}
+#act-sheet.on .act-bg{opacity:1}
+#act-sheet.on .act-panel{transform:translateY(0)}
+.act-group{background:rgba(252,252,252,.96);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.act-group button,.act-cancel{background:none;border:none;font-family:inherit;font-size:16.5px;color:#262626;padding:13px 0;cursor:pointer;width:100%}
+.act-group button+button{border-top:1px solid rgba(60,60,67,.16)}
+.act-cancel{display:block;background:rgba(252,252,252,.96);border-radius:14px;margin-top:8px;font-weight:600;color:#262626}
+.act-group button:active,.act-cancel:active{background:#e9e9ee}
+/* v84：フィードのストーリートレイは自分のアバターが先頭（未投稿時は＋バッジ） */
+.story .ring{position:relative}
+.story .splus{position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:#0095f6;color:#fff;font-size:16px;line-height:17px;text-align:center;border:2.5px solid #fff;z-index:2}
+
 /* v83：iOS風アラート（リセット確認用。ブラウザ標準ダイアログは使わない） */
 #ios-alert{position:absolute;inset:0;z-index:400;display:none;align-items:center;justify-content:center}
 #ios-alert.on{display:flex}
@@ -809,7 +825,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v83：リアル化の第3弾です。カカオの連続メッセージ表示（アバターと名前は先頭だけ）、トーク一覧の日付書式、Instagramの「いいねした人」とフォロワー／フォロー中の一覧、検索での投稿ヒット、写真の日単位グルーピング、リセット確認のiOS風アラートを実物に寄せました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v84：リアル化の第3弾（2）です。チャット画面のステータスバーを実物どおり暗色にし、Instagramの投稿メニュー（…）をアクションシート化、フィードのストーリー列は自分のアバターを先頭に（未投稿時は＋バッジ）、ニュース記事の日時をNAVERの「입력」書式に寄せました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1053,6 +1069,7 @@ img{-webkit-user-drag:none}
 
 <div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
 <div id="ppl-sheet"><div class="ppl-bg" id="ppl-bg"></div><div class="ppl-panel"><div class="cm-grab"></div><div class="ppl-head" id="ppl-title">いいね！</div><div class="ppl-list" id="ppl-list"></div></div></div>
+<div id="act-sheet"><div class="act-bg" id="act-bg"></div><div class="act-panel"><div class="act-group"><button data-act="share">投稿を共有する</button><button data-act="about">この投稿について</button></div><button data-act="cancel" class="act-cancel">キャンセル</button></div></div>
 <div id="ios-alert"><div class="ia-bg"></div><div class="ia-card"><div class="ia-t" id="ia-title"></div><div class="ia-m" id="ia-msg"></div><div class="ia-btns"><button id="ia-cancel">キャンセル</button><button id="ia-ok" class="dest">OK</button></div></div></div>
 <audio id="bgm" loop preload="auto" style="display:none"></audio>
 <div id="toast"></div>
@@ -1428,7 +1445,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); } }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -1786,8 +1803,8 @@ function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') retur
 function igBaseLikes(p){ return parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13; }
 function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
 function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' seen'; const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
-function igStoriesRowHTML(){ const SUBAR=[['park_jaeon',cav()],['nao_sculpt','assets/nao-avatar.jpg'],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>'<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'"></span>'+s[0]+'</button>').join('')+'</div>'; }
-function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast('このユーザーのストーリーは、物語の進行で追加されます'); })); }
+function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna.jpg'],['s0l_a','assets/av-sola.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
+function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast(b.dataset.suser==='nao_sculpt'?'（ストーリーの追加は演出用です）':'このユーザーのストーリーは、物語の進行で追加されます'); })); }
 function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':'nao_sculpt'):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
 function igPostHTML(p,owner){
  const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar.jpg',name:'nao_sculpt'};
@@ -1808,6 +1825,7 @@ function igWireCard(dp,p,owner,inFeed){
  imgW.addEventListener('dblclick',dbl);
  imgW.addEventListener('click',()=>{ const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
  saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); save(); });
+ const dots=dp.querySelector('.dots'); if(dots) dots.addEventListener('click',e=>{ e.stopPropagation(); openActSheet(p); }); /* v84：「…」は実物どおりアクションシート */
  dp.querySelector('.ig-cmtb').addEventListener('click',()=>openCmSheet(p,owner,false));
  dp.querySelector('.ig-shrb').addEventListener('click',()=>toast('（共有は演出用です）'));
  const ca=dp.querySelector('.ig-cmtadd'); if(ca) ca.addEventListener('click',()=>openCmSheet(p,owner,true));
@@ -1845,6 +1863,8 @@ function sendCm(){ const inp=$('#cm-in'); if(!inp||!cmPost) return; const v=(inp
 $('#cm-close').addEventListener('click',closeCmSheet);
 $('#cm-bg').addEventListener('click',closeCmSheet);
 $('#ppl-bg').addEventListener('click',closePplSheet);
+$('#act-bg').addEventListener('click',closeActSheet);
+document.querySelectorAll('#act-sheet [data-act]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.act; closeActSheet(); if(k==='share') toast('（共有は演出用です）'); else if(k==='about') toast('（投稿の詳細情報は演出用です）'); }));
 $('#cm-send').addEventListener('click',sendCm);
 $('#cm-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendCm(); });
 /* v83：人の一覧シート（いいねした人／フォロワー／フォロー中）。構成は作中に登場するアカウントのみで、新規の人物名は作らない */
@@ -1853,6 +1873,10 @@ function pplRow(u){ const av=igCmAv(u); const who=u==='park_jaeon.sculpt'?'j':u=
 function openPplSheet(title,rows,foot){ const sh=$('#ppl-sheet'); if(!sh) return; $('#ppl-title').textContent=title; $('#ppl-list').innerHTML=rows+(foot?'<div class="ppl-foot">'+foot+'</div>':''); sh.classList.add('on'); sh.querySelectorAll('[data-ppl]').forEach(b=>b.addEventListener('click',()=>{ const w=b.dataset.who; closePplSheet(); if(w){ igTab='prof'; igWho=w; igNTab='grid'; showView('v-ig'); renderIG(); } else toast('このアカウントのプロフィールは、物語の中で表示されます'); })); }
 function closePplSheet(){ const sh=$('#ppl-sheet'); if(sh) sh.classList.remove('on'); }
 function openLikers(p,owner){ const ownerU=owner==='j'?'park_jaeon.sculpt':'nao_sculpt'; const norm=u=>u==='park_jaeon'?'park_jaeon.sculpt':u; const seen=[]; igAllCm(p).forEach(c=>{ const u=norm(c[0]); if(u!==ownerU&&!seen.includes(u)) seen.push(u); }); let list=seen.slice(0,6); const liked=S.igLikes.includes(p.id); if(liked) list=['nao_sculpt'].concat(list.filter(u=>u!=='nao_sculpt')); const total=igBaseLikes(p)+(liked?1:0); const rest=total-list.length; openPplSheet('いいね！'+total.toLocaleString('en-US')+'件', list.length?list.map(pplRow).join(''):'<div class="cm-empty">まだいいねがありません</div>', rest>0?'ほか '+rest.toLocaleString('en-US')+' 人':''); }
+/* v84：投稿ヘッダーの「…」から開くアクションシート */
+let actPost=null;
+function openActSheet(p){ actPost=p; const s=$('#act-sheet'); if(s) s.classList.add('on'); }
+function closeActSheet(){ const s=$('#act-sheet'); if(s) s.classList.remove('on'); actPost=null; }
 function openFollowList(kind,isJ,prof){ const me=isJ?'park_jaeon.sculpt':'nao_sculpt'; const others=['nao_sculpt','b1nna_','s0l_a','park_jaeon.sculpt'].filter(u=>u!==me); openPplSheet((kind==='fol'?'フォロワー ':'フォロー中 ')+(kind==='fol'?prof.fol:'86'), others.map(pplRow).join(''), ''); }
 function renderIG(){
  syncIgChrome();
@@ -2755,9 +2779,10 @@ function renderNews(){
 }
 const NW_CM_POOL=[['campus_cat','조소과 건물 불빛 진짜 새벽까지 켜져 있더라',12],['seoul_daily','날씨 정보 감사합니다 덕분에 일정 잡기 좋네요',4],['art_lover_21','젊은 작가들 전시 꼭 가보고 싶다',27],['hongdae_local','우리 동네 얘기 나오니까 반갑네',9],['rainy_day','다들 우산 챙기세요',15],['gallery_goer','복원 얘기는 들을수록 대단하다 싶음',31]];
 function nwCmts(a){ let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*31+id.charCodeAt(i))>>>0; return [0,1,2].map(k=>NW_CM_POOL[(h+k*2)%NW_CM_POOL.length]); }
+function nwInput(a){ let h=0; const id=String(a.id); for(let i=0;i<id.length;i++) h=(h*33+id.charCodeAt(i))>>>0; const mins=9*60+(h%620); const hh=Math.floor(mins/60), mm=mins%60; const ap=hh<12?'오전':'오후'; let h12=hh%12; if(h12===0) h12=12; const md=String(a.date).match(/(\d+)월\s*(\d+)일/); const ds=md?('2021.'+String(md[1]).padStart(2,'0')+'.'+String(md[2]).padStart(2,'0')+'.'):''; return ds+' '+ap+' '+h12+':'+String(mm).padStart(2,'0'); } /* v84：NAVER記事のバイライン書式（입력 YYYY.MM.DD. 오전/오후 H:MM）。時刻は記事IDから決定的に導く */
 function openNews(id){
  const a=NEWS.find(x=>x.id===id); if(!a) return;
- $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+' · 홍대 앞 소식</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwc"><div class="nwc-h">댓글 <span>'+nwCmts(a).length+'</span></div>'+nwCmts(a).map((c,i)=>'<div class="nwc-row"><div class="nwc-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'</div><button class="nwc-like" data-nwl="'+i+'" data-n="'+c[2]+'"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span>'+c[2]+'</span></button></div>').join('')+'</div>'+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
+ $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 입력 '+nwInput(a)+'</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwc"><div class="nwc-h">댓글 <span>'+nwCmts(a).length+'</span></div>'+nwCmts(a).map((c,i)=>'<div class="nwc-row"><div class="nwc-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'</div><button class="nwc-like" data-nwl="'+i+'" data-n="'+c[2]+'"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span>'+c[2]+'</span></button></div>').join('')+'</div>'+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
  $('#newsread-body').querySelectorAll('[data-nwl]').forEach(b=>b.addEventListener('click',()=>{ const on=b.classList.toggle('on'); const sp=b.querySelector('span'); if(sp) sp.textContent=+b.dataset.n+(on?1:0); }));
  showView('v-newsread');
 }
