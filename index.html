@@ -1073,12 +1073,17 @@ img{-webkit-user-drag:none;user-select:none}
 .ksp-pprice{font-size:18px;font-weight:800;color:#191919}
 .ksp-pbtn{margin-left:auto;padding:11px 20px;border-radius:10px;border:0;background:#fee500;font-size:14px;font-weight:800;color:#191919;font-family:inherit}
 .ksp-pbtn.on{background:#191919;color:#fee500}
+
+/* v128：ギャラリーの日／月／年表示は iOS 写真風に先頭写真を全幅の大タイルにする */
+.gal-grid button.g-first{grid-column:1/-1;aspect-ratio:16/10}
+.gal-mh.gm-day{font-size:19px;font-weight:800;padding:22px 14px 8px}
+.gal-mh.gm-month{font-size:16.5px;padding:20px 12px 7px}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v127：カカオトークの「#」タブと「쇼핑」タブを実物化しました。これまでは「演出用です」の表示だけでしたが、「#」ではトレンドタグと、その時期に読めるニュース・写真へ実際に移動でき、「쇼핑」では 선물하기 風の商品一覧とカート（保存されます）が使えます。本編・台詞・数値・解放条件・写真は変えていません。</p>
+<p class="src">v128：写真（ギャラリー）の「日／月／年」表示を作り込みました。これまでは全表示モード共通の3列グリッドで、1日1枚の日付では写真が小さく左に寄って空白が目立ちましたが、iOSの写真アプリの日表示のように、各日付の先頭の写真が全幅の大きなタイルで表示されるようになりました。日の見出しも大きくしています。本編・台詞・数値・解放条件・写真そのものは変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2781,11 +2786,11 @@ function renderGallery(){
  const gm=['day','month','year','all'].includes(S.galMode)?S.galMode:'day'; /* v91：iOS写真のライブラリ切替（연도/월/일/모든 사진） */
  const gkey=g=>gm==='day'?g.d:gm==='month'?(g.d.split('월')[0]+'월'):gm==='year'?'2021년':'';
  const ghead=g=>gm==='day'?('2021년 '+g.d+(galWeekday(g)?' '+galWeekday(g)+'요일':'')):gm==='month'?('2021년 '+(g.d.split('월')[0]+'월')):'2021년';
- let h='',lastD=null;
+ let h='',lastD=null,gFirst=false;
  un.forEach((g,i)=>{
    const k=gkey(g);
-   if(k!==lastD){ if(lastD!==null) h+='</div>'; if(gm!=='all') h+='<div class="gal-mh">'+ghead(g)+'</div>'; h+='<div class="gal-grid">'; lastD=k; }
-   h+='<button data-gal="'+i+'"><img loading="lazy" decoding="async" src="'+g.img+'">'+(galFav.has(g.img)?'<span class="fav-badge">♥</span>':'')+'</button>'; /* v122：お気に入りバッジ（Tinder版 .fav-badge 移植） */
+   if(k!==lastD){ if(lastD!==null) h+='</div>'; if(gm!=='all') h+='<div class="gal-mh gm-'+gm+'">'+ghead(g)+'</div>'; h+='<div class="gal-grid">'; lastD=k; gFirst=true; }
+   h+='<button data-gal="'+i+'"'+((gFirst&&gm!=='all')?' class="g-first"':'')+'><img loading="lazy" decoding="async" src="'+g.img+'">'+(galFav.has(g.img)?'<span class="fav-badge">♥</span>':'')+'</button>'; gFirst=false; /* v122：お気に入りバッジ（Tinder版 .fav-badge 移植） */ /* v128：日／月／年表示では各グループの先頭を全幅の大タイルに（iOS写真の日表示） */
  });
  if(lastD!==null) h+='</div>';
  const seg91=$('#gal-seg'); if(seg91) seg91.querySelectorAll('[data-gm]').forEach(x=>x.classList.toggle('on',x.dataset.gm===gm));
