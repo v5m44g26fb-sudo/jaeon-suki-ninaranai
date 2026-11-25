@@ -9,10 +9,10 @@
 <meta property="og:title" content="わかっていても｜スマホ風SNSファンゲーム">
 <meta property="og:description" content="韓国ドラマ『わかっていても』を題材にしたスマホ風SNSファンゲーム（完結編）。ユ・ナビの位置でパク・ジェオンとの物語を、カカオトークやInstagram風の画面で辿る創作フィクション／ファンメイド作品です。">
 <meta property="og:url" content="https://v5m44g26fb-sudo.github.io/jaeon-suki-ninaranai/">
-<meta property="og:image" content="https://v5m44g26fb-sudo.github.io/jaeon-suki-ninaranai/assets/ig-butterfly.jpg">
+<meta property="og:image" content="https://v5m44g26fb-sudo.github.io/jaeon-suki-ninaranai/assets/ig-butterfly-main.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0a09">
-<link rel="icon" type="image/jpeg" href="assets/ig-butterfly.jpg">
+<link rel="icon" type="image/jpeg" href="assets/ig-butterfly-main.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -967,7 +967,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v117：アバター5人分を、本人が生成したポートレートに差し替えました。ジェオン・なお・ビンナ・ドヒョク・ソラの顔が、カカオトーク・Instagram・通話・検索など全ての画面で新しい生成写真になっています（物語の後半でジェオンのプロフィール画像になる投稿写真と、プロフィールの背景写真は今までどおり）。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v118：プロフィールの背景写真や、物語の後半でジェオンのプロフィール画像になる投稿写真、サイトのアイコンなど、残っていた写真も全て本人が生成した写真に差し替えました。これでゲーム内の写真は全て生成写真です。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1078,7 +1078,7 @@ img{-webkit-user-drag:none}
 
 <!-- KAKAO PROFILE (2021) -->
 <div class="view" id="v-profile">
-<img class="prof-bg" id="prof-bg" src="assets/ig-jaeon1.jpg" alt="">
+<img class="prof-bg" id="prof-bg" src="assets/ig-jaeon1-main.jpg" alt="">
 <div class="prof-shade"></div>
 <button class="prof-x" id="prof-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
 <span class="prof-gear"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span>
@@ -2352,7 +2352,7 @@ const FP_IC={chat:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" s
 let fpName=null;
 function openFProf(name){
  const isMe=(name==='なお');
- const d=isMe?{av:'assets/nao-avatar-gen.jpg',bg:'url(assets/nao-post1.jpg) center / cover no-repeat',st:(S.calU===4?'오늘 생일이에요':'졸업 제작 중… 🦋')}:FPROF[name];
+ const d=isMe?{av:'assets/nao-avatar-gen.jpg',bg:'url(assets/nao-post1-main.jpg) center / cover no-repeat',st:(S.calU===4?'오늘 생일이에요':'졸업 제작 중… 🦋')}:FPROF[name];
  if(!d) return; fpName=name;
  const bgEl=$('#fp-bg'); if(bgEl) bgEl.style.background=d.bg;
  const avEl=$('#fp-av'); if(avEl) avEl.src=d.av;
@@ -2597,12 +2597,12 @@ function vib(p){ try{ if(typeof S!=='undefined'&&S.vibOn===false) return; if(nav
 /* ジェオンのプロフィールは章の進行で変わる。変化の節目は解剖メモ／彼視点の解放と緩く連動：
    calU3=メモ03の頃（曖昧な関係）、6=助手復帰（メモ06）、10=雨の章のあと（メモ07／彼視点04を過ぎて）、11=最終章（メモ09／彼視点05） */
 function profStage(){ const u=S.calU;
- if(S.epiProf&&S.endId==='drama') return {st:'정원에, 가끔 간다',mus:'「Butterfly」― JUNHA PARK (J.UNA)',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
- if(u>=11) return {st:'나비. 이제는 잡지 않는다',mus:'「Love Me Like That」― SAM KIM',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-butterfly.jpg'};
- if(u>=10) return {st:'',mus:'',av:'assets/ig-jaeon3.jpg',bg:'assets/ig-jaeon2.jpg'};
- if(u>=6)  return {st:'전시 준비 중',mus:'「We\'re Already」― KIMMUSEUM',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon2.jpg'};
- if(u>=3)  return {st:'',mus:'「Whisper」― Park Ji Woo',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon1.jpg'};
- return {st:'작업 중. 끝나지 않는 것',mus:'「Love Song」',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon1.jpg'};
+ if(S.epiProf&&S.endId==='drama') return {st:'정원에, 가끔 간다',mus:'「Butterfly」― JUNHA PARK (J.UNA)',av:'assets/ig-jaeon3-main.jpg',bg:'assets/ig-butterfly-main.jpg'};
+ if(u>=11) return {st:'나비. 이제는 잡지 않는다',mus:'「Love Me Like That」― SAM KIM',av:'assets/ig-jaeon3-main.jpg',bg:'assets/ig-butterfly-main.jpg'};
+ if(u>=10) return {st:'',mus:'',av:'assets/ig-jaeon3-main.jpg',bg:'assets/ig-jaeon2-main.jpg'};
+ if(u>=6)  return {st:'전시 준비 중',mus:'「We\'re Already」― KIMMUSEUM',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon2-main.jpg'};
+ if(u>=3)  return {st:'',mus:'「Whisper」― Park Ji Woo',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon1-main.jpg'};
+ return {st:'작업 중. 끝나지 않는 것',mus:'「Love Song」',av:'assets/av-jaeon-gen.jpg',bg:'assets/ig-jaeon1-main.jpg'};
 }
 function cav(){ return profStage().av; }
 function updProfile(){ const p=profStage();
