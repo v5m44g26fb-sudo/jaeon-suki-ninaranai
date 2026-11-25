@@ -963,7 +963,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v92：リアル化の第10弾です。カカオトークの吹き出しの最大幅を実物の比率に合わせ、長文が画面いっぱいに広がらないようにしました。Instagramのいいね・保存・フォロー、コメントへのいいね、ストーリーのいいね、カカオトークの反応に触感フィードバックを追加し、コメントの投稿ボタンは入力が空の間は淡く表示されます。プロフィールの設定ボタンのタップ領域を広げ、Instagramのホームボタンの再タップでフィードの先頭に戻るようにしました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v93：リアル化の全解禁ラウンド（1）です。Instagramの複数枚投稿が実物どおりのカルーセル（横スワイプ・ドット・枚数カウンタ付き）になり、プロフィールに解放済みストーリーで構成するハイライト行が付きました。ハイライトをタップすると、そのグループのストーリーだけが再生されます。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1265,8 +1265,8 @@ const MEMOS=[
    1〜9は本編のメモ解放アイテム直前の日付チップ、10は calU>=9（6月25日）、11は calU>=11（7月16日）。 */
 const MEMO_DATES={1:'2021年3月26日',2:'2021年4月16日',3:'2021年4月16日',4:'2021年4月25日',5:'2021年5月7日',6:'2021年5月19日',7:'2021年6月25日',8:'2021年7月9日',9:'2021年7月9日',10:'2021年6月25日',11:'2021年7月16日'};
 const IG_J=[
-{id:'atelier',img:'assets/ig-atelier.jpg',cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','재온아 작업실에서 살아?'],['park_jaeon','끝나지 않으니까']],cmL:[['b1nna_','재온이 요즘 작업실에서 살아']]},
-{id:'jaeon2',img:'assets/ig-jaeon2.jpg',cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
+{id:'atelier',img:'assets/ig-atelier.jpg',imgs:['assets/ig-atelier.jpg','assets/ig-atelier-night.jpg'],cap:'작업실. 끝나지 않는 것',likes:'312',unlock:2,cm:[['b1nna_','재온아 작업실에서 살아?'],['park_jaeon','끝나지 않으니까']],cmL:[['b1nna_','재온이 요즘 작업실에서 살아']]},
+{id:'jaeon2',img:'assets/ig-jaeon2.jpg',imgs:['assets/ig-jaeon2.jpg','assets/ig-jaeon3.jpg'],cap:'과제 전시 준비 중',likes:'486',unlock:2,cm:[['s0l_a','이거 작년 사진이잖아'],['park_jaeon','……バレた']]},
 {id:'jaeon1',img:'assets/ig-jaeon1.jpg',cap:'☁️',likes:'529',unlock:4,cm:[['b1nna_','좋아요 테러 갑니다'],['nao_sculpt','（……見てるだけ）']],cmL:[['s0l_a','……']]},
 {id:'butterfly',img:'assets/ig-butterfly.jpg',cap:'나비. 잡으면 죽는다',likes:'601',unlock:4,cm:[['s0l_a','相変わらずだね'],['park_jaeon','飛んでる時が一番きれいだから']],cmL:[['b1nna_','蝶の写真、前より増えたね']]},
 {id:'bar',img:'assets/ig-bar.jpg',cap:'lime.',likes:'274',unlock:4,cm:[['b1nna_','誰と飲んだの'],['park_jaeon','秘密']]},
@@ -1274,7 +1274,7 @@ const IG_J=[
 {id:'rain',img:'assets/ig-rain.jpg',cap:'비. 우산은 없었다',likes:'692',unlock:9,cm:[['b1nna_','誰と？ どこで？'],['park_jaeon','秘密']],cmL:[['s0l_a','……元気？']]},
 {id:'wheel',img:'assets/ig-wheel.jpg',cap:'관람차. 말하지 못한 것',likes:'447',unlock:8,cm:[['b1nna_','合宿？ 誰と乗ったの'],['park_jaeon','……秘密']]},
 {id:'hands',img:'assets/ig-hands.jpg',cap:'다시 처음부터. 손은 거짓말을 못 한다',likes:'523',unlock:10,cm:[['s0l_a','……本気なんだ'],['nao_sculpt','（見てしまった）']]},
-{id:'gallery',img:'assets/ig-gallery.jpg',cap:'전시. ……와줘서',likes:'766',unlock:11,cm:[['b1nna_','おめでとう！！'],['park_jaeon','ありがとう']]},
+{id:'gallery',img:'assets/ig-gallery.jpg',imgs:['assets/ig-gallery.jpg','assets/ig-hands.jpg'],cap:'전시. ……와줘서',likes:'766',unlock:11,cm:[['b1nna_','おめでとう！！'],['park_jaeon','ありがとう']]},
 {id:'army',img:'assets/ig-army.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]},
 {id:'enlist',img:'assets/ig-enlist.jpg',cap:'……',likes:'1,876',unlock:99,cm:[['b1nna_','見たよ。……元気で']]},
 {id:'atelier2',img:'assets/ig-atelier-night.jpg',cap:'작업실. 밤',likes:'539',unlock:10,cm:[['b1nna_','또 작업실이네'],['park_jaeon','조용하니까']]}
@@ -1282,7 +1282,7 @@ const IG_J=[
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','なおかわいい'],['nao_sculpt','ありがとう笑']],cmL:[['b1nna_','この日、泣いてなかった？']]},
 {id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:3,cm:[['b1nna_','その顔すき']],cmL:[['park_jaeon','🪼']]},
-{id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:4,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
+{id:'n3',img:'assets/nao-post3.jpg',imgs:['assets/nao-post3.jpg','assets/nao-post1.jpg'],cap:'作業の合間',likes:'87',unlock:4,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]}
 ];
 /* v68：day は月グリッドのドット用。値は新規に作らず、写真アプリ（GAL）の日付・要約内の明記日付など既存データで確定できるものだけに付けた（個展3/5・バー3/12・作業室3/26・曖昧な関係4/16・誕生日4/25・合宿6/18・雨の夜6/25・修復7/9・展示7/16・温室9/17・水やり9/19）。確定できないエントリには付けない */
 const CAL=[
@@ -1986,7 +1986,9 @@ function igPostHTML(p,owner){
  const base=igBaseLikes(p);
  const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
  const prev=allCm.slice(0,2).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
- return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div><div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div><div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
+ const cimgs=(Array.isArray(p.imgs)&&p.imgs.length>1)?p.imgs:null; /* v93：複数枚投稿は実物作法のカルーセル */
+ const media= cimgs ? '<div class="ig-imgwrap car"><div class="ig-track">'+cimgs.map(s=>'<img src="'+s+'" draggable="false" alt="">').join('')+'</div><span class="ig-cnt">1/'+cimgs.length+'</span><div class="ig-dots">'+cimgs.map((s,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join('')+'</div><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>' : '<div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>';
+ return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>'+media+'<div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
 }
 function igWireCard(dp,p,owner,inFeed){
  const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
@@ -1994,10 +1996,18 @@ function igWireCard(dp,p,owner,inFeed){
  const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); if(v&&typeof vib==='function') vib(10); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
  lkEl.addEventListener('click',()=>openLikers(p,owner)); /* v83：実物どおり、いいね数タップで「いいねした人」が開く */
  likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
- let lastTap=0;
+ let lastTap=0, swipeAt=0; /* v93：スワイプ直後のクリックはダブルタップ判定から除外 */
  const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
  imgW.addEventListener('dblclick',dbl);
- imgW.addEventListener('click',()=>{ const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
+ imgW.addEventListener('click',()=>{ if(Date.now()-swipeAt<350) return; const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
+ const track=dp.querySelector('.ig-track'); /* v93：カルーセルの横スワイプ（縦スクロールと方向で分離） */
+ if(track){ const slides=track.children.length; let ci=0, sx=0, sy=0, dx=0, drag=false;
+  const cnt=dp.querySelector('.ig-cnt'), dots=dp.querySelectorAll('.ig-dots i');
+  const go=i=>{ ci=Math.max(0,Math.min(slides-1,i)); track.style.transform='translateX('+(-ci*100)+'%)'; if(cnt) cnt.textContent=(ci+1)+'/'+slides; dots.forEach((d,j)=>d.classList.toggle('on',j===ci)); };
+  imgW.addEventListener('pointerdown',e=>{ drag=true; sx=e.clientX; sy=e.clientY; dx=0; track.classList.add('drag'); });
+  imgW.addEventListener('pointermove',e=>{ if(!drag) return; dx=e.clientX-sx; const dy=e.clientY-sy; if(Math.abs(dy)>Math.abs(dx)+6){ drag=false; track.classList.remove('drag'); track.style.transform='translateX('+(-ci*100)+'%)'; return; } track.style.transform='translateX(calc('+(-ci*100)+'% + '+dx+'px))'; });
+  const cend=()=>{ if(!drag) return; drag=false; track.classList.remove('drag'); if(Math.abs(dx)>42){ swipeAt=Date.now(); go(ci+(dx<0?1:-1)); } else { if(Math.abs(dx)>8) swipeAt=Date.now(); go(ci); } };
+  imgW.addEventListener('pointerup',cend); imgW.addEventListener('pointercancel',cend); }
  saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); if(!has&&typeof vib==='function') vib(8); save(); });
  const dots=dp.querySelector('.dots'); if(dots) dots.addEventListener('click',e=>{ e.stopPropagation(); openActSheet(p); }); /* v84：「…」は実物どおりアクションシート */
  dp.querySelector('.ig-cmtb').addEventListener('click',()=>openCmSheet(p,owner,false));
@@ -2094,9 +2104,11 @@ function renderIG(){
  let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b>'+(prof.cat?'<br><span class="ig-cat">'+prof.cat+'</span>':'')+'<br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
  h+= isJ ? '<div class="ig-folbtn"><span class="'+(S.igFolJ===false?'':'ghost')+'" data-gf="follow">'+(S.igFolJ===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
+ const hls=(typeof igHighlights==='function')?igHighlights(isJ?'park_jaeon':'nao_sculpt'):[]; /* v93：ハイライト行（解放済みストーリーから構成） */
+ if(hls.length) h+='<div class="ig-hls">'+hls.map((g,i)=>'<button class="ig-hl" data-hl="'+i+'"><span class="hl-ring'+(g.allSeen?' seen':'')+'"><img src="'+g.cover+'" alt=""></span><span class="hl-t">'+esc(g.t)+'</span></button>').join('')+'</div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
  if(isJ||igNTab==='grid'){
-  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img loading="lazy" decoding="async" src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
+  h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img loading="lazy" decoding="async" src="'+p.img+'">'+((Array.isArray(p.imgs)&&p.imgs.length>1)?'<span class="ig-multi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="13" height="13" rx="2.5" fill="rgba(0,0,0,.25)"/><path d="M16 8V5.5A2.5 2.5 0 0 0 13.5 3H5.5A2.5 2.5 0 0 0 3 5.5v8A2.5 2.5 0 0 0 5.5 16H8"/></svg></span>':'')+'</button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
  }else{
   const sv=S.igSaves.slice().reverse().map(id=>{ const pj=IG_J.find(x=>x.id===id); if(pj&&vis(pj)) return {p:pj,o:'j'}; const pn=IG_N.find(x=>x.id===id); if(pn&&vis(pn)) return {p:pn,o:'n'}; return null; }).filter(Boolean);
   h+= sv.length ? '<div class="ig-grid">'+sv.map(x=>'<button data-spost="'+x.p.id+'" data-owner="'+x.o+'"><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>' : '<div class="ig-saved-empty">保存した投稿はまだありません。<br>投稿のブックマークボタンから保存できます。</div>';
@@ -2106,6 +2118,7 @@ function renderIG(){
  body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,isJ,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
  body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); if(typeof vib==='function') vib(10); renderIG(); } else openFolSheet(); return; } toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':'（プロフィールの編集は演出用です）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
+ body.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>{ const g=hls[+b.dataset.hl]; if(g&&g.list.length&&typeof openStoryHL==='function') openStoryHL(g.list); })); /* v93：ハイライトはそのグループだけを再生 */
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
  function openDetail(p,owner){
    body.querySelector('#ig-detail').innerHTML=igPostHTML(p,owner);
@@ -2399,8 +2412,8 @@ const STORIES=[
 let storyState={list:[],i:0,timer:null,remain:0,startedAt:0,paused:false,user:null}; let storyFrom='prof'; const STORY_DUR=5000; /* v81：実物どおり5秒自動送り＋既読管理（Tinder版のストーリー機構を移植） */
 const STORY_ORDER=['nao_sculpt','park_jaeon','b1nna_','s0l_a']; /* v88：トレイの表示順（次ユーザー自動遷移の順序） */
 function storyStartIdx(list){ const seen=Array.isArray(S.storySeen)?S.storySeen:[]; const ix=list.findIndex(x=>!seen.includes(storyKey(x))); return ix<0?0:ix; } /* v88：未見の先頭から再開（すべて見た場合は先頭から再生＝実物の作法） */
-function storyNextUser(){ const cur=STORY_ORDER.indexOf(storyState.user); for(let k=cur+1;k<STORY_ORDER.length;k++){ const u=STORY_ORDER[k]; const list=STORIES.filter(x=>x.user===u&&S.calU>=x.unlock); if(list.length){ storyState.user=u; storyState.list=list; storyState.i=storyStartIdx(list); renderStory(); return true; } } return false; } /* v88：実物どおり、見終わると次のユーザーのストーリーへ自動で進む */
-function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return; storyFrom=igTab; storyState.user=user; storyState.list=list; storyState.i=storyStartIdx(list); showView('v-story'); renderStory(); }
+function storyNextUser(){ if(storyState.hl) return false; /* v93：ハイライト再生中は次ユーザーへ進まない */ const cur=STORY_ORDER.indexOf(storyState.user); for(let k=cur+1;k<STORY_ORDER.length;k++){ const u=STORY_ORDER[k]; const list=STORIES.filter(x=>x.user===u&&S.calU>=x.unlock); if(list.length){ storyState.user=u; storyState.list=list; storyState.i=storyStartIdx(list); renderStory(); return true; } } return false; } /* v88：実物どおり、見終わると次のユーザーのストーリーへ自動で進む */
+function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return; storyState.hl=false; storyFrom=igTab; storyState.user=user; storyState.list=list; storyState.i=storyStartIdx(list); showView('v-story'); renderStory(); }
 function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ closeStory(); return; }
  $('#story-img').src=s.img; $('#story-av').src=s.av; $('#story-user').textContent=s.user; $('#story-ago').textContent=s.ago; $('#story-cap').textContent=s.cap;
  $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"><b></b></i>').join('');
@@ -2409,7 +2422,7 @@ function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ clos
  if(st.timer) clearTimeout(st.timer); st.timer=null; st.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused');
  st.remain=STORY_DUR; st.startedAt=Date.now(); st.timer=setTimeout(()=>storyStep(1),STORY_DUR); /* v81：自動送り（タップ送り・長押し一時停止は従来どおり併存） */ }
 function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>=st.list.length){ if(d>0&&storyNextUser()) return; closeStory(); return; } renderStory(); }
-function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
+function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; storyState.hl=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
 /* v86：ストーリー下部（返信欄／ハート／紙飛行機）を実物どおり反応させる。ハートは実物のストーリーいいねとして保存される */
 (function(){ const foot=document.querySelector('.story-foot'); if(foot) foot.addEventListener('pointerdown',e=>e.stopPropagation());
  const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); if(typeof vib==='function') vib(10); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('tap'); } save(); });
@@ -3461,6 +3474,60 @@ window.noiseGo=null;
    if(id!=='v-lock'){ const cv=$('#cam-view'); if(cv) cv.classList.remove('on'); }
  };
 })();
+</script>
+
+<script>
+/* ================= v93 : IG CAROUSEL / HIGHLIGHTS =================
+   複数枚投稿のカルーセル（ドット・枚数カウンタ・横スワイプ、ダブルタップいいねと両立）と、
+   プロフィールのハイライト行（解放済みストーリーから構成し、そのグループだけを再生）。
+   本編・台詞・数値・解放条件・LSKEYは不変。新規セーブ項目なし（既読は storySeen を共用）。 */
+(function(){
+ const st=document.createElement('style'); st.textContent=
+ '.ig-imgwrap.car{overflow:hidden;touch-action:pan-y}'
+ +'.ig-track{display:flex;transition:transform .34s cubic-bezier(.32,.72,0,1);touch-action:pan-y}'
+ +'.ig-track.drag{transition:none}'
+ +'.ig-track img{width:100%;aspect-ratio:1;object-fit:cover;display:block;flex:none;-webkit-user-drag:none;user-select:none;touch-action:pan-y}'
+ +'.ig-imgwrap .ig-bigheart{z-index:4}'
+ +'.ig-cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11.5px;line-height:1;padding:4px 8px;border-radius:11px;z-index:3}'
+ +'.ig-dots{position:absolute;left:0;right:0;bottom:8px;display:flex;gap:4px;justify-content:center;z-index:3;pointer-events:none}'
+ +'.ig-dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45)}'
+ +'.ig-dots i.on{background:#fff}'
+ +'.ig-multi{position:absolute;top:6px;right:6px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));z-index:2;display:block}'
+ +'.ig-hls{display:flex;gap:17px;padding:2px 16px 13px;overflow-x:auto;scrollbar-width:none}'
+ +'.ig-hls::-webkit-scrollbar{display:none}'
+ +'.ig-hl{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0;flex:none;cursor:pointer}'
+ +'.hl-ring{width:62px;height:62px;border-radius:50%;border:1px solid #d9d9d9;padding:2.5px;display:block;background:#fff;box-sizing:border-box}'
+ +'.hl-ring.seen{opacity:.55}'
+ +'.hl-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}'
+ +'.hl-t{font-size:11.5px;color:#262626}';
+ document.head.appendChild(st);
+})();
+/* ハイライトのグループ定義：作中ストーリーの画像でテーマ分け。解放済みの分だけで構成する */
+function igHighlights(user){
+ const DEFS={
+  park_jaeon:[
+   {t:'작업',imgs:['assets/ig-atelier.jpg','assets/ig-jaeon3.jpg']},
+   {t:'나비',imgs:['assets/ig-butterfly.jpg']},
+   {t:'합숙',imgs:['assets/ig-wheel.jpg']},
+   {t:'비',imgs:['assets/ig-rain.jpg']},
+   {t:'전시',imgs:['assets/ig-hands.jpg','assets/ig-gallery.jpg']}
+  ],
+  nao_sculpt:[
+   {t:'제작',imgs:['assets/nao-post2.jpg','assets/nao-post3.jpg']}
+  ]
+ };
+ const seen=Array.isArray(S.storySeen)?S.storySeen:[];
+ return (DEFS[user]||[]).map(g=>{
+   const list=STORIES.filter(s=>s.user===user&&g.imgs.indexOf(s.img)>=0&&S.calU>=s.unlock);
+   if(!list.length) return null;
+   return {t:g.t,cover:list[0].img,list:list,allSeen:list.every(s=>seen.indexOf(storyKey(s))>=0)};
+ }).filter(Boolean);
+}
+function openStoryHL(list){
+ if(!list||!list.length) return;
+ storyFrom='prof'; storyState.user=list[0].user; storyState.list=list; storyState.i=0; storyState.hl=true;
+ showView('v-story'); renderStory();
+}
 </script>
 
 </body>
