@@ -206,6 +206,40 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .plus-panel div:active span{transform:scale(.88)}
 #toast{position:absolute;left:50%;bottom:calc(110px + var(--sab));transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:.35s;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/* v83：カカオ実物の連続メッセージ表示（同じ相手が続く間はアバター・名前は先頭だけ、間隔も詰まる） */
+.row.grp{margin-left:45px;margin-top:-4px}
+.row.grp .bub{border-top-left-radius:14px}
+/* v83：IGの人の一覧シート（いいねした人／フォロワー／フォロー中） */
+#ppl-sheet{position:absolute;inset:0;z-index:240;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
+#ppl-sheet .ppl-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#ppl-sheet .ppl-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:74%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -6px 28px rgba(0,0,0,.18)}
+#ppl-sheet.on{pointer-events:auto}
+#ppl-sheet.on .ppl-bg{opacity:1}
+#ppl-sheet.on .ppl-panel{transform:translateY(0)}
+.ppl-head{display:flex;align-items:center;justify-content:center;padding:9px 12px 11px;border-bottom:1px solid #efefef;font-weight:700;font-size:14.5px;color:#262626;flex:none}
+.ppl-list{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:6px 0;scrollbar-width:none}
+.ppl-list::-webkit-scrollbar{display:none}
+.ppl-row{display:flex;align-items:center;gap:11px;width:100%;padding:7px 16px;background:none;border:none;text-align:left;cursor:pointer;font-family:inherit}
+.ppl-row:active{background:#fafafa}
+.ppl-row>img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none}
+.ppl-row .cm-ava{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;flex:none}
+.ppl-tx{display:flex;flex-direction:column;min-width:0}
+.ppl-tx b{font-size:14px;color:#262626}
+.ppl-tx span{font-size:13px;color:#8e8e93}
+.ppl-foot{padding:8px 14px 16px;color:#8e8e93;font-size:12.5px;text-align:center}
+.ig-stats span[data-stat]{cursor:pointer}
+/* v83：iOS風アラート（リセット確認用。ブラウザ標準ダイアログは使わない） */
+#ios-alert{position:absolute;inset:0;z-index:400;display:none;align-items:center;justify-content:center}
+#ios-alert.on{display:flex}
+#ios-alert .ia-bg{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+.ia-card{position:relative;width:270px;background:rgba(248,248,248,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:14px;overflow:hidden;text-align:center;animation:iaIn .18s ease}
+@keyframes iaIn{from{transform:scale(1.14);opacity:0}to{transform:scale(1);opacity:1}}
+.ia-t{font-size:16.5px;font-weight:600;color:#000;padding:18px 16px 4px}
+.ia-m{font-size:13px;color:#000;padding:0 16px 16px;line-height:1.45}
+.ia-btns{display:flex;border-top:1px solid rgba(60,60,67,.29)}
+.ia-btns button{flex:1;background:none;border:none;padding:11px 0;font-size:16.5px;color:#007aff;cursor:pointer;font-family:inherit}
+.ia-btns button.dest{color:#ff3b30;font-weight:600;border-left:1px solid rgba(60,60,67,.29)}
+
 /* ===== kakao profile : 2021 ===== */
 #v-profile{background:#000;color:#fff;z-index:130}
 .prof-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
@@ -260,7 +294,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ig-actions svg{display:block}
 .ig-actions .ig-save{margin-left:auto}
 .ig-post .pc{padding:6px 12px;font-size:13px;line-height:1.55;color:#262626}
-.ig-post .pc .lk2{font-weight:600;margin-bottom:3px}
+.ig-post .pc .lk2{font-weight:600;margin-bottom:3px;cursor:pointer}
 .ig-post .cm{color:#555;font-size:12.5px;margin-top:3px}
 .ig-post .cm b{color:#111}
 .ig-post .allcm{color:#8e8e8e;font-size:12.5px;margin-top:3px}
@@ -775,7 +809,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v82：Instagramのプロフィール画面を実物の構成に整理しました（上部にあったストーリー列とアカウント切替タブを外し、ヘッダーはユーザー名表示に）。ストーリーはフィード側で従来どおり見られます。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v83：リアル化の第3弾です。カカオの連続メッセージ表示（アバターと名前は先頭だけ）、トーク一覧の日付書式、Instagramの「いいねした人」とフォロワー／フォロー中の一覧、検索での投稿ヒット、写真の日単位グルーピング、リセット確認のiOS風アラートを実物に寄せました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1018,6 +1052,8 @@ img{-webkit-user-drag:none}
 </div>
 
 <div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
+<div id="ppl-sheet"><div class="ppl-bg" id="ppl-bg"></div><div class="ppl-panel"><div class="cm-grab"></div><div class="ppl-head" id="ppl-title">いいね！</div><div class="ppl-list" id="ppl-list"></div></div></div>
+<div id="ios-alert"><div class="ia-bg"></div><div class="ia-card"><div class="ia-t" id="ia-title"></div><div class="ia-m" id="ia-msg"></div><div class="ia-btns"><button id="ia-cancel">キャンセル</button><button id="ia-ok" class="dest">OK</button></div></div></div>
 <audio id="bgm" loop preload="auto" style="display:none"></audio>
 <div id="toast"></div>
 <div class="homebar" id="homebar"></div>
@@ -1392,7 +1428,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); } }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -1422,7 +1458,8 @@ function addSys(v){feed.appendChild(el('<div class="sys">'+esc(v)+'</div>'));}
 function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</span>'+esc(v)+'</div>'); feed.appendChild(d);}
 function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
 function scheduleRead(){ if(readTimer) clearTimeout(readTimer); const d=ffMode?60:(900+Math.random()*700)*paceMul()*ambientMul(); readTimer=setTimeout(()=>{ clearUnread(); },d); }
-function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); }
+function prevRowIsJ(){ const l=feed.lastElementChild; return !!(l&&l.classList&&l.classList.contains('row')&&!l.classList.contains('me')&&l.querySelector('.bub')); } /* v83：直前が同じ相手の行なら連続メッセージ扱い */
+function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const grp=prevRowIsJ(); const r=el(grp?'<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>':'<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); }
 function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); tagMsg(r); feed.appendChild(r);}
 /* v23：追随スクロール。最下部付近にいるときだけ新着へ追随し、読み返し中の位置は奪わない。
    操作の起点（選択肢・カード表示、明示タップで進めた直後）は最新へ寄せる */
@@ -1695,9 +1732,12 @@ function renderThreads(){
   :(S.chap>=2?'その分け方、覚えとく':'（まだ出会っていない）');
  const proPrev=(S.proUnread>0)?(()=>{const lf=[...(S.free||[])].reverse().find(m=>m.w==='j'||m.w==='jimg'); return lf?(lf.t||'🦋 写真'):prevJ;})():prevJ;
  /* v51：トーク一覧の月ラベルは、プレビュー／サイドログと同じ章ステージから導出する（従来は初登場月に固定され、7月の内容に「3月」と付く行内不一致があった） */
- const TM=['3月','3月','3月','4月','4月','5月','5月','6月','7月'];
- const tmon=i=>TM[Math.min(Math.max(i,0),TM.length-1)];
- L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,tmon(S.chap),S.proUnread>0?S.proUnread:(S.chap>=2&&!S.done?1:0),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
+ /* v83：スレッド一覧の時刻は実物カカオの書式（同年内は「M월 D일」）にし、既存の作中日付 KDATE から導出する（章→カレンダー段階の対応は従来の月対応と一致） */
+ const CHAPCAL=[0,1,2,3,4,5,6,8,10];
+ const kdMD=c=>{ const kd=KDATE[c]; if(!kd) return ''; const m=kd.match(/(\d+)월\s*(\d+)일/); return m?m[1]+'월 '+m[2]+'일':''; };
+ const tmon=i=>kdMD(CHAPCAL[Math.min(Math.max(i,0),CHAPCAL.length-1)]);
+ const mainDate=(()=>{ let c=S.calU; while(c>0&&!KDATE[c]) c--; return kdMD(c); })();
+ L.appendChild(threadRow(cav(),'パク・ジェオン',proPrev,mainDate,S.proUnread>0?S.proUnread:(S.chap>=2&&!S.done?1:0),()=>{ if(S.proUnread){S.proUnread=0; save();} showView('v-chat'); updChatMode(); if(onTap) fireTap(); else if(!S.done) run(); }));
  const si=a=>Math.min(Math.max(S.chap,0),a.length-1);
  const lastT=a=>{const e=a[si(a)]; return e&&e.length?e[e.length-1][1]:'';};
  if(S.chap>=1) L.appendChild(threadRow('assets/av-bitna.jpg','ビンナ',lastT(BITNA),tmon(si(BITNA)),0,()=>openSide('ビンナ','assets/av-bitna.jpg',BITNA[si(BITNA)])));
@@ -1716,9 +1756,12 @@ function openSide(name,img,log){
  }
  $('#side-name').textContent=name;
  const f=sideView.querySelector('#side-feed'); f.innerHTML='';
+ let prevWho=null;
  log.forEach(([who,txt])=>{
    if(who==='なお'){ f.appendChild(el('<div class="row me"><div class="bub">'+esc(txt)+'</div></div>')); }
+   else if(who===prevWho){ f.appendChild(el('<div class="row grp"><div><div class="bub">'+esc(txt)+'</div></div></div>')); } /* v83：サイドトークでも連続メッセージはアバター・名前を省く */
    else{ f.appendChild(el('<div class="row">'+(img?'<img class="av" src="'+img+'">':'<span class="avc" style="width:36px;height:36px;border-radius:13px;background:#7fb2d9;display:flex;align-items:center;justify-content:center;color:#fff;flex:none">'+IC.group+'</span>')+'<div><div class="nm">'+esc(who)+'</div><div class="bub">'+esc(txt)+'</div></div></div>')); }
+   prevWho=who;
  });
  showView('v-side');
 }
@@ -1758,6 +1801,7 @@ function igWireCard(dp,p,owner,inFeed){
  const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
  const base=igBaseLikes(p);
  const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
+ lkEl.addEventListener('click',()=>openLikers(p,owner)); /* v83：実物どおり、いいね数タップで「いいねした人」が開く */
  likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
  let lastTap=0;
  const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
@@ -1800,8 +1844,16 @@ function closeCmSheet(){ const sh=$('#cm-sheet'); if(sh) sh.classList.remove('on
 function sendCm(){ const inp=$('#cm-in'); if(!inp||!cmPost) return; const v=(inp.value||'').trim(); if(!v) return; inp.value=''; if(!S.igMyCmts||typeof S.igMyCmts!=='object'||Array.isArray(S.igMyCmts)) S.igMyCmts={}; if(!Array.isArray(S.igMyCmts[cmPost.id])) S.igMyCmts[cmPost.id]=[]; S.igMyCmts[cmPost.id].push(v); save(); renderCmList(); const list=$('#cm-list'); if(list) list.scrollTop=list.scrollHeight; const n=igAllCm(cmPost).length; document.querySelectorAll('[data-cmpid="'+cmPost.id+'"]').forEach(e2=>{ e2.textContent='コメント'+n+'件をすべて見る'; }); }
 $('#cm-close').addEventListener('click',closeCmSheet);
 $('#cm-bg').addEventListener('click',closeCmSheet);
+$('#ppl-bg').addEventListener('click',closePplSheet);
 $('#cm-send').addEventListener('click',sendCm);
 $('#cm-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendCm(); });
+/* v83：人の一覧シート（いいねした人／フォロワー／フォロー中）。構成は作中に登場するアカウントのみで、新規の人物名は作らない */
+const PPL_D={'park_jaeon.sculpt':'パク・ジェオン','nao_sculpt':'なお','b1nna_':'オ・ビンナ','s0l_a':'ユン・ソルア'};
+function pplRow(u){ const av=igCmAv(u); const who=u==='park_jaeon.sculpt'?'j':u==='nao_sculpt'?'n':null; return '<button class="ppl-row" data-ppl="'+u+'" data-who="'+(who||'')+'">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(u.charAt(0).toUpperCase())+'</span>')+'<span class="ppl-tx"><b>'+esc(u)+'</b><span>'+esc(PPL_D[u]||'')+'</span></span></button>'; }
+function openPplSheet(title,rows,foot){ const sh=$('#ppl-sheet'); if(!sh) return; $('#ppl-title').textContent=title; $('#ppl-list').innerHTML=rows+(foot?'<div class="ppl-foot">'+foot+'</div>':''); sh.classList.add('on'); sh.querySelectorAll('[data-ppl]').forEach(b=>b.addEventListener('click',()=>{ const w=b.dataset.who; closePplSheet(); if(w){ igTab='prof'; igWho=w; igNTab='grid'; showView('v-ig'); renderIG(); } else toast('このアカウントのプロフィールは、物語の中で表示されます'); })); }
+function closePplSheet(){ const sh=$('#ppl-sheet'); if(sh) sh.classList.remove('on'); }
+function openLikers(p,owner){ const ownerU=owner==='j'?'park_jaeon.sculpt':'nao_sculpt'; const norm=u=>u==='park_jaeon'?'park_jaeon.sculpt':u; const seen=[]; igAllCm(p).forEach(c=>{ const u=norm(c[0]); if(u!==ownerU&&!seen.includes(u)) seen.push(u); }); let list=seen.slice(0,6); const liked=S.igLikes.includes(p.id); if(liked) list=['nao_sculpt'].concat(list.filter(u=>u!=='nao_sculpt')); const total=igBaseLikes(p)+(liked?1:0); const rest=total-list.length; openPplSheet('いいね！'+total.toLocaleString('en-US')+'件', list.length?list.map(pplRow).join(''):'<div class="cm-empty">まだいいねがありません</div>', rest>0?'ほか '+rest.toLocaleString('en-US')+' 人':''); }
+function openFollowList(kind,isJ,prof){ const me=isJ?'park_jaeon.sculpt':'nao_sculpt'; const others=['nao_sculpt','b1nna_','s0l_a','park_jaeon.sculpt'].filter(u=>u!==me); openPplSheet((kind==='fol'?'フォロワー ':'フォロー中 ')+(kind==='fol'?prof.fol:'86'), others.map(pplRow).join(''), ''); }
 function renderIG(){
  syncIgChrome();
  const body=$('#ig-body');
@@ -1823,7 +1875,7 @@ function renderIG(){
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>',
   grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
  let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
- h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span><b>'+prof.fol+'</b>フォロワー</span><span><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
+ h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
  h+= isJ ? '<div class="ig-folbtn"><span class="ghost" data-gf="follow">フォロー中</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
  if(isJ||igNTab==='grid'){
@@ -1834,6 +1886,7 @@ function renderIG(){
  }
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
+ body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,isJ,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
  body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':k==='follow'?'（フォローは演出用です）':'（プロフィールの編集は演出用です）'); })); /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
@@ -1939,7 +1992,12 @@ btnNext.addEventListener('pointercancel',()=>{ if(nextPressT) clearTimeout(nextP
 btnNext.addEventListener('click',()=>{ if(nextFFired){ nextFFired=false; return; } if(S.done) return; if(onTap) fireTap(); else run(); });
 /* v5：チャット画面のタップで次へ（選択肢・ボタンのタップは除外） */
 feed.addEventListener('click',e=>{ if(suppressTap){ suppressTap=false; return; } if(rtrayRow){ closeTray(); return; } if(choiceOpen) return; if(e.target.closest('button')) return; fireTap(); });
-$('#app-reset').addEventListener('click',()=>{ if(confirm('最初からやり直しますか？（本編の進行状況がリセットされます。エンディングコレクション・後日談・彼視点の既読と、設定は残ります）')){ const ns=Object.assign({},S,{idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,endId:null,call1:false,call2:false,free:[],freeN:0,freeClosed:false,noise:[],proN:0,proOps:0,proUnread:0,chatOpened:false}); try{localStorage.setItem(LSKEY,JSON.stringify(ns));}catch(e){} location.reload(); }});
+/* v83：リセット確認はブラウザ標準 confirm ではなく、実物 iOS 風アラートで出す */
+let iaCb=null;
+function iosAlert(title,msg,okLabel,cb){ $('#ia-title').textContent=title; $('#ia-msg').textContent=msg; $('#ia-ok').textContent=okLabel; iaCb=cb||null; $('#ios-alert').classList.add('on'); }
+$('#ia-cancel').addEventListener('click',()=>{ $('#ios-alert').classList.remove('on'); iaCb=null; });
+$('#ia-ok').addEventListener('click',()=>{ $('#ios-alert').classList.remove('on'); const cb=iaCb; iaCb=null; if(cb) cb(); });
+$('#app-reset').addEventListener('click',()=>{ iosAlert('最初からやり直しますか？','本編の進行状況がリセットされます。エンディングコレクション・後日談・彼視点の既読と、設定は残ります。','最初から',()=>{ const ns=Object.assign({},S,{idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,endId:null,call1:false,call2:false,free:[],freeN:0,freeClosed:false,noise:[],proN:0,proOps:0,proUnread:0,chatOpened:false}); try{localStorage.setItem(LSKEY,JSON.stringify(ns));}catch(e){} location.reload(); }); });
 /* v6：ステータスバーとロック画面の時計は実時刻ではなく物語内時刻（chatMin）に連動する（updClock は v6 セクションで定義し、updParams から呼ばれる） */
 /* ===== v3 UI extras : lock / kakao tabs / plus panel / profile / friends ===== */
 let lockOpening=false;
@@ -2075,7 +2133,7 @@ $('#story-prev').addEventListener('click',()=>storyStep(-1));
 function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); const bp=$('#btn-plus'); if(bp) bp.classList.remove('on'); } }
 /* v66：フリーチャットでも本編と同じ実物様式にする。自分の送信には時刻と既読「1」を付け、彼の返信が来た時点で「1」が消える（既読化）。時刻・既読は S.free の並びから導出するのでセーブ形式は不変 */
 function freeAddMe(t,unsent,unread){ const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+'<div class="bub">'+esc(t)+'</div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
-function freeAddJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
+function freeAddJ(t){ const grp=prevRowIsJ(); const r=el(grp?'<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>':'<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
 function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
 function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); feed.appendChild(r); scrollFeed(); }
 function renderFreeLog(){ const F=S.free||[]; /* v66：自分の送信より後に彼の返信（j／jimg）があれば既読（「1」なし）、なければ未読（「1」あり）として描き直す */ const later=F.map((m,i)=>F.slice(i+1).some(x=>x.w==='j'||x.w==='jimg')); F.forEach((m,i)=>{ curMsgKey='f'+i; if(m.w==='meimg') freeAddMeImg(m.img); else if(m.w==='me') freeAddMe(m.t,false,!later[i]); else if(m.w==='mu') freeAddMe(m.t,true); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
@@ -2211,13 +2269,13 @@ function renderGallery(){
  const cnt=$('#gal-count'); if(cnt) cnt.textContent='사진 '+un.length+'장';
  const b=$('#gal-body');
  /* v68：iOS写真風に月グループ見出し（2021년 N월）を挟む。data-gal は従来どおり un の通し番号 */
- let h='',lastM='';
+ /* v83：iOS写真の「日」表示に合わせ、月見出し＋サムネイル上の日付重ねをやめて日単位の見出し（日付＋曜日）に組む */
+ let h='',lastD='';
  un.forEach((g,i)=>{
-   const mo=g.d.split(' ')[0];
-   if(mo!==lastM){ if(lastM) h+='</div>'; h+='<div class="gal-mh">2021년 '+mo+'</div><div class="gal-grid">'; lastM=mo; }
-   h+='<button data-gal="'+i+'"><img src="'+g.img+'"><span class="gd">'+g.d+'</span></button>';
+   if(g.d!==lastD){ if(lastD) h+='</div>'; const wd=galWeekday(g); h+='<div class="gal-mh">2021년 '+g.d+(wd?' '+wd+'요일':'')+'</div><div class="gal-grid">'; lastD=g.d; }
+   h+='<button data-gal="'+i+'"><img src="'+g.img+'"></button>';
  });
- if(lastM) h+='</div>';
+ if(lastD) h+='</div>';
  b.innerHTML=h+(un.length<GAL.length?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>');
  b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; galCur=g; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':''; $('#gal-cap').textContent=g.cap; updGalFav(); $('#gal-view').classList.add('on'); }));
 }
@@ -2631,6 +2689,7 @@ function renderIGSearch(){
  const accts=IGS_ACCTS.filter(a=>S.chap>=(a.min||0)&&(!q||a.u.toLowerCase().includes(q)||a.d.includes(q))); /* v75：未登場の人物は検索に出さない（スレッド／友達一覧の解放条件と一致） */
  let h='';
  if(accts.length) h+='<div class="igs-sec">アカウント</div>'+accts.map(a=>'<button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button>').join('');
+ if(q){ const hits=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)&&x.p.cap.toLowerCase().includes(q)); if(hits.length) h+='<div class="igs-sec">投稿</div><div class="ig-grid">'+hits.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>'; } /* v83：実物どおり、キーワードでは投稿（キャプション）も検索対象にする */
  if(!q){
    const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p));
    if(posts.length) h+='<div class="igs-sec">探索</div><div class="ig-grid">'+posts.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img src="'+x.p.img+'"></button>').join('')+'</div>';
