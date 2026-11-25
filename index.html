@@ -1005,12 +1005,36 @@ img{-webkit-user-drag:none;user-select:none}
 .gal-nav.prev{left:10px}
 .gal-nav.next{right:10px}
 .gal-nav:active{background:rgba(255,255,255,.3)}
+/* ===== v123 : TINDER PORT — calendar / notes / settings / call / finale =====
+   カレンダー：月送りでグリッドが fadeup で切り替わる（Tinder版の画面遷移
+   リズム）。詳細シートのメモ欄に .article .box（灰色の面）を移植。
+   通話：着信中の応答ボタンに ringpulse（緑の波紋）、アバターに白リング。
+   設定：値ボタンの押下に Tinder版 choices と同じスケール反応を追加。
+   終幕：エンディングカードを fincard 化（finfade 2.6s）し、fin-credits を追加。
+   ※設定の .set-tgl（文字ピル）は本作の実物スイッチ .isw より簡素なため見送り */
+.cal-grid,.cal-pager{animation:fadeup .35s ease}
+#cal-d-note{background:#f2f2f7;border-radius:10px;padding:11px 13px;line-height:1.8}
+@keyframes ringpulse{0%{box-shadow:0 0 0 0 rgba(52,199,89,.45)}100%{box-shadow:0 0 0 22px rgba(52,199,89,0)}}
+#v-call[data-phase="incoming"] .cb.accept{animation:ringpulse 1.4s ease-out infinite}
+.call-av{border:3px solid rgba(255,255,255,.35)}
+.setbtn{transition:transform .1s ease}
+.setbtn:active{transform:scale(.97)}
+@keyframes finfade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.endcard.fincard{animation:finfade 2.6s ease both}
+.fin-credits{margin:16px 0 4px;padding:14px 6px 2px;border-top:1px solid rgba(255,255,255,.22);text-align:center}
+.fin-credits .fc-t{font-size:13px;font-weight:900;letter-spacing:.14em;color:#fff;margin-bottom:8px}
+.fin-credits .fc-l{font-size:11.5px;color:#aeb9c6;line-height:2;letter-spacing:.06em;animation:finfade 1.6s ease both}
+.fin-credits .fc-l:nth-child(3){animation-delay:.5s}
+@media (prefers-reduced-motion: reduce){
+ .cal-grid,.cal-pager,.endcard.fincard,.fin-credits .fc-l{animation:none !important}
+ #v-call[data-phase="incoming"] .cb.accept{animation:none !important}
+}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v122：全体の底上げ第3弾（ニュース／ギャラリー）。ニュース一覧の先頭に、参照元のヒーローカード（大きな写真＋見出し）を追加し、記事の文字組みも参照元の大きさ・行間に揃えました。ギャラリーは、写真を開いたときの前後ボタンと、お気に入りのハート印をグリッドにも出すようにしました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v123：全体の底上げ第4弾（カレンダー／解剖メモ／設定／通話／エンディング）。月の切り替えに参照元の出現リズムを入れ、予定の詳細メモを面で受ける形に。メモの本文も参照元の記事と同じ文字組みへ。着信中の応答ボタンに緑の波紋を付け、エンディングのカードはゆっくり現れて、最後にクレジットが入るようになりました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1955,7 +1979,7 @@ const ENDINGS={
 };
 function renderEnding(id){
  const E=ENDINGS[id]; if(!E) return;
- const d=el('<div class="endcard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>後日談が解放されました（ホームの「後日談」）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><button class="tohome-b">ホームへ</button></div>');
+ const d=el('<div class="endcard fincard"><h3>'+E.title+'</h3><p style="text-align:left;white-space:pre-wrap">'+esc(E.body)+'</p><p>最終解明度</p><div class="big">'+S.kai+' ／ 100</div><p style="font-size:12px;color:#c8d2de">エンディングコレクションに登録されました（ホームの「解剖メモ」下部）。<br>後日談が解放されました（ホームの「後日談」）。<br>別の結末を見るには「最初から」から再プレイしてください。</p><div class="fin-credits"><div class="fc-t">わかっていても</div><div class="fc-l">パク・ジェオンと、なおの物語</div><div class="fc-l">遊んでくれて、ありがとう</div></div><button class="tohome-b">ホームへ</button></div>');
  feed.appendChild(d); scrollFeed(true);
  const b=d.querySelector('.tohome-b'); if(b) b.addEventListener('click',()=>showView('v-home'));
  addSys(id==='nao'?'―― このトークは、もう使われていません ――':'―― エンディング後のフリーチャットが解放されました。このトークで、自由にメッセージを送れます ――');
@@ -3789,9 +3813,9 @@ var calPage=-1;
  +'.nt-chev{color:#c7c7cc;font-size:18px;flex:none}'
  +'.note-d{padding:20px 20px 32px}'
  +'.note-d .tag{font-size:10.5px;background:var(--kakao);border-radius:8px;padding:2px 8px;font-weight:700;display:inline-block;margin-bottom:10px;color:#262626}'
- +'.note-d h1{font-size:20px;line-height:1.5;color:#111;margin-bottom:6px}'
+ +'.note-d h1{font-size:19px;line-height:1.55;color:#111;margin-bottom:6px}'
  +'.note-date{font-size:12.5px;color:#8e8e93;margin-bottom:14px}'
- +'.note-d p{font-size:14px;line-height:1.95;color:#262626;white-space:pre-wrap}'
+ +'.note-d p{font-size:14.5px;line-height:1.95;color:#262626;white-space:pre-wrap}'
  +'.cal-pager{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 4px}'
  +'.cal-pg-t{font-size:16px;font-weight:700;color:#262626}'
  +'.cal-pager button{background:#f2f2f7;border:0;width:34px;height:34px;border-radius:50%;font-size:17px;color:#262626;cursor:pointer;font-family:inherit}'
