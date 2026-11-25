@@ -962,7 +962,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v109：主人公の名前統一の残り1件として、第4章でユン・ソルアが主人公を呼ぶ「ナビさん」を「なおさん」に変更しました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v110：実在グループのファンミーティングバナーが写った写真1点を、世界観に合わないためゲーム内から全て取り除きました（IG投稿・ストーリー・写真ギャラリー・プロフィールのハイライト）。物語の内容・数値・他の解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1315,7 +1315,6 @@ const IG_J=[
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1.jpg',imgs:['assets/nao-post1.jpg','assets/nao-busan.jpg','assets/nao-busan-me.jpg'],cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','え、そこ足元ガラス！？ 下、海じゃん'],['nao_sculpt','足すくんだけど、いい気分転換になった']],cmL:[['b1nna_','この日、泣いてなかった？']]},
-{id:'n2',img:'assets/nao-post2.jpg',cap:'🪼',likes:'121',unlock:3,cm:[['b1nna_','その顔すき']],cmL:[['park_jaeon','🪼']]},
 {id:'n3',img:'assets/nao-post3.jpg',cap:'作業の合間',likes:'87',unlock:4,cm:[['park_jaeon','……それ、俺が撮ったやつ'],['nao_sculpt','勝手に載せた。文句ある？']]},
 {id:'n4',img:'assets/nao-making.jpg',cap:'卒業制作。少しずつ、形になってきた',likes:'73',unlock:4,cm:[['b1nna_','手、粘土まみれじゃん'],['nao_sculpt','洗っても落ちないやつ']],cmL:[['park_jaeon','……悪くない']]},
 {id:'n5',img:'assets/nao-cafe.jpg',cap:'課題の前に寄り道。チーズケーキで充電',likes:'112',unlock:2,cm:[['b1nna_','そのチーズケーキどこの！？'],['nao_sculpt','学校の近く。課題終わったら連れてく']]},
@@ -2015,7 +2014,7 @@ let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿
 /* ================= v81 : IGフィード／コメントシート／既読リング =================
    姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
    自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
-const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n2:'5日前',n3:'2時間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前'};
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',hands:'3時間前',gallery:'1時間前',atelier2:'4時間前',n1:'1週間前',n3:'2時間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前'};
 let igTab='feed';
 let igFeedY=0, igFeedHold=false; /* v88：フィードのスクロール位置保持（実物どおり、詳細・プロフィール・ストーリーから戻っても元の位置） */
 (function(){ const b=$('#ig-body'); if(b) b.addEventListener('scroll',()=>{ if(igTab==='feed'&&!igFeedHold) igFeedY=b.scrollTop; },{passive:true}); })();
@@ -2462,7 +2461,6 @@ $('#povread-back').addEventListener('click',()=>{ renderPOV(); showView('v-pov')
 const STORIES=[
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-atelier.jpg',cap:'작업 중',ago:'2시간',unlock:2},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-butterfly.jpg',cap:'나비',ago:'5시간',unlock:4},
-{user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post2.jpg',cap:'🪼 오늘도 제작',ago:'3시간',unlock:3},
 {user:'nao_sculpt',av:'assets/nao-avatar.jpg',img:'assets/nao-post3.jpg',cap:'작업 중 잠깐 ☕',ago:'1시간',unlock:3},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-jaeon3.jpg',cap:'전시 준비',ago:'3시간',unlock:6},
 {user:'park_jaeon',av:'assets/av-jaeon.jpg',img:'assets/ig-wheel.jpg',cap:'관람차',ago:'1시간',unlock:8},
@@ -2630,7 +2628,6 @@ const GAL=[
  {img:'assets/nao-post1.jpg',d:'3월 5일',cap:'外出の日 ― 海の上のガラス橋',u:0},
  {img:'assets/ig-bar.jpg',d:'3월 12일',cap:'初めてのバー。ライムのカクテル',u:1},
  {img:'assets/ig-atelier.jpg',d:'3월 26일',cap:'作業室 ― 彼の制作風景',u:2},
- {img:'assets/nao-post2.jpg',d:'4월 16일',cap:'🪼 息抜きの日',u:3},
  {img:'assets/nao-post3.jpg',d:'4월 16일',cap:'作業の合間（撮られた方）',u:3},
  {img:'assets/ig-butterfly.jpg',d:'4월 25일',cap:'誕生日 ― 温室の蝶',u:4},
  {img:'assets/ig-wheel.jpg',d:'6월 18일',cap:'合宿 ― 観覧車',u:8},
@@ -3574,7 +3571,7 @@ function igHighlights(user){
    {t:'전시',imgs:['assets/ig-hands.jpg','assets/ig-gallery.jpg']}
   ],
   nao_sculpt:[
-   {t:'제작',imgs:['assets/nao-post2.jpg','assets/nao-post3.jpg']}
+   {t:'제작',imgs:['assets/nao-post3.jpg']}
   ]
  };
  const seen=Array.isArray(S.storySeen)?S.storySeen:[];
