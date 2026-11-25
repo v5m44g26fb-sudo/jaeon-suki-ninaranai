@@ -774,6 +774,26 @@ img{-webkit-user-drag:none}
 #cm-sheet.on .cm-bg{opacity:1}
 #cm-sheet.on .cm-panel{transform:translateY(0)}
 .cm-grab{width:38px;height:4.5px;border-radius:3px;background:#dbdbdb;margin:8px auto 2px;flex:none}
+#cm-sheet.dragging .cm-panel,#ppl-sheet.dragging .ppl-panel{transition:none!important}
+#cm-sheet .cm-grab,#cm-sheet .cm-head,#ppl-sheet .cm-grab,#ppl-sheet .ppl-head{cursor:grab}
+#fol-sheet{position:absolute;inset:0;z-index:246;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
+#fol-sheet .fol-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#fol-sheet .fol-panel{position:relative;margin:0 8px calc(10px + var(--sab));transform:translateY(110%);transition:transform .34s cubic-bezier(.32,.72,0,1)}
+#fol-sheet.on{pointer-events:auto}
+#fol-sheet.on .fol-bg{opacity:1}
+#fol-sheet.on .fol-panel{transform:translateY(0)}
+#fol-sheet .fol-box{background:rgba(248,248,248,.96);border-radius:13px;overflow:hidden;margin-top:8px}
+#fol-sheet .fol-box button{display:block;width:100%;padding:15px 0;font-size:16px;color:#262626;background:none}
+#fol-sheet .fol-box button.danger{color:#ed4956;font-weight:600}
+#fol-sheet .fol-box button.cancel{font-weight:600}
+#rtmenu{position:absolute;z-index:221;display:none;background:#fff;border-radius:12px;box-shadow:0 10px 32px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.12);padding:4px;min-width:104px}
+#rtmenu.on{display:block}
+#rtmenu button{display:block;width:100%;padding:9px 14px;font-size:14px;color:#262626;text-align:left;background:none}
+.story-foot .sf-in{pointer-events:auto;cursor:pointer}
+.story-foot button.sf-ic{background:none;border:0;padding:0;display:flex;pointer-events:auto;cursor:pointer}
+#sf-heart.liked svg{fill:#ff3040;stroke:#ff3040}
+.sf-float{position:absolute;left:50%;bottom:104px;z-index:5;pointer-events:none;animation:sfFloat 1s ease-out forwards}
+@keyframes sfFloat{0%{opacity:0;transform:translate(-50%,12px) scale(.5)}25%{opacity:1;transform:translate(-50%,0) scale(1.18)}55%{transform:translate(-50%,-34px) scale(1)}100%{opacity:0;transform:translate(-50%,-96px) scale(1.02)}}
 .cm-head{display:flex;align-items:center;justify-content:center;position:relative;padding:9px 12px 11px;border-bottom:1px solid #efefef;font-weight:700;font-size:14.5px;color:#262626;flex:none}
 .cm-head button{position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:6px;color:#262626;display:flex}
 .cm-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:4px 14px;scrollbar-width:none}
@@ -826,7 +846,7 @@ img{-webkit-user-drag:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v85：リアル化の第3弾（3）です。ホーム画面のページドット（2ページ目が存在しない表示）を外し、ニュース一覧では写真のある記事にNAVER実物どおりサムネイルを付けました。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v86：リアル化の第4弾です。コメントなどのシートをドラッグでも閉じられるようにし、Instagramのフォローを実物どおり付け外しできるように、ストーリーにもハートを送れるようにしました。カカオトークの長押しには「コピー」も追加。本編・台詞・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -922,6 +942,7 @@ img{-webkit-user-drag:none}
 <div data-pp="album"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17.5 9.5 12l3.5 3.5 3-3 4.5 4.5"/></svg></span>앨범</div><div data-pp="camera"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><circle cx="12" cy="13.7" r="3.6"/><path d="M8.5 7.5 10 4.8h4L15.5 7.5"/></svg></span>카메라</div><div data-pp="gift"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg></span>선물하기</div><div data-pp="pay"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.2 9.9a2.3 2.3 0 0 1 0 4.2M17.8 9.9a2.3 2.3 0 0 0 0 4.2"/></svg></span>송금</div><div data-pp="voice"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg></span>음성메시지</div><div data-pp="contact"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.4 3.6-5 7-5s6.2 1.6 7 5"/></svg></span>연락처</div><div data-pp="file"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg></span>파일</div><div data-pp="cal"><span><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span>일정</div>
 </div>
 <div id="rtray" role="dialog" aria-label="メッセージ反応"></div>
+<div id="rtmenu"><button id="rt-copy" type="button">コピー</button></div>
 <div id="albumpick"><div class="ap-sheet"><div class="ap-head"><span>사진 선택（写真を選ぶ）</span><button class="ap-x" id="ap-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="ap-grid" id="ap-grid"></div></div></div>
 </div>
 
@@ -1062,12 +1083,13 @@ img{-webkit-user-drag:none}
 <div class="story-head"><img id="story-av" src="" alt=""><b id="story-user"></b><span id="story-ago"></span><button class="sx" id="story-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <div class="story-cap" id="story-cap"></div>
 <div id="story-pause-ind"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 5v14M15 5v14"/></svg> 一時停止中</div>
-<div class="story-foot"><span class="sf-in">メッセージを送信…</span><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></div>
+<div class="story-foot"><span class="sf-in" id="sf-in">メッセージを送信…</span><button class="sf-ic" id="sf-heart" type="button" aria-label="ストーリーにいいね"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg></button><button class="sf-ic" id="sf-send" type="button" aria-label="ストーリーを共有"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></button></div>
 <button class="story-zone l" id="story-prev"></button>
 <button class="story-zone r" id="story-next"></button>
 </div>
 
 <div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
+<div id="fol-sheet"><div class="fol-bg" id="fol-bg"></div><div class="fol-panel"><div class="fol-box"><button class="danger" id="fol-unfollow" type="button">フォローをやめる</button></div><div class="fol-box"><button class="cancel" id="fol-cancel" type="button">キャンセル</button></div></div></div>
 <div id="ppl-sheet"><div class="ppl-bg" id="ppl-bg"></div><div class="ppl-panel"><div class="cm-grab"></div><div class="ppl-head" id="ppl-title">いいね！</div><div class="ppl-list" id="ppl-list"></div></div></div>
 <div id="act-sheet"><div class="act-bg" id="act-bg"></div><div class="act-panel"><div class="act-group"><button data-act="share">投稿を共有する</button><button data-act="about">この投稿について</button></div><button data-act="cancel" class="act-cancel">キャンセル</button></div></div>
 <div id="ios-alert"><div class="ia-bg"></div><div class="ia-card"><div class="ia-t" id="ia-title"></div><div class="ia-m" id="ia-msg"></div><div class="ia-btns"><button id="ia-cancel">キャンセル</button><button id="ia-ok" class="dest">OK</button></div></div></div>
@@ -1395,7 +1417,7 @@ const STORY=[
 /* ================= ENGINE ================= */
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
-let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{},igMyCmts:{},igCmLikes:[],storySeen:[]} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{},igMyCmts:{},igCmLikes:[],storySeen:[],igFolJ:true,storyLikes:[]} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
 /* v31：壊れたセーブ（JSON破損・非オブジェクト）は LSKEY+'.bak' へ退避し、初期状態で起動する */
 try{const raw=localStorage.getItem(LSKEY); if(raw){ try{const p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) S=Object.assign(S,p); else try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} }catch(pe){ try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} } }}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
@@ -1445,7 +1467,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); } }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-news','v-newsread','v-cal','v-notes','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
  $('#p-kyori').textContent=S.kyo;
@@ -1861,6 +1883,16 @@ function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(
 function closeCmSheet(){ const sh=$('#cm-sheet'); if(sh) sh.classList.remove('on'); cmPost=null; }
 function sendCm(){ const inp=$('#cm-in'); if(!inp||!cmPost) return; const v=(inp.value||'').trim(); if(!v) return; inp.value=''; if(!S.igMyCmts||typeof S.igMyCmts!=='object'||Array.isArray(S.igMyCmts)) S.igMyCmts={}; if(!Array.isArray(S.igMyCmts[cmPost.id])) S.igMyCmts[cmPost.id]=[]; S.igMyCmts[cmPost.id].push(v); save(); renderCmList(); const list=$('#cm-list'); if(list) list.scrollTop=list.scrollHeight; const n=igAllCm(cmPost).length; document.querySelectorAll('[data-cmpid="'+cmPost.id+'"]').forEach(e2=>{ e2.textContent='コメント'+n+'件をすべて見る'; }); }
 $('#cm-close').addEventListener('click',closeCmSheet);
+/* v86：コメント／人の一覧シートは、実物どおりグラブ部分を下へドラッグしても閉じられる */
+function sheetDrag(sh,panel,handles,close){ if(!sh||!panel) return; let sy=0,dy=0,act=false;
+ handles.forEach(hd=>{ if(!hd) return; hd.style.touchAction='none';
+  hd.addEventListener('pointerdown',e=>{ if(!sh.classList.contains('on')) return; act=true; sy=e.clientY; dy=0; sh.classList.add('dragging'); try{ hd.setPointerCapture(e.pointerId); }catch(err){} });
+  hd.addEventListener('pointermove',e=>{ if(!act) return; dy=Math.max(0,e.clientY-sy); panel.style.transform='translateY('+dy+'px)'; });
+  const end=()=>{ if(!act) return; act=false; sh.classList.remove('dragging'); panel.style.transform=''; if(dy>90) close(); };
+  hd.addEventListener('pointerup',end); hd.addEventListener('pointercancel',end); });
+}
+sheetDrag($('#cm-sheet'),$('#cm-sheet .cm-panel'),[$('#cm-sheet .cm-grab'),$('#cm-sheet .cm-head')],closeCmSheet);
+sheetDrag($('#ppl-sheet'),$('#ppl-sheet .ppl-panel'),[$('#ppl-sheet .cm-grab'),$('#ppl-sheet .ppl-head')],closePplSheet);
 $('#cm-bg').addEventListener('click',closeCmSheet);
 $('#ppl-bg').addEventListener('click',closePplSheet);
 $('#act-bg').addEventListener('click',closeActSheet);
@@ -1872,6 +1904,12 @@ const PPL_D={'park_jaeon.sculpt':'パク・ジェオン','nao_sculpt':'なお','
 function pplRow(u){ const av=igCmAv(u); const who=u==='park_jaeon.sculpt'?'j':u==='nao_sculpt'?'n':null; return '<button class="ppl-row" data-ppl="'+u+'" data-who="'+(who||'')+'">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(u.charAt(0).toUpperCase())+'</span>')+'<span class="ppl-tx"><b>'+esc(u)+'</b><span>'+esc(PPL_D[u]||'')+'</span></span></button>'; }
 function openPplSheet(title,rows,foot){ const sh=$('#ppl-sheet'); if(!sh) return; $('#ppl-title').textContent=title; $('#ppl-list').innerHTML=rows+(foot?'<div class="ppl-foot">'+foot+'</div>':''); sh.classList.add('on'); sh.querySelectorAll('[data-ppl]').forEach(b=>b.addEventListener('click',()=>{ const w=b.dataset.who; closePplSheet(); if(w){ igTab='prof'; igWho=w; igNTab='grid'; showView('v-ig'); renderIG(); } else toast('このアカウントのプロフィールは、物語の中で表示されます'); })); }
 function closePplSheet(){ const sh=$('#ppl-sheet'); if(sh) sh.classList.remove('on'); }
+/* v86：フォロー解除の確認シート（iOS実物の作法） */
+function openFolSheet(){ const sh=$('#fol-sheet'); if(sh) sh.classList.add('on'); }
+function closeFolSheet(){ const sh=$('#fol-sheet'); if(sh) sh.classList.remove('on'); }
+$('#fol-bg').addEventListener('click',closeFolSheet);
+$('#fol-cancel').addEventListener('click',closeFolSheet);
+$('#fol-unfollow').addEventListener('click',()=>{ S.igFolJ=false; save(); closeFolSheet(); renderIG(); });
 function openLikers(p,owner){ const ownerU=owner==='j'?'park_jaeon.sculpt':'nao_sculpt'; const norm=u=>u==='park_jaeon'?'park_jaeon.sculpt':u; const seen=[]; igAllCm(p).forEach(c=>{ const u=norm(c[0]); if(u!==ownerU&&!seen.includes(u)) seen.push(u); }); let list=seen.slice(0,6); const liked=S.igLikes.includes(p.id); if(liked) list=['nao_sculpt'].concat(list.filter(u=>u!=='nao_sculpt')); const total=igBaseLikes(p)+(liked?1:0); const rest=total-list.length; openPplSheet('いいね！'+total.toLocaleString('en-US')+'件', list.length?list.map(pplRow).join(''):'<div class="cm-empty">まだいいねがありません</div>', rest>0?'ほか '+rest.toLocaleString('en-US')+' 人':''); }
 /* v84：投稿ヘッダーの「…」から開くアクションシート */
 let actPost=null;
@@ -1891,6 +1929,7 @@ function renderIG(){
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
   :{img:'assets/nao-avatar.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
+ if(isJ&&S.igFolJ===false) prof.fol=(parseInt(prof.fol.replace(/,/g,''),10)-1).toLocaleString('en-US'); /* v86：フォロー解除中は実物どおりフォロワー数が1少ない表示 */
  const IC={
   heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
   heartBig:'<svg width="92" height="92" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
@@ -1900,7 +1939,7 @@ function renderIG(){
   grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
  let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>86</b>フォロー中</span></div></div><div class="ig-bio"><b>'+prof.name+'</b><br>'+prof.bio.replace(/\n/g,'<br>')+'</div>';
- h+= isJ ? '<div class="ig-folbtn"><span class="ghost" data-gf="follow">フォロー中</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
+ h+= isJ ? '<div class="ig-folbtn"><span class="'+(S.igFolJ===false?'':'ghost')+'" data-gf="follow">'+(S.igFolJ===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
  if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
  if(isJ||igNTab==='grid'){
   h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img src="'+p.img+'"></button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
@@ -1911,7 +1950,7 @@ function renderIG(){
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
  body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,isJ,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
- body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':k==='follow'?'（フォローは演出用です）':'（プロフィールの編集は演出用です）'); })); /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
+ body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); renderIG(); } else openFolSheet(); return; } toast(k==='dm'?'（メッセージはカカオトークのトークで進みます）':'（プロフィールの編集は演出用です）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
  function openDetail(p,owner){
@@ -2145,11 +2184,18 @@ function openStory(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.
 function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ closeStory(); return; }
  $('#story-img').src=s.img; $('#story-av').src=s.av; $('#story-user').textContent=s.user; $('#story-ago').textContent=s.ago; $('#story-cap').textContent=s.cap;
  $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"><b></b></i>').join('');
+ const sfh=$('#sf-heart'); if(sfh) sfh.classList.toggle('liked',Array.isArray(S.storyLikes)&&S.storyLikes.includes(storyKey(s))); /* v86：ストーリーのいいね状態を実物どおり復元 */
  if(Array.isArray(S.storySeen)){ const key=storyKey(s); if(!S.storySeen.includes(key)){ S.storySeen.push(key); save(); } }
  if(st.timer) clearTimeout(st.timer); st.timer=null; st.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused');
  st.remain=STORY_DUR; st.startedAt=Date.now(); st.timer=setTimeout(()=>storyStep(1),STORY_DUR); /* v81：自動送り（タップ送り・長押し一時停止は従来どおり併存） */ }
 function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>=st.list.length){ closeStory(); return; } renderStory(); }
 function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
+/* v86：ストーリー下部（返信欄／ハート／紙飛行機）を実物どおり反応させる。ハートは実物のストーリーいいねとして保存される */
+(function(){ const foot=document.querySelector('.story-foot'); if(foot) foot.addEventListener('pointerdown',e=>e.stopPropagation());
+ const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('tap'); } save(); });
+ const ss=$('#sf-send'); if(ss) ss.addEventListener('click',e=>{ e.stopPropagation(); toast('（共有は演出用です）'); });
+ const si=$('#sf-in'); if(si) si.addEventListener('click',e=>{ e.stopPropagation(); toast('（返信はカカオトークのトークで進みます）'); });
+})();
 $('#story-close').addEventListener('click',closeStory);
 $('#story-next').addEventListener('click',()=>storyStep(1));
 $('#story-prev').addEventListener('click',()=>storyStep(-1));
@@ -2608,9 +2654,11 @@ if(chatBottomBtn) chatBottomBtn.addEventListener('click',()=>{ feed.scrollTo({to
 /* ---------- P2: メッセージ反応（カカオ風・長押しトレー・保存） ---------- */
 const RT_EMO=['❤️','😂','😮','😢','😡','👍']; /* v76：保存値（S.reactions）は従来どおり絵文字文字列のまま互換を保ち、表示だけ RT_SVG のSVGに置き換える */
 let rtrayRow=null, suppressTap=false, lpTimer=null;
-function closeTray(){ const t=$('#rtray'); if(t) t.classList.remove('on'); rtrayRow=null; }
+function fallbackCopy(txt){ try{ const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }catch(e){} }
+const rtCopyBtn=$('#rt-copy'); if(rtCopyBtn) rtCopyBtn.addEventListener('click',ev=>{ ev.stopPropagation(); const row=rtrayRow; const bt=row?row.querySelector('.bub'):null; const txt=bt?bt.textContent.trim():''; closeTray(); if(!txt) return; const done=()=>toast('コピーしました'); if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(()=>{ fallbackCopy(txt); done(); }); } else { fallbackCopy(txt); done(); } });
+function closeTray(){ const t=$('#rtray'); if(t) t.classList.remove('on'); const mn=$('#rtmenu'); if(mn) mn.classList.remove('on'); rtrayRow=null; }
 function renderReactionTray(row){
- const t=$('#rtray'); if(!t||!row) return;
+ const t=$('#rtray'); if(!t||!row) return; const mn=$('#rtmenu');
  const key=row.dataset.rk; if(!key) return;
  const cur=S.reactions[key]||'';
  t.innerHTML=RT_EMO.map(e=>'<button data-re="'+e+'" class="'+(e===cur?'sel':'')+'" aria-label="反応">'+(RT_SVG[e]||'')+'</button>').join('');
@@ -2620,7 +2668,8 @@ function renderReactionTray(row){
    let x=br.left-cr.left, y=br.top-cr.top-t.offsetHeight-8;
    if(y<46) y=br.bottom-cr.top+8;
    x=Math.max(6,Math.min(x,cr.width-t.offsetWidth-6));
-   t.style.left=x+'px'; t.style.top=y+'px'; }
+   t.style.left=x+'px'; t.style.top=y+'px';
+   if(mn){ if(bub.textContent.trim()){ mn.classList.add('on'); mn.style.left=Math.max(6,Math.min(x,cr.width-mn.offsetWidth-6))+'px'; mn.style.top=(y+t.offsetHeight+6)+'px'; } else mn.classList.remove('on'); } } /* v86：実物カカオの長押し作法どおり、反応トレイの下に操作メニュー（コピー）も出す */
  t.querySelectorAll('[data-re]').forEach(b=>b.addEventListener('click',ev=>{
    ev.stopPropagation();
    const e=b.dataset.re;
@@ -2637,7 +2686,7 @@ feed.addEventListener('pointerdown',e=>{
 ['pointerup','pointercancel'].forEach(ev=>feed.addEventListener(ev,()=>{ if(lpTimer){ clearTimeout(lpTimer); lpTimer=null; } },{passive:true}));
 feed.addEventListener('pointermove',()=>{ if(lpTimer){ clearTimeout(lpTimer); lpTimer=null; } },{passive:true});
 feed.addEventListener('contextmenu',e=>{ if(e.target.closest&&e.target.closest('.bub')) e.preventDefault(); });
-document.addEventListener('pointerdown',e=>{ if(rtrayRow&&!e.target.closest('#rtray')&&!(e.target.closest&&e.target.closest('.bub'))) closeTray(); });
+document.addEventListener('pointerdown',e=>{ if(rtrayRow&&!e.target.closest('#rtray')&&!e.target.closest('#rtmenu')&&!(e.target.closest&&e.target.closest('.bub'))) closeTray(); });
 
 /* ---------- P3: フリーチャット用＋ボタン＋写真ピッカー送信 ---------- */
 const btnPlus2=$('#btn-plus2');
