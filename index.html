@@ -442,8 +442,8 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 #v-story{background:#000;color:#fff;z-index:140}
 .story-progs{position:absolute;top:max(48px,calc(var(--sat) + 4px));left:8px;right:8px;display:flex;gap:4px;z-index:3}
 .story-progs i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;position:relative}
-.story-progs i.done b{width:100%}
-.story-progs i.cur b{animation:storyFill 5s linear forwards}
+.story-progs i.done b{transform:scaleX(1)}
+.story-progs i.cur b{animation:sprog2 5s linear forwards}
 .story-head{position:absolute;top:max(58px,calc(var(--sat) + 14px));left:12px;right:12px;display:flex;align-items:center;gap:8px;z-index:3;pointer-events:none} /* v48：ヘッダ帯はタップを透過させ、下の送りゾーンを塞がない */
 .story-head img{width:33px;height:33px;border-radius:50%;object-fit:cover}
 .story-head b{font-size:13.5px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
@@ -768,8 +768,8 @@ img{-webkit-user-drag:none}
 .wn-press{flex:none;font-size:10.5px;color:#9a9a9e}
 
 /* ===== v81 : IGフィード／コメントシート／ストーリー自動送り／UIレイヤー ===== */
-.story-progs i b{display:block;height:100%;width:0;background:#fff;border-radius:2px}
-@keyframes storyFill{from{width:0}to{width:100%}}
+.story-progs i b{display:block;height:100%;width:100%;background:#fff;border-radius:2px;transform:scaleX(0);transform-origin:left}
+@keyframes sprog2{to{transform:scaleX(1)}}
 #v-story.paused .story-progs i.cur b{animation-play-state:paused}
 .ig-feed .ig-post{border-bottom:1px solid #efefef}
 .ig-nav .ig-nav-av{width:24px;height:24px;border-radius:50%;object-fit:cover;display:block;margin:0 auto}
@@ -879,7 +879,7 @@ img{-webkit-user-drag:none}
 .nwc-like.on{color:#ff3040;border-color:#ffb3ba}
 .nwc-like.on svg{fill:#ff3040;stroke:#ff3040}
 @media (prefers-reduced-motion: reduce){
- .story-progs i.cur b{animation:none !important;width:100%}
+ .story-progs i.cur b{animation:none !important;transform:scaleX(1)}
  #v-home.fresh .apps .app,#v-home.fresh .dock .app{animation:none !important}
  #cm-sheet .cm-panel{transition-duration:.01s !important}
 }
@@ -991,7 +991,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v120：全体の底上げ第1弾。姉妹作『現役アイドル、Tinderやってた件』の共通機構を移植し、行の出現アニメーション、ロック画面ヒントの明滅、ホームのメーターのグラデーション、通知バナーのばねの効き、操作の反応を揃えました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
+<p class="src">v121：全体の底上げ第2弾（Instagram）。複数枚投稿のカルーセルを、参照元のスクロールスナップ機構へ置き換えました（旧来のドラッグ方式は廃止。前後の矢印ボタンも追加）。ストーリーの進み具合のバーも、参照元と同じscaleX方式に揃えました。物語の内容・数値・解放条件は不変で、既存セーブはそのまま読み込めます。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2070,7 +2070,7 @@ function igPostHTML(p,owner){
  const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
  const prev=allCm.slice(0,2).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
  const cimgs=(Array.isArray(p.imgs)&&p.imgs.length>1)?p.imgs:null; /* v93：複数枚投稿は実物作法のカルーセル */
- const media= cimgs ? '<div class="ig-imgwrap car"><div class="ig-track">'+cimgs.map(s=>'<img src="'+s+'" draggable="false" alt="">').join('')+'</div><span class="ig-cnt">1/'+cimgs.length+'</span><div class="ig-dots">'+cimgs.map((s,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join('')+'</div><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>' : '<div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>';
+ const media= cimgs ? '<div class="ig-imgwrap car ig-carousel"><div class="ig-car-track">'+cimgs.map(s=>'<img src="'+s+'" draggable="false" alt="">').join('')+'</div><span class="ig-car-count">1/'+cimgs.length+'</span><div class="ig-car-dots">'+cimgs.map((s,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join('')+'</div><button class="ig-car-nav prev" aria-label="前の写真">‹</button><button class="ig-car-nav next" aria-label="次の写真">›</button><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>' : '<div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>';
  return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>'+media+'<div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar-gen.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
 }
 function igWireCard(dp,p,owner,inFeed){
@@ -2083,14 +2083,15 @@ function igWireCard(dp,p,owner,inFeed){
  const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
  imgW.addEventListener('dblclick',dbl);
  imgW.addEventListener('click',()=>{ if(Date.now()-swipeAt<350) return; const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
- const track=dp.querySelector('.ig-track'); /* v93：カルーセルの横スワイプ（縦スクロールと方向で分離） */
- if(track){ const slides=track.children.length; let ci=0, sx=0, sy=0, dx=0, drag=false;
-  const cnt=dp.querySelector('.ig-cnt'), dots=dp.querySelectorAll('.ig-dots i');
-  const go=i=>{ ci=Math.max(0,Math.min(slides-1,i)); track.style.transform='translateX('+(-ci*100)+'%)'; if(cnt) cnt.textContent=(ci+1)+'/'+slides; dots.forEach((d,j)=>d.classList.toggle('on',j===ci)); };
-  imgW.addEventListener('pointerdown',e=>{ drag=true; sx=e.clientX; sy=e.clientY; dx=0; track.classList.add('drag'); });
-  imgW.addEventListener('pointermove',e=>{ if(!drag) return; dx=e.clientX-sx; const dy=e.clientY-sy; if(Math.abs(dy)>Math.abs(dx)+6){ drag=false; track.classList.remove('drag'); track.style.transform='translateX('+(-ci*100)+'%)'; return; } track.style.transform='translateX(calc('+(-ci*100)+'% + '+dx+'px))'; });
-  const cend=()=>{ if(!drag) return; drag=false; track.classList.remove('drag'); if(Math.abs(dx)>42){ swipeAt=Date.now(); go(ci+(dx<0?1:-1)); } else { if(Math.abs(dx)>8) swipeAt=Date.now(); go(ci); } };
-  imgW.addEventListener('pointerup',cend); imgW.addEventListener('pointercancel',cend); }
+ const track=dp.querySelector('.ig-car-track'); /* v121：参照元（Tinder版）のスクロールスナップ機構へ置き換え。旧transformドラッグ機構は廃止 */
+ if(track){ const slides=track.children.length; let ci=0;
+  const cnt=dp.querySelector('.ig-car-count'), dots=dp.querySelectorAll('.ig-car-dots i');
+  const paint=()=>{ if(cnt) cnt.textContent=(ci+1)+'/'+slides; dots.forEach((d,j)=>d.classList.toggle('on',j===ci)); };
+  const go=i=>{ ci=Math.max(0,Math.min(slides-1,i)); track.scrollTo({left:ci*track.clientWidth,behavior:'smooth'}); paint(); };
+  track.addEventListener('scroll',()=>{ swipeAt=Date.now(); const ni=Math.max(0,Math.min(slides-1,Math.round(track.scrollLeft/Math.max(1,track.clientWidth)))); if(ni!==ci){ ci=ni; paint(); } },{passive:true});
+  const pv=dp.querySelector('.ig-car-nav.prev'), nx=dp.querySelector('.ig-car-nav.next');
+  if(pv) pv.addEventListener('click',e=>{ e.stopPropagation(); swipeAt=Date.now(); go(ci-1); });
+  if(nx) nx.addEventListener('click',e=>{ e.stopPropagation(); swipeAt=Date.now(); go(ci+1); }); }
  saveBtn.addEventListener('click',()=>{ const has=S.igSaves.includes(p.id); if(has){ S.igSaves=S.igSaves.filter(x=>x!==p.id); toast('保存を取り消しました'); } else { S.igSaves.push(p.id); toast('保存しました'); } saveBtn.classList.toggle('saved',!has); if(!has&&typeof vib==='function') vib(8); save(); });
  const dots=dp.querySelector('.dots'); if(dots) dots.addEventListener('click',e=>{ e.stopPropagation(); openActSheet(p); }); /* v84：「…」は実物どおりアクションシート */
  dp.querySelector('.ig-cmtb').addEventListener('click',()=>openCmSheet(p,owner,false));
@@ -3570,15 +3571,18 @@ window.noiseGo=null;
    本編・台詞・数値・解放条件・LSKEYは不変。新規セーブ項目なし（既読は storySeen を共用）。 */
 (function(){
  const st=document.createElement('style'); st.textContent=
- '.ig-imgwrap.car{overflow:hidden;touch-action:pan-y}'
- +'.ig-track{display:flex;transition:transform .34s cubic-bezier(.32,.72,0,1);touch-action:pan-y}'
- +'.ig-track.drag{transition:none}'
- +'.ig-track img{width:100%;aspect-ratio:1;object-fit:cover;display:block;flex:none;-webkit-user-drag:none;user-select:none;touch-action:pan-y}'
+ '.ig-carousel{position:relative}'
+ +'.ig-car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}'
+ +'.ig-car-track::-webkit-scrollbar{display:none}'
+ +'.ig-car-track img{flex:0 0 100%;width:100%;aspect-ratio:1;object-fit:cover;display:block;scroll-snap-align:start;-webkit-user-drag:none;user-select:none}'
  +'.ig-imgwrap .ig-bigheart{z-index:4}'
- +'.ig-cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11.5px;line-height:1;padding:4px 8px;border-radius:11px;z-index:3}'
- +'.ig-dots{position:absolute;left:0;right:0;bottom:8px;display:flex;gap:4px;justify-content:center;z-index:3;pointer-events:none}'
- +'.ig-dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45)}'
- +'.ig-dots i.on{background:#fff}'
+ +'.ig-car-count{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11.5px;padding:3px 9px;border-radius:999px;pointer-events:none;z-index:3}'
+ +'.ig-car-dots{position:absolute;left:0;right:0;bottom:9px;display:flex;gap:5px;justify-content:center;pointer-events:none;z-index:3}'
+ +'.ig-car-dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55)}'
+ +'.ig-car-dots i.on{background:#fff}'
+ +'.ig-car-nav{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.45);color:#fff;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;z-index:3}'
+ +'.ig-car-nav.prev{left:8px}'
+ +'.ig-car-nav.next{right:8px}'
  +'.ig-multi{position:absolute;top:6px;right:6px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));z-index:2;display:block}'
  +'.ig-hls{display:flex;gap:17px;padding:2px 16px 13px;overflow-x:auto;scrollbar-width:none}'
  +'.ig-hls::-webkit-scrollbar{display:none}'
