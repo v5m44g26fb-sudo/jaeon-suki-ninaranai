@@ -1093,7 +1093,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v133：Instagramのストーリートレイで、ストーリーが無いユーザーに付いていたグレーのリングを外しました（実物ではグレーのリングは「見終わったストーリーがある」という意味のため）。チャット画面下部の入力バーは、入力欄タップで物語が進み、絵文字／# ボタンもタップに反応するようになりました。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v134：ロック画面の通知をタップすると、解除後に該当アプリまで開くようになりました（カカオトークの通知はトーク一覧、解剖メモの通知はそのメモの詳細、カレンダーの通知はその予定の詳細、天気の通知はニュースへ。通知バナーの遷移と揃えました）。遷移先のない通知は従来どおりホームが開きます。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -4028,17 +4028,17 @@ function renderLockNotifs(){
  if(Array.isArray(S.noise)&&S.noise.length){
    let cal=-1,_nl=[]; const _sc=S.noise.slice().sort((a,b)=>b-a); for(const c of _sc){ const l=(typeof noiseEntries==='function')?noiseEntries(c):[]; if(l.length){ cal=c; _nl=l; break; } } const n=_nl.length?_nl[_nl.length-1]:null; /* v126：発火済みでも現行データに無い通知（削除済み）は遡って最新の実在エントリを表示 */
    if(n){ const kd=(KDATE[cal]||'').match(/(\d+)월\s*(\d+)일/);
-     items.push({ic:(IC[n[0]]||''),bg:(n[0]==='chat'?'#fee500':'#fff'),app:String(n[1]).replace(/\s*[・―-]\s*지금$/,''),time:kd?(kd[1]+'월 '+kd[2]+'일'):'',body:n[2]}); }
+     items.push({ic:(IC[n[0]]||''),bg:(n[0]==='chat'?'#fee500':'#fff'),app:String(n[1]).replace(/\s*[・―-]\s*지금$/,''),time:kd?(kd[1]+'월 '+kd[2]+'일'):'',body:n[2],go:(({chat:'kakao',book:'cal',cap:'cal',rain:'news',cloud:'news'})[n[0]]||null)}); }
  }
  if(Array.isArray(S.memos)&&S.memos.length){
    const id=Math.max.apply(null,S.memos); const m=MEMOS.find(x=>x.id===id);
-   if(m) items.push({ic:'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg>',bg:'#fff',app:'解剖メモ',time:MEMO_DATES[id]||'',body:'「'+m.title+'」が解放されました'});
+   if(m) items.push({ic:'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg>',bg:'#fff',app:'解剖メモ',time:MEMO_DATES[id]||'',body:'「'+m.title+'」が解放されました',go:'note:'+id});
  }
- let lastEv=null,lastMo='',lastKey=-1;
+ let lastEv=null,lastMo='',lastKey=-1,lastKey2='';
  const lim=(typeof curCalIdx==='function')?curCalIdx():CAL.length-1; /* 作中日付より先の月の予定は「直近」に数えない */
- CAL.forEach((mo,mi)=>{ if(mi>lim) return; mo.e.forEach(e=>{ const locked=e.u>S.calU&&!(e.cond&&e.cond()); if(locked) return; const key=mi*100+(e.day||0); if(key>=lastKey){ lastKey=key; lastEv=e; lastMo=mo.m; } }); });
- if(lastEv) items.push({ic:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',bg:'#fff',app:'캘린더',time:'2021年 '+lastMo+' '+lastEv.d,body:lastEv.t});
- box.innerHTML=items.slice(0,3).map((it,i)=>'<div class="lnotif'+(i===1?' stack':'')+'"><span class="ln-ic" style="background:'+it.bg+';color:#262626">'+it.ic+'</span><div style="flex:1;min-width:0"><div class="ln-h"><b>'+esc(it.app)+'</b><span>'+esc(it.time)+'</span></div><div class="ln-t">'+esc(it.body)+'</div></div></div>').join('');
+ CAL.forEach((mo,mi)=>{ if(mi>lim) return; mo.e.forEach((e,ei)=>{ const locked=e.u>S.calU&&!(e.cond&&e.cond()); if(locked) return; const key=mi*100+(e.day||0); if(key>=lastKey){ lastKey=key; lastEv=e; lastMo=mo.m; lastKey2=mi+'-'+ei; } }); });
+ if(lastEv) items.push({ic:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',bg:'#fff',app:'캘린더',time:'2021年 '+lastMo+' '+lastEv.d,body:lastEv.t,go:lastKey2?('cal:'+lastKey2):null});
+ box.innerHTML=items.slice(0,3).map((it,i)=>'<div class="lnotif'+(i===1?' stack':'')+'"'+(it.go?' data-lkgo="'+it.go+'"':'')+'><span class="ln-ic" style="background:'+it.bg+';color:#262626">'+it.ic+'</span><div style="flex:1;min-width:0"><div class="ln-h"><b>'+esc(it.app)+'</b><span>'+esc(it.time)+'</span></div><div class="ln-t">'+esc(it.body)+'</div></div></div>').join('');
 }
 (function(){
  const _uc=updClock; updClock=function(){ _uc(); renderLockNotifs(); };
@@ -4068,6 +4068,27 @@ function renderLockNotifs(){
  if(em){ em.style.cursor='pointer'; em.addEventListener('click',()=>toast('（スタンプは、物語クリア後のフリートークで送れます）')); }
  const hs=document.querySelector('.chat-input .in-hash');
  if(hs){ hs.style.cursor='pointer'; hs.addEventListener('click',()=>toast('（#検索は、カカオトークの「#」タブで使えます）')); }
+})();
+</script>
+<script>
+/* ================= v134 : REALISM — ロック画面の通知タップ =================
+   実物 iOS どおり、ロック画面の通知をタップすると解除後に該当アプリ（と詳細）まで開く。
+   通知バナー（v90）の遷移先マップと揃えた。遷移先の無い通知は従来どおりホームへ。
+   本編・台詞・数値・解放条件・LSKEYは不変。 */
+(function(){
+ let lkRoute=null;
+ const lv=$('#v-lock');
+ if(lv) lv.addEventListener('click',e=>{ const t=(e.target&&e.target.closest)?e.target.closest('[data-lkgo]'):null; lkRoute=t?t.dataset.lkgo:null; },true);
+ function lkGo(r){
+   if(!r) return;
+   const ix=r.indexOf(':'); const kind=ix<0?r:r.slice(0,ix); const arg=ix<0?'':r.slice(ix+1);
+   if(kind==='kakao'){ if(typeof kkTabReset==='function') kkTabReset(); if(typeof renderThreads==='function') renderThreads(); showView('v-kakao'); }
+   else if(kind==='news'){ renderNews(); showView('v-news'); }
+   else if(kind==='note'){ renderNotes(); showView('v-notes'); if(arg) openNoteDetail(+arg); }
+   else if(kind==='cal'){ const mi=arg?parseInt(arg.split('-')[0],10):NaN; if(!isNaN(mi)) calPage=mi; renderCal(); showView('v-cal'); if(arg) openCalDetail(arg); }
+ }
+ const _sv=showView;
+ showView=function(id){ const pv=document.querySelector('.view.on'); const prevId=pv?pv.id:null; _sv(id); if(prevId==='v-lock'&&id==='v-home'&&lkRoute){ const r=lkRoute; lkRoute=null; setTimeout(()=>lkGo(r),90); } };
 })();
 </script>
 </body>
