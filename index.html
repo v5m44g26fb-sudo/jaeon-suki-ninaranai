@@ -458,6 +458,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .story-zone{position:absolute;top:0;bottom:0;width:32%;z-index:2}
 .story-zone.l{left:0}.story-zone.r{right:0}
 .story .ring.seen{background:#c7c7cc}
+.story .ring.none{background:transparent}
 .mus-credit{margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:13px 15px;background:#fff;font-size:12px;line-height:1.8;color:#444}
 .mus-credit b{font-size:12.5px;color:#111}
 
@@ -1092,7 +1093,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v132：ホーム画面のカレンダー／写真ウィジェットがタップで各アプリを開くようになりました（ニュースウィジェットと挙動を統一）。電話の通話履歴は、行と ⓘ をタップすると日時・通話時間などの詳細が出ます（日時は本編の発生日に一致）。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v133：Instagramのストーリートレイで、ストーリーが無いユーザーに付いていたグレーのリングを外しました（実物ではグレーのリングは「見終わったストーリーがある」という意味のため）。チャット画面下部の入力バーは、入力欄タップで物語が進み、絵文字／# ボタンもタップに反応するようになりました。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2175,7 +2176,7 @@ function igAllCm(p){ const mine=(S.igMyCmts&&Array.isArray(S.igMyCmts[p.id]))?S.
 function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar-gen.jpg'; if(name==='b1nna_') return 'assets/av-bitna-gen2.jpg'; if(name==='s0l_a') return 'assets/av-sola-gen2.jpg'; return ''; }
 function igBaseLikes(p){ return parseInt(String(p.likes).replace(/,/g,''),10)+Math.max(0,S.calU-(p.unlock||0))*13; }
 function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
-function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' seen'; const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
+function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' none'; /* v133：ストーリーが無いユーザーは実物どおりリング自体を付けない（グレーの既読リングは「見たストーリーがある」意味になるため） */ const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
 function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar-gen.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna-gen2.jpg'],['s0l_a','assets/av-sola-gen2.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
 function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast(b.dataset.suser==='nao_sculpt'?'（ストーリーの追加は演出用です）':'このユーザーのストーリーは、物語の進行で追加されます'); })); }
 function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':'nao_sculpt'):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
@@ -4053,6 +4054,20 @@ function renderLockNotifs(){
  const st=document.createElement('style'); st.textContent='.cl-row{cursor:pointer}.cl-row:active{background:#f2f2f7}'; document.head.appendChild(st);
  const wc=document.querySelector('.wid-cal'); if(wc) wc.addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('tap'); renderCal(); showView('v-cal'); });
  const wp=document.querySelector('.wid-photo'); if(wp) wp.addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('tap'); renderGallery(); showView('v-gallery'); });
+})();
+</script>
+<script>
+/* ================= v133 : REALISM — IGストーリーリング／チャット入力バー =================
+   ストーリーの無いユーザーのリング無し表示は storyRingCls 側に実装。
+   本編モードの入力バーは、実物どおり各部が反応する：入力欄タップ＝フィードと同じ前進、
+   絵文字／# は案内トースト（本作の作法）。本編・台詞・数値・解放条件・LSKEYは不変。 */
+(function(){
+ const fi=document.querySelector('.chat-input .fakein');
+ if(fi) fi.addEventListener('click',()=>{ if(typeof choiceOpen!=='undefined'&&choiceOpen) return; if(typeof fireTap==='function') fireTap(); });
+ const em=document.querySelector('.chat-input .in-emo');
+ if(em){ em.style.cursor='pointer'; em.addEventListener('click',()=>toast('（スタンプは、物語クリア後のフリートークで送れます）')); }
+ const hs=document.querySelector('.chat-input .in-hash');
+ if(hs){ hs.style.cursor='pointer'; hs.addEventListener('click',()=>toast('（#検索は、カカオトークの「#」タブで使えます）')); }
 })();
 </script>
 </body>
