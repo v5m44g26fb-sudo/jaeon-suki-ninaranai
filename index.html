@@ -83,11 +83,11 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 @keyframes flut{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(8deg)}}
 .home-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;padding:max(56px,calc(var(--sat) + 12px)) 0 118px;position:relative;z-index:1}
 .wid-row{display:flex;gap:12px;padding:2px 20px 0}
-.wid-cal{flex:1;background:#fff;color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);min-height:104px}
+.wid-cal{flex:1;cursor:pointer;background:#fff;color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);min-height:104px}
 .wid-cal .wd{color:#ff3b30;font-size:12.5px;font-weight:600}
 .wid-cal .d{font-size:38px;font-weight:300;line-height:1.1}
 .wid-cal .ev{font-size:11px;color:#555;border-left:3px solid #ff9500;padding-left:6px;margin-top:4px;line-height:1.4}
-.wid-photo{flex:1;border-radius:20px;overflow:hidden;position:relative;box-shadow:0 4px 14px rgba(0,0,0,.22);min-height:104px}
+.wid-photo{flex:1;cursor:pointer;border-radius:20px;overflow:hidden;position:relative;box-shadow:0 4px 14px rgba(0,0,0,.22);min-height:104px}
 .wid-photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
 .wid-photo span{position:absolute;left:10px;bottom:8px;font-size:11px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .wid-wide{margin:12px 20px 0;background:rgba(255,255,255,.94);color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.65}
@@ -1092,7 +1092,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v131：クリア後のフリーチャットと、後日談・彼視点に、言葉と距離感の場面を増補しました（彼の返信ルール8件と汎用返信2件の追加、彼視点3篇と後日談2篇・パリからの手紙への加筆。いずれも追加のみで、既存の台詞・数値・解放条件は変えていません）。あわせて、現在は使われていない旧い実写真系の画像ファイル21点をリポジトリから削除しました（表示中の写真はすべて生成画像のままです）。</p>
+<p class="src">v132：ホーム画面のカレンダー／写真ウィジェットがタップで各アプリを開くようになりました（ニュースウィジェットと挙動を統一）。電話の通話履歴は、行と ⓘ をタップすると日時・通話時間などの詳細が出ます（日時は本編の発生日に一致）。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2396,12 +2396,18 @@ function endsHTML(){
 /* call log */
 const RAIN_IDX=STORY.findIndex(it=>it.k==='memo'&&it.id===7);
 function renderCallLog(){
+ /* v132：履歴の行と ⓘ は実物どおりタップに反応する（詳細アラート）。日時は本編の発生日（c1=作中4月16日／c2=6月25日）に一致させる */
+ const CL_DET=[
+  '音声通話\n2021年4月16日（金） ― 通話時間 06:12\n「言いかけて、止めた夜」\nこの通話は、物語の中で再生されます',
+  '音声通話\n2021年6月25日（金） ― 通話時間 03:47\n「ブレスレットの夜。言わないと決めたこと」\nこの通話は、物語の中で再生されます',
+  '不在着信\n2021年6月26日（土）午前 2:47\n雨の夜、言い争いのあとに一度だけかかってきた電話'];
  let h='';
- if(S.call1||S.callSeen) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 06:12 ― 言いかけて、止めた夜</span></span><span class="cii">i</span></div>';
- if(S.call2) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 03:47 ― ブレスレットの夜。言わないと決めたこと</span></span><span class="cii">i</span></div>';
+ if(S.call1||S.callSeen) h+='<div class="thread cl-row" data-cl="0" role="button"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>4月</time></span><span class="tp">音声通話 06:12 ― 言いかけて、止めた夜</span></span><span class="cii">i</span></div>';
+ if(S.call2) h+='<div class="thread cl-row" data-cl="1" role="button"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn">パク・ジェオン<time>6月</time></span><span class="tp">音声通話 03:47 ― ブレスレットの夜。言わないと決めたこと</span></span><span class="cii">i</span></div>';
  /* 雨の夜の痕跡：言い争いのあと、彼は一度だけ電話をかけた。出られなかった（出なかった）一本だけが履歴に残る */
- if(RAIN_IDX>=0&&S.idx>RAIN_IDX) h+='<div class="thread"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn"><span class="missed">パク・ジェオン</span><time>6月</time></span><span class="tp">부재중 전화（不在着信）― 6월 26일 오전 2:47</span></span><span class="cii">i</span></div>';
+ if(RAIN_IDX>=0&&S.idx>RAIN_IDX) h+='<div class="thread cl-row" data-cl="2" role="button"><img class="av" src="'+cav()+'"><span class="tt"><span class="tn"><span class="missed">パク・ジェオン</span><time>6月</time></span><span class="tp">부재중 전화（不在着信）― 6월 26일 오전 2:47</span></span><span class="cii">i</span></div>';
  $('#calllog-body').innerHTML=h?h+'<p class="locknote">通話は物語の中で再生されます（大事なセリフにはボイス付き）</p>':'<p class="locknote">まだ通話履歴はありません</p>';
+ document.querySelectorAll('#calllog-body [data-cl]').forEach(r=>r.addEventListener('click',()=>{ const d=CL_DET[+r.dataset.cl]; if(d) iosAlert('パク・ジェオン',d,'閉じる',null); })); /* v132：行タップで詳細（実物の履歴詳細に相当） */
 }
 /* nav */
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
@@ -4039,5 +4045,15 @@ function renderLockNotifs(){
 })();
 </script>
 
+<script>
+/* ================= v132 : REALISM — ホームウィジェット／通話履歴 =================
+   ホームのカレンダー／写真ウィジェットは実物 iOS どおりタップでアプリを開く（ニュースウィジェットと挙動を統一）。
+   通話履歴の行タップ詳細は renderCallLog 側に実装。本編・台詞・数値・解放条件・LSKEYは不変。 */
+(function(){
+ const st=document.createElement('style'); st.textContent='.cl-row{cursor:pointer}.cl-row:active{background:#f2f2f7}'; document.head.appendChild(st);
+ const wc=document.querySelector('.wid-cal'); if(wc) wc.addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('tap'); renderCal(); showView('v-cal'); });
+ const wp=document.querySelector('.wid-photo'); if(wp) wp.addEventListener('click',()=>{ if(typeof sfxPlay==='function') sfxPlay('tap'); renderGallery(); showView('v-gallery'); });
+})();
+</script>
 </body>
 </html>
