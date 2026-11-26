@@ -1093,7 +1093,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v134：ロック画面の通知をタップすると、解除後に該当アプリまで開くようになりました（カカオトークの通知はトーク一覧、解剖メモの通知はそのメモの詳細、カレンダーの通知はその予定の詳細、天気の通知はニュースへ。通知バナーの遷移と揃えました）。遷移先のない通知は従来どおりホームが開きます。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v135：カメラのモード表示（슬로모션／비디오／사진／인물／파노라마）がタップで切り替わるようになりました。ビデオモードではシャッターが赤くなり、押すと録画表示（●REC）が出て、もう一度押すと止まります。反転ボタンでファインダー表示も左右反転します。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -4089,6 +4089,43 @@ function renderLockNotifs(){
  }
  const _sv=showView;
  showView=function(id){ const pv=document.querySelector('.view.on'); const prevId=pv?pv.id:null; _sv(id); if(prevId==='v-lock'&&id==='v-home'&&lkRoute){ const r=lkRoute; lkRoute=null; setTimeout(()=>lkGo(r),90); } };
+})();
+</script>
+<script>
+/* ================= v135 : REALISM — カメラのモード／反転／録画 =================
+   実物カメラどおり、モード表示（슬로모션／비디오／사진／인물／파노라마）をタップで切り替え、
+   ビデオではシャッターが赤丸→録画中は角丸に変わり REC 表示が出る。反転ボタンで
+   ファインダー表示を左右反転する。これまでは全て無反応だった。
+   本編・台詞・数値・解放条件・LSKEYは不変。 */
+(function(){
+ const cv=$('#cam-view'); if(!cv) return;
+ const st=document.createElement('style'); st.textContent='.cam-modes span{cursor:pointer}#cam-shutter.rec{background:#ff3b30}#cam-shutter.rec.onair{border-radius:12px;transform:scale(.78)}.cam-vf.flip{transform:scaleX(-1)}'; document.head.appendChild(st);
+ const modes=cv.querySelectorAll('.cam-modes span');
+ const shb=$('#cam-shutter');
+ const top=cv.querySelector('.cam-top span');
+ let curMode='사진', recT=null, recS=0;
+ function stopRec(){ if(recT){ clearInterval(recT); recT=null; } if(shb) shb.classList.remove('onair'); if(top) top.textContent=curMode; }
+ modes.forEach(sp=>sp.addEventListener('click',()=>{
+   stopRec();
+   modes.forEach(x=>x.classList.remove('on')); sp.classList.add('on');
+   curMode=sp.textContent;
+   if(top) top.textContent=curMode;
+   if(shb) shb.classList.toggle('rec', curMode==='비디오');
+   if(typeof vib==='function') vib(8);
+ }));
+ if(shb) cv.addEventListener('click',e=>{
+   if(e.target!==shb) return;
+   if(curMode!=='비디오') return; /* 写真系モードのシャッターは従来の処理（フラッシュ＋効果音）に任せる */
+   e.stopPropagation();
+   if(recT){ stopRec(); if(typeof vib==='function') vib(10); return; }
+   recS=0; shb.classList.add('onair');
+   const tick=()=>{ if(top) top.textContent='● REC 0:'+String(recS).padStart(2,'0'); recS++; };
+   tick(); recT=setInterval(tick,1000);
+   if(typeof vib==='function') vib(12);
+ },true);
+ const flip=cv.querySelector('.cam-flip');
+ if(flip){ flip.style.cursor='pointer'; flip.addEventListener('click',()=>{ const vf=cv.querySelector('.cam-vf'); if(vf) vf.classList.toggle('flip'); if(typeof vib==='function') vib(8); }); }
+ const cc=$('#cam-close'); if(cc) cc.addEventListener('click',stopRec);
 })();
 </script>
 </body>
