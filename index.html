@@ -659,9 +659,12 @@ img{-webkit-user-drag:none}
 #story-pause-ind{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);font-size:14.5px;color:#fff;background:rgba(0,0,0,.48);border-radius:999px;padding:9px 17px;display:none;z-index:6;pointer-events:none}
 #v-story.paused #story-pause-ind{display:block}
 #v-story.paused .story-img{filter:brightness(.8)}
-#albumpick{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:230;display:none;align-items:flex-end}
-#albumpick.on{display:flex}
-#albumpick .ap-sheet{background:#fff;width:100%;max-height:64%;overflow-y:auto;border-radius:16px 16px 0 0;padding:14px 12px calc(16px + var(--sab))}
+#albumpick{position:absolute;inset:0;z-index:230;display:flex;align-items:flex-end;pointer-events:none}
+#albumpick::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#albumpick.on{pointer-events:auto}
+#albumpick.on::before{opacity:1}
+#albumpick .ap-sheet{position:relative;background:#fff;width:100%;max-height:64%;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:16px 16px 0 0;padding:14px 12px calc(16px + var(--sab));transform:translateY(103%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -6px 28px rgba(0,0,0,.18)}
+#albumpick.on .ap-sheet{transform:translateY(0)}
 #albumpick .ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:10px}
 #albumpick .ap-grid button{padding:0;aspect-ratio:1;overflow:hidden;border:0;background:#eee}
 #albumpick .ap-grid img{width:100%;height:100%;object-fit:cover;display:block}
@@ -895,6 +898,28 @@ img{-webkit-user-drag:none}
 .nwc-like{flex:none;display:flex;align-items:center;gap:3px;font-size:11.5px;color:#8e8e93;border:1px solid #e6e6e6;border-radius:999px;padding:3px 8px;background:#fff}
 .nwc-like.on{color:#ff3040;border-color:#ffb3ba}
 .nwc-like.on svg{fill:#ff3040;stroke:#ff3040}
+/* v143：押下フィードバックの穴埋め（実物の作法に合わせ、行は背景・アイコン類は透明度／スケールで返す） */
+.back:active{opacity:.4}
+.nt-row:active{background:#f2f2f7}
+.gal-grid button:active{opacity:.72}
+.wid-cal:active,.wid-photo:active{opacity:.72}
+.ia-btns button:active{background:#e9e9ee}
+.prof-music:active{opacity:.55}
+.cm-reply:active{opacity:.45}
+.cm-like{transition:transform .12s ease}
+.cm-like:active{transform:scale(1.22)}
+.cm-like.pop svg{animation:igpop .3s ease}
+.ig-stats span[data-stat]:active{opacity:.45}
+.nw-tabs button:active{background:#f5f6f7}
+.nwc-like:active{background:#f5f5f7}
+.story-foot button.sf-ic:active{transform:scale(.85)}
+.story-foot button.sf-ic{transition:transform .12s ease}
+#cm-close:active{opacity:.45}
+.ksp-pbtn:active{transform:scale(.97)}
+#albumpick .ap-grid button:active{opacity:.7}
+#noise:active{opacity:.85}
+/* v143：慣性スクロールの表記統一（残りのスクロール容器） */
+.nw-tabs,.gal-strip,.ig-hls,#chat-drawer,.call-main{-webkit-overflow-scrolling:touch}
 @media (prefers-reduced-motion: reduce){
  .story-progs i.cur b{animation:none !important;transform:scaleX(1)}
  #v-home.fresh .apps .app,#v-home.fresh .dock .app{animation:none !important}
@@ -1078,11 +1103,12 @@ img{-webkit-user-drag:none;user-select:none}
 .ksp-price{font-size:14.5px;font-weight:800;color:#191919;margin-top:4px}
 .ksp-add{margin-top:8px;width:100%;padding:7px 0;border-radius:8px;border:1px solid #e3e3e6;background:#fff;font-size:12.5px;font-weight:700;color:#191919;font-family:inherit}
 .ksp-add.on{background:#fee500;border-color:#fee500}
-#ksp-sheet{position:absolute;inset:0;z-index:90;display:none}
-#ksp-sheet.on{display:block}
-.ksp-bg{position:absolute;inset:0;background:rgba(0,0,0,.45)}
-.ksp-panel{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:18px 18px 0 0;padding:12px 18px calc(20px + var(--sab,0px));animation:kspUp .3s cubic-bezier(.32,.72,.24,1)}
-@keyframes kspUp{from{transform:translateY(56px);opacity:.3}to{transform:translateY(0);opacity:1}}
+#ksp-sheet{position:absolute;inset:0;z-index:90;pointer-events:none}
+#ksp-sheet.on{pointer-events:auto}
+.ksp-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#ksp-sheet.on .ksp-bg{opacity:1}
+.ksp-panel{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:18px 18px 0 0;padding:12px 18px calc(20px + var(--sab,0px));transform:translateY(105%);transition:transform .34s cubic-bezier(.32,.72,0,1)}
+#ksp-sheet.on .ksp-panel{transform:translateY(0)}
 .ksp-panel img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;background:#eee}
 .ksp-pname{font-size:16.5px;font-weight:800;color:#191919;margin-top:13px}
 .ksp-pdesc{font-size:13px;color:#666;line-height:1.55;margin-top:5px}
@@ -1109,7 +1135,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v142：キャラ設定の活用度調査を受けて4件を手直ししました（ソルアのトークに執着の粘りを足す増補、ビンナとソルアの状態メッセージ、ジェオンの蝶のタトゥーへの再言及、フリーチャットの「保存した」の言い回し）。本編の数値・解放条件・進行は変えていません。</p>
+<p class="src">v143：操作の手触りと応答の質を実物に寄せました（コメントのいいねを全再描画からその場更新へ、写真ピッカーと商品シートにスライドの出入りを追加、戻るボタンやメモ行など押下フィードバックの穴埋め）。本編の台詞・数値・解放条件・進行は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2265,6 +2291,7 @@ let cmPost=null, cmOwner='j';
 function cmLikeKey(p,c){ return p.id+'::'+c[0]+'::'+c[1]; }
 function cmLikeBase(p,c){ const k=cmLikeKey(p,c); let h=0; for(let i=0;i<k.length;i++) h=(h*31+k.charCodeAt(i))>>>0; return h%43; } /* v139：コメントのいいね数はキーから決定的に導く（再表示しても変わらない） */
 function cmMetaExtra(p,c,liked){ const n=cmLikeBase(p,c)+(liked?1:0); return (n>0?'<span>いいね！'+n+'件</span>':'')+'<button class="cm-reply" data-rep="'+esc(c[0])+'">返信する</button>'; }
+function bindCmReplies(root){ root.querySelectorAll('[data-rep]').forEach(b=>{ if(b.dataset.repBound) return; b.dataset.repBound='1'; b.addEventListener('click',()=>{ const inp=$('#cm-in'); if(!inp) return; inp.value='@'+b.dataset.rep+' '; inp.focus(); updCmSend(); }); }); } /* v143：返信ボタンの結線（いいねのその場更新で作り直されたボタンにも使う） */
 function renderCmList(){
  const list=$('#cm-list'); if(!list||!cmPost) return;
  const story=(cmPost.cm||[]).map(c=>({c:c,mine:false,late:false,li:0})).concat((S.calU>=(cmPost.unlock||0)+3?(cmPost.cmL||[]):[]).map((c,i)=>({c:c,mine:false,late:true,li:i}))); /* v137：cmL は投稿より後の時刻で表示 */
@@ -2272,8 +2299,8 @@ function renderCmList(){
  const all=story.concat(mine);
  if(!all.length){ list.innerHTML='<div class="cm-empty">まだコメントがありません</div>'; return; }
  list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':igCmDisp(cmPost,x.late,x.li))+'</span>'+(x.mine?'':cmMetaExtra(cmPost,c,liked))+'</div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+''+'</button></div>'; }).join('');
- list.querySelectorAll('[data-cmk]').forEach(b=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); if(i>=0) S.igCmLikes.splice(i,1); else { S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } save(); renderCmList(); }));
- list.querySelectorAll('[data-rep]').forEach(b=>b.addEventListener('click',()=>{ const inp=$('#cm-in'); if(!inp) return; inp.value='@'+b.dataset.rep+' '; inp.focus(); updCmSend(); })); /* v139：返信は実物どおりメンションを入れて入力欄へ */
+ list.querySelectorAll('[data-cmk]').forEach((b,bi)=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); const liked=i<0; if(liked){ S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } else S.igCmLikes.splice(i,1); save(); /* v143：実物どおりその場で更新する（従来のリスト全再描画はスクロールとタッチを中断させた） */ b.classList.toggle('liked',liked); const svg=b.querySelector('svg'); if(svg) svg.setAttribute('fill',liked?'#ff3040':'none'); if(liked){ b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); } const x=all[bi]; const row=b.closest('.cm-row'); const meta=row?row.querySelector('.cm-meta'):null; if(x&&meta&&!x.mine){ const t=meta.querySelector('span'); meta.innerHTML='<span>'+(t?t.textContent:'')+'</span>'+cmMetaExtra(cmPost,x.c,liked); bindCmReplies(meta); } }));
+ bindCmReplies(list); /* v139：返信は実物どおりメンションを入れて入力欄へ */
 }
 function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); updCmSend(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
 function closeCmSheet(){ const sh=$('#cm-sheet'); if(sh) sh.classList.remove('on'); cmPost=null; }
