@@ -1180,12 +1180,75 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
  #v-lock.boot .lock-top,#v-lock.boot .lock-clock,#v-lock.boot .lock-title,#v-lock.boot .lock-notifs,#v-lock.boot .lock-btns,#v-lock.boot .lock-hint{animation:none !important}
  .row.pop{animation:none !important}
 }
+
+/* ===== v146：動きの質（遷移の方向／シートのバネ／一覧の時間差入場／ボタンの戻り／大きな写真のシマー）
+   v120〜v145 の動き（タイトルの振付・吹き出し出現・フェードイン）とは競合させず、カーブと尺の作法を揃える側の変更。
+   本編の台詞・数値・解放条件・LSKEY・写真割り当ては不変 ===== */
+/* --- 画面遷移の方向：進む=右から（従来の vin）、戻る=左から（vinB）。旧画面も方向つきで退出する --- */
+@keyframes vinB{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes voutF{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-14px)}}
+@keyframes voutB{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(22px)}}
+.view.on{z-index:2}
+.view.on.vback{animation:vinB .26s cubic-bezier(.32,.72,0,1)}
+.view.byeF{display:flex;z-index:1;animation:voutF .26s ease-in both;pointer-events:none}
+.view.byeB{display:flex;z-index:3;animation:voutB .26s ease-in both;pointer-events:none}
+/* --- シート：開く時は少し行き過ぎて収まるスプリング、閉じる時は加速して抜ける。暗転も開きに追随させる --- */
+#ppl-sheet .ppl-panel,#sv-sheet .ppl-panel,#cm-sheet .cm-panel,#shr-sheet .sh-panel,#bg-sheet .sh-panel,#gsh-sheet .sh-panel,#cal-sheet .sh-panel{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
+#ppl-sheet.on .ppl-panel,#sv-sheet.on .ppl-panel,#cm-sheet.on .cm-panel,#shr-sheet.on .sh-panel,#bg-sheet.on .sh-panel,#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transition:transform .52s cubic-bezier(.3,1.14,.38,1)}
+#act-sheet .act-panel,#fol-sheet .fol-panel,#mk-sheet .act-panel{transition:transform .26s cubic-bezier(.55,0,.85,.4)}
+#act-sheet.on .act-panel,#fol-sheet.on .fol-panel,#mk-sheet.on .act-panel{transition:transform .44s cubic-bezier(.3,1.14,.38,1)}
+#ksp-sheet .ksp-panel{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
+#ksp-sheet.on .ksp-panel{transition:transform .5s cubic-bezier(.3,1.14,.38,1)}
+#albumpick .ap-sheet{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
+#albumpick.on .ap-sheet{transition:transform .52s cubic-bezier(.3,1.14,.38,1)}
+#chat-drawer{transition:transform .26s cubic-bezier(.55,0,.85,.4)}
+#chat-drawer.on{transition:transform .46s cubic-bezier(.3,1.12,.38,1)}
+#ppl-sheet.on .ppl-bg,#sv-sheet.on .ppl-bg,#cm-sheet.on .cm-bg,#shr-sheet.on .sh-bg,#bg-sheet.on .sh-bg,#gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg,#act-sheet.on .act-bg,#fol-sheet.on .fol-bg,#mk-sheet.on .act-bg,#ksp-sheet.on .ksp-bg{transition:opacity .42s ease}
+#albumpick.on::before{transition:opacity .42s ease}
+/* --- 一覧の時間差入場：従来の全行同時 fadeup（再描画のたびに再生される）を止め、初回表示だけ先頭からずらして出す --- */
+.nw-item,.povrow,.ig-post,.nw-rank button,.news-hero{animation:none}
+.casc .nw-item,.casc .povrow,.casc .ig-post,.casc .nw-rank button,.casc .news-hero,.casc .thread,.casc .nt-row,.casc .cm-row,.casc .gal-grid>button{animation:fadeup .38s cubic-bezier(.32,.72,0,1) both;animation-delay:calc(var(--i,0)*42ms)}
+/* --- ボタンの戻り：押し込みは速く、離すとバネで戻る。ポップの弾みも同じカーブに統一 --- */
+.app .ic{transition:transform .24s cubic-bezier(.34,1.35,.64,1),filter .18s}
+.app:active .ic{transition-duration:.06s,.06s}
+.ig-actions .ig-like.pop svg,.cm-like.pop svg{animation-timing-function:cubic-bezier(.34,1.5,.64,1)}
+.cm-like{transition:transform .22s cubic-bezier(.34,1.5,.64,1)}
+.cm-like:active{transition-duration:.05s}
+.setbtn{transition:transform .2s cubic-bezier(.34,1.4,.64,1)}
+.setbtn:active{transition-duration:.05s}
+.story-foot button.sf-ic{transition:transform .2s cubic-bezier(.34,1.4,.64,1)}
+.story-foot button.sf-ic:active{transition-duration:.05s}
+.plus-panel span{transition:transform .2s cubic-bezier(.34,1.4,.64,1)}
+.plus-panel div:active span{transition-duration:.05s}
+.cg i{transition:transform .18s cubic-bezier(.34,1.4,.64,1),background .15s ease,color .15s ease}
+.cg:active i{transition-duration:.05s,.15s,.15s}
+.ksp-pbtn{transition:transform .2s cubic-bezier(.34,1.4,.64,1)}
+.ksp-pbtn:active{transition-duration:.05s}
+/* --- 大きな写真の読み込みシマー（光の帯）。読み込み完了（.ld）が付くと止まる --- */
+@keyframes shimSweep{from{transform:translateX(-115%) skewX(-8deg)}to{transform:translateX(320%) skewX(-8deg)}}
+.ig-imgwrap{overflow:hidden}
+.ig-imgwrap::after{content:'';position:absolute;top:0;bottom:0;left:0;width:34%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.38) 50%,rgba(255,255,255,0) 100%);transform:translateX(-115%) skewX(-8deg);animation:shimSweep 1.25s ease-in-out infinite;pointer-events:none;z-index:3}
+.ig-imgwrap.ld::after{animation:none;opacity:0;transition:opacity .35s ease}
+#v-story::after{content:'';position:absolute;top:12%;bottom:12%;left:0;width:34%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.20) 50%,rgba(255,255,255,0) 100%);transform:translateX(-115%) skewX(-8deg);animation:shimSweep 1.25s ease-in-out infinite;pointer-events:none;z-index:1}
+#v-story.ld::after{animation:none;opacity:0;transition:opacity .35s ease}
+#gal-view::after{content:'';position:absolute;top:12%;bottom:12%;left:0;width:34%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.16) 50%,rgba(255,255,255,0) 100%);transform:translateX(-115%) skewX(-8deg);animation:shimSweep 1.25s ease-in-out infinite;pointer-events:none;z-index:1}
+#gal-view.ld::after{animation:none;opacity:0;transition:opacity .35s ease}
+.news-hero{position:relative}
+.news-hero::after{content:'';position:absolute;top:0;height:170px;left:0;width:34%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.30) 50%,rgba(255,255,255,0) 100%);transform:translateX(-115%) skewX(-8deg);animation:shimSweep 1.25s ease-in-out infinite;pointer-events:none;z-index:2}
+.news-hero.ld::after{animation:none;opacity:0;transition:opacity .35s ease}
+@media (prefers-reduced-motion: reduce){
+ .view.on.vback{animation:none !important}
+ .view.byeF,.view.byeB{display:none !important;animation:none !important}
+ .casc .nw-item,.casc .povrow,.casc .ig-post,.casc .nw-rank button,.casc .news-hero,.casc .thread,.casc .nt-row,.casc .cm-row,.casc .gal-grid>button{animation:none !important}
+ .ig-imgwrap::after,#v-story::after,#gal-view::after,.news-hero::after{animation:none !important;opacity:0 !important}
+ #ppl-sheet .ppl-panel,#sv-sheet .ppl-panel,#cm-sheet .cm-panel,#shr-sheet .sh-panel,#bg-sheet .sh-panel,#gsh-sheet .sh-panel,#cal-sheet .sh-panel,#act-sheet .act-panel,#fol-sheet .fol-panel,#mk-sheet .act-panel,#ksp-sheet .ksp-panel,#albumpick .ap-sheet,#chat-drawer{transition-duration:.01s !important}
+}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v145：状態のつながりを整えました（ニュースのコメントいいねが記事を開き直しても消えないように保存化。空の画面はアイコン＋見出し＋補足の形に統一。写真の読み込みは地色＋フェードインで全アプリ共通に）。本編の台詞・数値・解放条件・進行は変えていません。</p>
+<p class="src">v146：動きの質を整えました（戻る時は左から入る遷移の方向、開くと少し行き過ぎて収まるシートのバネ、一覧は初回だけ先頭からずらして表示、大きな写真の読み込みには光の帯）。本編の台詞・数値・解放条件・進行は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2214,6 +2277,7 @@ function renderThreads(){
  if(S.chap>=4) L.appendChild(threadRow('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク',lastT(DOHYUK),tmon(si(DOHYUK)),0,()=>openSide('ヤン・ドヒョク','assets/av-dohyuk-gen.jpg',DOHYUK[si(DOHYUK)],si(DOHYUK))));
  if(S.chap>=5) L.appendChild(threadRow('assets/av-sola-gen2.jpg','ユン・ソルア',lastT(SOLA),tmon(si(SOLA)),0,()=>openSide('ユン・ソルア','assets/av-sola-gen2.jpg',SOLA[si(SOLA)],si(SOLA))));
  if(S.chap<1){const d=document.createElement('div'); d.className='locknote'; d.textContent='物語を進めると、トークが増えていきます'; L.appendChild(d);}
+ if(window.__casc)__casc(L,'threads',L.querySelectorAll('.thread'));
  updKkBadge(); /* v104：一覧を描くたびにタブバッジも実未読へ同期する */
 }
 let sideView=null;
@@ -2332,7 +2396,7 @@ function renderIGFeed(){
  let h=igStoriesRowHTML();
  const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)).sort((a,b)=>igAgeMin(a.p)-igAgeMin(b.p));
  h+='<div class="ig-feed">'+posts.map(x=>igPostHTML(x.p,x.o)).join('')+'</div>';
- body.innerHTML=h; igFeedHold=true; body.scrollTop=igFeedY; requestAnimationFrame(()=>{ body.scrollTop=igFeedY; igFeedHold=false; }); /* v88：スクロール位置を復元 */
+ body.innerHTML=h; if(window.__casc)__casc(body,'igfeed',body.querySelectorAll('.ig-post')); igFeedHold=true; body.scrollTop=igFeedY; requestAnimationFrame(()=>{ body.scrollTop=igFeedY; igFeedHold=false; }); /* v88：スクロール位置を復元 */
  wireStoriesRow(body);
  body.querySelectorAll('.ig-feed .ig-post').forEach(dp=>{ const pool=dp.dataset.owner==='j'?IG_J:IG_N; const p=pool.find(x=>x.id===dp.dataset.pid); if(p) igWireCard(dp,p,dp.dataset.owner,true); });
 }
@@ -2350,6 +2414,7 @@ function renderCmList(){
  if(!all.length){ list.innerHTML='<div class="es-box"><div class="es-ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.5-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg></div><div class="es-h">まだコメントがありません</div><div class="es-s">最初のコメントを書いてみましょう</div></div>'; return; } /* v145：空状態を共通形に統一 */
  list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':igCmDisp(cmPost,x.late,x.li))+'</span>'+(x.mine?'':cmMetaExtra(cmPost,c,liked))+'</div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+''+'</button></div>'; }).join('');
  list.querySelectorAll('[data-cmk]').forEach((b,bi)=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); const liked=i<0; if(liked){ S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } else S.igCmLikes.splice(i,1); save(); /* v143：実物どおりその場で更新する（従来のリスト全再描画はスクロールとタッチを中断させた） */ b.classList.toggle('liked',liked); const svg=b.querySelector('svg'); if(svg) svg.setAttribute('fill',liked?'#ff3040':'none'); if(liked){ b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); } const x=all[bi]; const row=b.closest('.cm-row'); const meta=row?row.querySelector('.cm-meta'):null; if(x&&meta&&!x.mine){ const t=meta.querySelector('span'); meta.innerHTML='<span>'+(t?t.textContent:'')+'</span>'+cmMetaExtra(cmPost,x.c,liked); bindCmReplies(meta); } }));
+ if(window.__casc)__casc(list,'cm:'+(cmPost?cmPost.id:''),list.querySelectorAll('.cm-row'));
  bindCmReplies(list); /* v139：返信は実物どおりメンションを入れて入力欄へ */
 }
 function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); updCmSend(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
@@ -2496,6 +2561,7 @@ function renderNotes(){
    if(!un) return '<div class="nt-row lock"><span class="nt-main"><b>？？？</b><span class="nt-sub">未解放 ― 物語のキー場面を読み進めると解放されます</span></span></div>';
    return '<button class="nt-row" data-note="'+m.id+'"><span class="nt-main"><b>'+esc(m.title)+'</b><span class="nt-sub">'+(MEMO_DATES[m.id]?MEMO_DATES[m.id]+'　':'')+esc(m.body.split('\n')[0]||'')+'</span></span><span class="nt-chev">›</span></button>';
   }).join('')+'</div>'+ /* v96：iOSメモ風に一覧→詳細へ階層化（未解放は行のみ・中身は出さない） */(ntq?('<p class="notes-count">'+MEMOS.filter(ntHit).length+'件ヒット</p>'+(MEMOS.some(ntHit)?'':'<p class="locknote">「'+esc((typeof ntQuery==='string'?ntQuery:'').trim())+'」に一致するメモはありません</p>')):(endsHTML()+musicCreditHTML()+'<p class="locknote">メモは「彼の言葉」ではなく「行動」から書かれています</p>'+'<p class="notes-count">'+MEMOS.length+'件のメモ</p>')); /* v70：iOSメモ風の日付行と件数フッタ（未解放分に日付は出さない） */
+ if(window.__casc)__casc(b,'notes',b.querySelectorAll('.nt-row'));
 }
 function endsHTML(){
  const defs=[['drama','END「わかっていても」'],['gen','END「一人で進む」'],['nao','特別END「好きにはならない」']];
@@ -2727,7 +2793,7 @@ function renderPOV(){
    if(un) btn.addEventListener('click',()=>{ if(!S.pov.includes(p.id)){S.pov.push(p.id); save();} $('#povread-body').innerHTML='<div class="pr-t">'+esc(p.title)+'</div>'+esc(p.body); showView('v-povread'); });
    b.appendChild(btn);
  });
- const note=document.createElement('p'); note.className='locknote'; note.textContent='彼の内面も、全部は言葉になっていません。行動と断片から読む記録です'; b.appendChild(note);
+ const note=document.createElement('p'); note.className='locknote'; note.textContent='彼の内面も、全部は言葉になっていません。行動と断片から読む記録です'; b.appendChild(note); if(window.__casc)__casc(b,'pov',b.querySelectorAll('.povrow'));
 }
 $('#povread-back').addEventListener('click',()=>{ renderPOV(); showView('v-pov'); });
 /* ================= v4 : IG STORIES ================= */
@@ -2957,6 +3023,7 @@ function renderGallery(){
    h+='<button data-gal="'+i+'"'+((gFirst&&gm!=='all')?' class="g-first"':'')+'><img loading="lazy" decoding="async" src="'+g.img+'">'+(galFav.has(g.img)?'<span class="fav-badge">♥</span>':'')+'</button>'; gFirst=false; /* v122：お気に入りバッジ（Tinder版 .fav-badge 移植） */ /* v128：日／月／年表示では各グループの先頭を全幅の大タイルに（iOS写真の日表示） */
  });
  if(lastD!==null) h+='</div>';
+ if(window.__casc)__casc(b,'gal:'+gm,b.querySelectorAll('.gal-grid>button'));
  const seg91=$('#gal-seg'); if(seg91) seg91.querySelectorAll('[data-gm]').forEach(x=>x.classList.toggle('on',x.dataset.gm===gm));
  const unAll=GAL.filter(g=>S.calU>=g.u); b.innerHTML=(un.length?'':'<div class="es-box"><div class="es-ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M4.5 18.5 10 13l3.5 3.5L17 13l2.5 2.5"/></svg></div><div class="es-h">'+(unAll.length?'写真がありません':'写真はまだありません')+'</div><div class="es-s">'+(unAll.length?'削除した写真は「最近削除した項目」から戻せます':'物語の中で撮った写真が、日付付きでここに増えていきます')+'</div></div>')+h+(un.length?((!GAL.length||unAll.length<GAL.length)?'<p class="locknote">物語の中で撮った写真が、日付付きでここに増えていきます</p>':'<p class="locknote">一学期ぶんの写真が、全部そろいました</p>'):'') /* v145：0枚時は空状態の共通形を出し、従来の locknote は写真がある時だけに残す */+((Array.isArray(S.galDel)&&S.galDel.length)?'<button class="gal-trash-row" id="gal-trash-row">最近削除した項目<span>'+S.galDel.length+'件 ›</span></button>':''); const trw=b.querySelector('#gal-trash-row'); if(trw) trw.addEventListener('click',()=>{ if(typeof renderGalTrash==='function') renderGalTrash(); });
  b.querySelectorAll('[data-gal]').forEach(btn=>btn.addEventListener('click',()=>{ const g=un[+btn.dataset.gal]; galCur=g; $('#gal-img').src=g.img; $('#gal-date').textContent='2021년 '+g.d; const wd=galWeekday(g); $('#gal-wday').textContent=wd?wd+'요일':''; $('#gal-cap').textContent=g.cap; updGalFav(); $('#gal-view').classList.add('on'); }));
@@ -3259,7 +3326,7 @@ function renderEpi(){
    if(un) btn.addEventListener('click',()=>{ if(e.type==='letter') openEpiLetter(); else playEpi(e.id); });
    b.appendChild(btn);
  });
- const note=document.createElement('p'); note.className='locknote'; note.textContent='後日談は、到達したエンディングごとに開きます。チャット劇はトーク画面で、タップしながら読み進めます'; b.appendChild(note);
+ const note=document.createElement('p'); note.className='locknote'; note.textContent='後日談は、到達したエンディングごとに開きます。チャット劇はトーク画面で、タップしながら読み進めます'; b.appendChild(note); if(window.__casc)__casc(b,'epi',b.querySelectorAll('.povrow'));
 }
 $('#epiread-back').addEventListener('click',()=>{ renderEpi(); showView('v-epi'); });
 
@@ -3502,7 +3569,7 @@ function renderNews(){
  if(nwCat==='전체'&&!nwQuery){ const hero=latest.filter(a=>a.th).slice().sort((x,y)=>y.hot-x.hot)[0]; if(hero) h+='<button class="news-hero" data-nw="'+hero.id+'"><img loading="lazy" decoding="async" src="'+hero.th+'" alt=""><span class="in"><span class="tag">'+esc(hero.cat)+'</span><h3>'+esc(hero.title)+'</h3><p>'+esc(hero.sub)+'</p></span></button>'; } /* v122：参照元（Tinder版）のヒーローカードを移植 */
  h+='<div class="nw-sec">'+(nwQuery?('검색 결과 '+latest.length+'건'):'최신 뉴스')+'</div>'+(nwQuery&&!latest.length?'<div class="nw-empty">검색 결과가 없습니다<br><span>다른 검색어를 입력해 보세요</span></div>':'')+latest.map(a=>'<button class="nw-item" data-nw="'+a.id+'">'+(a.th?'<div class="nw-flex"><div class="nw-tx">':'')+'<span class="cat">'+esc(a.cat)+'</span><div class="ti">'+esc(a.title)+'</div><div class="sub">'+esc(a.sub)+'</div><div class="meta">'+esc(a.press)+' · 2021년 '+esc(a.date)+'</div>'+(a.th?'</div><img class="nw-th" loading="lazy" decoding="async" src="'+a.th+'" alt=""></div>':'')+'</button>').join(''); /* v85：NAVER実物どおり、写真のある記事は一覧にサムネイルを付ける */
  h+='<p class="locknote">物語が進むと、その時期のニュースがここに増えていきます</p>';
- b.innerHTML=h;
+ b.innerHTML=h; if(window.__casc)__casc(b,'news:'+(nwQuery?'q':nwCat),b.querySelectorAll('.nw-item,.nw-rank button,.news-hero'));
  b.querySelectorAll('[data-nw]').forEach(btn=>btn.addEventListener('click',()=>openNews(btn.dataset.nw)));
  b.querySelectorAll('[data-nwcat]').forEach(btn=>btn.addEventListener('click',()=>{ nwCat=btn.dataset.nwcat; renderNews(); }));
  const qi=b.querySelector('#nw-q'); if(qi){ qi.value=nwQuery; qi.addEventListener('input',()=>{ nwQuery=qi.value.trim(); nwQFocus=true; renderNews(); }); qi.addEventListener('blur',()=>{ nwQFocus=false; }); if(nwQFocus){ qi.focus(); try{ qi.setSelectionRange(qi.value.length,qi.value.length); }catch(e){} } } /* v90：検索欄（再描画後も入力を継続できるようフォーカスを戻す） */
@@ -3731,7 +3798,7 @@ function kpRender(){ const d=$('#kp-disp'); if(d) d.textContent=kpNum; }
  const st=document.createElement('style'); st.textContent=
  '#gsh-sheet,#cal-sheet{position:absolute;inset:0;z-index:243;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}'
  +'#gsh-sheet .sh-bg,#cal-sheet .sh-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}'
- +'#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}'
+ +'#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .3s cubic-bezier(.55,0,.85,.4);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}'
  +'#gsh-sheet.on,#cal-sheet.on{pointer-events:auto}'
  +'#gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg{opacity:1}'
  +'#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transform:translateY(0)}'
@@ -3965,7 +4032,7 @@ function openStoryHL(list){
  +'.iga-empty{padding:52px 30px;text-align:center;color:#8e8e8e;font-size:13.5px;line-height:1.8}'
  +'#mk-sheet{position:absolute;inset:0;z-index:246;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}'
  +'#mk-sheet .act-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}'
- +'#mk-sheet .act-panel{position:relative;margin:0 8px calc(10px + var(--sab));transform:translateY(110%);transition:transform .34s cubic-bezier(.32,.72,0,1)}'
+ +'#mk-sheet .act-panel{position:relative;margin:0 8px calc(10px + var(--sab));transform:translateY(110%);transition:transform .26s cubic-bezier(.55,0,.85,.4)}'
  +'#mk-sheet.on{pointer-events:auto}'
  +'#mk-sheet.on .act-bg{opacity:1}'
  +'#mk-sheet.on .act-panel{transform:translateY(0)}';
@@ -4197,6 +4264,47 @@ function renderLockNotifs(){
  }
  const _sv=showView;
  showView=function(id){ const pv=document.querySelector('.view.on'); const prevId=pv?pv.id:null; _sv(id); if(prevId==='v-lock'&&id==='v-home'&&lkRoute){ const r=lkRoute; lkRoute=null; setTimeout(()=>lkGo(r),90); } };
+})();
+</script>
+<script>
+/* ================= v146 : MOTION — 動きの質（遷移の方向／一覧の時間差入場／大きな写真のシマー）
+   方向の判定は「戻る」ボタン（.back／ストーリーの閉じる）のクリックを捕捉して次の showView 1回だけに使う。
+   一覧の時間差入場は __casc（初回表示のキーだけ .casc を付け、再描画では再生しない）。
+   本編の台詞・数値・解放条件・LSKEY・写真割り当ては不変。 */
+(function(){
+ const RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+ /* --- 一覧の時間差入場（初回だけ） --- */
+ const seen=new Set();
+ window.__casc=function(el,key,items){ if(!el) return; if(RM||seen.has(key)){ el.classList.remove('casc'); return; } seen.add(key); el.classList.add('casc'); const list=items||[]; for(let i=0;i<list.length;i++){ try{ list[i].style.setProperty('--i',Math.min(i,8)); }catch(e){} } };
+ /* --- 画面遷移の方向（戻る=左から入る＋旧画面は右へ退出／進む=従来どおり＋旧画面は左へ退出） --- */
+ let backFlag=false;
+ document.addEventListener('click',e=>{ const t=(e.target&&e.target.closest)?e.target.closest('.back,#story-close'):null; if(t){ backFlag=true; setTimeout(()=>{ backFlag=false; },0); } },true);
+ const _svPrev=showView;
+ showView=function(id){
+   const back=backFlag; backFlag=false;
+   const pv=document.querySelector('.view.on'); const prev=(pv&&pv.id!==id)?pv:null;
+   const nv=document.getElementById(id);
+   if(nv){ nv.classList.remove('byeF','byeB'); nv.classList.toggle('vback',!!back); }
+   _svPrev(id);
+   if(prev&&!RM&&id!=='v-lock'&&prev.id!=='v-lock'){
+     prev.classList.add(back?'byeB':'byeF');
+     const p=prev; setTimeout(()=>{ p.classList.remove('byeF','byeB'); },300);
+   }
+ };
+ /* --- 大きな写真のシマー：読み込み完了で .ld を付け、帯を止める --- */
+ function markLd(img){
+   const w=(img.closest)?img.closest('.ig-imgwrap,.news-hero'):null; if(w) w.classList.add('ld');
+   if(img.id==='story-img'){ const v=document.getElementById('v-story'); if(v) v.classList.add('ld'); }
+   if(img.id==='gal-img'){ const v=document.getElementById('gal-view'); if(v) v.classList.add('ld'); }
+ }
+ document.addEventListener('load',e=>{ if(e.target&&e.target.tagName==='IMG') markLd(e.target); },true);
+ document.addEventListener('error',e=>{ if(e.target&&e.target.tagName==='IMG') markLd(e.target); },true);
+ function sweep(){ document.querySelectorAll('img').forEach(im=>{ if(im.complete&&im.naturalWidth>0) markLd(im); }); }
+ window.addEventListener('load',sweep); sweep();
+ [['story-img','v-story'],['gal-img','gal-view']].forEach(pair=>{
+   const im=document.getElementById(pair[0]); if(!im) return;
+   new MutationObserver(()=>{ if(!im.complete){ const v=document.getElementById(pair[1]); if(v) v.classList.remove('ld'); } }).observe(im,{attributes:true,attributeFilter:['src']});
+ });
 })();
 </script>
 </body>
