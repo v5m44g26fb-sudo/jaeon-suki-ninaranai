@@ -1255,7 +1255,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v148：ホーム画面の様式を舞台の2021年（iOS 14）の作法に合わせました（アイコンのツヤとウィジェットの重い影を外してフラットに、電話と設定のアイコンを単色に、バッジの位置をアイコンの角に固定、ニュースウィジェットの角丸を他と統一）。本編の台詞・解放条件・進行は変えていません。</p>
+<p class="src">v149：生成写真8枚を新しい投稿として追加しました（二人で並ぶアトリエ・カフェ・観覧車・雨の日の傘・展示会場・蝶の温室、ジェオンの夜の作業室、なおの釜山の坂道）。物語の進行に合わせて解放され、写真アルバムにも同じ日付で並びます。既存の投稿・台詞・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1609,7 +1609,9 @@ const IG_J=[
 {id:'army',img:'assets/ig-army-main.jpg',cap:'다녀오겠습니다.',likes:'1,208',unlock:99,cm:[['b1nna_','……ついに開いたんだね、通知'],['nao_sculpt','（見てしまった。……元気で）']]},
 {id:'enlist',img:'assets/ig-enlist-main.jpg',cap:'……',likes:'1,876',unlock:99,cm:[['b1nna_','見たよ。……元気で']]},
 {id:'atelier2',img:'assets/ig-atelier2-main.jpg',cap:'작업실. 밤',likes:'539',unlock:10,cm:[['b1nna_','또 작업실이네'],['park_jaeon','조용하니까']]},
-{id:'summer',img:'assets/ig-atelier-summer.jpg',cap:'작업실. 한여름',likes:'441',unlock:10,cm:[['b1nna_','扇風機と麦茶……夏の作業室って感じ'],['park_jaeon','……粘土が乾く前に終わらせる']]}
+{id:'summer',img:'assets/ig-atelier-summer.jpg',cap:'작업실. 한여름',likes:'441',unlock:10,cm:[['b1nna_','扇風機と麦茶……夏の作業室って感じ'],['park_jaeon','……粘土が乾く前に終わらせる']]},
+{id:'nightlab',img:'assets/ig-nightlab-main.jpg',cap:'밤. 손은 쉬지 않는다',likes:'498',unlock:10,cm:[['b1nna_','また夜！？ 寝なよ'],['park_jaeon','……終わったら寝る']]},
+{id:'greenhouse',img:'assets/ig-greenhouse-main.jpg',cap:'나비. 같이 보는 날',likes:'843',unlock:12,cm:[['b1nna_','え、誰と見てるの！？'],['park_jaeon','……水やり当番'],['s0l_a','……変わったね']]}
 ];
 const IG_N=[
 {id:'n1',img:'assets/nao-post1-main.jpg',imgs:['assets/nao-post1-main.jpg','assets/nao-busan.jpg','assets/nao-busan-me.jpg'],cap:'久しぶりの外出。卒業制作、そろそろ本気出す',likes:'98',unlock:0,cm:[['b1nna_','え、そこ足元ガラス！？ 下、海じゃん'],['nao_sculpt','足すくんだけど、いい気分転換になった']],cmL:[['b1nna_','この日、泣いてなかった？']]},
@@ -1626,7 +1628,13 @@ const IG_N=[
 {id:'n14',img:'assets/nao-rainwindow.jpg',cap:'雨の日。窓辺で本とコーヒー',likes:'96',unlock:8,cm:[['b1nna_','窓の雨、すごいね'],['nao_sculpt','外の灯りがにじんで見える']]},
 {id:'n15',img:'assets/nao-hand.jpg',cap:'展示作品。手のかたち',likes:'156',unlock:11,cm:[['b1nna_','手のシワまで本物みたい'],['nao_sculpt','石膏だよ。近くで見ると荒い']],cmL:[['park_jaeon','……手が、いちばん残った']]},
 {id:'n16',img:'assets/nao-bus.jpg',cap:'帰りのバス。窓の外、ずっと海だった',likes:'104',unlock:0,cm:[['b1nna_','車窓からの海、夕日がやばい'],['nao_sculpt','帰りたくなくなるやつ']]},
-{id:'n17',img:'assets/nao-station.jpg',cap:'合宿の帰り。ホーム、誰もいなかった',likes:'129',unlock:8,cm:[['b1nna_','夕日のホーム、誰もいなくてエモい'],['nao_sculpt','電車、全然来なかった']]}
+{id:'n17',img:'assets/nao-station.jpg',cap:'合宿の帰り。ホーム、誰もいなかった',likes:'129',unlock:8,cm:[['b1nna_','夕日のホーム、誰もいなくてエモい'],['nao_sculpt','電車、全然来なかった']]},
+{id:'n21',img:'assets/nao-slope.jpg',cap:'釜山の坂道。振り返ったら、海だった',likes:'87',unlock:0,cm:[['b1nna_','その坂、息切れするやつ'],['nao_sculpt','上まで行ったら、景色がご褒美だった']]},
+{id:'n18',img:'assets/nao-wheel2.jpg',cap:'観覧車。てっぺん、怖くなかった',likes:'121',unlock:8,cm:[['b1nna_','隣、誰！？'],['nao_sculpt','……合宿だよ']],cmL:[['park_jaeon','……また、乗る？']]},
+{id:'n19',img:'assets/nao-umbrella2.jpg',cap:'傘、一本だった。……悪くなかった',likes:'138',unlock:9,cm:[['b1nna_','それで！？ 詳しく！！'],['nao_sculpt','……近いだけだよ']],cmL:[['park_jaeon','……濡れてない？']]},
+{id:'n22',img:'assets/nao-repair.jpg',cap:'修復中。隣で手伝ってくれる人',likes:'164',unlock:10,cm:[['b1nna_','隣の人、誰とは言わないけど'],['nao_sculpt','……助かってる']]},
+{id:'n20',img:'assets/nao-cafe2.jpg',cap:'展示の帰り。寄り道のカフェ',likes:'152',unlock:11,cm:[['b1nna_','向かいの席、誰ですかー！'],['nao_sculpt','……内緒'],['s0l_a','……ふーん']]},
+{id:'n23',img:'assets/nao-exhibit2.jpg',cap:'展示。隣で、同じの見てた',likes:'171',unlock:11,cm:[['b1nna_','おめでとう！ 隣の人は……まあいいや'],['nao_sculpt','ありがとう。案内してもらった']]}
 ];
 /* v68：day は月グリッドのドット用。値は新規に作らず、写真アプリ（GAL）の日付・要約内の明記日付など既存データで確定できるものだけに付けた（個展3/5・バー3/12・作業室3/26・曖昧な関係4/16・誕生日4/25・合宿6/18・雨の夜6/25・修復7/9・展示7/16・温室9/17・水やり9/19）。確定できないエントリには付けない */
 const CAL=[
@@ -2323,7 +2331,7 @@ let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿
 /* ================= v81 : IGフィード／コメントシート／既読リング =================
    姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
    自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
-const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',gallery:'1時間前',hands:'3時間前',atelier2:'4時間前',n1:'1週間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前'};
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',gallery:'1時間前',hands:'3時間前',atelier2:'4時間前',n1:'1週間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前',nightlab:'6時間前',greenhouse:'2時間前',n18:'5時間前',n19:'9時間前',n20:'3時間前',n21:'5日前',n22:'7時間前',n23:'4時間前'};
 let igTab='feed';
 let igFeedY=0, igFeedHold=false; /* v88：フィードのスクロール位置保持（実物どおり、詳細・プロフィール・ストーリーから戻っても元の位置） */
 (function(){ const b=$('#ig-body'); if(b) b.addEventListener('scroll',()=>{ if(igTab==='feed'&&!igFeedHold) igFeedY=b.scrollTop; },{passive:true}); })();
@@ -3001,14 +3009,22 @@ function updClock(){
 /* ================= v6 : GALLERY ================= */
 const GAL=[
  {img:'assets/nao-post1-main.jpg',d:'3월 5일',cap:'外出の日 ― 海の上のガラス橋',u:0},
+ {img:'assets/nao-slope.jpg',d:'3월 5일',cap:'外出の日 ― 釜山の坂道',u:0},
  {img:'assets/ig-bar-main.jpg',d:'3월 12일',cap:'初めてのバー。ライムのカクテル',u:1},
  {img:'assets/ig-atelier-main.jpg',d:'3월 26일',cap:'作業室 ― 彼の制作風景',u:2},
  {img:'assets/nao-making-main.jpg',d:'4월 16일',cap:'作業の合間（撮られた方）',u:3},
  {img:'assets/ig-butterfly-main.jpg',d:'4월 25일',cap:'誕生日 ― 温室の蝶',u:4},
  {img:'assets/ig-wheel-main.jpg',d:'6월 18일',cap:'合宿 ― 観覧車',u:8},
+ {img:'assets/nao-wheel2.jpg',d:'6월 18일',cap:'合宿 ― 観覧車の中',u:8},
  {img:'assets/ig-rain-main.jpg',d:'6월 25일',cap:'雨の夜',u:9},
+ {img:'assets/nao-umbrella2.jpg',d:'6월 25일',cap:'雨の夜 ― 傘、一本',u:9},
  {img:'assets/ig-hands-main.jpg',d:'7월 9일',cap:'修復の日々 ― 手は嘘をつかない',u:10},
- {img:'assets/ig-gallery-main.jpg',d:'7월 16일',cap:'ギャラリー展当日',u:11}
+ {img:'assets/nao-repair.jpg',d:'7월 9일',cap:'修復の日々 ― 並んで作業',u:10},
+ {img:'assets/ig-nightlab-main.jpg',d:'7월 9일',cap:'修復の日々 ― 夜の作業室',u:10},
+ {img:'assets/ig-gallery-main.jpg',d:'7월 16일',cap:'ギャラリー展当日',u:11},
+ {img:'assets/nao-exhibit2.jpg',d:'7월 16일',cap:'ギャラリー展 ― 並んで見る',u:11},
+ {img:'assets/nao-cafe2.jpg',d:'7월 16일',cap:'展示の帰り ― カフェ',u:11},
+ {img:'assets/ig-greenhouse-main.jpg',d:'9월 17일',cap:'温室 ― 蝶を見上げる',u:12}
 ]; /* v116：生成写真で9件全て復活（4월 16일 のエントリは日付・cap・u とも v110 時点の値のまま、写真のみ nao-making-main に差し替え） */
 /* v68：写真詳細のお気に入りはセッション内のみ（セーブに持たせない）。galCur はツールバー操作の対象 */
 let galCur=null; const galFav=new Set(Array.isArray(S.galFav)?S.galFav:[]); /* v90：お気に入りをセーブと連動（旧セーブは空で補完） */
