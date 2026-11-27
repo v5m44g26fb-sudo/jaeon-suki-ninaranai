@@ -640,7 +640,7 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
    実機 iPhone（Safari/WebKit）での見え方・挙動に寄せるための横断指定。
    - 100vh→100dvh のフォールバックと、モバイル幅でも見出し＋電話を1画面に収める指定は上部の各ルールに反映済み。
    - セーフエリアは --sat / --sab（:root）を介して各ヘッダー・下部バーの max() に反映済み（インセット0の環境では従来寸法と一致）。
-   - 入力ズーム：実テキスト入力は #free-in のみで、font-size は既に 16px（iOS Safari の自動ズーム閾値）を確認済みのため変更なし。 */
+   - 入力ズーム：実テキスト入力は全て font-size 16px（iOS Safari の自動ズーム閾値）に統一（v147 で # タブ検索の 14.5px を是正）。 */
 input,textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default} /* 入力欄だけは選択・コールアウトを実物どおりに戻す */
 img{-webkit-user-drag:none}
 #side-feed{-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}
@@ -1075,7 +1075,7 @@ img{-webkit-user-drag:none;user-select:none}
 /* v127：カカオ # タブ／쇼핑 タブの実物化 */
 .ksh{padding:14px 16px 34px;background:#fff}
 .ksh-search{display:flex;align-items:center;gap:8px;background:#f1f1f4;border-radius:10px;padding:9px 12px;color:#8e8e93}
-.ksh-search input{flex:1;border:0;background:none;font-size:14.5px;color:#191919;outline:none;font-family:inherit}
+.ksh-search input{flex:1;border:0;background:none;font-size:16px;color:#191919;outline:none;font-family:inherit} /* v147：14.5px では実機フォーカス時に iOS の自動ズームがかかるため 16px に統一 */
 .ksh-sec{font-size:15px;font-weight:800;color:#191919;margin:22px 0 8px}
 .ksh-tags{display:flex;flex-direction:column}
 .ksh-tag{display:flex;align-items:center;gap:12px;padding:9px 2px;background:none;border:0;border-bottom:1px solid #f2f2f4;font-size:14.5px;font-weight:600;color:#191919;text-align:left;font-family:inherit}
@@ -1243,12 +1243,20 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
  .ig-imgwrap::after,#v-story::after,#gal-view::after,.news-hero::after{animation:none !important;opacity:0 !important}
  #ppl-sheet .ppl-panel,#sv-sheet .ppl-panel,#cm-sheet .cm-panel,#shr-sheet .sh-panel,#bg-sheet .sh-panel,#gsh-sheet .sh-panel,#cal-sheet .sh-panel,#act-sheet .act-panel,#fol-sheet .fol-panel,#mk-sheet .act-panel,#ksp-sheet .ksp-panel,#albumpick .ap-sheet,#chat-drawer{transition-duration:.01s !important}
 }
+
+/* ===== v147：環境作法（複数幅・セーフエリア・入力ズーム・ステータスバー下の視認性）
+   ① #タブ検索の入力だけ 14.5px で、実機フォーカス時に iOS の自動ズームがかかっていたため 16px に統一（上の .ksh-search input）。
+   ② フォロー中リストの件数が '86' 固定でプロフィール表示（ジェオン74）と食い違っていたため prof.ing に単一化（openFollowList）。
+   ③ ホームは全面スクロールのため、スクロールした白いカードが浮いたステータスバー（白文字）の下に潜ると時刻が読めなくなる。
+      上端のステータスバー帯にすりガラス（暗色＋ぼかし）＋下端の薄い影を敷き、潜っても読めるようにする。静止位置では壁紙の上に薄く乗るだけで、構成は変えない。 */
+#v-home::before{content:'';position:absolute;top:0;left:0;right:0;height:max(44px,var(--sat));background:rgba(9,11,19,.42);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);z-index:2;pointer-events:none}
+#v-home::after{content:'';position:absolute;top:max(44px,var(--sat));left:0;right:0;height:26px;background:linear-gradient(rgba(9,11,19,.30),rgba(9,11,19,0));z-index:2;pointer-events:none}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v146：動きの質を整えました（戻る時は左から入る遷移の方向、開くと少し行き過ぎて収まるシートのバネ、一覧は初回だけ先頭からずらして表示、大きな写真の読み込みには光の帯）。本編の台詞・数値・解放条件・進行は変えていません。</p>
+<p class="src">v147：環境作法を整えました（細い画面・短い画面でも崩れないか全画面を実測、カカオ検索の入力で画面が拡大しないよう文字サイズを統一、ホームをスクロールしても上の時計が読めるよう影を追加、フォロー中リストの件数をプロフィールと一致）。本編の台詞・解放条件・進行は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2455,7 +2463,7 @@ function openLikers(p,owner){ const ownerU=owner==='j'?'park_jaeon.sculpt':'nao_
 let actPost=null;
 function openActSheet(p){ actPost=p; const s=$('#act-sheet'); if(s) s.classList.add('on'); }
 function closeActSheet(){ const s=$('#act-sheet'); if(s) s.classList.remove('on'); actPost=null; }
-function openFollowList(kind,isJ,prof){ const me=isJ?'park_jaeon.sculpt':'nao_sculpt'; const others=['nao_sculpt','b1nna_','s0l_a','park_jaeon.sculpt'].filter(u=>u!==me); openPplSheet((kind==='fol'?'フォロワー ':'フォロー中 ')+(kind==='fol'?prof.fol:'86'), others.map(pplRow).join(''), ''); }
+function openFollowList(kind,isJ,prof){ const me=isJ?'park_jaeon.sculpt':'nao_sculpt'; const others=['nao_sculpt','b1nna_','s0l_a','park_jaeon.sculpt'].filter(u=>u!==me); openPplSheet((kind==='fol'?'フォロワー ':'フォロー中 ')+(kind==='fol'?prof.fol:prof.ing) /* v147：'86' 固定だった件数を prof 側に単一化（ジェオンは 74） */, others.map(pplRow).join(''), ''); }
 function renderIG(){
  syncIgChrome();
  const body=$('#ig-body');
