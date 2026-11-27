@@ -1255,7 +1255,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v149：生成写真8枚を新しい投稿として追加しました（二人で並ぶアトリエ・カフェ・観覧車・雨の日の傘・展示会場・蝶の温室、ジェオンの夜の作業室、なおの釜山の坂道）。物語の進行に合わせて解放され、写真アルバムにも同じ日付で並びます。既存の投稿・台詞・解放条件は変えていません。</p>
+<p class="src">v150：Instagramでコメントが開けなくなることがある不具合を直しました（長く遊んだセーブに古い形のデータが残っていると、コメント一覧の表示で止まってしまう問題です）。本編・投稿・台詞・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1941,6 +1941,7 @@ S.free.forEach(m=>{ if(m.w==='jimg'){ if(typeof m.img!=='string') m.img=''; if(t
 S.free.forEach(m=>{ if(m.q){ if(typeof m.q!=='object'||typeof m.q.t!=='string') delete m.q; else m.q={n:typeof m.q.n==='string'?m.q.n:'',t:m.q.t}; } }); /* v87: 引用データの正規化（壊れた q は落とす） */
 if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def'; if(typeof S.kkNotif!=='boolean') S.kkNotif=true; /* v140：トーク通知スイッチの保存（旧セーブは既定ONで補完） */
 if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; if(!['day','month','year','all'].includes(S.galMode)) S.galMode='day'; if(!Array.isArray(S.kkCart)) S.kkCart=[]; else S.kkCart=S.kkCart.filter(x=>typeof x==='string'); /* v127：カカオショッピングのカート正規化 */ /* v91：ギャラリー表示モードの正規化（profSeen は renderFriends で遅延初期化） */ /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
+if(!S.igMyCmts||typeof S.igMyCmts!=='object'||Array.isArray(S.igMyCmts)) S.igMyCmts={}; Object.keys(S.igMyCmts).forEach(k=>{ const v=S.igMyCmts[k]; if(!Array.isArray(v)){ delete S.igMyCmts[k]; return; } S.igMyCmts[k]=v.filter(t=>typeof t==='string'||typeof t==='number'||typeof t==='boolean').map(t=>String(t)); }); /* v150：IG自分のコメント保存の異常系是正（非文字列の要素が残っていると esc が落ちてコメントシートが開かなくなる。正常なセーブでは値は変わらない） */
 const __fin=(v,d)=>(typeof v==='number'&&isFinite(v))?v:d;
 S.kai=Math.max(0,Math.min(100,__fin(S.kai,0)));
 S.kyo=Math.max(0,Math.min(100,__fin(S.kyo,62)));
