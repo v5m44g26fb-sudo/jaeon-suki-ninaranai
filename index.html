@@ -77,7 +77,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .lk-btn{width:47px;height:47px;border-radius:50%;background:rgba(30,30,34,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:19px}
 .lock-hint{text-align:center;font-size:12.5px;color:rgba(255,255,255,.85);padding:12px 0 max(30px,calc(var(--sab) + 8px))}
 /* ===== home : iOS 14 ===== */
-#v-home{background:linear-gradient(168deg,#274b63 0%,#3c3a5e 48%,#191725 100%);color:#fff;overflow:hidden}
+#v-home{background:radial-gradient(90% 42% at 82% -4%,rgba(255,206,130,.14) 0%,rgba(255,206,130,0) 60%),linear-gradient(168deg,#274b63 0%,#3c3a5e 48%,#191725 100%);color:#fff;overflow:hidden}
 .wall-butterflies{position:absolute;inset:0;font-size:24px;opacity:.4;pointer-events:none}
 .wall-butterflies span{position:absolute;animation:flut 7s ease-in-out infinite}
 @keyframes flut{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(8deg)}}
@@ -1130,12 +1130,50 @@ img{-webkit-user-drag:none;user-select:none}
 .nwr-rel-it .ti{display:block;font-size:14.5px;font-weight:600;color:#191919;line-height:1.4}
 .nwr-rel-it .meta{display:block;font-size:11.5px;color:#8e8e93;margin-top:3px}
 .nwr-rel-it img{width:56px;height:56px;border-radius:9px;object-fit:cover;flex:none;background:#eee}
+/* ===== v144：見た目の進化（開いた瞬間に分かる格上げ。明朝タイポグラフィとキービジュアルの意図は不変） ===== */
+/* ロック画面：キービジュアルがゆっくり漂い（Ken Burns）、ランプの光が呼吸するように明滅する */
+#v-lock .lock-kv{animation:kvDrift 30s ease-in-out infinite alternate;will-change:transform}
+@keyframes kvDrift{from{transform:scale(1.03)}to{transform:scale(1.1) translate(-1.2%,1.5%)}}
+#v-lock .lock-kv::before{content:'';position:absolute;inset:0;background:radial-gradient(38% 26% at 68% 37%,rgba(255,203,120,.34) 0%,rgba(255,203,120,0) 70%);animation:kvGlow 8.5s ease-in-out infinite alternate}
+@keyframes kvGlow{from{opacity:.4}to{opacity:.95}}
+/* ロック画面の蝶：横方向への漂いを足して奥行きを出す（ホーム側は従来の flut のまま） */
+@keyframes flutLock{0%,100%{transform:translate(0,0) rotate(-7deg)}33%{transform:translate(9px,-13px) rotate(5deg)}66%{transform:translate(-7px,-5px) rotate(-2deg)}}
+#v-lock .wall-butterflies span{animation-name:flutLock;animation-duration:9.5s}
+#v-lock .wall-butterflies span:nth-child(2){animation-duration:12.5s}
+#v-lock .wall-butterflies span:nth-child(3){animation-duration:15s}
+/* ロック画面の登場：錠→時計→タイトル→通知→ボタンの順に立ち上がる */
+@keyframes lockIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+#v-lock.boot .lock-top{animation:lockIn .65s cubic-bezier(.32,.72,0,1) .02s both}
+#v-lock.boot .lock-clock{animation:lockIn .7s cubic-bezier(.32,.72,0,1) .1s both}
+#v-lock.boot .lock-title{animation:lockIn .7s cubic-bezier(.32,.72,0,1) .22s both}
+#v-lock.boot .lock-notifs{animation:lockIn .7s cubic-bezier(.32,.72,0,1) .34s both}
+#v-lock.boot .lock-btns{animation:lockIn .65s cubic-bezier(.32,.72,0,1) .46s both}
+#v-lock.boot .lock-hint{animation:lockIn .65s cubic-bezier(.32,.72,0,1) .54s both}
+/* ホーム：アプリアイコンにツヤ、ウィジェットの影を深く、写真ウィジェットは静かに息づく */
+.app .ic::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.05) 46%,rgba(255,255,255,0) 60%);box-shadow:inset 0 1px 1px rgba(255,255,255,.38),inset 0 -10px 16px rgba(0,0,0,.12);pointer-events:none}
+.wid-cal,.wid-wide,.wid-music,.wid-news,.set-card{box-shadow:0 12px 26px rgba(2,6,16,.34),0 2px 6px rgba(2,6,16,.20)}
+.wid-photo img{animation:photoDrift 24s ease-in-out infinite alternate}
+@keyframes photoDrift{from{transform:scale(1.01)}to{transform:scale(1.08)}}
+.wid-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 52%,rgba(0,0,0,.34) 100%);pointer-events:none}
+.wid-photo span{z-index:1}
+/* チャット：新着の吹き出しが下からふわりと現れる（履歴の再描画では発火させない） */
+@keyframes rowIn{from{opacity:0;transform:translateY(7px) scale(.96)}to{opacity:1;transform:none}}
+.row.pop{animation:rowIn .27s cubic-bezier(.32,.72,0,1);transform-origin:0 100%}
+.row.me.pop{transform-origin:100% 100%}
+/* IG：投稿写真がふわりと読み込まれる（実物の画像フェードイン） */
+.ig-imgwrap>img,.ig-car-track img{animation:imgFade .45s ease}
+@keyframes imgFade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){
+ #v-lock .lock-kv,#v-lock .lock-kv::before,.wid-photo img,.ig-imgwrap>img,.ig-car-track img{animation:none !important}
+ #v-lock.boot .lock-top,#v-lock.boot .lock-clock,#v-lock.boot .lock-title,#v-lock.boot .lock-notifs,#v-lock.boot .lock-btns,#v-lock.boot .lock-hint{animation:none !important}
+ .row.pop{animation:none !important}
+}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v143：操作の手触りと応答の質を実物に寄せました（コメントのいいねを全再描画からその場更新へ、写真ピッカーと商品シートにスライドの出入りを追加、戻るボタンやメモ行など押下フィードバックの穴埋め）。本編の台詞・数値・解放条件・進行は変えていません。</p>
+<p class="src">v144：見た目を一段引き上げました（ロック画面のキービジュアルがゆっくり漂い、ランプの光が呼吸するように明滅。蝶の舞い方と画面の登場の動き、ホームのアイコンのツヤとウィジェットの影、チャットの吹き出しの現れ方、IG写真の読み込みも実物らしく）。本編の台詞・数値・解放条件・進行は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1143,7 +1181,7 @@ img{-webkit-user-drag:none;user-select:none}
 <div class="statusbar"><span id="sb-time">9:41</span><span class="sb-r"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#fff"/><rect x="4.5" y="5" width="3" height="6" rx="0.8" fill="#fff"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8" fill="#fff"/><rect x="13.5" y="0" width="3" height="11" rx="0.8" fill="#fff" opacity=".35"/></svg><svg width="16" height="11" viewBox="0 0 16 12"><path d="M8 10.6a1.7 1.7 0 1 1 0 .01zM5.2 8.2a4.2 4.2 0 0 1 5.6 0l-1.4 1.5a2.6 2.6 0 0 0-2.8 0zM2.6 5.4a8 8 0 0 1 10.8 0L12 6.9a6.3 6.3 0 0 0-8 0zM.2 2.7a11.6 11.6 0 0 1 15.6 0l-1.4 1.5a9.9 9.9 0 0 0-12.8 0z" fill="#fff"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" fill="none" stroke="#fff" opacity=".45"/><rect id="sb-batt" x="2" y="2" width="13" height="8" rx="1.8" fill="#fff"/><path id="sb-bolt" d="M11.2 1.6 6.6 6.9h2.9l-1.1 3.5 4.6-5.3h-2.9z" fill="#111" style="display:none"/><path d="M23.2 4v4a2.2 2.2 0 0 0 0-4z" fill="#fff" opacity=".45"/></svg></span></div>
 
 <!-- LOCK (iOS 14) -->
-<div class="view on" id="v-lock">
+<div class="view on boot" id="v-lock">
 <div class="lock-kv" aria-hidden="true"></div>
 <div class="wall-butterflies"><span style="left:14%;top:20%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:76%;top:14%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:60%;top:40%;animation-delay:2.1s"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span></div>
 <div class="lock-top"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></svg></div>
@@ -1821,7 +1859,7 @@ S.calU=Math.max(0,Math.min(12,Math.floor(__fin(S.calU,0))));
 S.freeN=Math.max(0,Math.floor(__fin(S.freeN,0)));
 if(S.done&&S.endId!=='drama'&&S.endId!=='gen'&&S.endId!=='nao'){ S.done=false; S.endId=null; }
 S.idx=Math.floor(__fin(S.idx,0)); if(S.idx<0) S.idx=0; if(S.idx>STORY.length) S.idx=STORY.length; if(!S.done&&S.idx>=STORY.length) S.idx=STORY.length-1;
-let playing=false, replaying=false, choiceOpen=false;
+let playing=false, replaying=false, choiceOpen=false; let freeRestoring=false; /* v144：フリートーク履歴の復元中は吹き出しの出現アニメを止める */
 const save=()=>{try{localStorage.setItem(LSKEY,JSON.stringify(S));}catch(e){}};
 /* ===== v74：メッセージ反応の基盤（start の replay より前に必要） ===== */
 let curMsgKey=null, playKeyPfx='x', playKeyN=0;
@@ -1873,8 +1911,8 @@ function addScene(v){const d=el('<div class="scene"><span class="who">SCENE</spa
 function addFade(v){feed.appendChild(el('<div class="fade">'+esc(v)+'</div>'));}
 function scheduleRead(){ if(readTimer) clearTimeout(readTimer); const d=ffMode?60:(900+Math.random()*700)*paceMul()*ambientMul(); readTimer=setTimeout(()=>{ clearUnread(); },d); }
 function prevRowIsJ(){ const l=feed.lastElementChild; return !!(l&&l.classList&&l.classList.contains('row')&&!l.classList.contains('me')&&l.querySelector('.bub')); } /* v83：直前が同じ相手の行なら連続メッセージ扱い */
-function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const grp=prevRowIsJ(); const r=el(grp?'<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>':'<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); }
-function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); tagMsg(r); feed.appendChild(r);}
+function addJ(v){ if(inSeq&&!replaying) scheduleRead(); else clearUnread(); const grp=prevRowIsJ(); const r=el(grp?'<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>':'<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(v)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); if(!replaying) r.classList.add('pop'); feed.appendChild(r); }
+function addMe(v){const r=el('<div class="row me"><div class="bmeta"><span class="unread">1</span><span class="tm">'+fmtTime()+'</span></div><div class="bub">'+esc(v)+'</div></div>'); tagMsg(r); if(!replaying) r.classList.add('pop'); feed.appendChild(r);}
 /* v23：追随スクロール。最下部付近にいるときだけ新着へ追随し、読み返し中の位置は奪わない。
    操作の起点（選択肢・カード表示、明示タップで進めた直後）は最新へ寄せる */
 let feedStick=true, advForce=false;
@@ -1909,7 +1947,7 @@ function setHint(on){ const th=$('#tap-hint'); if(th) th.classList.toggle('on',!
 function fireTap(){ advForce=true; if(onTap){ const f=onTap; onTap=null; setHint(false); f(); } }
 function waitTap(){ return new Promise(res=>{ setHint(true); onTap=()=>{ setHint(false); res(); }; }); }
 function interruptibleSleep(ms){ return new Promise(res=>{ if(ms<=40){ res(); return; } let done=false; const tap=()=>fin(); const fin=()=>{ if(done) return; done=true; clearTimeout(t); if(onTap===tap) onTap=null; res(); }; const t=setTimeout(fin,ms); onTap=tap; }); }
-function typingRow(){ const t=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(t); scrollFeed(); return t; }
+function typingRow(){ const t=el('<div class="row pop"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(t); scrollFeed(); return t; }
 const KEYLINE=/好きだ|好きです|付き合|別れ|現れないで|さよなら|ごめん|愛して|行かないで|もう会わない|最後に/;
 function isKeyLine(it){ return !!it&&(it.kp||KEYLINE.test(it.v))&&!it.np; }
 async function paceBeforeJ(it){
@@ -2725,10 +2763,10 @@ $('#story-prev').addEventListener('click',()=>storyStep(-1));
 /* ================= v4 : FREE CHAT ================= */
 function updChatMode(){ const fr=$('#free-row'); const ci=document.querySelector('#v-chat .chat-input'); if(fr) fr.style.display=S.done?'flex':'none'; if(ci) ci.style.display=S.done?'none':'flex'; if(S.done){ const pp=$('#plus-panel'); if(pp) pp.classList.remove('on'); const bp=$('#btn-plus'); if(bp) bp.classList.remove('on'); } }
 /* v66：フリーチャットでも本編と同じ実物様式にする。自分の送信には時刻と既読「1」を付け、彼の返信が来た時点で「1」が消える（既読化）。時刻・既読は S.free の並びから導出するのでセーブ形式は不変 */
-function freeAddMe(t,unsent,unread,q){ const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+(q?'<div class="qwrap"><div class="qblk"><b>'+esc(q.n||'')+'</b><span>'+esc(q.t||'')+'</span></div><div class="bub">'+esc(t)+'</div></div>':'<div class="bub">'+esc(t)+'</div>')+'</div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
-function freeAddJ(t){ const grp=prevRowIsJ(); const r=el(grp?'<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>':'<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
-function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); feed.appendChild(r); scrollFeed(); }
-function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); feed.appendChild(r); scrollFeed(); }
+function freeAddMe(t,unsent,unread,q){ const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+(q?'<div class="qwrap"><div class="qblk"><b>'+esc(q.n||'')+'</b><span>'+esc(q.t||'')+'</span></div><div class="bub">'+esc(t)+'</div></div>':'<div class="bub">'+esc(t)+'</div>')+'</div>'); tagMsg(r); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
+function freeAddJ(t){ const grp=prevRowIsJ(); const r=el(grp?'<div class="row grp"><div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>':'<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub">'+esc(t)+'</div><span class="tm">'+fmtTime()+'</span></div></div></div>'); tagMsg(r); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
+function addDraftJ(t){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="brow2"><div class="bub draft">'+esc(t)+'</div><span class="unsent-lab">未送信</span></div></div></div>'); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
+function freeAddJImg(img,cap){ const r=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><img class="msgimg" src="'+img+'">'+(cap?'<div class="brow2" style="margin-top:4px"><div class="bub">'+esc(cap)+'</div></div>':'')+'</div></div>'); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
 const STK=[
  {id:'bf',kw:'蝶',svg:'<svg viewBox="0 0 24 24"><path fill="#7d6fd0" stroke="#fff" stroke-width="1" d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1.1" ry="4.4" fill="#4c3d63"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="#4c3d63" stroke-width="1.1" stroke-linecap="round"/></svg>'},
  {id:'heart',kw:'',svg:'<svg viewBox="0 0 100 100"><path d="M50 84C24 64 10 48 10 31 10 18 20 9 32 9c7.5 0 14.5 4 18 10C53.5 13 60.5 9 68 9c12 0 22 9 22 22 0 17-14 33-40 53z" fill="#ff5b7f" stroke="#fff" stroke-width="4" stroke-linejoin="round"/></svg>'},
@@ -2739,9 +2777,9 @@ const STK=[
  {id:'star',kw:'',svg:'<svg viewBox="0 0 100 100"><path d="M50 8l10.5 26.5L88 37 67.5 55.5 73.5 84 50 68.5 26.5 84 32.5 55.5 12 37l27.5-2.5z" fill="#ffc93b" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><circle cx="24" cy="20" r="3" fill="#7d6fd0"/><circle cx="82" cy="66" r="3.4" fill="#ff5b7f"/><path d="M78 14v10M73 19h10" stroke="#7d6fd0" stroke-width="3.4" stroke-linecap="round"/></svg>'},
  {id:'flower',kw:'',svg:'<svg viewBox="0 0 100 100"><g fill="#ffb7cd" stroke="#fff" stroke-width="3.4"><ellipse cx="50" cy="27" rx="12" ry="17"/><ellipse cx="50" cy="27" rx="12" ry="17" transform="rotate(72 50 50)"/><ellipse cx="50" cy="27" rx="12" ry="17" transform="rotate(144 50 50)"/><ellipse cx="50" cy="27" rx="12" ry="17" transform="rotate(216 50 50)"/><ellipse cx="50" cy="27" rx="12" ry="17" transform="rotate(288 50 50)"/></g><circle cx="50" cy="50" r="11" fill="#ffc93b" stroke="#fff" stroke-width="3.4"/></svg>'}
 ];
-function freeAddStk(id,unread,unsent){ const st=STK.find(x=>x.id===id); if(!st) return; const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+'<div class="stk-msg">'+st.svg+'</div></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
+function freeAddStk(id,unread,unsent){ const st=STK.find(x=>x.id===id); if(!st) return; const r=el('<div class="row me fr'+(unsent?' unsent':'')+'">'+(unsent?'<span class="unsent-lab">未送信</span>':'<div class="bmeta">'+(unread?'<span class="unread">1</span>':'')+'<span class="tm">'+fmtTime()+'</span></div>')+'<div class="stk-msg">'+st.svg+'</div></div>'); tagMsg(r); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
 
-function renderFreeLog(){ const F=S.free||[]; /* v66：自分の送信より後に彼の返信（j／jimg）があれば既読（「1」なし）、なければ未読（「1」あり）として描き直す */ const later=F.map((m,i)=>F.slice(i+1).some(x=>x.w==='j'||x.w==='jimg')); F.forEach((m,i)=>{ curMsgKey='f'+i; if(m.w==='meimg') freeAddMeImg(m.img); else if(m.w==='me') freeAddMe(m.t,false,!later[i],m.q); else if(m.w==='mu') freeAddMe(m.t,true,false,m.q); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='stk') freeAddStk(m.s,!later[i]&&!m.u,!!m.u); else if(m.w==='sys') addSys(m.t); }); scrollFeed(true); }
+function renderFreeLog(){ freeRestoring=true; const F=S.free||[]; /* v66：自分の送信より後に彼の返信（j／jimg）があれば既読（「1」なし）、なければ未読（「1」あり）として描き直す */ const later=F.map((m,i)=>F.slice(i+1).some(x=>x.w==='j'||x.w==='jimg')); F.forEach((m,i)=>{ curMsgKey='f'+i; if(m.w==='meimg') freeAddMeImg(m.img); else if(m.w==='me') freeAddMe(m.t,false,!later[i],m.q); else if(m.w==='mu') freeAddMe(m.t,true,false,m.q); else if(m.w==='j') freeAddJ(m.t); else if(m.w==='draft') addDraftJ(m.t); else if(m.w==='jimg') freeAddJImg(m.img,m.cap); else if(m.w==='stk') freeAddStk(m.s,!later[i]&&!m.u,!!m.u); else if(m.w==='sys') addSys(m.t); }); freeRestoring=false; scrollFeed(true); }
 function pickFreeReplies(txt){
  if(S.endId==='gen'){ if(S.freeN===2) return ['……見たよ']; if(S.freeN===5) return ['……元気で']; return null; }
  const R=[
@@ -2798,7 +2836,7 @@ async function sendFree(){
  const reps=pickFreeReplies(txt);
  if(!reps||!reps.length) return;
  freeBusy=true;
- const ty=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
+ const ty=el('<div class="row pop"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
  await sleep(Math.round((950+Math.min(reps.join('').length*22,1500))*paceMul())); ty.remove();
  feed.querySelectorAll('.row.fr .unread').forEach(e=>e.remove()); /* v66：彼の返信が届いた時点で、自分の送信の「1」が消える（既読化） */
  let firstRep=true;
@@ -3314,7 +3352,7 @@ document.addEventListener('pointerdown',e=>{ if(rtrayRow&&!e.target.closest('#rt
 /* ---------- P3: フリーチャット用＋ボタン＋写真ピッカー送信 ---------- */
 const btnPlus2=$('#btn-plus2');
 if(btnPlus2) btnPlus2.addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); btnPlus2.classList.toggle('on',on); const bp=$('#btn-plus'); if(bp) bp.classList.toggle('on',on); });
-function freeAddMeImg(img){ const r=el('<div class="row me fr"><div class="bmeta"><span class="tm">'+fmtTime()+'</span></div><img class="msgimg" src="'+img+'" style="max-width:62%;border-radius:14px"></div>'); tagMsg(r); feed.appendChild(r); scrollFeed(); }
+function freeAddMeImg(img){ const r=el('<div class="row me fr"><div class="bmeta"><span class="tm">'+fmtTime()+'</span></div><img class="msgimg" src="'+img+'" style="max-width:62%;border-radius:14px"></div>'); tagMsg(r); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
 function openAlbumPick(){
  const g=$('#ap-grid'); if(!g) return;
  const imgs=[]; const seen=new Set();
@@ -3623,7 +3661,7 @@ async function sendSticker(id){
  const reps=pickFreeReplies(st.kw||'');
  if(!reps||!reps.length) return;
  freeBusy=true;
- const ty=el('<div class="row"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
+ const ty=el('<div class="row pop"><img class="av" src="'+cav()+'"><div><div class="nm">パク・ジェオン</div><div class="typing"><i></i><i></i><i></i></div></div></div>'); feed.appendChild(ty); scrollFeed();
  await sleep(Math.round((950+Math.min(reps.join('').length*22,1500))*paceMul())); ty.remove();
  feed.querySelectorAll('.row.fr .unread').forEach(e=>e.remove());
  let firstRep=true;
