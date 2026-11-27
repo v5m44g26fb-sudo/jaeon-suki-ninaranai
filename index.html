@@ -1093,7 +1093,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v136：カメラを削除しました。ロック画面のボタンと、カカオトークの＋パネルの項目からも外しています。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v137：Instagramの投稿時刻が、物語の時間に合わせて経っていくようになりました（昔の投稿は「○週間前」や日付で表示されます）。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2170,6 +2170,20 @@ const IG_IC={
  shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
  bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>'};
 function igAgoMin(s){ if(!s||s==='たった今') return 0; let m; if(m=s.match(/(\d+)分前/)) return +m[1]; if(m=s.match(/(\d+)時間前/)) return +m[1]*60; if(m=s.match(/(\d+)日前/)) return +m[1]*1440; if(m=s.match(/(\d+)週間前/)) return +m[1]*10080; return 99999; }
+/* v137：相対時刻を物語時間で生かす。投稿の瞬間は「解放カレンダーの日付・時刻 − 従来の経過表記」で固定し、
+   表示上の経過は作中の今（calU の日付＋chatMin）との差で出す。章が進めば投稿は古くなり、並び順も実時刻順になる。
+   終幕後投稿（unlock>=90）は常に最新扱い。IG_AGO の原データ・解放条件・数値は不変 */
+const KD_EXTRA={7:[2021,5,28]}; /* KDATE に無い cal7 はホームの暦データ（CD=28日・CW=金曜）から 2021年5月28日で確定できる */
+function kdAbsDay(cal){ const parse=(y,m,d)=>Math.floor(Date.UTC(y,m-1,d)/86400000); if(KD_EXTRA[cal]){ const e=KD_EXTRA[cal]; return parse(e[0],e[1],e[2]); } const kd=KDATE[cal]; if(kd){ const m=kd.match(/(\d+)월\s*(\d+)일/); if(m) return parse(2021,+m[1],+m[2]); } const keys=Object.keys(KDATE).map(Number).sort((a,b)=>a-b); let prev=null,next=null; for(const k of keys){ if(k<cal) prev=k; if(k>cal){ next=k; break; } } if(prev!=null&&next!=null){ const a=kdAbsDay(prev), b=kdAbsDay(next); return Math.round(a+(b-a)*(cal-prev)/(next-prev)); } if(prev!=null) return kdAbsDay(prev)+(cal-prev)*7; return kdAbsDay(next)-(next-cal)*7; }
+function storyNowMin(){ return kdAbsDay(S.calU)*1440+(((chatMin%1440)+1440)%1440); }
+function calTimeOf(cal){ if(KTIME[cal]!=null) return KTIME[cal]; let c=cal; while(c>0&&KTIME[c]==null) c--; return KTIME[c]!=null?KTIME[c]:12*60; }
+function igPostMoment(p){ if(!p||p.unlock>=90) return null; const u=Math.max(0,Math.min(p.unlock,12)); return kdAbsDay(u)*1440+calTimeOf(u)-igAgoMin(IG_AGO[p.id]); }
+function igAgeMin(p){ const mo=igPostMoment(p); if(mo==null) return igAgoMin(IG_AGO[p.id]); return Math.max(0,storyNowMin()-mo); }
+function igFmtAge(min){ if(min<10) return 'たった今'; if(min<60) return Math.floor(min)+'分前'; if(min<1440) return Math.floor(min/60)+'時間前'; if(min<10080) return Math.floor(min/1440)+'日前'; if(min<80640) return Math.floor(min/10080)+'週間前'; return null; }
+function igDispFromMin(min,momentMin){ const f=igFmtAge(min); if(f) return f; const d=new Date(momentMin*60000); return (d.getUTCMonth()+1)+'月'+d.getUTCDate()+'日'; }
+function igAgoDisp(p){ return igDispFromMin(igAgeMin(p), igPostMoment(p)); }
+function igCmAgeMin(p,late,li){ if(!late) return igAgeMin(p); const m1=igPostMoment(p); if(m1==null) return igAgeMin(p); const u2=Math.min((p.unlock||0)+3,12); const m2=kdAbsDay(u2)*1440+calTimeOf(u2); const mom=m1+(m2-m1)*(0.55+0.15*(li||0)); return Math.max(5,storyNowMin()-mom); }
+function igCmDisp(p,late,li){ const a=igCmAgeMin(p,late,li); return igDispFromMin(a, storyNowMin()-a); }
 function igStoryCm(p){ return (p.cm||[]).concat(S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]); }
 function igAllCm(p){ const mine=(S.igMyCmts&&Array.isArray(S.igMyCmts[p.id]))?S.igMyCmts[p.id]:[]; return igStoryCm(p).concat(mine.map(t=>['nao_sculpt',t])); }
 function igCmAv(name){ if(name==='park_jaeon'||name==='park_jaeon.sculpt') return cav(); if(name==='nao_sculpt') return 'assets/nao-avatar-gen.jpg'; if(name==='b1nna_') return 'assets/av-bitna-gen2.jpg'; if(name==='s0l_a') return 'assets/av-sola-gen2.jpg'; return ''; }
@@ -2187,7 +2201,7 @@ function igPostHTML(p,owner){
  const prev=allCm.slice(0,2).map(c=>'<div class="cm"><b>'+esc(c[0])+'</b> '+esc(c[1])+'</div>').join('');
  const cimgs=(Array.isArray(p.imgs)&&p.imgs.length>1)?p.imgs:null; /* v93：複数枚投稿は実物作法のカルーセル */
  const media= cimgs ? '<div class="ig-imgwrap car ig-carousel"><div class="ig-car-track">'+cimgs.map(s=>'<img src="'+s+'" draggable="false" alt="">').join('')+'</div><span class="ig-car-count">1/'+cimgs.length+'</span><div class="ig-car-dots">'+cimgs.map((s,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join('')+'</div><button class="ig-car-nav prev" aria-label="前の写真">‹</button><button class="ig-car-nav next" aria-label="次の写真">›</button><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>' : '<div class="ig-imgwrap"><img src="'+p.img+'"><span class="ig-bigheart">'+IG_IC.heartBig+'</span></div>';
- return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>'+media+'<div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar-gen.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+(IG_AGO[p.id]||'1日前')+'</div></div>';
+ return '<div class="ig-post" data-pid="'+p.id+'" data-owner="'+owner+'"><div class="ph"><span class="phring"><img src="'+pr.img+'"></span><span class="ph-name">'+pr.name+'</span><span class="dots"><svg viewBox="0 0 24 24" width="22" height="22" fill="#262626"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>'+media+'<div class="ig-actions"><button class="ig-like'+(liked0?' liked':'')+'" aria-label="いいね">'+IG_IC.heart+'</button><button class="ig-cmtb" aria-label="コメント">'+IG_IC.cmt+'</button><button class="ig-shrb" aria-label="共有">'+IG_IC.shr+'</button><span class="ig-save"><button class="ig-savebtn'+(saved0?' saved':'')+'" aria-label="保存">'+IG_IC.bmk+'</button></span></div><div class="pc"><div class="lk2">いいね！'+(base+(liked0?1:0)).toLocaleString('en-US')+'件</div><b>'+pr.name+'</b> '+esc(p.cap)+(allCm.length?'<div class="allcm" data-cmpid="'+p.id+'">コメント'+allCm.length+'件をすべて見る</div>':'')+prev+'</div><div class="ig-cmtadd"><img src="assets/nao-avatar-gen.jpg"><span>コメントを追加…</span></div><div class="ig-time">'+igAgoDisp(p)+'</div></div>';
 }
 function igWireCard(dp,p,owner,inFeed){
  const likeBtn=dp.querySelector('.ig-like'), saveBtn=dp.querySelector('.ig-savebtn'), lkEl=dp.querySelector('.lk2'), imgW=dp.querySelector('.ig-imgwrap'), big=dp.querySelector('.ig-bigheart');
@@ -2223,7 +2237,7 @@ function renderIGFeed(){
  if(!Array.isArray(S.igSaves)) S.igSaves=[];
  syncIgChrome();
  let h=igStoriesRowHTML();
- const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)).sort((a,b)=>igAgoMin(IG_AGO[a.p.id])-igAgoMin(IG_AGO[b.p.id]));
+ const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)).sort((a,b)=>igAgeMin(a.p)-igAgeMin(b.p));
  h+='<div class="ig-feed">'+posts.map(x=>igPostHTML(x.p,x.o)).join('')+'</div>';
  body.innerHTML=h; igFeedHold=true; body.scrollTop=igFeedY; requestAnimationFrame(()=>{ body.scrollTop=igFeedY; igFeedHold=false; }); /* v88：スクロール位置を復元 */
  wireStoriesRow(body);
@@ -2234,11 +2248,11 @@ let cmPost=null, cmOwner='j';
 function cmLikeKey(p,c){ return p.id+'::'+c[0]+'::'+c[1]; }
 function renderCmList(){
  const list=$('#cm-list'); if(!list||!cmPost) return;
- const story=igStoryCm(cmPost).map(c=>({c:c,mine:false}));
+ const story=(cmPost.cm||[]).map(c=>({c:c,mine:false,late:false,li:0})).concat((S.calU>=(cmPost.unlock||0)+3?(cmPost.cmL||[]):[]).map((c,i)=>({c:c,mine:false,late:true,li:i}))); /* v137：cmL は投稿より後の時刻で表示 */
  const mine=((S.igMyCmts&&Array.isArray(S.igMyCmts[cmPost.id]))?S.igMyCmts[cmPost.id]:[]).map(t=>({c:['nao_sculpt',t],mine:true}));
  const all=story.concat(mine);
  if(!all.length){ list.innerHTML='<div class="cm-empty">まだコメントがありません</div>'; return; }
- list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':(IG_AGO[cmPost.id]||'1日前'))+'</span></div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+(liked?'<span>1</span>':'')+'</button></div>'; }).join('');
+ list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':igCmDisp(cmPost,x.late,x.li))+'</span></div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+(liked?'<span>1</span>':'')+'</button></div>'; }).join('');
  list.querySelectorAll('[data-cmk]').forEach(b=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); if(i>=0) S.igCmLikes.splice(i,1); else { S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } save(); renderCmList(); }));
 }
 function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); updCmSend(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
@@ -2258,7 +2272,7 @@ sheetDrag($('#ppl-sheet'),$('#ppl-sheet .ppl-panel'),[$('#ppl-sheet .cm-grab'),$
 $('#cm-bg').addEventListener('click',closeCmSheet);
 $('#ppl-bg').addEventListener('click',closePplSheet);
 $('#act-bg').addEventListener('click',closeActSheet);
-document.querySelectorAll('#act-sheet [data-act]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.act; const p=actPost; closeActSheet(); if(k==='share'){ if(p) openShareSheet(p); } else if(k==='about'&&p){ const isJ=IG_J.some(x=>x.id===p.id); const nm=isJ?'park_jaeon.sculpt':'nao_sculpt'; const lk=(typeof igBaseLikes==='function'?igBaseLikes(p):0)+(S.igLikes.includes(p.id)?1:0); iosAlert('この投稿について',nm+'\n投稿：'+(IG_AGO[p.id]||'1日前')+' ・ いいね！'+lk.toLocaleString('en-US')+'件','閉じる',null); } })); /* v87: 「この投稿について」は実物どおり投稿情報を出す */
+document.querySelectorAll('#act-sheet [data-act]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.act; const p=actPost; closeActSheet(); if(k==='share'){ if(p) openShareSheet(p); } else if(k==='about'&&p){ const isJ=IG_J.some(x=>x.id===p.id); const nm=isJ?'park_jaeon.sculpt':'nao_sculpt'; const lk=(typeof igBaseLikes==='function'?igBaseLikes(p):0)+(S.igLikes.includes(p.id)?1:0); iosAlert('この投稿について',nm+'\n投稿：'+igAgoDisp(p)+' ・ いいね！'+lk.toLocaleString('en-US')+'件','閉じる',null); } })); /* v87: 「この投稿について」は実物どおり投稿情報を出す */
 $('#cm-send').addEventListener('click',sendCm);
 function updCmSend(){ const b=$('#cm-send'), i=$('#cm-in'); if(b) b.classList.toggle('off',!(i&&i.value.trim())); } /* v92：実物IGの作法どおり、空欄の間は投稿ボタンを淡くする */
 $('#cm-in').addEventListener('input',updCmSend);
@@ -3847,10 +3861,10 @@ function igActEvents(){
  const evs=[];
  IG_N.forEach(p=>{
    if(!igPostVis(p)) return;
-   igStoryCm(p).forEach(c=>{
-     if(c[0]==='nao_sculpt') return;
-     evs.push({user:c[0],text:c[1],pid:p.id,img:p.img,ago:IG_AGO[p.id]||'1日前',amin:igAgoMin(IG_AGO[p.id])});
-   });
+   (p.cm||[]).map(c=>({c:c,late:false,li:0})).concat((S.calU>=(p.unlock||0)+3?(p.cmL||[]):[]).map((c,i)=>({c:c,late:true,li:i}))).forEach(x=>{
+     if(x.c[0]==='nao_sculpt') return;
+     evs.push({user:x.c[0],text:x.c[1],pid:p.id,img:p.img,ago:igCmDisp(p,x.late,x.li),amin:igCmAgeMin(p,x.late,x.li)});
+   }); /* v137：アクティビティもコメント単位の経過時間で */
  });
  evs.sort((a,b)=>a.amin-b.amin);
  return evs;
