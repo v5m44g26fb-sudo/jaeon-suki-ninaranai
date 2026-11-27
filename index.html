@@ -286,7 +286,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .prof-av{width:92px;height:92px;border-radius:34px;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .prof-nm{font-size:19px;font-weight:700;margin-top:11px;text-shadow:0 1px 5px rgba(0,0,0,.55)}
 .prof-status{font-size:13px;margin-top:5px;color:#f2f2f2;text-shadow:0 1px 4px rgba(0,0,0,.55)}
-.prof-music{display:inline-block;margin-top:11px;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.4);border-radius:13px;padding:4px 12px;font-size:11.5px}
+.prof-music{display:inline-block;margin-top:11px;cursor:pointer;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.4);border-radius:13px;padding:4px 12px;font-size:11.5px}
 .prof-actions{position:absolute;left:0;right:0;bottom:0;padding:20px 44px max(46px,calc(var(--sab) + 12px));display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.35);z-index:2}
 .prof-actions button{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11.5px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
 .prof-actions button span{font-size:23px}
@@ -1109,7 +1109,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v139：Instagramのコメントに、いいねの件数と「返信する」が付きました（返信はメンション入りで入力できます）。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v140：カカオトークが実物らしくなりました。開いていたタブを覚えるようになり、彼のプロフィールの曲をタップすると再生されます。トークの通知設定も保存されます。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1226,7 +1226,6 @@ img{-webkit-user-drag:none;user-select:none}
 <img class="prof-bg" id="prof-bg" src="assets/ig-jaeon1-main.jpg" alt="">
 <div class="prof-shade"></div>
 <button class="prof-x" id="prof-close"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-<span class="prof-gear"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg></span>
 <div class="prof-main">
 <img class="prof-av" id="prof-av" src="assets/av-jaeon-gen.jpg" alt="">
 <div class="prof-nm">パク・ジェオン</div>
@@ -1786,7 +1785,7 @@ if(!S.picks||typeof S.picks!=='object'||Array.isArray(S.picks)) S.picks={};
 S.free=S.free.filter(m=>!!m&&typeof m==='object');
 S.free.forEach(m=>{ if(m.w==='jimg'){ if(typeof m.img!=='string') m.img=''; if(typeof m.cap!=='string') m.cap=m.cap==null?'':String(m.cap); } else if(typeof m.t!=='string') m.t=m.t==null?'':String(m.t); });
 S.free.forEach(m=>{ if(m.q){ if(typeof m.q!=='object'||typeof m.q.t!=='string') delete m.q; else m.q={n:typeof m.q.n==='string'?m.q.n:'',t:m.q.t}; } }); /* v87: 引用データの正規化（壊れた q は落とす） */
-if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def';
+if(!Array.isArray(S.igRecent)) S.igRecent=[]; else S.igRecent=S.igRecent.filter(x=>typeof x==='string'); if(typeof S.chatBg!=='string') S.chatBg='def'; if(typeof S.kkNotif!=='boolean') S.kkNotif=true; /* v140：トーク通知スイッチの保存（旧セーブは既定ONで補完） */
 if(!Array.isArray(S.galFav)) S.galFav=[]; else S.galFav=S.galFav.filter(x=>typeof x==='string'); if(!Array.isArray(S.galDel)) S.galDel=[]; else S.galDel=S.galDel.filter(x=>typeof x==='string'); if(!['s','m','l'].includes(S.nwFont)) S.nwFont='m'; if(typeof S.vibOn!=='boolean') S.vibOn=true; if(!['day','month','year','all'].includes(S.galMode)) S.galMode='day'; if(!Array.isArray(S.kkCart)) S.kkCart=[]; else S.kkCart=S.kkCart.filter(x=>typeof x==='string'); /* v127：カカオショッピングのカート正規化 */ /* v91：ギャラリー表示モードの正規化（profSeen は renderFriends で遅延初期化） */ /* v90：ギャラリーお気に入り/削除・記事文字サイズ・触感の正規化 */ /* v89：トーク背景の正規化 */ /* v88：IG検索履歴の正規化 */
 const __fin=(v,d)=>(typeof v==='number'&&isFinite(v))?v:d;
 S.kai=Math.max(0,Math.min(100,__fin(S.kai,0)));
@@ -2448,7 +2447,7 @@ function renderCallLog(){
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
  if(typeof sfxPlay==='function') sfxPlay('tap');
  const k=b.dataset.open;
- if(k==='kakao'){renderThreads(); kkTabReset(); showView('v-kakao');}
+ if(k==='kakao'){renderThreads(); kkApplyTab(b.closest('#v-chat')?'chats':kkTab); showView('v-kakao');} /* v140：再オープンは前回のタブを保持（トーク内の戻るだけは一覧＝채팅 へ） */
  if(k==='ig'){igTab='feed'; renderIGFeed(); showView('v-ig');}
  if(k==='cal'){renderCal(); showView('v-cal');}
  if(k==='notes'){renderNotes(); showView('v-notes');}
@@ -2502,16 +2501,21 @@ function renderFriends(){
    openFProf(b.dataset.fr);
  }));
 }
-document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener('click',()=>{
- const t=b.dataset.tab;
- document.querySelectorAll('.kk-tabbar [data-tab]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+/* v140：タブ適用を kkApplyTab に一本化し、開いていたタブを保持する（実物どおり、アプリに戻ると前回のタブのまま）。
+   通知などトーク一覧へ直行すべき入口だけが kkTabReset で 채팅 に戻す */
+let kkTab='chats';
+function kkApplyTab(t){
+ kkTab=t;
+ document.querySelectorAll('.kk-tabbar [data-tab]').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));
  const T=$('#kk-title');
  const ic2=$('#kk-ico2');
  if(t==='friends'){ renderFriends(); $('#thread-list').style.display='none'; $('#more-body').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display='none'; $('#friend-list').style.display=''; T.textContent='친구'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M3.8 19.5c.7-3.2 3.2-4.8 6.2-4.8 1.4 0 2.7.3 3.8 1M17.5 14.5v6M14.5 17.5h6"/></svg>'; }
  else if(t==='chats'){ $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display='none'; $('#thread-list').style.display=''; T.textContent='채팅'; if(ic2) ic2.innerHTML=IC.chat; }
  else if(t==='more'){ renderMore(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display='none'; $('#more-body').style.display=''; T.textContent='더보기'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg>'; }
  else if(t==='sharp'){ renderSharp(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#shop-body').style.display='none'; $('#sharp-body').style.display=''; T.textContent='#'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4 7 20M17 4l-2 16M4.5 9h16M3.5 15h16"/></svg>'; } else if(t==='shop'){ renderShop(); $('#thread-list').style.display='none'; $('#friend-list').style.display='none'; $('#more-body').style.display='none'; $('#sharp-body').style.display='none'; $('#shop-body').style.display=''; T.textContent='쇼핑'; if(ic2) ic2.innerHTML='<svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 3.5h2.2l2.3 11h10.3l2-8H6"/></svg>'; }
-}));
+ if(typeof kkSearchApply==='function') kkSearchApply();
+}
+document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener('click',()=>kkApplyTab(b.dataset.tab)));
 $('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
 /* v66：＋パネルは実物の1ページ目の構成（앨범／선물하기／송금／음성메시지／연락처／파일／일정）に統一。項目ごとに実物らしいフィードバックを返す（物語の進行には影響しない） */
 const PP_T={album:'（送信は演出用です。送信ボタンで物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
@@ -2522,6 +2526,9 @@ $('#prof-close').addEventListener('click',()=>showView(profFrom));
 $('#prof-chat').addEventListener('click',()=>{ showView('v-chat'); if(onTap) fireTap(); else if(!S.done) run(); });
 $('#prof-call2').addEventListener('click',()=>toast('（無料通話は物語の通話シーンで再生されます）'));
 $('#prof-gift').addEventListener('click',()=>toast('（プレゼントは演出用です）'));
+/* v140：プロフィールミュージックは実物どおりタップでその曲を再生する（収録曲に対応する段階のみ。対応表に無い「Love Song」は曲名を返す） */
+const PROF_MUS_KEY={'Butterfly':'butterfly','Love Me Like That':'love-me-like-that',"We're Already":'were-already','Whisper':'whisper'};
+(function(){ const mu=$('#prof-music'); if(mu) mu.addEventListener('click',()=>{ const p=profStage(); const m=(p.mus||'').match(/「([^」]+)」/); const title=m?m[1]:''; if(!title) return; const key=PROF_MUS_KEY[title]; if(key&&typeof playTrack==='function'&&playTrack(key)){ toast('♪ '+TRACKS[key].t+' ― '+TRACKS[key].a); } else { toast('♪ '+title+'（プロフィールミュージック）'); } }); })();
 /* ================= v87 : FRIEND PROFILES / CHAT SEARCH / DRAWER / QUOTE REPLY ================= */
 /* 友達プロフィール：実物カカオのプロフィール画面（背景・アバター・名前・状態・下部ボタン）を汎用化。
    状態メッセージと解放条件は友達一覧の既存データと一致させ、新しい人物情報は作らない */
@@ -2569,14 +2576,14 @@ $('#cs-up').addEventListener('click',()=>csGo(csPos-1));
 $('#cs-dn').addEventListener('click',()=>csGo(csPos+1));
 if(csIn){ csIn.addEventListener('input',()=>{ if(csDeb) clearTimeout(csDeb); csDeb=setTimeout(csRun,220); }); csIn.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing){ e.preventDefault(); csGo(csPos+1); } }); }
 /* チャットルームのドロワー（実物カカオの右ドロワー：メンバー／写真／検索／通知） */
-function openDrawer(){ const im=document.querySelector('#cd-m-j img'); if(im) im.src=cav(); const d=$('#chat-drawer'); if(d) d.classList.add('on'); const b=$('#chat-drawer-bg'); if(b) b.classList.add('on'); }
+function openDrawer(){ const im=document.querySelector('#cd-m-j img'); if(im) im.src=cav(); const sw=$('#cd-notif-sw'); if(sw) sw.classList.toggle('on',S.kkNotif!==false); /* v140：保存済みの通知設定を反映 */ const d=$('#chat-drawer'); if(d) d.classList.add('on'); const b=$('#chat-drawer-bg'); if(b) b.classList.add('on'); }
 function closeDrawer(){ const d=$('#chat-drawer'); if(d) d.classList.remove('on'); const b=$('#chat-drawer-bg'); if(b) b.classList.remove('on'); }
 $('#chat-menu-btn').addEventListener('click',openDrawer);
 $('#chat-drawer-bg').addEventListener('click',closeDrawer);
 $('#cd-m-j').addEventListener('click',()=>{ closeDrawer(); profFrom='v-chat'; markProfSeen(); showView('v-profile'); });
 $('#cd-photos').addEventListener('click',()=>{ closeDrawer(); renderGallery(); showView('v-gallery'); });
 $('#cd-search2').addEventListener('click',()=>{ openChatSearch(); });
-$('#cd-notif-sw').addEventListener('click',e=>{ e.currentTarget.classList.toggle('on'); });
+$('#cd-notif-sw').addEventListener('click',e=>{ S.kkNotif=!e.currentTarget.classList.contains('on'); e.currentTarget.classList.toggle('on',S.kkNotif); save(); }); /* v140：実物どおりトークごとの通知設定として保存する */
 /* 引用返信（フリーチャット）：長押しメニューの「返信」で引用バーを出し、送信した吹き出しに引用ブロックを付ける。引用は S.free の q に保存（既定値方式で旧セーブ互換） */
 let freeQuote=null;
 function updQuoteBar(){ const bar=$('#quote-bar'); if(!bar) return; if(freeQuote){ const n=$('#qb-name'); if(n) n.textContent=freeQuote.n; const t=$('#qb-text'); if(t) t.textContent=freeQuote.t; bar.classList.add('on'); } else bar.classList.remove('on'); }
@@ -2614,6 +2621,8 @@ function rampBgmTo(target,ms,done){
 }
 function updMusicUI(){ const np=$('#mus-now'); if(np) np.innerHTML=curTrack?(IC.note+' '+esc(TRACKS[curTrack].t+' ― '+TRACKS[curTrack].a)):''; const tg=$('#mus-toggle'); if(tg){ tg.innerHTML=S.sndOn?(IC.speaker+' ON'):(IC.mute+' OFF'); tg.classList.toggle('on',!!S.sndOn); } /* v70：実物トグルスイッチの状態表示（表示のみ） */ const vr=$('#mus-vol'); if(vr&&document.activeElement!==vr) vr.value=S.sndVol; }
 function syncMusic(){ const want=CHAP_TRACK[S.chap]||'butterfly'; const a=ensureBgm(); if(!a) return; if(want!==curTrack){ curTrack=want; if(musicStarted&&S.sndOn&&!a.paused){ /* 再生中の曲替わりはクロスフェード（フェードアウト→差し替え→フェードイン） */ rampBgmTo(0,450,()=>{ a.src=TRACKS[want].f; a.play().catch(()=>{}); rampBgmTo(effVol(),750); }); } else { stopBgmFade(); a.src=TRACKS[want].f; a.volume=effVol(); if(musicStarted&&S.sndOn) a.play().catch(()=>{}); } } updMusicUI(); }
+/* v140：任意トラックの即時再生（プロフィールミュージックの試聴用。章トラックへは次の syncMusic で自然に戻る） */
+function playTrack(key){ if(!TRACKS[key]) return false; const a=ensureBgm(); if(!a) return false; musicStarted=true; stopBgmFade(); if(curTrack!==key){ curTrack=key; a.src=TRACKS[key].f; } a.volume=effVol(); if(S.sndOn&&!S.mute) a.play().catch(()=>{}); updMusicUI(); return true; }
 function startMusic(){ musicStarted=true; const a=ensureBgm(); if(!a) return; if(!curTrack) syncMusic(); stopBgmFade(); if(S.sndOn&&a.paused){ a.volume=0; a.play().catch(()=>{}); rampBgmTo(effVol(),800); } else { a.volume=effVol(); if(S.sndOn) a.play().catch(()=>{}); } }
 function duckMusic(on){ ducked=on; const a=ensureBgm(); if(a) rampBgmTo(effVol(),on?350:600); }
 document.addEventListener('pointerdown',function h(){ document.removeEventListener('pointerdown',h); startMusic(); });
@@ -3558,7 +3567,7 @@ function renderMore(){
  b.querySelectorAll('[data-mi]').forEach(btn=>btn.addEventListener('click',()=>{ const it=items[+btn.dataset.mi]; if(it) it[2](); }));
 }
 /* カカオをアプリから開き直した時は、実物の初期表示どおり 채팅 タブへ戻す（タイトルと中身の不一致防止） */
-function kkTabReset(){ const t=$('#kk-title'); if(t) t.textContent='채팅'; const tl=$('#thread-list'); if(tl) tl.style.display=''; const fl=$('#friend-list'); if(fl) fl.style.display='none'; const mb=$('#more-body'); if(mb) mb.style.display='none'; const shb=$('#sharp-body'); if(shb) shb.style.display='none'; const spb=$('#shop-body'); if(spb) spb.style.display='none'; const kss=$('#ksp-sheet'); if(kss) kss.classList.remove('on'); document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab==='chats')); }
+function kkTabReset(){ kkTab='chats'; const t=$('#kk-title'); if(t) t.textContent='채팅'; const tl=$('#thread-list'); if(tl) tl.style.display=''; const fl=$('#friend-list'); if(fl) fl.style.display='none'; const mb=$('#more-body'); if(mb) mb.style.display='none'; const shb=$('#sharp-body'); if(shb) shb.style.display='none'; const spb=$('#shop-body'); if(spb) spb.style.display='none'; const kss=$('#ksp-sheet'); if(kss) kss.classList.remove('on'); document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab==='chats')); }
 /* トーク背景：実物カカオの 채팅방 배경。--kakao-bg を差し替えるので本体・サイドトーク・ヘッダーに一括で効く */
 const CHATBGS={def:['기본','#b2c7d9'],sky:['하늘','#a9cdec'],beige:['베이지','#ead9c2'],pink:['핑크','#f2cfd6'],mint:['민트','#c9e6da'],gray:['그레이','#d8d8dc']};
 function chatBgKey(){ return (typeof S.chatBg==='string'&&CHATBGS[S.chatBg])?S.chatBg:'def'; }
