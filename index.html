@@ -1109,7 +1109,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v140：カカオトークが実物らしくなりました。開いていたタブを覚えるようになり、彼のプロフィールの曲をタップすると再生されます。トークの通知設定も保存されます。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v141：Instagramも開いていたタブを覚えるようになりました（プロフィールや検索の途中で閉じても、戻るとそのまま）。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2448,7 +2448,7 @@ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',(
  if(typeof sfxPlay==='function') sfxPlay('tap');
  const k=b.dataset.open;
  if(k==='kakao'){renderThreads(); kkApplyTab(b.closest('#v-chat')?'chats':kkTab); showView('v-kakao');} /* v140：再オープンは前回のタブを保持（トーク内の戻るだけは一覧＝채팅 へ） */
- if(k==='ig'){igTab='feed'; renderIGFeed(); showView('v-ig');}
+ if(k==='ig'){ if(igTab==='search'){ renderIGSearch(); showView('v-igsearch'); syncIgChrome(); } else if(igTab==='prof'){ renderIG(); showView('v-ig'); } else { renderIGFeed(); showView('v-ig'); } } /* v141：再オープンは前回のタブ（フィード／プロフィール／検索）を保持（実物どおり） */
  if(k==='cal'){renderCal(); showView('v-cal');}
  if(k==='notes'){renderNotes(); showView('v-notes');}
  if(k==='calllog'){renderCallLog(); showView('v-calllog');}
@@ -3389,7 +3389,7 @@ document.addEventListener('click',e=>{
  else if(b.dataset.ignav==='prof'){ igWho='n'; igTab='prof'; renderIG(); showView('v-ig'); }
  else { const wasFeed=igTab==='feed'&&$('#v-ig').classList.contains('on'); if(wasFeed) igFeedY=0; igTab='feed'; renderIGFeed(); showView('v-ig'); } /* v92：実物IGどおり、フィード表示中にホームを再タップすると先頭へ戻る */
 });
-const igsBack=$('#igs-back'); if(igsBack) igsBack.addEventListener('click',()=>showView('v-ig'));
+const igsBack=$('#igs-back'); if(igsBack) igsBack.addEventListener('click',()=>{ igTab='feed'; renderIGFeed(); showView('v-ig'); syncIgChrome(); }); /* v141：検索から戻る時はフィードタブへ戻す（igTab と表示の不一致を解消。スクロール位置は renderIGFeed が復元する） */
 const igsIn=$('#igs-in'); if(igsIn) igsIn.addEventListener('input',renderIGSearch);
 /* ================= v75 : NEWS APP (P7) =================
    韓国ポータル風ニュース。解放は作中カレンダー進行 S.calU（写真ギャラリーと同基準）に連動し、
