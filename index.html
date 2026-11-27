@@ -228,6 +228,20 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ppl-tx{display:flex;flex-direction:column;min-width:0}
 .ppl-tx b{font-size:14px;color:#262626}
 .ppl-tx span{font-size:13px;color:#8e8e93}
+/* v138：自分のストーリーの閲覧者（実物どおり、自分の投稿では返信欄ではなく閲覧者が出る） */
+#story-viewers{position:absolute;left:12px;bottom:max(14px,var(--sab));z-index:3;display:none;align-items:center;gap:8px;background:none;border:0;padding:6px 4px;color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+#story-viewers .sv-avs{display:flex}
+#story-viewers .sv-avs img{width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid #fff;margin-left:-8px}
+#story-viewers .sv-avs img:first-child{margin-left:0}
+#sv-sheet{position:absolute;inset:0;z-index:242;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
+#sv-sheet .ppl-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#sv-sheet .ppl-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:74%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -6px 28px rgba(0,0,0,.18)}
+#sv-sheet.on{pointer-events:auto}
+#sv-sheet.on .ppl-bg{opacity:1}
+#sv-sheet.on .ppl-panel{transform:translateY(0)}
+#sv-sheet.dragging .ppl-panel{transition:none!important}
+#sv-sheet .cm-grab,#sv-sheet .ppl-head{cursor:grab}
+.sv-row{cursor:default}
 .ppl-foot{padding:8px 14px 16px;color:#8e8e93;font-size:12.5px;text-align:center}
 .ig-stats span[data-stat]{cursor:pointer}
 /* v84：IG投稿の「…」アクションシート（iOS のアクションシート様式） */
@@ -1093,7 +1107,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v137：Instagramの投稿時刻が、物語の時間に合わせて経っていくようになりました（昔の投稿は「○週間前」や日付で表示されます）。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v138：自分のストーリーを開くと、実物どおり返信欄ではなく「閲覧者」（見た人と時刻）が出るようになりました。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1387,6 +1401,7 @@ img{-webkit-user-drag:none;user-select:none}
 <div class="story-cap" id="story-cap"></div>
 <div id="story-pause-ind"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 5v14M15 5v14"/></svg> 一時停止中</div>
 <div class="story-foot"><span class="sf-in" id="sf-in">メッセージを送信…</span><button class="sf-ic" id="sf-heart" type="button" aria-label="ストーリーにいいね"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg></button><button class="sf-ic" id="sf-send" type="button" aria-label="ストーリーを共有"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg></button></div>
+<button id="story-viewers" type="button" aria-label="閲覧者を見る"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="sv-count"></span><span class="sv-avs" id="sv-avs"></span></button>
 <button class="story-zone l" id="story-prev"></button>
 <button class="story-zone r" id="story-next"></button>
 </div>
@@ -1394,6 +1409,7 @@ img{-webkit-user-drag:none;user-select:none}
 <div id="cm-sheet"><div class="cm-bg" id="cm-bg"></div><div class="cm-panel"><div class="cm-grab"></div><div class="cm-head">コメント<button id="cm-close" aria-label="閉じる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="cm-list" id="cm-list"></div><div class="cm-bar"><img src="assets/nao-avatar-gen.jpg" alt=""><input id="cm-in" type="text" placeholder="コメントを追加…" autocomplete="off"><button id="cm-send">投稿する</button></div></div></div>
 <div id="fol-sheet"><div class="fol-bg" id="fol-bg"></div><div class="fol-panel"><div class="fol-box"><button class="danger" id="fol-unfollow" type="button">フォローをやめる</button></div><div class="fol-box"><button class="cancel" id="fol-cancel" type="button">キャンセル</button></div></div></div>
 <div id="ppl-sheet"><div class="ppl-bg" id="ppl-bg"></div><div class="ppl-panel"><div class="cm-grab"></div><div class="ppl-head" id="ppl-title">いいね！</div><div class="ppl-list" id="ppl-list"></div></div></div>
+<div id="sv-sheet"><div class="ppl-bg" id="sv-bg"></div><div class="ppl-panel"><div class="cm-grab"></div><div class="ppl-head">閲覧者</div><div class="ppl-list" id="sv-list"></div></div></div>
 <div id="shr-sheet"><div class="sh-bg" id="shr-bg"></div><div class="sh-panel"><div class="cm-grab"></div><div class="sh-head" id="shr-title">投稿を送信</div><div id="shr-list"></div></div></div>
 <div id="bg-sheet"><div class="sh-bg" id="bg-bg"></div><div class="sh-panel"><div class="cm-grab"></div><div class="sh-head">채팅방 배경（トークの背景）</div><div id="bg-sw"></div></div></div>
 <div id="act-sheet"><div class="act-bg" id="act-bg"></div><div class="act-panel"><div class="act-group"><button data-act="share">投稿を共有する</button><button data-act="about">この投稿について</button></div><button data-act="cancel" class="act-cancel">キャンセル</button></div></div>
@@ -2643,17 +2659,25 @@ function renderStory(){ const st=storyState; const s=st.list[st.i]; if(!s){ clos
  $('#story-img').src=s.img; $('#story-av').src=s.av; $('#story-user').textContent=s.user; $('#story-ago').textContent=s.ago; $('#story-cap').textContent=s.cap;
  $('#story-progs').innerHTML=st.list.map((x,i)=>'<i class="'+(i<st.i?'done':i===st.i?'cur':'')+'"><b></b></i>').join('');
  const sfh=$('#sf-heart'); if(sfh) sfh.classList.toggle('liked',Array.isArray(S.storyLikes)&&S.storyLikes.includes(storyKey(s))); /* v86：ストーリーのいいね状態を実物どおり復元 */
+ const ownStory=(s.user==='nao_sculpt'); const sfoot=document.querySelector('.story-foot'); if(sfoot) sfoot.style.display=ownStory?'none':''; const svb=$('#story-viewers'); if(svb){ if(ownStory){ const vw=storyViewers(s); svb.style.display='flex'; const svc=$('#sv-count'); if(svc) svc.textContent=vw.length+'人が視聴'; const sva=$('#sv-avs'); if(sva) sva.innerHTML=vw.map(v=>'<img src="'+v.av+'" alt="">').join(''); } else svb.style.display='none'; } /* v138：自分のストーリーは閲覧者表示（実物の作法） */
  if(Array.isArray(S.storySeen)){ const key=storyKey(s); if(!S.storySeen.includes(key)){ S.storySeen.push(key); save(); } }
  if(st.timer) clearTimeout(st.timer); st.timer=null; st.paused=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused');
  st.remain=STORY_DUR; st.startedAt=Date.now(); st.timer=setTimeout(()=>storyStep(1),STORY_DUR); /* v81：自動送り（タップ送り・長押し一時停止は従来どおり併存） */ }
 function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>=st.list.length){ if(d>0&&storyNextUser()) return; closeStory(); return; } renderStory(); }
-function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; storyState.hl=false; const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
+function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; storyState.hl=false; const svs=$('#sv-sheet'); if(svs) svs.classList.remove('on'); const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
 /* v86：ストーリー下部（返信欄／ハート／紙飛行機）を実物どおり反応させる。ハートは実物のストーリーいいねとして保存される */
 (function(){ const foot=document.querySelector('.story-foot'); if(foot) foot.addEventListener('pointerdown',e=>e.stopPropagation());
  const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); if(typeof vib==='function') vib(10); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('tap'); } save(); });
  const ss=$('#sf-send'); if(ss) ss.addEventListener('click',e=>{ e.stopPropagation(); openShareSheet(null); }); /* v89：ストーリーも送信先シート */
  const si=$('#sf-in'); if(si) si.addEventListener('click',e=>{ e.stopPropagation(); toast('（返信はカカオトークのトークで進みます）'); });
 })();
+/* v138：自分のストーリーの閲覧者。登場アカウントのみ・決定的な時刻（再表示しても変わらない） */
+function storyAgoMinOf(s){ const a=(s&&s.ago)||''; if(a==='방금') return 2; let m; if(m=a.match(/(\d+)분/)) return +m[1]; if(m=a.match(/(\d+)시간/)) return +m[1]*60; return 60; }
+function storyViewers(s){ const ago=storyAgoMinOf(s); const cands=[['park_jaeon.sculpt','assets/av-jaeon-gen.jpg',0.18],['b1nna_','assets/av-bitna-gen2.jpg',0.45]]; if(S.calU>=5) cands.push(['s0l_a','assets/av-sola-gen2.jpg',0.8]); return cands.map(c=>({user:c[0],av:c[1],ago:Math.max(1,Math.round(ago*c[2]))})).sort((a,b)=>a.ago-b.ago); }
+function svAgoTxt(min){ if(min<1) return 'たった今'; if(min<60) return min+'分前'; return Math.floor(min/60)+'時間前'; }
+function openSvSheet(){ const s=storyState.list[storyState.i]; if(!s) return; const vw=storyViewers(s); const list=$('#sv-list'); if(list) list.innerHTML=vw.map(v=>'<div class="ppl-row sv-row"><img src="'+v.av+'" alt=""><span class="ppl-tx"><b>'+v.user+'</b><span>'+svAgoTxt(v.ago)+'に視聴</span></span></div>').join(''); const sh=$('#sv-sheet'); if(sh) sh.classList.add('on'); storyPause(); }
+function closeSvSheet(){ const sh=$('#sv-sheet'); if(sh) sh.classList.remove('on'); storyResume(); }
+(function(){ const b=$('#story-viewers'); if(b){ b.addEventListener('pointerdown',e=>e.stopPropagation()); b.addEventListener('click',e=>{ e.stopPropagation(); openSvSheet(); }); } const bg=$('#sv-bg'); if(bg) bg.addEventListener('click',closeSvSheet); sheetDrag($('#sv-sheet'),$('#sv-sheet .ppl-panel'),[$('#sv-sheet .cm-grab'),$('#sv-sheet .ppl-head')],closeSvSheet); })();
 $('#story-close').addEventListener('click',closeStory);
 $('#story-next').addEventListener('click',()=>storyStep(1));
 $('#story-prev').addEventListener('click',()=>storyStep(-1));
