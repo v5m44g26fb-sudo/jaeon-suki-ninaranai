@@ -860,6 +860,8 @@ img{-webkit-user-drag:none}
 .cm-row .cm-tx{flex:1;font-size:13.5px;line-height:1.5;color:#262626;min-width:0;word-break:break-word}
 .cm-row .cm-tx b{margin-right:5px}
 .cm-row .cm-meta{font-size:11.5px;color:#8e8e8e;margin-top:2px}
+.cm-row .cm-meta{display:flex;gap:12px;align-items:center}
+.cm-row .cm-reply{background:none;border:0;padding:0;font:inherit;color:#8e8e8e;cursor:pointer} /* v139 */
 .cm-like{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;color:#8e8e8e;font-size:10px;padding-top:5px}
 .cm-like.liked{color:#ff3040}
 .cm-empty{color:#8e8e8e;font-size:13px;text-align:center;padding:28px 0}
@@ -1107,7 +1109,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v138：自分のストーリーを開くと、実物どおり返信欄ではなく「閲覧者」（見た人と時刻）が出るようになりました。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v139：Instagramのコメントに、いいねの件数と「返信する」が付きました（返信はメンション入りで入力できます）。本編・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2262,14 +2264,17 @@ function renderIGFeed(){
 /* コメントシート：実物の作法どおり下からせり上がり、全コメント＋自分の投稿＋コメントへのいいね */
 let cmPost=null, cmOwner='j';
 function cmLikeKey(p,c){ return p.id+'::'+c[0]+'::'+c[1]; }
+function cmLikeBase(p,c){ const k=cmLikeKey(p,c); let h=0; for(let i=0;i<k.length;i++) h=(h*31+k.charCodeAt(i))>>>0; return h%43; } /* v139：コメントのいいね数はキーから決定的に導く（再表示しても変わらない） */
+function cmMetaExtra(p,c,liked){ const n=cmLikeBase(p,c)+(liked?1:0); return (n>0?'<span>いいね！'+n+'件</span>':'')+'<button class="cm-reply" data-rep="'+esc(c[0])+'">返信する</button>'; }
 function renderCmList(){
  const list=$('#cm-list'); if(!list||!cmPost) return;
  const story=(cmPost.cm||[]).map(c=>({c:c,mine:false,late:false,li:0})).concat((S.calU>=(cmPost.unlock||0)+3?(cmPost.cmL||[]):[]).map((c,i)=>({c:c,mine:false,late:true,li:i}))); /* v137：cmL は投稿より後の時刻で表示 */
  const mine=((S.igMyCmts&&Array.isArray(S.igMyCmts[cmPost.id]))?S.igMyCmts[cmPost.id]:[]).map(t=>({c:['nao_sculpt',t],mine:true}));
  const all=story.concat(mine);
  if(!all.length){ list.innerHTML='<div class="cm-empty">まだコメントがありません</div>'; return; }
- list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':igCmDisp(cmPost,x.late,x.li))+'</span></div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+(liked?'<span>1</span>':'')+'</button></div>'; }).join('');
+ list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':igCmDisp(cmPost,x.late,x.li))+'</span>'+(x.mine?'':cmMetaExtra(cmPost,c,liked))+'</div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+''+'</button></div>'; }).join('');
  list.querySelectorAll('[data-cmk]').forEach(b=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); if(i>=0) S.igCmLikes.splice(i,1); else { S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } save(); renderCmList(); }));
+ list.querySelectorAll('[data-rep]').forEach(b=>b.addEventListener('click',()=>{ const inp=$('#cm-in'); if(!inp) return; inp.value='@'+b.dataset.rep+' '; inp.focus(); updCmSend(); })); /* v139：返信は実物どおりメンションを入れて入力欄へ */
 }
 function openCmSheet(p,owner,focus){ cmPost=p; cmOwner=owner||'j'; renderCmList(); updCmSend(); const sh=$('#cm-sheet'); if(sh) sh.classList.add('on'); if(focus) setTimeout(()=>{ const i=$('#cm-in'); if(i) i.focus(); },400); }
 function closeCmSheet(){ const sh=$('#cm-sheet'); if(sh) sh.classList.remove('on'); cmPost=null; }
