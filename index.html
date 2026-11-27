@@ -1109,7 +1109,7 @@ img{-webkit-user-drag:none;user-select:none}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v141：Instagramも開いていたタブを覚えるようになりました（プロフィールや検索の途中で閉じても、戻るとそのまま）。本編・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v142：キャラ設定の活用度調査を受けて4件を手直ししました（ソルアのトークに執着の粘りを足す増補、ビンナとソルアの状態メッセージ、ジェオンの蝶のタトゥーへの再言及、フリーチャットの「保存した」の言い回し）。本編の数値・解放条件・進行は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1545,8 +1545,8 @@ const DOHYUK=[
 ];
 const SOLA=[
 [],[],[],[],[],
-[['ソルア','もう、聞いたと思うけど'],['ソルア','私とあの子は、切っても切れないの']],
-[['ソルア','カフェで話した。……私が、終わりにした'],['ソルア','中途半端より、他人でいる方がマシだって']],
+[['ソルア','もう、聞いたと思うけど'],['ソルア','私とあの子は、切っても切れないの'],['ソルア','あの子のこと、あんたよりずっと知ってる'],['ソルア','それでも選ばれたいなら、頑張りな']],
+[['ソルア','あのカフェ、まだ通ってたの'],['ソルア','来る日も来ない日も、同じ席'],['ソルア','……バカみたいでしょ'],['ソルア','カフェで話した。……私が、終わりにした'],['ソルア','中途半端より、他人でいる方がマシだって']],
 [['ソルア','あの子、変わったね'],['ソルア','……あんたのせいかもね']],
 [['ソルア','展示、見に行ったよ'],['ソルア','私の知らない顔、してた']]
 ];
@@ -2491,9 +2491,9 @@ function renderFriends(){
  const row=(img,name,st,mus)=>'<button class="thread fr-row" data-fr="'+name+'"><img class="av" src="'+img+'"><span class="tt"><span class="tn">'+name+'</span><span class="tp">'+(st==='RAMEN'?IC.bowl:esc(st||''))+'</span></span>'+(mus?'<span class="fr-mus">'+IC.note+' '+esc(mus)+'</span>':'')+'</button>';
  const jm=(profStage().mus.match(/「([^」]+)」/)||[])[1]||'';
  h+=row(cav(),'パク・ジェオン',profStage().st,jm).replace('ジェオン</span>','ジェオン</span>'+profDotHTML());
- if(S.chap>=1) h+=row('assets/av-bitna-gen2.jpg','ビンナ','');
+ if(S.chap>=1) h+=row('assets/av-bitna-gen2.jpg','ビンナ','다 보인다');
  if(S.chap>=4) h+=row('assets/av-dohyuk-gen.jpg','ヤン・ドヒョク','RAMEN');
- if(S.chap>=5) h+=row('assets/av-sola-gen2.jpg','ユン・ソルア','');
+ if(S.chap>=5) h+=row('assets/av-sola-gen2.jpg','ユン・ソルア','미련 없어');
  F.innerHTML=h;
  const my=F.querySelector('#fr-myprof'); if(my) my.addEventListener('click',()=>openFProf('なお'));
  F.querySelectorAll('.fr-row').forEach(b=>b.addEventListener('click',()=>{
@@ -2533,9 +2533,9 @@ const PROF_MUS_KEY={'Butterfly':'butterfly','Love Me Like That':'love-me-like-th
 /* 友達プロフィール：実物カカオのプロフィール画面（背景・アバター・名前・状態・下部ボタン）を汎用化。
    状態メッセージと解放条件は友達一覧の既存データと一致させ、新しい人物情報は作らない */
 const FPROF={
- 'ビンナ':{av:'assets/av-bitna-gen2.jpg',bg:'linear-gradient(160deg,#7d6a99,#4c3d63)',st:'',log:()=>BITNA[Math.min(Math.max(S.chap,0),BITNA.length-1)]},
+ 'ビンナ':{av:'assets/av-bitna-gen2.jpg',bg:'linear-gradient(160deg,#7d6a99,#4c3d63)',st:'다 보인다',log:()=>BITNA[Math.min(Math.max(S.chap,0),BITNA.length-1)]},
  'ヤン・ドヒョク':{av:'assets/av-dohyuk-gen.jpg',bg:'linear-gradient(160deg,#a8815c,#755334)',st:'RAMEN',log:()=>DOHYUK[Math.min(Math.max(S.chap,0),DOHYUK.length-1)]},
- 'ユン・ソルア':{av:'assets/av-sola-gen2.jpg',bg:'linear-gradient(160deg,#6d87a0,#42586e)',st:'',log:()=>SOLA[Math.min(Math.max(S.chap,0),SOLA.length-1)]}
+ 'ユン・ソルア':{av:'assets/av-sola-gen2.jpg',bg:'linear-gradient(160deg,#6d87a0,#42586e)',st:'미련 없어',log:()=>SOLA[Math.min(Math.max(S.chap,0),SOLA.length-1)]}
 };
 const FP_IC={chat:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H12l-4.6 3.8v-3.8H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg>',call:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.9 3.2h2.9l1.4 4.3-2 1.9a12.6 12.6 0 0 0 5.4 5.4l1.9-2 4.3 1.4v2.9a2.5 2.5 0 0 1-2.6 2.5C10.4 19.1 4.9 13.6 4.4 5.8a2.5 2.5 0 0 1 2.5-2.6z" fill="currentColor" stroke="none"/></svg>',gift:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="3.8"/><path d="M6 13.8V20.5h12v-6.7M12 10v10.5M12 10c-4.5 0-5.5-1.4-5.5-2.8C6.5 5.8 7.7 5 9 5c2 0 3 2.2 3 5zm0 0c4.5 0 5.5-1.4 5.5-2.8C17.5 5.8 16.3 5 15 5c-2 0-3 2.2-3 5z"/></svg>',gear:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h4l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4z"/></svg>'};
 let fpName=null;
@@ -2633,7 +2633,7 @@ function musicCreditHTML(){ return '<div class="mus-credit"><b>'+IC.note+' BGM�
  +'<div class="mus-credit"><b><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg> 通話ボイス（v9追加）</b><br>通話シーン（看病の夜／ブレスレットの夜）のジェオンの核セリフに、韓国語ボイスを付けています（日本語字幕と併用）。声はAnyVoiceの既製ボイス「호기요」（実在俳優のクローンではありません）。音源は assets/voice/ に配置しています。</div>'; }
 /* ================= v4 : POV ================= */
 const POVS=[
-{id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n席を立つ理由なら、いくらでもあった。カウンターが近すぎるせいにするのは、やめた。\n\n泣いた跡。ライムのカクテル。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\n\n席は近すぎた。肘が触れそうで、触れなかった。その距離のまま、閉店までいた。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
+{id:1,title:'彼視点 01 ― バーの夜',sub:'第1章クリアで解放',unlock:()=>S.calU>=2,body:'バー。カウンターの端。\n……人違いだった。でも、席を立たなかったのは、俺のほうだ。\n席を立つ理由なら、いくらでもあった。カウンターが近すぎるせいにするのは、やめた。\n\n泣いた跡。ライムのカクテル。誰にも構われたくない、って顔で、一番構われたそうな目。\nコースターに蝶を描いた。なんで描いたかは、自分でも分からない。\nうなじにも、一匹いる。描くものが蝶になるのは、たぶん、そのせいだ。\n\n席は近すぎた。肘が触れそうで、触れなかった。その距離のまま、閉店までいた。\n\n「蝶、見に行く？」\n言ってから、少し後悔した。断られたら、それで終わる誘い方だったから。\n\n彼女は来なかった。\n……来なかったのに、帰り道、コンビニでライムを買った。理由は、ない。ないはずだった。'},
 {id:2,title:'彼視点 02 ― 言えなかった夜',sub:'誕生日の章を過ぎると解放',unlock:()=>S.calU>=5,body:'ソルアからの電話。\n行かなきゃ、と口が言った。行きたかったかは、別。\n\nあとで聞いた話。あの夜彼女は、幼なじみとかいう男の店で、わかめスープを食べたらしい。\n……俺と過ごすはずだった夜なのに、って言いたいところだけど。電話一本で置いていったのは、俺だ。\n\n「ごめん」しか言えなかった。理由は、言わなかった。言えなかった、のほうが正しい。\n答えられないものを謝るなよ、と自分でも思う。\n\n前に一度、電話をかけたことがある。声が聞きたくて。\n――それも、言えなかった。\n「……なんでもない。忘れて」\n忘れてほしかったのは、本当は、こっちのほうだった。'},
 {id:3,title:'彼視点 03 ― 観覧車のあと',sub:'合宿の章で解放',unlock:()=>S.calU>=8,body:'観覧車。くじ引きの結果。\n狭いゴンドラで、外ばかり見ていた。隣を見たら、負ける気がした。\n膝が触れるか触れないか、その距離を保つだけで精一杯だった。\n\n降りる時、彼女が少しよろけた。手は出しかけて、背中の手前で止めた。……無事でよかった。触れなかったことも、たぶん。\n\n「……ドヒョクとはさ」\n言いかけて、やめた。聞いて、どうするつもりだったのか。\n嫉妬、って名前をつけたら、認めたことになる。\nつけなければ、ないことになる――はずだった。\n\nささやきゲーム。質問は、最悪のやつだった。\n「……なお」\n声が漏れた時、終わったと思った。\n\nでも彼女は、怒らなかった。責めもしなかった。\n……採点は、保留のまま。嬉しいのか、怖いのか、自分でも分からなかった。'},
 {id:4,title:'彼視点 04 ― 雨の夜の、翌朝',sub:'雨の章を過ぎると解放',unlock:()=>S.calU>=10||S.pov.includes(4),body:'雨。酒。ドヒョクの名前。\n言ったことの半分も覚えていないのに、彼女の顔だけ、覚えている。\n\n「二度と、私の前に現れないで」\n\n謝りの文章を、何度も打って、消した。\n言葉で謝ったら、また軽くなる気がした。言い訳に聞こえる気がした。\n結局、送れなかった。\n\n一睡もできなかった。目を閉じると、雨の中の背中が出てくる。\n――それからしばらくして、あの人の作品が壊れたと聞いた。\n行く理由は、もうなかった。でも手は、勝手に道具を揃えていた。'},
@@ -2746,7 +2746,7 @@ function pickFreeReplies(txt){
   [['夢'],['……出た？','…………聞かないでおく']],
   [['傘'],['……一本しか、ない','入れば、いい']],
   [['寒い'],['……手、貸して','…………やっぱ、なんでもない']],
-  [['写真','自撮り'],['……さっきの、見た','…………保存した、とは言ってない']],
+  [['写真','自撮り'],['……さっきの、見た','……言ってない。……コメントには、書いたけど']],
   [['耳'],['……耳、赤いよ','…………自覚、ないんだ']],
   [['眠れ','寝れ'],['……寝れないなら、起きてればいい','俺も、まだ作業']]
  ]; /* v60：新規ルール5件は既存14件の末尾に追加（既存の一致・優先順位を遮らない）。雨は複合形のみ（単独の「雨」と天気の実況は汎用プール） */
