@@ -93,7 +93,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .wid-wide{margin:12px 20px 0;background:rgba(255,255,255,.94);color:#111;border-radius:20px;padding:12px 15px;box-shadow:0 4px 14px rgba(0,0,0,.22);font-size:12.5px;line-height:1.65}
 .wid-wide b{font-size:13px}
 .meterbar{height:6px;background:#e4e4e9;border-radius:3px;margin:4px 0 7px;overflow:hidden}
-.meterbar i{display:block;height:100%;background:#f2b705;border-radius:3px;transition:width .5s}
+.meterbar i{display:block;height:100%;width:100%;background:#f2b705;border-radius:3px;transform:scaleX(0);transform-origin:left center;transition:transform .5s ease}
 .apps{margin-top:18px;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:19px 10px}
 .app{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#fff;position:relative;text-shadow:0 1px 3px rgba(0,0,0,.45)}
 .app .ic{width:59px;height:59px;border-radius:13.5px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 2px 7px rgba(0,0,0,.20);overflow:hidden;position:relative}
@@ -164,7 +164,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .ch-icons{font-size:16.5px;letter-spacing:3px;color:#222;padding-right:4px}
 .paramline{background:rgba(255,255,255,.82);margin:6px 10px 2px;border-radius:11px;padding:6px 12px;font-size:11px;color:#33475c;display:flex;gap:12px;align-items:center;box-shadow:0 1px 2px rgba(30,50,80,.08)}
 .paramline .mb{flex:1;height:5px;background:#d7dee6;border-radius:3px;overflow:hidden}
-.paramline .mb i{display:block;height:100%;background:#f2b705;transition:width .5s}
+.paramline .mb i{display:block;height:100%;width:100%;background:#f2b705;transform:scaleX(0);transform-origin:left center;transition:transform .5s ease}
 #feed{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;padding:6px 12px 14px;display:flex;flex-direction:column;gap:7px}
 .dchip{align-self:center;background:rgba(70,86,102,.45);color:#fff;font-size:11px;padding:4.5px 13px;border-radius:12px;margin:8px 0 4px;display:inline-flex;align-items:center;gap:5px} /* v80：実物カカオの日付チップにはカレンダーアイコンが付く */
 .chapdiv{align-self:stretch;text-align:center;color:#35516e;font-size:12.5px;letter-spacing:.24em;border-top:1px solid rgba(143,166,188,.22);padding:14px 0 0;margin:20px 6px 0}
@@ -206,7 +206,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .plus-panel span{width:47px;height:47px;border-radius:50%;background:#f4f5f6;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .12s}
 /* v66：パネル項目の押下フィードバック */
 .plus-panel div:active span{transform:scale(.88)}
-#toast{position:absolute;left:50%;bottom:calc(110px + var(--sab));transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:.35s;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
+#toast{position:absolute;left:50%;bottom:calc(110px + var(--sab));transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:opacity .35s ease,transform .35s ease;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 /* v83：カカオ実物の連続メッセージ表示（同じ相手が続く間はアバター・名前は先頭だけ、間隔も詰まる） */
 .row.grp{margin-left:45px;margin-top:-4px}
@@ -845,9 +845,9 @@ img{-webkit-user-drag:none}
 .cd-mrow img{width:40px;height:40px;border-radius:15px;object-fit:cover;flex:none}
 .cd-item{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:12px 18px;font-size:14.5px;color:#262626;text-align:left;background:none;border-top:1px solid #f4f4f6}
 .ios-sw{width:47px;height:28px;border-radius:14px;background:#e9e9ec;position:relative;flex:none;transition:background .2s}
-.ios-sw::after{content:'';position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.ios-sw::after{content:'';position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
 .ios-sw.on{background:#34c759}
-.ios-sw.on::after{left:21px}
+.ios-sw.on::after{transform:translateX(19px)}
 .story-foot .sf-in{pointer-events:auto;cursor:pointer}
 .story-foot button.sf-ic{background:none;border:0;padding:0;display:flex;pointer-events:auto;cursor:pointer}
 #sf-heart.liked svg{fill:#ff3040;stroke:#ff3040}
@@ -1019,10 +1019,11 @@ img{-webkit-user-drag:none}
 .ig-post{animation:fadeup .4s ease}
 @keyframes pulseHint{0%,100%{opacity:.55}50%{opacity:1}}
 .lock-hint{animation:pulseHint 2.2s ease infinite}
-.meterbar i{background:linear-gradient(90deg,#ffd60a,#ff9500,#ff3b30);transition:width 1.2s ease}
+.meterbar i{background:linear-gradient(90deg,#ffd60a,#ff9500,#ff3b30);transition:transform 1.2s ease}
 #noise{transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .3s,visibility 0s linear .5s}
 #noise.on{transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .3s,visibility 0s}
-button,input,textarea{touch-action:manipulation}
+*{touch-action:manipulation}
+button:focus-visible,[role="button"]:focus-visible{outline:2px solid rgba(10,132,255,.85);outline-offset:2px}
 img{-webkit-user-drag:none;user-select:none}
 @media (prefers-reduced-motion: reduce){
  .nw-item,.cal-e,.memo,.povrow,.nw-rank button,.ig-post{animation:none !important}
@@ -1056,8 +1057,9 @@ img{-webkit-user-drag:none;user-select:none}
    ※設定の .set-tgl（文字ピル）は本作の実物スイッチ .isw より簡素なため見送り */
 .cal-grid,.cal-pager{animation:fadeup .35s ease}
 #cal-d-note{background:#f2f2f7;border-radius:10px;padding:11px 13px;line-height:1.8}
-@keyframes ringpulse{0%{box-shadow:0 0 0 0 rgba(52,199,89,.45)}100%{box-shadow:0 0 0 22px rgba(52,199,89,0)}}
-#v-call[data-phase="incoming"] .cb.accept{animation:ringpulse 1.4s ease-out infinite}
+@keyframes ringpulse{0%{transform:scale(1);opacity:.45}100%{transform:scale(1.67);opacity:0}}
+#v-call[data-phase="incoming"] .cb.accept{position:relative;z-index:0}
+#v-call[data-phase="incoming"] .cb.accept::after{content:'';position:absolute;inset:0;border-radius:50%;background:#34c759;z-index:-1;animation:ringpulse 1.4s ease-out infinite}
 .call-av{border:3px solid rgba(255,255,255,.35)}
 .setbtn{transition:transform .1s ease}
 .setbtn:active{transform:scale(.97)}
@@ -1070,6 +1072,7 @@ img{-webkit-user-drag:none;user-select:none}
 @media (prefers-reduced-motion: reduce){
  .cal-grid,.cal-pager,.endcard.fincard,.fin-credits .fc-l{animation:none !important}
  #v-call[data-phase="incoming"] .cb.accept{animation:none !important}
+ #v-call[data-phase="incoming"] .cb.accept::after{animation:none !important} /* v152：波紋を ::after に移したため RM 側も追随 */
 }
 
 /* v127：カカオ # タブ／쇼핑 タブの実物化 */
@@ -1192,6 +1195,15 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 .view.byeF{display:flex;z-index:1;animation:voutF .26s ease-in both;pointer-events:none}
 .view.byeB{display:flex;z-index:3;animation:voutB .26s ease-in both;pointer-events:none}
 /* --- シート：開く時は少し行き過ぎて収まるスプリング、閉じる時は加速して抜ける。暗転も開きに追随させる --- */
+/* v152：共有シート／予定詳細シートの土台作法は静的CSS側に置く（従来は v90 の実行時注入スタイルにあり、
+   注入が効くまで素の div として描画され、読み込み時に 0.28 のレイアウトずれを起こしていた） */
+#gsh-sheet,#cal-sheet{position:absolute;inset:0;z-index:243;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
+#gsh-sheet .sh-bg,#cal-sheet .sh-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
+#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .3s cubic-bezier(.55,0,.85,.4);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}
+#gsh-sheet.on,#cal-sheet.on{pointer-events:auto}
+#gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg{opacity:1}
+#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transform:translateY(0)}
+#gsh-sheet.dragging .sh-panel,#cal-sheet.dragging .sh-panel{transition:none!important}
 #ppl-sheet .ppl-panel,#sv-sheet .ppl-panel,#cm-sheet .cm-panel,#shr-sheet .sh-panel,#bg-sheet .sh-panel,#gsh-sheet .sh-panel,#cal-sheet .sh-panel{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
 #ppl-sheet.on .ppl-panel,#sv-sheet.on .ppl-panel,#cm-sheet.on .cm-panel,#shr-sheet.on .sh-panel,#bg-sheet.on .sh-panel,#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transition:transform .52s cubic-bezier(.3,1.14,.38,1)}
 #act-sheet .act-panel,#fol-sheet .fol-panel,#mk-sheet .act-panel{transition:transform .26s cubic-bezier(.55,0,.85,.4)}
@@ -1255,7 +1267,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v151：読み込みを軽くしました（起動時に裏で読み込んでいたBGMとプロフィール背景を、必要になるまで読み込まないようにし、写真データも画質を落とさず圧縮しました）。表示・内容・台詞・解放条件は変えていません。</p>
+<p class="src">v152：表示の作法を整えました（読み込み時に起きていた画面のずれを解消し、バーの伸び方・スイッチ・着信の波紋をなめらかな方式に変更、Instagram上部ボタンのタップ範囲を拡大）。内容・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1287,7 +1299,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <div class="wid-photo"><img loading="lazy" decoding="async" src="assets/ig-butterfly-room.jpg" alt=""><span><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg> 나비 ― 写真</span></div>
 </div>
 <div class="wid-wide"><b><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg> 解剖メモ ― パク・ジェオン解明度</b>
-<div class="meterbar"><i id="w-kai" style="width:0%"></i></div>
+<div class="meterbar"><i id="w-kai" style="transform:scaleX(0)"></i></div>
 心の距離：<span id="w-kyori">――</span>　／　進行：<span id="w-prog">プロローグ</span></div>
 <div class="wid-music"><div class="mh"><b><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.3V6.2L19 4.3v11.8"/><circle cx="7.2" cy="18.3" r="2.4"/><circle cx="16.7" cy="16.1" r="2.4"/></svg> BGM</b><span id="mus-now"></span><button id="mus-toggle" class="isw" aria-label="BGMのオン・オフ"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9.5a4 4 0 0 1 0 5M18 7a7.5 7.5 0 0 1 0 10"/></svg> ON</button></div><input type="range" id="mus-vol" min="0" max="100" value="70"><div class="mc">ドラマOSTの公式プレビュー音源（30秒・ループ）。場面に合わせて自動で切り替わります</div></div>
 <button class="wid-news" id="wid-news" data-open="news"><span class="wn-tag">뉴스</span><span class="wn-title" id="wn-title">젊은 조각가들의 개인전, 봄 전시 시즌 개막</span><span class="wn-press" id="wn-press">아트인사이트</span></button>
@@ -1351,7 +1363,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <div id="chat-search"><input id="cs-in" type="text" placeholder="대화 내용 검색（トーク内検索）" autocomplete="off"><span id="cs-count"></span><button id="cs-up" aria-label="前の結果"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14.5 12 8l6.5 6.5"/></svg></button><button id="cs-dn" aria-label="次の結果"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 9.5 12 16l6.5-6.5"/></svg></button><button id="cs-close" aria-label="検索を閉じる"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <div id="chat-drawer-bg"></div>
 <div id="chat-drawer"><div class="cd-sec">대화 상대（メンバー）</div><button class="cd-mrow" id="cd-m-j"><img src="assets/av-jaeon-gen.jpg" alt=""><span>パク・ジェオン</span></button><div class="cd-mrow"><img src="assets/nao-avatar-gen.jpg" alt=""><span>なお</span></div><div class="cd-sec">채팅방（このトーク）</div><button class="cd-item" id="cd-photos"><span>사진 보기（写真を見る）</span></button><button class="cd-item" id="cd-search2"><span>대화 내용 검색（トーク内検索）</span></button><div class="cd-item"><span>채팅방 알림（通知）</span><span class="ios-sw on" id="cd-notif-sw"></span></div><button class="cd-item" id="cd-bg"><span>채팅방 배경（背景）</span><span class="cd-bgname" id="cd-bgname">기본</span></button></div>
-<div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="width:0%"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
+<div class="paramline"><span>解明度 <b id="p-kai">0</b></span><span class="mb"><i id="p-kai-bar" style="transform:scaleX(0)"></i></span><span>心の距離 <b id="p-kyori">62</b></span></div>
 <div id="feed"></div>
 <div id="tap-hint">▼</div>
 <button id="chat-bottom-btn" aria-label="一番下へ戻る"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v13M6 11.5l6 6 6-6"/></svg> 一番下へ戻る</button>
@@ -1972,9 +1984,9 @@ let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-igedit','v-news','v-newsread','v-cal','v-notes','v-note','v-calllog','v-pov','v-povread','v-gallery','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
 function updParams(){
- $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.width=S.kai+'%';
+ $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.transform='scaleX('+(S.kai/100)+')';
  $('#p-kyori').textContent=S.kyo;
- $('#w-kai').style.width=S.kai+'%';
+ $('#w-kai').style.transform='scaleX('+(S.kai/100)+')';
  $('#w-kyori').textContent=S.kyo<=25?'近い（でも壁はある）':S.kyo<=45?'近づきかけ':S.kyo<=70?'曖昧な距離':'遠い';
  const progs=['プロローグ','第1章 バーでの出会い','第2章 再会と作業室','第3章 曖昧な関係','第3章 一度目の別れ','第4章 助手として戻る','第5章 合宿','第6章 付き合おう','最終章 壊れたもの'];
  $('#w-prog').textContent=S.done?'完結（END到達）':progs[S.chap]||'';
@@ -2492,7 +2504,7 @@ function renderIG(){
   cmt:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.5-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>',
   shr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M21.5 2.5 11 13M21.5 2.5 14.8 21.5l-3.8-8.5-8.5-3.8z" stroke-linejoin="round"/></svg>',
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>',
-  grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
+  grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
  let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
  h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>'+prof.ing+'</b>フォロー中</span></div></div><div class="ig-bio"><b>'+(isJ?prof.name:esc(profN().name))+'</b>'+(prof.cat?'<br><span class="ig-cat">'+prof.cat+'</span>':'')+'<br>'+(isJ?prof.bio:esc(profN().bio)).replace(/\n/g,'<br>')+'</div>'; /* v95：自分のプロフィールは編集内容（名前・自己紹介）を表示 */
  h+= isJ ? '<div class="ig-folbtn"><span class="'+(S.igFolJ===false?'':'ghost')+'" data-gf="follow">'+(S.igFolJ===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
@@ -3820,13 +3832,6 @@ function kpRender(){ const d=$('#kp-disp'); if(d) d.textContent=kpNum; }
    新規セーブ項目（galFav/galDel/nwFont/vibOn）は既定値方式＋正規化で旧セーブ互換。 */
 (function(){
  const st=document.createElement('style'); st.textContent=
- '#gsh-sheet,#cal-sheet{position:absolute;inset:0;z-index:243;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}'
- +'#gsh-sheet .sh-bg,#cal-sheet .sh-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}'
- +'#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .3s cubic-bezier(.55,0,.85,.4);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}'
- +'#gsh-sheet.on,#cal-sheet.on{pointer-events:auto}'
- +'#gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg{opacity:1}'
- +'#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transform:translateY(0)}'
- +'#gsh-sheet.dragging .sh-panel,#cal-sheet.dragging .sh-panel{transition:none!important}'
  +'.gsh-head{display:flex;gap:12px;align-items:center;padding:10px 0 12px;border-bottom:1px solid #eee}'
  +'.gsh-head img{width:52px;height:52px;object-fit:cover;border-radius:8px;flex:none}'
  +'.gsh-tx{display:flex;flex-direction:column;min-width:0}'
@@ -4044,7 +4049,7 @@ function openStoryHL(list){
    カカオトークへの導線。新規セーブ項目 actSeen（既読件数）は既定値方式＋正規化で旧セーブ互換。 */
 (function(){
  const st=document.createElement('style'); st.textContent=
- '.igh-btn{background:none;border:0;padding:0;cursor:pointer;position:relative;display:block}'
+ '.igh-btn{background:none;border:0;padding:0;cursor:pointer;position:relative;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex:none}'
  +'.igh-dot{position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#ff3040;border:1.5px solid #fff}'
  +'.iga-head{padding:max(50px,calc(var(--sat) + 6px)) 13px 9px;display:flex;align-items:center;gap:6px;background:#fff;border-bottom:1px solid #efefef}'
  +'.iga-head h2{font-size:16.5px;font-weight:700;color:#262626}'
