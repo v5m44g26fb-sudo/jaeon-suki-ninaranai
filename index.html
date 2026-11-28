@@ -206,8 +206,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .plus-panel span{width:47px;height:47px;border-radius:50%;background:#f4f5f6;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .12s}
 /* v66：パネル項目の押下フィードバック */
 .plus-panel div:active span{transform:scale(.88)}
-#toast{position:absolute;left:50%;bottom:calc(110px + var(--sab));transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:opacity .35s ease,transform .35s ease;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
-#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast{position:absolute;left:50%;bottom:calc(110px + var(--sab));transform:translateX(-50%) translateY(20px);background:rgba(20,20,25,.92);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:20px;opacity:0;transition:opacity .18s ease-in,transform .18s ease-in;z-index:300;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);transition:opacity .25s cubic-bezier(.22,1,.36,1),transform .25s cubic-bezier(.22,1,.36,1)}
 /* v83：カカオ実物の連続メッセージ表示（同じ相手が続く間はアバター・名前は先頭だけ、間隔も詰まる） */
 .row.grp{margin-left:45px;margin-top:-4px}
 .row.grp .bub{border-top-left-radius:14px}
@@ -371,7 +371,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .cal-d.dot{font-weight:700}
 .cal-d.dot::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#e8a13a}
-.cal-e.flash{animation:calflash 1.2s ease-out}
+#cal-body .cal-e.flash{animation:calflash 1.2s ease-out}
 @keyframes calflash{0%,55%{background:#fdf0cd}100%{background:transparent}}
 .gal-mh{padding:16px 12px 6px;font-size:14px;font-weight:700;color:#1c1c1e}
 .memo{margin:12px 14px;border:1px solid var(--line);border-radius:16px;padding:14px 15px;background:#fffdf4}
@@ -533,16 +533,19 @@ button.cal-d{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .epi-done{color:#7a6a2f;font-weight:700}
 /* ===== v23 : touch feel ===== */
 @keyframes vin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+@keyframes ppIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ppOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}
 .view.on{animation:vin .26s cubic-bezier(.32,.72,0,1)}
 #gal-view.on{animation:vin .26s cubic-bezier(.32,.72,0,1)}
-.plus-panel.on{animation:vin .26s cubic-bezier(.32,.72,0,1)}
+.plus-panel.on{animation:ppIn .2s cubic-bezier(.32,.72,0,1)}
+.plus-panel.on.bye{animation:ppOut .13s cubic-bezier(.4,0,1,1) both}
 .app:active{opacity:.55}
 .setbtn:active{background:#d9e4ef}
 @media (prefers-reduced-motion: reduce){
  .wall-butterflies span{animation:none !important}
  #tap-hint.on{animation:none !important}
  .typing i{animation:none !important;opacity:.55}
- .view.on,#gal-view.on,.plus-panel.on{animation:none !important}
+ .view.on,#gal-view.on,.plus-panel.on,.plus-panel.on.bye{animation:none !important}
  .cal-e.flash{animation:none !important}
  *{transition-duration:.01s !important;scroll-behavior:auto !important}
 }
@@ -1199,26 +1202,26 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
    注入が効くまで素の div として描画され、読み込み時に 0.28 のレイアウトずれを起こしていた） */
 #gsh-sheet,#cal-sheet{position:absolute;inset:0;z-index:243;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
 #gsh-sheet .sh-bg,#cal-sheet .sh-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}
-#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .3s cubic-bezier(.55,0,.85,.4);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}
+#gsh-sheet .sh-panel,#cal-sheet .sh-panel{position:relative;background:#fff;border-radius:14px 14px 0 0;max-height:76%;display:flex;flex-direction:column;transform:translateY(103%);transition:transform .3s cubic-bezier(.4,0,1,1);box-shadow:0 -6px 28px rgba(0,0,0,.18);padding:6px 18px calc(14px + var(--sab))}
 #gsh-sheet.on,#cal-sheet.on{pointer-events:auto}
 #gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg{opacity:1}
 #gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transform:translateY(0)}
 #gsh-sheet.dragging .sh-panel,#cal-sheet.dragging .sh-panel{transition:none!important}
-#ppl-sheet .ppl-panel,#sv-sheet .ppl-panel,#cm-sheet .cm-panel,#shr-sheet .sh-panel,#bg-sheet .sh-panel,#gsh-sheet .sh-panel,#cal-sheet .sh-panel{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
+#ppl-sheet .ppl-panel,#sv-sheet .ppl-panel,#cm-sheet .cm-panel,#shr-sheet .sh-panel,#bg-sheet .sh-panel,#gsh-sheet .sh-panel,#cal-sheet .sh-panel{transition:transform .3s cubic-bezier(.4,0,1,1)}
 #ppl-sheet.on .ppl-panel,#sv-sheet.on .ppl-panel,#cm-sheet.on .cm-panel,#shr-sheet.on .sh-panel,#bg-sheet.on .sh-panel,#gsh-sheet.on .sh-panel,#cal-sheet.on .sh-panel{transition:transform .52s cubic-bezier(.3,1.14,.38,1)}
-#act-sheet .act-panel,#fol-sheet .fol-panel,#mk-sheet .act-panel{transition:transform .26s cubic-bezier(.55,0,.85,.4)}
+#act-sheet .act-panel,#fol-sheet .fol-panel,#mk-sheet .act-panel{transition:transform .26s cubic-bezier(.4,0,1,1)}
 #act-sheet.on .act-panel,#fol-sheet.on .fol-panel,#mk-sheet.on .act-panel{transition:transform .44s cubic-bezier(.3,1.14,.38,1)}
-#ksp-sheet .ksp-panel{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
+#ksp-sheet .ksp-panel{transition:transform .3s cubic-bezier(.4,0,1,1)}
 #ksp-sheet.on .ksp-panel{transition:transform .5s cubic-bezier(.3,1.14,.38,1)}
-#albumpick .ap-sheet{transition:transform .3s cubic-bezier(.55,0,.85,.4)}
+#albumpick .ap-sheet{transition:transform .3s cubic-bezier(.4,0,1,1)}
 #albumpick.on .ap-sheet{transition:transform .52s cubic-bezier(.3,1.14,.38,1)}
-#chat-drawer{transition:transform .26s cubic-bezier(.55,0,.85,.4)}
+#chat-drawer{transition:transform .26s cubic-bezier(.4,0,1,1)}
 #chat-drawer.on{transition:transform .46s cubic-bezier(.3,1.12,.38,1)}
 #ppl-sheet.on .ppl-bg,#sv-sheet.on .ppl-bg,#cm-sheet.on .cm-bg,#shr-sheet.on .sh-bg,#bg-sheet.on .sh-bg,#gsh-sheet.on .sh-bg,#cal-sheet.on .sh-bg,#act-sheet.on .act-bg,#fol-sheet.on .fol-bg,#mk-sheet.on .act-bg,#ksp-sheet.on .ksp-bg{transition:opacity .42s ease}
 #albumpick.on::before{transition:opacity .42s ease}
 /* --- 一覧の時間差入場：従来の全行同時 fadeup（再描画のたびに再生される）を止め、初回表示だけ先頭からずらして出す --- */
-.nw-item,.povrow,.ig-post,.nw-rank button,.news-hero{animation:none}
-.casc .nw-item,.casc .povrow,.casc .ig-post,.casc .nw-rank button,.casc .news-hero,.casc .thread,.casc .nt-row,.casc .cm-row,.casc .gal-grid>button{animation:fadeup .38s cubic-bezier(.32,.72,0,1) both;animation-delay:calc(var(--i,0)*42ms)}
+.nw-item,.povrow,.ig-post,.nw-rank button,.news-hero,.cal-grid,.cal-pager,.cal-e{animation:none}
+.casc .nw-item,.casc .povrow,.casc .ig-post,.casc .nw-rank button,.casc .news-hero,.casc .thread,.casc .nt-row,.casc .cm-row,.casc .gal-grid>button,.casc .cal-grid,.casc .cal-pager,.casc .cal-e{animation:fadeup .38s cubic-bezier(.32,.72,0,1) both;animation-delay:calc(var(--i,0)*42ms)}
 /* --- ボタンの戻り：押し込みは速く、離すとバネで戻る。ポップの弾みも同じカーブに統一 --- */
 .app .ic{transition:transform .24s cubic-bezier(.34,1.35,.64,1),filter .18s}
 .app:active .ic{transition-duration:.06s,.06s}
@@ -1267,7 +1270,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v152：表示の作法を整えました（読み込み時に起きていた画面のずれを解消し、バーの伸び方・スイッチ・着信の波紋をなめらかな方式に変更、Instagram上部ボタンのタップ範囲を拡大）。内容・台詞・数値・解放条件は変えていません。</p>
+<p class="src">v153：動きの作法を整えました（シートを閉じる時の出だしの重さ、画面を素早く行き来した時の一瞬の消え、カレンダーをめくるたびに繰り返していたフェード、＋パネルの閉じる動き、トーストの出入り）。内容・台詞・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2565,6 +2568,7 @@ function renderCal(){
    });
  });
  b.innerHTML=h+'<p class="locknote">物語の進行に合わせて解放されます</p>';
+ if(window.__casc)__casc(b,'cal',b.querySelectorAll('.cal-pager,.cal-grid,.cal-e'));
  /* v68：ドットの日タップ → 該当エントリへスクロール＋ハイライト（表示だけの操作で、状態は持たない） */
  b.querySelectorAll('[data-cald]').forEach(btn=>btn.addEventListener('click',()=>{
    const t=document.getElementById(btn.dataset.cald); if(!t) return;
@@ -2687,7 +2691,11 @@ function kkApplyTab(t){
  if(typeof kkSearchApply==='function') kkSearchApply();
 }
 document.querySelectorAll('.kk-tabbar [data-tab]').forEach(b=>b.addEventListener('click',()=>kkApplyTab(b.dataset.tab)));
-$('#btn-plus').addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); $('#btn-plus').classList.toggle('on',on); });
+/* v153：＋パネルは開閉ペアで動かす（従来は開く時だけ vin、閉じる時は即消えだった） */
+function ppSetBtns(open){ ['#btn-plus','#btn-plus2'].forEach(s=>{ const b=$(s); if(b) b.classList.toggle('on',open); }); }
+function closePP(){ const pp=$('#plus-panel'); if(!pp||!pp.classList.contains('on')) return; ppSetBtns(false); if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ pp.classList.remove('on'); pp.classList.remove('bye'); return; } pp.classList.add('bye'); setTimeout(()=>{ if(pp.classList.contains('bye')){ pp.classList.remove('on'); pp.classList.remove('bye'); } },140); }
+function togglePP(){ const pp=$('#plus-panel'); if(!pp) return; if(pp.classList.contains('on')){ if(pp.classList.contains('bye')){ pp.classList.remove('bye'); ppSetBtns(true); } else closePP(); } else { pp.classList.remove('bye'); pp.classList.add('on'); ppSetBtns(true); } }
+$('#btn-plus').addEventListener('click',togglePP);
 /* v66：＋パネルは実物の1ページ目の構成（앨범／선물하기／송금／음성메시지／연락처／파일／일정）に統一。項目ごとに実物らしいフィードバックを返す（物語の進行には影響しない） */
 const PP_T={album:'（送信は演出用です。送信ボタンで物語が進みます）',gift:'（プレゼントは演出用です）',pay:'（送金は演出用です）',voice:'（音声メッセージは演出用です）',contact:'（連絡先の送信は演出用です）',file:'（ファイル送信は演出用です）',cal:'（日程の共有は演出用です）'};
 document.querySelectorAll('.plus-panel div').forEach(d=>d.addEventListener('click',()=>{ const k=d.dataset.pp; if(k==='album'&&S.done){ openAlbumPick(); return; } if(k==='cal'){ if($('#v-call').classList.contains('on')){ toast('（通話中は開けません）'); return; } $('#plus-panel').classList.remove('on'); renderCal(); showView('v-cal'); return; } /* v87: 日程は実物の共有先としてカレンダーを開く */ toast(PP_T[k]||'（送信は演出用です。送信ボタンで物語が進みます）'); }));
@@ -3466,7 +3474,7 @@ document.addEventListener('pointerdown',e=>{ if(rtrayRow&&!e.target.closest('#rt
 
 /* ---------- P3: フリーチャット用＋ボタン＋写真ピッカー送信 ---------- */
 const btnPlus2=$('#btn-plus2');
-if(btnPlus2) btnPlus2.addEventListener('click',()=>{ const on=$('#plus-panel').classList.toggle('on'); btnPlus2.classList.toggle('on',on); const bp=$('#btn-plus'); if(bp) bp.classList.toggle('on',on); });
+if(btnPlus2) btnPlus2.addEventListener('click',togglePP);
 function freeAddMeImg(img){ const r=el('<div class="row me fr"><div class="bmeta"><span class="tm">'+fmtTime()+'</span></div><img class="msgimg" src="'+img+'" style="max-width:62%;border-radius:14px"></div>'); tagMsg(r); if(!freeRestoring) r.classList.add('pop'); feed.appendChild(r); scrollFeed(); }
 function openAlbumPick(){
  const g=$('#ap-grid'); if(!g) return;
@@ -4061,7 +4069,7 @@ function openStoryHL(list){
  +'.iga-empty{padding:52px 30px;text-align:center;color:#8e8e8e;font-size:13.5px;line-height:1.8}'
  +'#mk-sheet{position:absolute;inset:0;z-index:246;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}'
  +'#mk-sheet .act-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease}'
- +'#mk-sheet .act-panel{position:relative;margin:0 8px calc(10px + var(--sab));transform:translateY(110%);transition:transform .26s cubic-bezier(.55,0,.85,.4)}'
+ +'#mk-sheet .act-panel{position:relative;margin:0 8px calc(10px + var(--sab));transform:translateY(110%);transition:transform .26s cubic-bezier(.4,0,1,1)}'
  +'#mk-sheet.on{pointer-events:auto}'
  +'#mk-sheet.on .act-bg{opacity:1}'
  +'#mk-sheet.on .act-panel{transform:translateY(0)}';
@@ -4309,16 +4317,45 @@ function renderLockNotifs(){
  let backFlag=false;
  document.addEventListener('click',e=>{ const t=(e.target&&e.target.closest)?e.target.closest('.back,#story-close'):null; if(t){ backFlag=true; setTimeout(()=>{ backFlag=false; },0); } },true);
  const _svPrev=showView;
+ /* v153：退出と再入場を「今の表示値」から駆動する（WAAPI）。素早い往復操作で
+    キーフレームの from 値（opacity 0 や 1）へ跳ねて一瞬消える／張り付く問題の対策。
+    割り込まれていない通常遷移では従来のキーフレーム退出と同一の動きになる
+    （開始値が実値＝1／0px のため）。WAAPI が使えない環境では従来のクラス方式が残る */
+ function liveOf(elm){ let o=1,tx=0; try{ const cs=getComputedStyle(elm); o=parseFloat(cs.opacity); if(isNaN(o)) o=1; tx=new DOMMatrixReadOnly(cs.transform).e||0; }catch(e){} return {o:o,tx:tx}; }
+ function exitView(elm,back,live){
+   if(elm.__vx){ try{ elm.__vx.cancel(); }catch(e){} elm.__vx=null; }
+   elm.classList.add(back?'byeB':'byeF');
+   let anim=null;
+   try{ anim=elm.animate([{opacity:live.o,transform:'translateX('+live.tx+'px)'},{opacity:0,transform:'translateX('+(back?22:-14)+'px)'}],{duration:260,easing:'ease-in',fill:'forwards'}); }catch(e){}
+   elm.__vx=anim;
+   if(anim){ try{ elm.getAnimations().forEach(a=>{ if(a.animationName==='voutF'||a.animationName==='voutB') a.cancel(); }); }catch(e){} }
+   let done=false;
+   const fin=()=>{ if(done) return; done=true; if(elm.__vx===anim) elm.__vx=null; elm.classList.remove('byeF','byeB'); if(anim){ try{ anim.cancel(); }catch(e){} } };
+   if(anim&&anim.finished){ anim.finished.then(fin).catch(()=>{}); setTimeout(fin,420); }
+   else setTimeout(fin,300);
+ }
+ function resumeView(elm,live){
+   try{ elm.getAnimations().forEach(a=>{ if(a.animationName==='vin'||a.animationName==='vinB') a.cancel(); }); }catch(e){}
+   let anim=null;
+   try{ anim=elm.animate([{opacity:live.o,transform:'translateX('+live.tx+'px)'},{opacity:1,transform:'translateX(0px)'}],{duration:280,easing:'cubic-bezier(.32,.72,0,1)',fill:'forwards'}); }catch(e){}
+   if(anim&&anim.finished){ anim.finished.then(()=>{ try{ anim.cancel(); }catch(e){} }).catch(()=>{}); }
+   if(anim) setTimeout(()=>{ try{ anim.cancel(); }catch(e){} },460);
+ }
  showView=function(id){
    const back=backFlag; backFlag=false;
    const pv=document.querySelector('.view.on'); const prev=(pv&&pv.id!==id)?pv:null;
    const nv=document.getElementById(id);
+   const useFx=!RM&&id!=='v-lock'&&!(prev&&prev.id==='v-lock');
+   let prevLive=null, nvLive=null;
+   if(prev&&useFx) prevLive=liveOf(prev);
+   if(nv&&(nv.classList.contains('byeF')||nv.classList.contains('byeB'))){
+     nvLive=liveOf(nv);
+     if(nv.__vx){ try{ nv.__vx.cancel(); }catch(e){} nv.__vx=null; }
+   }
    if(nv){ nv.classList.remove('byeF','byeB'); nv.classList.toggle('vback',!!back); }
    _svPrev(id);
-   if(prev&&!RM&&id!=='v-lock'&&prev.id!=='v-lock'){
-     prev.classList.add(back?'byeB':'byeF');
-     const p=prev; setTimeout(()=>{ p.classList.remove('byeF','byeB'); },300);
-   }
+   if(prev&&useFx) exitView(prev,back,prevLive||{o:1,tx:0});
+   if(nv&&nvLive&&!RM&&id!=='v-lock') resumeView(nv,nvLive);
  };
  /* --- 大きな写真のシマー：読み込み完了で .ld を付け、帯を止める --- */
  function markLd(img){
