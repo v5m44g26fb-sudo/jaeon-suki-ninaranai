@@ -1250,7 +1250,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v156：タイトル／ホーム／ロック画面の質感を刷新しました（通知とドックのすりガラスを深くし、縁にヘアラインを通し、設定カードの角を他のカードに統一）。ロック画面は、実機のステータスバーと二重になる作り物のバーを入口では出さず、帯と重複していた題字と浮遊する蝶の装飾を外して、時計と通知だけの実物寄りの構成にしました。物語の筋・数値・解放条件は変えていません。</p>
+<p class="src">v157：ビンナとソルアにも、自分のInstagram投稿が付きました（各2件・生成写真）。2人のプロフィールも開けるようになり、フォローの切り替え・保存・コメントも他のアカウントと同じに動きます。物語の筋・数値・既存の解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -1608,6 +1608,15 @@ const IG_N=[
 {id:'n20',img:'assets/nao-cafe2.jpg',cap:'展示の帰り。寄り道のカフェ',likes:'152',unlock:11,cm:[['b1nna_','向かいの席、誰ですかー！'],['nao_sculpt','……内緒'],['s0l_a','……ふーん']]},
 {id:'n23',img:'assets/nao-exhibit2.jpg',cap:'展示。隣で、同じの見てた',likes:'171',unlock:11,cm:[['b1nna_','おめでとう！ 隣の人は……まあいいや'],['nao_sculpt','ありがとう。案内してもらった']]}
 ];
+/* v157：ビンナ／ソルアの投稿（2026-11-27 キャラ監査の残件：2人にも自分の投稿を持たせる。ストーリーは足さない＝v133以来の確定状態を維持） */
+const IG_B=[
+{id:'bitna1',img:'assets/ig-bitna-cafe.jpg',cap:'거울 셀카는 못 참지 ☕',likes:'214',unlock:2,cm:[['park_jaeon','……作業は'],['b1nna_','してる。あんたこそ、作業室に住んでるでしょ'],['nao_sculpt','そのカフェ、連れてって'],['b1nna_','課題終わったらね。……なおの「終わったら」は信用してないけど']],cmL:[['park_jaeon','……そのネックレス、蝶なんだ']]},
+{id:'bitna2',img:'assets/ig-bitna-artshop.jpg',cap:'물감 고르는 중. 오늘은 새 색',likes:'187',unlock:5,cm:[['nao_sculpt','その棚、もう半分くらい持ってそう'],['b1nna_','持ってる。でも、新しい色は別腹']],cmL:[['s0l_a','色、増えたね']]}
+];
+const IG_S=[
+{id:'sola1',img:'assets/ig-sola-library.jpg',cap:'같은 자리. 오늘도',likes:'156',unlock:6,cm:[['b1nna_','図書館の主みたいな顔してる'],['s0l_a','……うるさい']],cmL:[['park_jaeon','……まだ、そこにいるんだ']]},
+{id:'sola2',img:'assets/ig-sola-street.jpg',cap:'돌아봤다. 이제는 그냥 풍경',likes:'203',unlock:9,cm:[['nao_sculpt','……きれい'],['s0l_a','……ありがとう'],['b1nna_','その顔、もう大丈夫なやつ'],['s0l_a','……かもね']],cmL:[['park_jaeon','……変わったね']]}
+];
 /* v68：day は月グリッドのドット用。値は新規に作らず、写真ライブラリ（LIBPHOTOS）の日付・要約内の明記日付など既存データで確定できるものだけに付けた（個展3/5・バー3/12・作業室3/26・曖昧な関係4/16・誕生日4/25・合宿6/18・雨の夜6/25・修復7/9・展示7/16・温室9/17・水やり9/19）。確定できないエントリには付けない */
 const CAL=[
 {m:'3月',e:[
@@ -1888,7 +1897,7 @@ const STORY=[
 /* ================= ENGINE ================= */
 const $=s=>document.querySelector(s);
 const LSKEY='jaeon-suki-ninaranai-v1';
-let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{},igMyCmts:{},igCmLikes:[],storySeen:[],igFolJ:true,storyLikes:[],igRecent:[],chatBg:'def',nwLikes:[]} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
+let S={idx:0,kai:0,kyo:62,chap:0,calU:0,memos:[],igs:[],picks:{},done:false,callSeen:false,ver:0,ends:[],endId:null,call1:false,call2:false,pov:[],free:[],freeN:0,freeClosed:false,sndOn:true,sndVol:70,igLikes:[],igSaves:[],reactions:{},igMyCmts:{},igCmLikes:[],storySeen:[],igFolJ:true,igFolB:true,igFolS:true,storyLikes:[],igRecent:[],chatBg:'def',nwLikes:[]} /* v74：reactions はメッセージ反応（キー→絵文字）。既定値をリテラルに持つため旧セーブは Object.assign でそのまま移行 */; /* v67：igLikes／igSaves はIGのいいね・保存（投稿IDの配列）。既定値（空配列）をこのリテラルに持つため、旧セーブは Object.assign のマージでそのまま読み込める */
 /* v31：壊れたセーブ（JSON破損・非オブジェクト）は LSKEY+'.bak' へ退避し、初期状態で起動する */
 try{const raw=localStorage.getItem(LSKEY); if(raw){ try{const p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) S=Object.assign(S,p); else try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} }catch(pe){ try{localStorage.setItem(LSKEY+'.bak',raw);}catch(e){} } }}catch(e){}
 /* v1セーブ移行：第1部完(done)は「完結」ではなく第2部開始地点として扱う */
@@ -1982,7 +1991,7 @@ let feedStick=true, advForce=false;
 feed.addEventListener('scroll',()=>{ feedStick=(feed.scrollHeight-feed.scrollTop-feed.clientHeight)<160; },{passive:true});
 function scrollFeed(force){ if(force||advForce||feedStick){ feed.scrollTop=feed.scrollHeight; feedStick=true; } advForce=false; }
 function unlockMemo(id,quiet){if(!S.memos.includes(id)){S.memos.push(id); if(!quiet) toast('解剖メモが解放されました（ホームの「解剖メモ」）');}}
-function unlockIG(id,quiet){if(!IG_J.concat(IG_N).some(p=>p.id===id)) return; /* v111：存在しない投稿（削除済み）は静かに素通り */ if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('Instagramに新しい投稿が解放されました（ホームの「Instagram」）');}}
+function unlockIG(id,quiet){if(!IG_J.concat(IG_N,IG_B,IG_S).some(p=>p.id===id)) return; /* v111：存在しない投稿（削除済み）は静かに素通り */ if(!S.igs.includes(id)){S.igs.push(id); if(!quiet) toast('Instagramに新しい投稿が解放されました（ホームの「Instagram」）');}}
 function applyItem(it,quiet){
  switch(it.k){
   case 'date': addDate(it.v,it.cal); if(typeof it.cal==='number') S.calU=Math.max(S.calU,it.cal); if(typeof it.cal==='number'&&typeof setAmb==='function') setAmb(it.cal); if(!quiet&&typeof it.cal==='number'&&typeof showNoise==='function') showNoise(it.cal); break;
@@ -2304,10 +2313,16 @@ let igNTab='grid'; /* v67：なお側プロフィールのタブ（grid＝投稿
 /* ================= v81 : IGフィード／コメントシート／既読リング =================
    姉妹作（Tinder版）の作り込みから機構ごと移植：ホーム＝フィード、コメントはシートで開いて
    自分（nao_sculpt）でも投稿できる、投稿カードの配線は詳細とフィードで共通化 */
-const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',gallery:'1時間前',hands:'3時間前',atelier2:'4時間前',n1:'1週間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前',nightlab:'6時間前',greenhouse:'2時間前',n18:'5時間前',n19:'9時間前',n20:'3時間前',n21:'5日前',n22:'7時間前',n23:'4時間前'};
+const IG_AGO={atelier:'2時間前',jaeon2:'5時間前',jaeon1:'1日前',butterfly:'2日前',bar:'3日前',jaeon3:'4時間前',rain:'12時間前',army:'たった今',enlist:'たった今',wheel:'6時間前',gallery:'1時間前',hands:'3時間前',atelier2:'4時間前',n1:'1週間前',n4:'3日前',n5:'4日前',walk:'3日前',pottery:'8時間前',statue:'2時間前',n6:'2日前',n7:'4日前',n8:'5時間前',stairs:'7時間前',n9:'6日前',n10:'9時間前',sunset:'11時間前',n11:'10時間前',n12:'14時間前',store:'15時間前',n13:'13時間前',n14:'3時間前',n15:'4時間前',n16:'6日前',summer:'5時間前',n17:'16時間前',nightlab:'6時間前',greenhouse:'2時間前',n18:'5時間前',n19:'9時間前',n20:'3時間前',n21:'5日前',n22:'7時間前',n23:'4時間前',bitna1:'3時間前',bitna2:'5時間前',sola1:'4時間前',sola2:'6時間前'};
 let igTab='feed';
 let igFeedY=0, igFeedHold=false; /* v88：フィードのスクロール位置保持（実物どおり、詳細・プロフィール・ストーリーから戻っても元の位置） */
 (function(){ const b=$('#ig-body'); if(b) b.addEventListener('scroll',()=>{ if(igTab==='feed'&&!igFeedHold) igFeedY=b.scrollTop; },{passive:true}); })();
+const IG_POOLS={j:IG_J,n:IG_N,b:IG_B,s:IG_S};
+const IG_UNAME={j:'park_jaeon.sculpt',n:'nao_sculpt',b:'b1nna_',s:'s0l_a'};
+const IG_FOLKEY={j:'igFolJ',b:'igFolB',s:'igFolS'};
+let folTarget='j';
+function igPool(o){ return IG_POOLS[o]||IG_N; }
+function igOwnerOf(id){ for(const k in IG_POOLS){ if(IG_POOLS[k].some(p=>p.id===id)) return k; } return 'n'; }
 const IG_IC={
  heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
  heartBig:'<svg width="92" height="92" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
@@ -2337,9 +2352,9 @@ function storyKey(s){ return s.user+'#'+s.unlock+'#'+s.img; }
 function storyRingCls(user){ const list=STORIES.filter(s=>s.user===user&&S.calU>=s.unlock); if(!list.length) return ' none'; /* v133：ストーリーが無いユーザーは実物どおりリング自体を付けない（グレーの既読リングは「見たストーリーがある」意味になるため） */ const seen=Array.isArray(S.storySeen)?S.storySeen:[]; return list.every(s=>seen.includes(storyKey(s)))?' seen':''; }
 function igStoriesRowHTML(){ const SUBAR=[['nao_sculpt','assets/nao-avatar-gen.jpg'],['park_jaeon',cav()],['b1nna_','assets/av-bitna-gen2.jpg'],['s0l_a','assets/av-sola-gen2.jpg']]; return '<div class="ig-stories">'+SUBAR.map(s=>{ const has=STORIES.some(x=>x.user===s[0]&&S.calU>=x.unlock); const plus=(s[0]==='nao_sculpt'&&!has)?'<span class="splus">+</span>':''; return '<button class="story" data-suser="'+s[0]+'"><span class="ring'+storyRingCls(s[0])+'"><img src="'+s[1]+'">'+plus+'</span>'+s[0]+'</button>'; }).join('')+'</div>'; } /* v84：実物どおり自分のストーリーを先頭に置き、未投稿の間は＋バッジを付ける */
 function wireStoriesRow(root){ root.querySelectorAll('[data-suser]').forEach(b=>b.addEventListener('click',()=>{ if(STORIES.some(x=>x.user===b.dataset.suser&&S.calU>=x.unlock)) openStory(b.dataset.suser); else toast(b.dataset.suser==='nao_sculpt'?'（ストーリーの追加は演出用です）':'このユーザーのストーリーは、物語の進行で追加されます'); })); }
-function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':'nao_sculpt'):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
+function syncIgChrome(){ document.querySelectorAll('[data-ignav]').forEach(b=>{ const k=b.dataset.ignav; b.classList.toggle('on',(k==='home'&&igTab==='feed')||(k==='prof'&&igTab==='prof')||(k==='search'&&igTab==='search')); }); const logo=document.querySelector('.ig-logo'); if(logo){ const un=igTab==='prof'; logo.textContent=un?(igWho==='j'?'park_jaeon':(IG_UNAME[igWho]||'nao_sculpt')):'Instagram'; logo.classList.toggle('uname',un); } } /* v82：プロフィールでは実物どおりヘッダーにユーザー名を表示（フィードではロゴに戻る） */
 function igPostHTML(p,owner){
- const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : {img:'assets/nao-avatar-gen.jpg',name:'nao_sculpt'};
+ const pr= owner==='j' ? {img:cav(),name:'park_jaeon.sculpt'} : owner==='b' ? {img:'assets/av-bitna-gen2.jpg',name:'b1nna_'} : owner==='s' ? {img:'assets/av-sola-gen2.jpg',name:'s0l_a'} : {img:'assets/nao-avatar-gen.jpg',name:'nao_sculpt'};
  const allCm=igAllCm(p);
  const base=igBaseLikes(p);
  const liked0=S.igLikes.includes(p.id), saved0=S.igSaves.includes(p.id);
@@ -2382,11 +2397,11 @@ function renderIGFeed(){
  if(!Array.isArray(S.igSaves)) S.igSaves=[];
  syncIgChrome();
  let h=igStoriesRowHTML();
- const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)).sort((a,b)=>igAgeMin(a.p)-igAgeMin(b.p));
+ const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'})),IG_B.map(p=>({p:p,o:'b'})),IG_S.map(p=>({p:p,o:'s'}))).filter(x=>igPostVis(x.p)).sort((a,b)=>igAgeMin(a.p)-igAgeMin(b.p));
  h+='<div class="ig-feed">'+posts.map(x=>igPostHTML(x.p,x.o)).join('')+'</div>';
  body.innerHTML=h; if(window.__casc)__casc(body,'igfeed',body.querySelectorAll('.ig-post')); igFeedHold=true; body.scrollTop=igFeedY; requestAnimationFrame(()=>{ body.scrollTop=igFeedY; igFeedHold=false; }); /* v88：スクロール位置を復元 */
  wireStoriesRow(body);
- body.querySelectorAll('.ig-feed .ig-post').forEach(dp=>{ const pool=dp.dataset.owner==='j'?IG_J:IG_N; const p=pool.find(x=>x.id===dp.dataset.pid); if(p) igWireCard(dp,p,dp.dataset.owner,true); });
+ body.querySelectorAll('.ig-feed .ig-post').forEach(dp=>{ const pool=igPool(dp.dataset.owner); const p=pool.find(x=>x.id===dp.dataset.pid); if(p) igWireCard(dp,p,dp.dataset.owner,true); });
 }
 /* コメントシート：実物の作法どおり下からせり上がり、全コメント＋自分の投稿＋コメントへのいいね */
 let cmPost=null, cmOwner='j';
@@ -2422,14 +2437,14 @@ sheetDrag($('#ppl-sheet'),$('#ppl-sheet .ppl-panel'),[$('#ppl-sheet .cm-grab'),$
 $('#cm-bg').addEventListener('click',closeCmSheet);
 $('#ppl-bg').addEventListener('click',closePplSheet);
 $('#act-bg').addEventListener('click',closeActSheet);
-document.querySelectorAll('#act-sheet [data-act]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.act; const p=actPost; closeActSheet(); if(k==='share'){ if(p) openShareSheet(p); } else if(k==='about'&&p){ const isJ=IG_J.some(x=>x.id===p.id); const nm=isJ?'park_jaeon.sculpt':'nao_sculpt'; const lk=(typeof igBaseLikes==='function'?igBaseLikes(p):0)+(S.igLikes.includes(p.id)?1:0); iosAlert('この投稿について',nm+'\n投稿：'+igAgoDisp(p)+' ・ いいね！'+lk.toLocaleString('en-US')+'件','閉じる',null); } })); /* v87: 「この投稿について」は実物どおり投稿情報を出す */
+document.querySelectorAll('#act-sheet [data-act]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.act; const p=actPost; closeActSheet(); if(k==='share'){ if(p) openShareSheet(p); } else if(k==='about'&&p){ const nm=IG_UNAME[igOwnerOf(p.id)]||'nao_sculpt'; const lk=(typeof igBaseLikes==='function'?igBaseLikes(p):0)+(S.igLikes.includes(p.id)?1:0); iosAlert('この投稿について',nm+'\n投稿：'+igAgoDisp(p)+' ・ いいね！'+lk.toLocaleString('en-US')+'件','閉じる',null); } })); /* v87: 「この投稿について」は実物どおり投稿情報を出す */
 $('#cm-send').addEventListener('click',sendCm);
 function updCmSend(){ const b=$('#cm-send'), i=$('#cm-in'); if(b) b.classList.toggle('off',!(i&&i.value.trim())); } /* v92：実物IGの作法どおり、空欄の間は投稿ボタンを淡くする */
 $('#cm-in').addEventListener('input',updCmSend);
 $('#cm-in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.isComposing) sendCm(); });
 /* v83：人の一覧シート（いいねした人／フォロワー／フォロー中）。構成は作中に登場するアカウントのみで、新規の人物名は作らない */
 const PPL_D={'park_jaeon.sculpt':'パク・ジェオン','nao_sculpt':'なお','b1nna_':'オ・ビンナ','s0l_a':'ユン・ソルア'};
-function pplRow(u){ const av=igCmAv(u); const who=u==='park_jaeon.sculpt'?'j':u==='nao_sculpt'?'n':null; return '<button class="ppl-row" data-ppl="'+u+'" data-who="'+(who||'')+'">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(u.charAt(0).toUpperCase())+'</span>')+'<span class="ppl-tx"><b>'+esc(u)+'</b><span>'+esc(PPL_D[u]||'')+'</span></span></button>'; }
+function pplRow(u){ const av=igCmAv(u); const who=u==='park_jaeon.sculpt'?'j':u==='nao_sculpt'?'n':u==='b1nna_'?'b':u==='s0l_a'?'s':null; return '<button class="ppl-row" data-ppl="'+u+'" data-who="'+(who||'')+'">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(u.charAt(0).toUpperCase())+'</span>')+'<span class="ppl-tx"><b>'+esc(u)+'</b><span>'+esc(PPL_D[u]||'')+'</span></span></button>'; }
 function openPplSheet(title,rows,foot){ const sh=$('#ppl-sheet'); if(!sh) return; $('#ppl-title').textContent=title; $('#ppl-list').innerHTML=rows+(foot?'<div class="ppl-foot">'+foot+'</div>':''); sh.classList.add('on'); sh.querySelectorAll('[data-ppl]').forEach(b=>b.addEventListener('click',()=>{ const w=b.dataset.who; closePplSheet(); if(w){ igTab='prof'; igWho=w; igNTab='grid'; showView('v-ig'); renderIG(); } else toast('このアカウントのプロフィールは、物語の中で表示されます'); })); }
 function closePplSheet(){ const sh=$('#ppl-sheet'); if(sh) sh.classList.remove('on'); }
 /* v86：フォロー解除の確認シート（iOS実物の作法） */
@@ -2437,27 +2452,33 @@ function openFolSheet(){ const sh=$('#fol-sheet'); if(sh) sh.classList.add('on')
 function closeFolSheet(){ const sh=$('#fol-sheet'); if(sh) sh.classList.remove('on'); }
 $('#fol-bg').addEventListener('click',closeFolSheet);
 $('#fol-cancel').addEventListener('click',closeFolSheet);
-$('#fol-unfollow').addEventListener('click',()=>{ S.igFolJ=false; save(); if(typeof vib==='function') vib(8); closeFolSheet(); renderIG(); });
-function openLikers(p,owner){ const ownerU=owner==='j'?'park_jaeon.sculpt':'nao_sculpt'; const norm=u=>u==='park_jaeon'?'park_jaeon.sculpt':u; const seen=[]; igAllCm(p).forEach(c=>{ const u=norm(c[0]); if(u!==ownerU&&!seen.includes(u)) seen.push(u); }); let list=seen.slice(0,6); const liked=S.igLikes.includes(p.id); if(liked) list=['nao_sculpt'].concat(list.filter(u=>u!=='nao_sculpt')); const total=igBaseLikes(p)+(liked?1:0); const rest=total-list.length; openPplSheet('いいね！'+total.toLocaleString('en-US')+'件', list.length?list.map(pplRow).join(''):'<div class="cm-empty">まだいいねがありません</div>', rest>0?'ほか '+rest.toLocaleString('en-US')+' 人':''); }
+$('#fol-unfollow').addEventListener('click',()=>{ const fk=IG_FOLKEY[folTarget]; if(fk) S[fk]=false; save(); if(typeof vib==='function') vib(8); closeFolSheet(); renderIG(); });
+function openLikers(p,owner){ const ownerU=IG_UNAME[owner]||'nao_sculpt'; const norm=u=>u==='park_jaeon'?'park_jaeon.sculpt':u; const seen=[]; igAllCm(p).forEach(c=>{ const u=norm(c[0]); if(u!==ownerU&&!seen.includes(u)) seen.push(u); }); let list=seen.slice(0,6); const liked=S.igLikes.includes(p.id); if(liked) list=['nao_sculpt'].concat(list.filter(u=>u!=='nao_sculpt')); const total=igBaseLikes(p)+(liked?1:0); const rest=total-list.length; openPplSheet('いいね！'+total.toLocaleString('en-US')+'件', list.length?list.map(pplRow).join(''):'<div class="cm-empty">まだいいねがありません</div>', rest>0?'ほか '+rest.toLocaleString('en-US')+' 人':''); }
 /* v84：投稿ヘッダーの「…」から開くアクションシート */
 let actPost=null;
 function openActSheet(p){ actPost=p; const s=$('#act-sheet'); if(s) s.classList.add('on'); }
 function closeActSheet(){ const s=$('#act-sheet'); if(s) s.classList.remove('on'); actPost=null; }
-function openFollowList(kind,isJ,prof){ const me=isJ?'park_jaeon.sculpt':'nao_sculpt'; const others=['nao_sculpt','b1nna_','s0l_a','park_jaeon.sculpt'].filter(u=>u!==me); openPplSheet((kind==='fol'?'フォロワー ':'フォロー中 ')+(kind==='fol'?prof.fol:prof.ing) /* v147：'86' 固定だった件数を prof 側に単一化（ジェオンは 74） */, others.map(pplRow).join(''), ''); }
+function openFollowList(kind,me,prof){ const others=['nao_sculpt','b1nna_','s0l_a','park_jaeon.sculpt'].filter(u=>u!==me); openPplSheet((kind==='fol'?'フォロワー ':'フォロー中 ')+(kind==='fol'?prof.fol:prof.ing) /* v147：'86' 固定だった件数を prof 側に単一化（ジェオンは 74） */, others.map(pplRow).join(''), ''); }
 function renderIG(){
  syncIgChrome();
  const body=$('#ig-body');
  if(!Array.isArray(S.igLikes)) S.igLikes=[]; /* v67：旧セーブ・破損値への防御（既定は S の初期値リテラル側） */
  if(!Array.isArray(S.igSaves)) S.igSaves=[];
  const isJ=igWho==='j';
- const posts=isJ?IG_J:IG_N;
+ const isN=igWho==='n';
+ const folKey=IG_FOLKEY[igWho]||null;
+ const posts=igPool(igWho);
  const vis=p=>S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock);
  const unlocked=posts.filter(vis);
  const locked=posts.length-unlocked.length;
  const prof=isJ
   ?{img:cav(),name:'park_jaeon.sculpt',bio:'홍서대 조소과 2학년\n작업 / 나비 / 가끔',cat:'아티스트',ing:'74',fol:(1204+S.calU*37+(S.calU>=8?260:0)+(S.calU>=11?180:0)).toLocaleString('en-US')}
+  :igWho==='b'
+  ?{img:'assets/av-bitna-gen2.jpg',name:'b1nna_',bio:'홍서대 조소과\n눈치 100단 / 다 보인다',cat:'아티스트',ing:'214',fol:(968+S.calU*8).toLocaleString('en-US')}
+  :igWho==='s'
+  ?{img:'assets/av-sola-gen2.jpg',name:'s0l_a',bio:'홍서대 조소과\n카페, 같은 자리',cat:'아티스트',ing:'98',fol:(623+S.calU*5).toLocaleString('en-US')}
   :{img:'assets/nao-avatar-gen.jpg',name:'nao_sculpt',bio:'홍서대 조소과 4학년｜卒業制作中\nなお',ing:'86',fol:(342+S.calU*6+(S.calU>=11?45:0)).toLocaleString('en-US')};
- if(isJ&&S.igFolJ===false) prof.fol=(parseInt(prof.fol.replace(/,/g,''),10)-1).toLocaleString('en-US'); /* v86：フォロー解除中は実物どおりフォロワー数が1少ない表示 */
+ if(folKey&&S[folKey]===false) prof.fol=(parseInt(prof.fol.replace(/,/g,''),10)-1).toLocaleString('en-US'); /* v86：フォロー解除中は実物どおりフォロワー数が1少ない表示 */
  const IC={
   heart:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
   heartBig:'<svg width="92" height="92" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>',
@@ -2466,21 +2487,21 @@ function renderIG(){
   bmk:'<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="1.7"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z" stroke-linejoin="round"/></svg>',
   grid:'<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7.6" height="7.6"/><rect x="13.4" y="3" width="7.6" height="7.6"/><rect x="3" y="13.4" width="7.6" height="7.6"/><rect x="13.4" y="13.4" width="7.6" height="7.6"/></svg>'};
  let h=''; /* v82：プロフィールにフィードのストーリートレイは出さない（実物のプロフィール構成に合わせる。トレイと再生機構はフィード側に存置） */
- h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>'+prof.ing+'</b>フォロー中</span></div></div><div class="ig-bio"><b>'+(isJ?prof.name:esc(profN().name))+'</b>'+(prof.cat?'<br><span class="ig-cat">'+prof.cat+'</span>':'')+'<br>'+(isJ?prof.bio:esc(profN().bio)).replace(/\n/g,'<br>')+'</div>'; /* v95：自分のプロフィールは編集内容（名前・自己紹介）を表示 */
- h+= isJ ? '<div class="ig-folbtn"><span class="'+(S.igFolJ===false?'':'ghost')+'" data-gf="follow">'+(S.igFolJ===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
- const hls=(typeof igHighlights==='function')?igHighlights(isJ?'park_jaeon':'nao_sculpt'):[]; /* v93：ハイライト行（解放済みストーリーから構成） */
+ h+='<div class="ig-prof"><span class="pring"><img src="'+prof.img+'"></span><div class="ig-stats"><span><b>'+unlocked.length+'</b>投稿</span><span data-stat="fol"><b>'+prof.fol+'</b>フォロワー</span><span data-stat="ing"><b>'+prof.ing+'</b>フォロー中</span></div></div><div class="ig-bio"><b>'+(isN?esc(profN().name):prof.name)+'</b>'+(prof.cat?'<br><span class="ig-cat">'+prof.cat+'</span>':'')+'<br>'+(isN?esc(profN().bio):prof.bio).replace(/\n/g,'<br>')+'</div>'; /* v95：自分のプロフィールは編集内容（名前・自己紹介）を表示 */
+ h+= folKey ? '<div class="ig-folbtn"><span class="'+(S[folKey]===false?'':'ghost')+'" data-gf="follow">'+(S[folKey]===false?'フォローする':'フォロー中')+'</span><span class="ghost" data-gf="dm">メッセージ</span></div>' : '<div class="ig-folbtn"><span class="ghost" data-gf="edit">プロフィールを編集</span></div>';
+ const hls=(typeof igHighlights==='function')?igHighlights(igWho==='j'?'park_jaeon':(IG_UNAME[igWho]||'nao_sculpt')):[]; /* v93：ハイライト行（解放済みストーリーから構成） */
  if(hls.length) h+='<div class="ig-hls">'+hls.map((g,i)=>'<button class="ig-hl" data-hl="'+i+'"><span class="hl-ring'+(g.allSeen?' seen':'')+'"><img src="'+g.cover+'" alt=""></span><span class="hl-t">'+esc(g.t)+'</span></button>').join('')+'</div>';
- if(!isJ) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
- if(isJ||igNTab==='grid'){
+ if(isN) h+='<div class="ig-ptabs"><button data-ptab="grid"'+(igNTab==='grid'?' class="on"':'')+'>'+IC.grid+'</button><button data-ptab="saved"'+(igNTab==='saved'?' class="on"':'')+'>'+IC.bmk+'</button></div>'; /* v67：実物同様、保存済みコレクションは自分のプロフィール側にだけ出す */
+ if(!isN||igNTab==='grid'){
   h+='<div class="ig-grid">'+unlocked.map(p=>'<button data-post="'+p.id+'"><img loading="lazy" decoding="async" src="'+p.img+'">'+((Array.isArray(p.imgs)&&p.imgs.length>1)?'<span class="ig-multi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="13" height="13" rx="2.5" fill="rgba(0,0,0,.25)"/><path d="M16 8V5.5A2.5 2.5 0 0 0 13.5 3H5.5A2.5 2.5 0 0 0 3 5.5v8A2.5 2.5 0 0 0 5.5 16H8"/></svg></span>':'')+'</button>').join('')+(locked?'<button disabled><span class="lk"><svg class="icx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> 物語で解放</span></button>':'')+'</div>';
  }else{
-  const sv=S.igSaves.slice().reverse().map(id=>{ const pj=IG_J.find(x=>x.id===id); if(pj&&vis(pj)) return {p:pj,o:'j'}; const pn=IG_N.find(x=>x.id===id); if(pn&&vis(pn)) return {p:pn,o:'n'}; return null; }).filter(Boolean);
+  const sv=S.igSaves.slice().reverse().map(id=>{ const o=igOwnerOf(id); const p=igPool(o).find(x=>x.id===id); if(p&&vis(p)) return {p:p,o:o}; return null; }).filter(Boolean);
   h+= sv.length ? '<div class="ig-grid">'+sv.map(x=>'<button data-spost="'+x.p.id+'" data-owner="'+x.o+'"><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>' : '<div class="es-box"><div class="es-ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M6.5 3.5h11V21L12 16.8 6.5 21z"/></svg></div><div class="es-h">保存した投稿はまだありません</div><div class="es-s">投稿のブックマークボタンから保存できます</div></div>'; /* v145：空状態を共通形に統一 */
  }
  h+='<div id="ig-detail"></div>';
  body.innerHTML=h;
- body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,isJ,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
- body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ if(S.igFolJ===false){ S.igFolJ=true; save(); if(typeof vib==='function') vib(10); renderIG(); } else openFolSheet(); return; } if(k==='edit'){ if(typeof openProfEdit==='function') openProfEdit(); return; } toast('（メッセージはカカオトークのトークで進みます）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
+ body.querySelectorAll('[data-stat]').forEach(sp=>sp.addEventListener('click',()=>openFollowList(sp.dataset.stat,prof.name,prof))); /* v83：フォロワー／フォロー中タップで一覧シート */
+ body.querySelectorAll('[data-gf]').forEach(sp=>sp.addEventListener('click',()=>{ const k=sp.dataset.gf; if(k==='follow'){ const fk=IG_FOLKEY[igWho]; if(fk){ if(S[fk]===false){ S[fk]=true; save(); if(typeof vib==='function') vib(10); renderIG(); } else { folTarget=igWho; openFolSheet(); } } return; } if(k==='edit'){ if(typeof openProfEdit==='function') openProfEdit(); return; } toast('（メッセージはカカオトークのトークで進みます）'); })); /* v86：フォロー中タップは実物どおり解除確認シート、フォローするタップで即フォロー（状態は保存される） */ /* v50：ボタン様式の3件が完全無反応だったため、アプリ内の作法（押せる見た目には案内トースト）に合わせて追加 */
  body.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>{ igNTab=b.dataset.ptab; renderIG(); }));
  body.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>{ const g=hls[+b.dataset.hl]; if(g&&g.list.length&&typeof openStoryHL==='function') openStoryHL(g.list); })); /* v93：ハイライトはそのグループだけを再生 */
  /* v67：投稿詳細。いいね・保存は実物挙動（ハート切替／画像ダブルタップはいいね化のみ・取り消し不可、表示数は基礎値への+1加算のみで基礎計算は不変） */
@@ -2491,7 +2512,7 @@ function renderIG(){
    const sc=()=>{ body.scrollTop+=dp.getBoundingClientRect().top-body.getBoundingClientRect().top-4; }; sc(); const di=dp.querySelector('.ig-imgwrap img'); if(di&&!di.complete) di.addEventListener('load',sc);
  }
  body.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{ const p=posts.find(x=>x.id===b.dataset.post); openDetail(p,igWho); }));
- body.querySelectorAll('[data-spost]').forEach(b=>b.addEventListener('click',()=>{ const o=b.dataset.owner; const p=(o==='j'?IG_J:IG_N).find(x=>x.id===b.dataset.spost); openDetail(p,o); }));
+ body.querySelectorAll('[data-spost]').forEach(b=>b.addEventListener('click',()=>{ const o=b.dataset.owner; const p=igPool(o).find(x=>x.id===b.dataset.spost); openDetail(p,o); }));
 }
 /* v82：アカウント切替タブバー廃止に伴い、その配線も削除（プロフィール遷移はフィードの投稿ヘッダー／検索／下部ナビに一本化） */
 
@@ -3400,7 +3421,7 @@ function openAlbumPick(){
  const g=$('#ap-grid'); if(!g) return;
  const imgs=[]; const seen=new Set();
  LIBPHOTOS.filter(x=>S.calU>=x.u).forEach(x=>{ if(!seen.has(x.img)){ seen.add(x.img); imgs.push(x.img); } });
- IG_J.concat(IG_N).forEach(p=>{ const vis=S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); if(vis&&!seen.has(p.img)){ seen.add(p.img); imgs.push(p.img); } });
+ IG_J.concat(IG_N,IG_B,IG_S).forEach(p=>{ const vis=S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); if(vis&&!seen.has(p.img)){ seen.add(p.img); imgs.push(p.img); } });
  g.innerHTML=imgs.map(s=>'<button data-ap="'+s+'"><img loading="lazy" decoding="async" src="'+s+'"></button>').join('')||'<div class="es-box" style="grid-column:1/-1"><div class="es-ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M4.5 18.5 10 13l3.5 3.5L17 13l2.5 2.5"/></svg></div><div class="es-h">まだ写真がありません</div><div class="es-s">物語の中で解放された写真が、ここから送れます</div></div>'; /* v145：空状態を共通形に統一 */
  g.querySelectorAll('[data-ap]').forEach(b=>b.addEventListener('click',()=>{
    const img=b.dataset.ap;
@@ -3431,8 +3452,8 @@ function storyResume(){ const st=storyState; if(!st.paused) return; st.paused=fa
 const IGS_ACCTS=[
  {u:'park_jaeon.sculpt',d:'パク・ジェオン',img:'assets/av-jaeon-gen.jpg',who:'j'},
  {u:'nao_sculpt',d:'なお',img:'assets/nao-avatar-gen.jpg',who:'n'},
- {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna-gen2.jpg',who:null,min:1},
- {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola-gen2.jpg',who:null,min:5}
+ {u:'b1nna_',d:'オ・ビンナ',img:'assets/av-bitna-gen2.jpg',who:'b',min:1},
+ {u:'s0l_a',d:'ユン・ソルア',img:'assets/av-sola-gen2.jpg',who:'s',min:5}
 ];
 function igPostVis(p){ return S.igs.includes(p.id)||p.unlock===0||(p.unlock>0&&p.unlock<90&&S.calU>=p.unlock); }
 function renderIGSearch(){
@@ -3441,11 +3462,11 @@ function renderIGSearch(){
  const accts=IGS_ACCTS.filter(a=>S.chap>=(a.min||0)&&(!q||a.u.toLowerCase().includes(q)||a.d.includes(q))); /* v75：未登場の人物は検索に出さない（スレッド／友達一覧の解放条件と一致） */
  let h='';
  if(accts.length) h+='<div class="igs-sec">アカウント</div>'+accts.map(a=>'<button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button>').join('');
- if(q){ const hits=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p)&&x.p.cap.toLowerCase().includes(q)); if(hits.length) h+='<div class="igs-sec">投稿</div><div class="ig-grid">'+hits.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>'; } /* v83：実物どおり、キーワードでは投稿（キャプション）も検索対象にする */
+ if(q){ const hits=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'})),IG_B.map(p=>({p:p,o:'b'})),IG_S.map(p=>({p:p,o:'s'}))).filter(x=>igPostVis(x.p)&&x.p.cap.toLowerCase().includes(q)); if(hits.length) h+='<div class="igs-sec">投稿</div><div class="ig-grid">'+hits.map(x=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>'; } /* v83：実物どおり、キーワードでは投稿（キャプション）も検索対象にする */
  if(!q){
    const rec=(Array.isArray(S.igRecent)?S.igRecent:[]).map(u=>IGS_ACCTS.find(a=>a.u===u)).filter(a=>a&&S.chap>=(a.min||0)); /* v88：最近の検索（実物の作法。未登場のアカウントは出さない） */
    if(rec.length) h+='<div class="igs-sec">最近の検索<button class="igs-clear" id="igs-clear">すべて消去</button></div>'+rec.map(a=>'<div class="igs-acctrow"><button class="igs-acct" data-acct="'+a.u+'"><img src="'+a.img+'"><span><span class="un">'+a.u+'</span><br><span class="dn">'+a.d+'</span></span></button><button class="igs-x" data-rx="'+a.u+'" aria-label="履歴から削除">✕</button></div>').join('');
-   const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'}))).filter(x=>igPostVis(x.p));
+   const posts=IG_J.map(p=>({p:p,o:'j'})).concat(IG_N.map(p=>({p:p,o:'n'})),IG_B.map(p=>({p:p,o:'b'})),IG_S.map(p=>({p:p,o:'s'}))).filter(x=>igPostVis(x.p));
    if(posts.length) h+='<div class="igs-sec">探索</div><div class="ig-grid xp">'+posts.map((x,i)=>'<button data-xpost="'+x.p.id+'" data-owner="'+x.o+'"'+(i%5===0?' class="big"':'')+'><img loading="lazy" decoding="async" src="'+x.p.img+'"></button>').join('')+'</div>';
  }
  if(!h) h='<div class="es-box"><div class="es-ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></div><div class="es-h">「'+esc(q)+'」の結果はありません</div><div class="es-s">別のキーワードで検索してみてください</div></div>'; /* v145：空状態を共通形（アイコン＋見出し＋補足）に統一 */
@@ -3580,7 +3601,7 @@ function renderSharp(){
  const b=$('#sharp-body'); if(!b) return;
  const vis=NEWS.filter(newsVis);
  const list=(kshKey?vis.filter(a=>(a.title+' '+a.sub+' '+a.cat).indexOf(kshKey)>=0):vis.slice().sort((x,y)=>y.hot-x.hot)).slice(0,6);
- const igs=(typeof IG_J!=='undefined'?IG_J.concat(IG_N):[]).filter(p=>S.calU>=p.unlock).slice(0,6);
+ const igs=(typeof IG_J!=='undefined'?IG_J.concat(IG_N,IG_B,IG_S):[]).filter(p=>S.calU>=p.unlock).slice(0,6);
  b.innerHTML='<div class="ksh"><div class="ksh-search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg><input id="ksh-q" type="text" placeholder="#검색（タグ・ニュース検索）" autocomplete="off"></div>'
  +'<div class="ksh-sec">실시간 트렌드</div><div class="ksh-tags">'+KSH_TAGS.map((t,i)=>'<button class="ksh-tag'+(kshKey===t[1]?' on':'')+'" data-ksh="'+esc(t[1])+'"><span class="no">'+(i+1)+'</span>'+esc(t[0])+'</button>').join('')+'</div>'
  +'<div class="ksh-sec">지금 많이 보는 뉴스</div>'+(list.length?list.map(a=>'<button class="ksh-card" data-kshnw="'+a.id+'"><span class="tx"><span class="cat">'+esc(a.cat)+'</span><span class="ti">'+esc(a.title)+'</span><span class="meta">'+esc(a.press)+' · '+(a.hot*137+S.calU*31)+'회</span></span>'+(a.th?'<img loading="lazy" decoding="async" src="'+a.th+'" alt="">':'')+'</button>').join(''):'<p class="locknote">아직 이 태그의 뉴스가 없습니다（このタグのニュースはまだありません）</p>')
