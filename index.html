@@ -1250,7 +1250,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v157：ビンナとソルアにも、自分のInstagram投稿が付きました（各2件・生成写真）。2人のプロフィールも開けるようになり、フォローの切り替え・保存・コメントも他のアカウントと同じに動きます。物語の筋・数値・既存の解放条件は変えていません。</p>
+<p class="src">v158：効果音の総点検をしました。送信・受信・通知などの音は以前から入っていましたが、無音だった「いいね」に専用のポップ音を付けました（Instagramの投稿・ダブルタップ・コメント、ニュースのコメント、ストーリーのハート）。音のオン・オフと音量は、これまで通り設定の「効果音」で変えられます。物語の筋・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
@@ -2368,9 +2368,9 @@ function igWireCard(dp,p,owner,inFeed){
  const base=igBaseLikes(p);
  const setLiked=v=>{ const has=S.igLikes.includes(p.id); if(v&&!has){ S.igLikes.push(p.id); save(); } if(!v&&has){ S.igLikes=S.igLikes.filter(x=>x!==p.id); save(); } likeBtn.classList.toggle('liked',v); if(v&&typeof vib==='function') vib(10); lkEl.textContent='いいね！'+(base+(v?1:0)).toLocaleString('en-US')+'件'; };
  lkEl.addEventListener('click',()=>openLikers(p,owner)); /* v83：実物どおり、いいね数タップで「いいねした人」が開く */
- likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
+ likeBtn.addEventListener('click',()=>{ const v=!S.igLikes.includes(p.id); setLiked(v); if(v){ if(typeof sfxPlay==='function') sfxPlay('like'); likeBtn.classList.remove('pop'); void likeBtn.offsetWidth; likeBtn.classList.add('pop'); } });
  let lastTap=0, swipeAt=0; /* v93：スワイプ直後のクリックはダブルタップ判定から除外 */
- const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)) setLiked(true); big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
+ const dbl=()=>{ lastTap=0; if(!S.igLikes.includes(p.id)){ setLiked(true); if(typeof sfxPlay==='function') sfxPlay('like'); } big.classList.remove('show'); void big.offsetWidth; big.classList.add('show'); };
  imgW.addEventListener('dblclick',dbl);
  imgW.addEventListener('click',()=>{ if(Date.now()-swipeAt<350) return; const t=Date.now(); if(t-lastTap<350) dbl(); else lastTap=t; });
  const track=dp.querySelector('.ig-car-track'); /* v121：参照元（Tinder版）のスクロールスナップ機構へ置き換え。旧transformドラッグ機構は廃止 */
@@ -2416,7 +2416,7 @@ function renderCmList(){
  const all=story.concat(mine);
  if(!all.length){ list.innerHTML='<div class="es-box"><div class="es-ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.5-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg></div><div class="es-h">まだコメントがありません</div><div class="es-s">最初のコメントを書いてみましょう</div></div>'; return; } /* v145：空状態を共通形に統一 */
  list.innerHTML=all.map(x=>{ const c=x.c; const av=igCmAv(c[0]); const liked=Array.isArray(S.igCmLikes)&&S.igCmLikes.includes(cmLikeKey(cmPost,c)); return '<div class="cm-row">'+(av?'<img src="'+av+'" alt="">':'<span class="cm-ava" style="background:#8e8e93">'+esc(c[0].charAt(0).toUpperCase())+'</span>')+'<div class="cm-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'<div class="cm-meta"><span>'+(x.mine?'たった今':igCmDisp(cmPost,x.late,x.li))+'</span>'+(x.mine?'':cmMetaExtra(cmPost,c,liked))+'</div></div><button class="cm-like'+(liked?' liked':'')+'" data-cmk="'+encodeURIComponent(cmLikeKey(cmPost,c))+'" aria-label="コメントにいいね"><svg viewBox="0 0 24 24" width="13" height="13" fill="'+(liked?'#ff3040':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'+''+'</button></div>'; }).join('');
- list.querySelectorAll('[data-cmk]').forEach((b,bi)=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); const liked=i<0; if(liked){ S.igCmLikes.push(k); if(typeof vib==='function') vib(8); } else S.igCmLikes.splice(i,1); save(); /* v143：実物どおりその場で更新する（従来のリスト全再描画はスクロールとタッチを中断させた） */ b.classList.toggle('liked',liked); const svg=b.querySelector('svg'); if(svg) svg.setAttribute('fill',liked?'#ff3040':'none'); if(liked){ b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); } const x=all[bi]; const row=b.closest('.cm-row'); const meta=row?row.querySelector('.cm-meta'):null; if(x&&meta&&!x.mine){ const t=meta.querySelector('span'); meta.innerHTML='<span>'+(t?t.textContent:'')+'</span>'+cmMetaExtra(cmPost,x.c,liked); bindCmReplies(meta); } }));
+ list.querySelectorAll('[data-cmk]').forEach((b,bi)=>b.addEventListener('click',()=>{ const k=decodeURIComponent(b.dataset.cmk); if(!Array.isArray(S.igCmLikes)) S.igCmLikes=[]; const i=S.igCmLikes.indexOf(k); const liked=i<0; if(liked){ S.igCmLikes.push(k); if(typeof vib==='function') vib(8); if(typeof sfxPlay==='function') sfxPlay('like'); } else S.igCmLikes.splice(i,1); save(); /* v143：実物どおりその場で更新する（従来のリスト全再描画はスクロールとタッチを中断させた） */ b.classList.toggle('liked',liked); const svg=b.querySelector('svg'); if(svg) svg.setAttribute('fill',liked?'#ff3040':'none'); if(liked){ b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); } const x=all[bi]; const row=b.closest('.cm-row'); const meta=row?row.querySelector('.cm-meta'):null; if(x&&meta&&!x.mine){ const t=meta.querySelector('span'); meta.innerHTML='<span>'+(t?t.textContent:'')+'</span>'+cmMetaExtra(cmPost,x.c,liked); bindCmReplies(meta); } }));
  if(window.__casc)__casc(list,'cm:'+(cmPost?cmPost.id:''),list.querySelectorAll('.cm-row'));
  bindCmReplies(list); /* v139：返信は実物どおりメンションを入れて入力欄へ */
 }
@@ -2837,7 +2837,7 @@ function storyStep(d){ const st=storyState; st.i+=d; if(st.i<0) st.i=0; if(st.i>
 function closeStory(){ if(storyState.timer) clearTimeout(storyState.timer); storyState.timer=null; storyState.paused=false; storyState.hl=false; const svs=$('#sv-sheet'); if(svs) svs.classList.remove('on'); const sv=$('#v-story'); if(sv) sv.classList.remove('paused'); showView('v-ig'); if(storyFrom==='feed') renderIGFeed(); else renderIG(); }
 /* v86：ストーリー下部（返信欄／ハート／紙飛行機）を実物どおり反応させる。ハートは実物のストーリーいいねとして保存される */
 (function(){ const foot=document.querySelector('.story-foot'); if(foot) foot.addEventListener('pointerdown',e=>e.stopPropagation());
- const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); if(typeof vib==='function') vib(10); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('tap'); } save(); });
+ const sh=$('#sf-heart'); if(sh) sh.addEventListener('click',e=>{ e.stopPropagation(); const cur=storyState.list[storyState.i]; if(!cur) return; if(!Array.isArray(S.storyLikes)) S.storyLikes=[]; const k=storyKey(cur); const ix=S.storyLikes.indexOf(k); if(ix>=0){ S.storyLikes.splice(ix,1); sh.classList.remove('liked'); } else { S.storyLikes.push(k); sh.classList.add('liked'); if(typeof vib==='function') vib(10); const v=$('#v-story'); if(v){ const f=document.createElement('span'); f.className='sf-float'; f.innerHTML='<svg width="54" height="54" viewBox="0 0 24 24" fill="#ff3040"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg>'; v.appendChild(f); setTimeout(()=>f.remove(),1050); } if(typeof sfxPlay==='function') sfxPlay('like'); } save(); });
  const ss=$('#sf-send'); if(ss) ss.addEventListener('click',e=>{ e.stopPropagation(); openShareSheet(null); }); /* v89：ストーリーも送信先シート */
  const si=$('#sf-in'); if(si) si.addEventListener('click',e=>{ e.stopPropagation(); toast('（返信はカカオトークのトークで進みます）'); });
 })();
@@ -3081,6 +3081,14 @@ replay(); updParams();
 updKkBadge(); /* v106：ホームのカカオアイコンバッジは実未読連動（updHomeKkBadge）に一本化し、従来の固定「1」／完了チェックの直接書き込みは廃止（ドック側も同じ集計で出す） */
 </script>
 <script>
+/* ================= v158 : いいね SE の統一 =================
+   v7 の効果音基盤（sfxPlay／sfxArmed／S.sfxOn・S.sfxVol）は既に送信・受信・通知・着信・
+   通話接続／終了・ロック解除・キーパッド・アンビエントを担っていた。本ラウンドの実測監査で
+   無音だったのは「いいね」系だけ（IGフィードのボタン／ダブルタップ、IGコメント、ニュース
+   コメント。ストーリーのハートだけ tap で鳴っていた）。波形合成の like ポップ
+   （assets/sfx/like.mp3、0.11秒・ピーク-6.4dB）を追加し、いいね系4+1箇所を全て
+   「付ける時だけ鳴る」に統一した。ストーリーの送りは実物IGどおり無音のまま。
+   新規セーブ項目なし（設定は既存の効果音トグル／効果音量を共用）。 */
 /* ================= v7 : SFX & AMBIENCE =================
    効果音と生活音。音源はすべて波形合成したオリジナル（assets/sfx/）。
    再生はユーザーのタップを起点にし（sfxArmed）、設定はセーブに保存する。
@@ -3088,8 +3096,8 @@ updKkBadge(); /* v106：ホームのカカオアイコンバッジは実未読�
 if(typeof S.sfxOn!=='boolean') S.sfxOn=true;
 if(typeof S.sfxVol!=='number'||!isFinite(S.sfxVol)) S.sfxVol=70; S.sfxVol=Math.max(0,Math.min(100,S.sfxVol)); /* v49：同上（150等では効果音・環境音・ボイスの volume 代入が例外になり全て無音化するため） */
 if(typeof S.mute!=='boolean') S.mute=false;
-const SFXF={send:'assets/sfx/send.mp3',recv:'assets/sfx/receive.mp3',tap:'assets/sfx/tap.mp3',notify:'assets/sfx/notify.mp3',connect:'assets/sfx/connect.mp3',callend:'assets/sfx/callend.mp3',unlock:'assets/sfx/unlock.mp3'};
-const SFXG={send:0.9,recv:0.9,tap:0.32,notify:0.85,connect:0.7,callend:0.7,unlock:0.5};
+const SFXF={send:'assets/sfx/send.mp3',recv:'assets/sfx/receive.mp3',tap:'assets/sfx/tap.mp3',notify:'assets/sfx/notify.mp3',connect:'assets/sfx/connect.mp3',callend:'assets/sfx/callend.mp3',unlock:'assets/sfx/unlock.mp3',like:'assets/sfx/like.mp3'};
+const SFXG={send:0.9,recv:0.9,tap:0.32,notify:0.85,connect:0.7,callend:0.7,unlock:0.5,like:0.5};
 const sfxCache={};
 let sfxArmed=false;
 document.addEventListener('pointerdown',()=>{ sfxArmed=true; });
@@ -3551,7 +3559,7 @@ function openNews(id){
  const a=NEWS.find(x=>x.id===id); if(!a) return;
  $('#newsread-body').innerHTML='<div class="nwr-cat">'+esc(a.cat)+'</div><div class="nwr-title">'+esc(a.title)+'</div><div class="nwr-meta">'+esc(a.press)+' · 입력 '+nwInput(a)+'</div>'+a.body.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div class="nwc"><div class="nwc-h">댓글 <span>'+nwCmts(a).length+'</span></div>'+nwCmts(a).map((c,i)=>'<div class="nwc-row"><div class="nwc-tx"><b>'+esc(c[0])+'</b>'+esc(c[1])+'</div><button class="nwc-like'+(Array.isArray(S.nwLikes)&&S.nwLikes.includes(a.id+':'+i)?' on':'')+'" data-nwl="'+i+'" data-n="'+c[2]+'"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.7C6 16.9 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3 7-9 10.8z"/></svg><span>'+(c[2]+((Array.isArray(S.nwLikes)&&S.nwLikes.includes(a.id+':'+i))?1:0))+'</span></button></div>').join('')+'</div>'+nwRelHTML(a)+'<div class="nwr-foot">이 기사는 게임 속 세계관의 창작 기사입니다.<br>실제 언론사·인물·사건과는 관계가 없습니다.</div>';
  $('#newsread-body').querySelectorAll('[data-nwrel]').forEach(b=>b.addEventListener('click',()=>openNews(b.dataset.nwrel))); const nb=$('#newsread-body'); if(nb) nb.scrollTop=0;
- $('#newsread-body').querySelectorAll('[data-nwl]').forEach(b=>b.addEventListener('click',()=>{ if(!Array.isArray(S.nwLikes)) S.nwLikes=[]; const key=a.id+':'+b.dataset.nwl; const ix=S.nwLikes.indexOf(key); const on=ix<0; if(on) S.nwLikes.push(key); else S.nwLikes.splice(ix,1); save(); b.classList.toggle('on',on); const sp=b.querySelector('span'); if(sp) sp.textContent=+b.dataset.n+(on?1:0); })); /* v145：ニュースのコメントいいねを S.nwLikes（記事ID:連番）へ保存する単一の情報源に寄せた。従来はDOMだけのトグルで、記事を開き直すと件数も状態も消えていた */
+ $('#newsread-body').querySelectorAll('[data-nwl]').forEach(b=>b.addEventListener('click',()=>{ if(!Array.isArray(S.nwLikes)) S.nwLikes=[]; const key=a.id+':'+b.dataset.nwl; const ix=S.nwLikes.indexOf(key); const on=ix<0; if(on){ S.nwLikes.push(key); if(typeof sfxPlay==='function') sfxPlay('like'); } else S.nwLikes.splice(ix,1); save(); b.classList.toggle('on',on); const sp=b.querySelector('span'); if(sp) sp.textContent=+b.dataset.n+(on?1:0); })); /* v145：ニュースのコメントいいねを S.nwLikes（記事ID:連番）へ保存する単一の情報源に寄せた。従来はDOMだけのトグルで、記事を開き直すと件数も状態も消えていた */
  showView('v-newsread');
 }
 const nwBack=$('#newsread-back'); if(nwBack) nwBack.addEventListener('click',()=>{ renderNews(); showView('v-news'); });
