@@ -55,12 +55,10 @@ box-shadow:0 0 0 2px #4a4d52,0 0 0 5px #17181c,0 30px 70px rgba(0,0,0,.65);margi
 button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
 /* ===== lock screen : iOS 14 ===== */
 #v-lock{background:radial-gradient(120% 60% at 78% -10%,rgba(216,180,110,.20) 0%,rgba(216,180,110,0) 55%),radial-gradient(130% 70% at 12% 108%,rgba(64,110,140,.38) 0%,rgba(64,110,140,0) 55%),linear-gradient(168deg,#1d3a52 0%,#2c2a4e 46%,#12101f 100%);color:#fff;z-index:100;cursor:pointer;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
-#v-lock .wall-butterflies{opacity:.35}
 /* v116：タイトル画面（ロック画面）の背景にキービジュアル（夜の作業室）を敷く。タイトル文字組み（明朝＋金の蝶）は不変 */
 #v-lock .lock-kv{position:absolute;inset:0;z-index:0;pointer-events:none;background:url('assets/title-keyvisual.jpg') center 30%/cover no-repeat}
 #v-lock .lock-kv::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,9,20,.52) 0%,rgba(9,9,20,.27) 34%,rgba(9,9,20,.36) 66%,rgba(7,7,16,.76) 100%)}
-#v-lock .wall-butterflies{z-index:1}
-#v-lock .lock-top,#v-lock .lock-clock,#v-lock .lock-title,#v-lock .lock-notifs,#v-lock .lock-btns,#v-lock .lock-hint{position:relative;z-index:1}
+#v-lock .lock-top,#v-lock .lock-clock,#v-lock .lock-notifs,#v-lock .lock-btns,#v-lock .lock-hint{position:relative;z-index:1}
 .lock-top{margin-top:max(52px,calc(var(--sat) + 8px));text-align:center;font-size:19px;opacity:.95}
 .lock-clock{margin-top:8px;text-align:center}
 .lock-date{font-size:16.5px;font-weight:500;letter-spacing:.01em}
@@ -746,11 +744,6 @@ img{-webkit-user-drag:none}
 .page-head h1{font-family:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:24px;font-weight:600;letter-spacing:.15em;color:#f3ecdc}
 .ph-mark{display:flex;justify-content:center;margin-bottom:8px}
 .ph-rule{width:56px;height:1px;background:linear-gradient(90deg,transparent,#c9a86a,transparent);margin:11px auto 3px}
-.lock-title{margin-top:19px;text-align:center;color:#fff;padding:0 20px}
-.lt-over{font-size:10.5px;letter-spacing:.32em;color:rgba(240,230,205,.78);font-weight:500}
-.lt-main{font-family:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:21px;font-weight:600;letter-spacing:.11em;line-height:1.55;margin-top:8px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
-.lt-rule{width:44px;height:1px;background:linear-gradient(90deg,transparent,rgba(230,205,150,.9),transparent);margin:12px auto 0}
-@media (max-height:720px){.lt-main{font-size:17px}.lock-title{margin-top:11px}.lt-rule{margin-top:8px}}
 /* ===== v77：ニュースのカテゴリタブ ===== */
 .nw-tabs{display:flex;gap:2px;padding:9px 10px 3px;overflow-x:auto;scrollbar-width:none;background:#fff}
 .nw-tabs::-webkit-scrollbar{display:none}
@@ -1100,16 +1093,10 @@ img{-webkit-user-drag:none;user-select:none}
 @keyframes kvDrift{from{transform:scale(1.03)}to{transform:scale(1.1) translate(-1.2%,1.5%)}}
 #v-lock .lock-kv::before{content:'';position:absolute;inset:0;background:radial-gradient(38% 26% at 68% 37%,rgba(255,203,120,.34) 0%,rgba(255,203,120,0) 70%);animation:kvGlow 8.5s ease-in-out infinite alternate}
 @keyframes kvGlow{from{opacity:.4}to{opacity:.95}}
-/* ロック画面の蝶：横方向への漂いを足して奥行きを出す（ホーム側は従来の flut のまま） */
-@keyframes flutLock{0%,100%{transform:translate(0,0) rotate(-7deg)}33%{transform:translate(9px,-13px) rotate(5deg)}66%{transform:translate(-7px,-5px) rotate(-2deg)}}
-#v-lock .wall-butterflies span{animation-name:flutLock;animation-duration:9.5s}
-#v-lock .wall-butterflies span:nth-child(2){animation-duration:12.5s}
-#v-lock .wall-butterflies span:nth-child(3){animation-duration:15s}
-/* ロック画面の登場：錠→時計→タイトル→通知→ボタンの順に立ち上がる */
+/* ロック画面の登場：錠→時計→通知→ボタンの順に立ち上がる */
 @keyframes lockIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 #v-lock.boot .lock-top{animation:lockIn .65s cubic-bezier(.32,.72,0,1) .02s both}
 #v-lock.boot .lock-clock{animation:lockIn .7s cubic-bezier(.32,.72,0,1) .1s both}
-#v-lock.boot .lock-title{animation:lockIn .7s cubic-bezier(.32,.72,0,1) .22s both}
 #v-lock.boot .lock-notifs{animation:lockIn .7s cubic-bezier(.32,.72,0,1) .34s both}
 #v-lock.boot .lock-btns{animation:lockIn .65s cubic-bezier(.32,.72,0,1) .46s both}
 #v-lock.boot .lock-hint{animation:lockIn .65s cubic-bezier(.32,.72,0,1) .54s both}
@@ -1140,7 +1127,7 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 .es-box .es-s{font-size:12.5px;line-height:1.75}
 @media (prefers-reduced-motion: reduce){
  #v-lock .lock-kv,#v-lock .lock-kv::before,.wid-photo img,.ig-imgwrap>img,.ig-car-track img,.ig-grid img,#albumpick .ap-grid img{animation:none !important}
- #v-lock.boot .lock-top,#v-lock.boot .lock-clock,#v-lock.boot .lock-title,#v-lock.boot .lock-notifs,#v-lock.boot .lock-btns,#v-lock.boot .lock-hint{animation:none !important}
+ #v-lock.boot .lock-top,#v-lock.boot .lock-clock,#v-lock.boot .lock-notifs,#v-lock.boot .lock-btns,#v-lock.boot .lock-hint{animation:none !important}
  .row.pop{animation:none !important}
 }
 
@@ -1236,25 +1223,45 @@ img.av,.igs-acct img,.iga-row img.th,.nwr-rel-it img{background:#e9e9ee}
 #mv-big-close{position:absolute;top:max(54px,calc(var(--sat) + 10px));right:12px;color:#fff;background:none;border:0;padding:6px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 #mv-cap{color:#fff;font-size:13.5px;padding:10px 18px max(24px,var(--sab))}
 @media (prefers-reduced-motion: reduce){ #media-view.on{animation:none !important} }
+
+/* ===== v156：デザイン刷新（姉妹作品の言語へ：すりガラスの質・金のヘアライン・カードの角と縁の統一＋ロック画面の整理）
+   タイトルの identity（明朝＋金の蝶）は不変。v148 の世代判断（アイコンに光沢を戻さない／影は単層で柔らかく）は維持し、
+   外側の影は v148 の値をそのままに、縁のヘアラインとガラスの質だけを足す。寸法・配置は変えない（v152 の CLS 対策と競合しない） ===== */
+/* ロック画面：通知カードのガラスを深く（blur 20＋saturate）、縁にヘアラインと上端のハイライト、影は単層で柔らかく */
+.lnotif{-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);box-shadow:0 10px 24px rgba(2,4,10,.30),inset 0 0 0 1px rgba(255,255,255,.10),inset 0 1px 0 rgba(255,255,255,.12)}
+.lk-btn{-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 8px 20px rgba(2,4,10,.32),inset 0 0 0 1px rgba(255,255,255,.14),inset 0 1px 0 rgba(255,255,255,.16)}
+/* ロック画面の整理（本人の実機指摘 2026-11-28）：作り物のステータスバーは実機のバーと二重になるため入口では出さない。
+   時刻は作中の時計が担い、ホーム／アプリ画面では作中スマホの時計として従来どおり残す */
+.statusbar{transition:opacity .25s ease}
+.statusbar.off{opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
+/* 題字はページ見出しの帯（金の蝶＋明朝）に一本化し、ロック側の重複題字と浮遊する蝶の装飾は撤去した（上の掃除済みCSS参照）。
+   バーが消えた分、錠の位置を詰めて積み重なりを減らす */
+#v-lock .lock-top{margin-top:max(34px,calc(var(--sat) - 2px))}
+/* ホーム：ドックのガラスに縁のヘアラインと単層の柔らかい影 */
+.dock{box-shadow:0 12px 28px rgba(2,6,16,.28),inset 0 0 0 1px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.25)}
+/* ホーム：白カード群の縁をヘアラインで締める（外側の影は v148 の単層のまま） */
+.wid-cal,.wid-wide,.wid-news{box-shadow:0 6px 18px rgba(2,6,16,.20),inset 0 0 0 1px rgba(15,20,35,.06)}
+/* BGM ウィジェット：暗いガラスを深く（blur 16＋saturate）、縁にヘアライン */
+.wid-music{-webkit-backdrop-filter:blur(16px) saturate(1.45);backdrop-filter:blur(16px) saturate(1.45);box-shadow:0 6px 18px rgba(2,6,16,.20),inset 0 0 0 1px rgba(255,255,255,.13),inset 0 1px 0 rgba(255,255,255,.10)}
+/* 設定カード：角を他のホームカード（20px）に統一し、縁を締める */
+.set-card{border-radius:20px;box-shadow:0 6px 18px rgba(2,6,16,.20),inset 0 0 0 1px rgba(15,20,35,.05)}
 </style>
 </head>
 <body>
 <div class="page-head">
 <div class="ph-mark"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" style="color:#c9a86a" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div><h1>わかっていても</h1><div class="ph-rule"></div>
-<p class="src">v155：写真アプリ（ギャラリー）を廃止しました。ホームの写真ウィジェットは Instagram の該当投稿へ、カカオのドロワーの「写真を見る」はこのトークで送受信した写真の一覧へ、それぞれ飛び先を付け替えています。物語の筋・数値・解放条件は変えていません。</p>
+<p class="src">v156：タイトル／ホーム／ロック画面の質感を刷新しました（通知とドックのすりガラスを深くし、縁にヘアラインを通し、設定カードの角を他のカードに統一）。ロック画面は、実機のステータスバーと二重になる作り物のバーを入口では出さず、帯と重複していた題字と浮遊する蝶の装飾を外して、時計と通知だけの実物寄りの構成にしました。物語の筋・数値・解放条件は変えていません。</p>
 </div>
 <div class="phone"><div class="screen">
 <div class="notch"></div>
 <div id="night-tint"></div>
-<div class="statusbar"><span id="sb-time">9:41</span><span class="sb-r"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#fff"/><rect x="4.5" y="5" width="3" height="6" rx="0.8" fill="#fff"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8" fill="#fff"/><rect x="13.5" y="0" width="3" height="11" rx="0.8" fill="#fff" opacity=".35"/></svg><svg width="16" height="11" viewBox="0 0 16 12"><path d="M8 10.6a1.7 1.7 0 1 1 0 .01zM5.2 8.2a4.2 4.2 0 0 1 5.6 0l-1.4 1.5a2.6 2.6 0 0 0-2.8 0zM2.6 5.4a8 8 0 0 1 10.8 0L12 6.9a6.3 6.3 0 0 0-8 0zM.2 2.7a11.6 11.6 0 0 1 15.6 0l-1.4 1.5a9.9 9.9 0 0 0-12.8 0z" fill="#fff"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" fill="none" stroke="#fff" opacity=".45"/><rect id="sb-batt" x="2" y="2" width="13" height="8" rx="1.8" fill="#fff"/><path id="sb-bolt" d="M11.2 1.6 6.6 6.9h2.9l-1.1 3.5 4.6-5.3h-2.9z" fill="#111" style="display:none"/><path d="M23.2 4v4a2.2 2.2 0 0 0 0-4z" fill="#fff" opacity=".45"/></svg></span></div>
+<div class="statusbar off"><span id="sb-time">9:41</span><span class="sb-r"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#fff"/><rect x="4.5" y="5" width="3" height="6" rx="0.8" fill="#fff"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8" fill="#fff"/><rect x="13.5" y="0" width="3" height="11" rx="0.8" fill="#fff" opacity=".35"/></svg><svg width="16" height="11" viewBox="0 0 16 12"><path d="M8 10.6a1.7 1.7 0 1 1 0 .01zM5.2 8.2a4.2 4.2 0 0 1 5.6 0l-1.4 1.5a2.6 2.6 0 0 0-2.8 0zM2.6 5.4a8 8 0 0 1 10.8 0L12 6.9a6.3 6.3 0 0 0-8 0zM.2 2.7a11.6 11.6 0 0 1 15.6 0l-1.4 1.5a9.9 9.9 0 0 0-12.8 0z" fill="#fff"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" fill="none" stroke="#fff" opacity=".45"/><rect id="sb-batt" x="2" y="2" width="13" height="8" rx="1.8" fill="#fff"/><path id="sb-bolt" d="M11.2 1.6 6.6 6.9h2.9l-1.1 3.5 4.6-5.3h-2.9z" fill="#111" style="display:none"/><path d="M23.2 4v4a2.2 2.2 0 0 0 0-4z" fill="#fff" opacity=".45"/></svg></span></div>
 
 <!-- LOCK (iOS 14) -->
 <div class="view on boot" id="v-lock">
 <div class="lock-kv" aria-hidden="true"></div>
-<div class="wall-butterflies"><span style="left:14%;top:20%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:76%;top:14%"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span><span style="left:60%;top:40%;animation-delay:2.1s"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 9.2C10.6 6.4 8.2 4.4 5.9 4.8 3.9 5.1 3.2 7.2 4.2 9.2c.8 1.6 2.7 2.4 4.5 2.1-1.5.6-2.7 1.9-2.8 3.4-.1 1.7 1.4 2.9 3 2.5 1.4-.3 2.5-1.5 3.1-3v.1c.6 1.5 1.7 2.7 3.1 3 1.6.4 3.1-.8 3-2.5-.1-1.5-1.3-2.8-2.8-3.4 1.8.3 3.7-.5 4.5-2.1 1-2 .3-4.1-1.7-4.4-2.3-.4-4.7 1.6-6.1 4.4z"/><ellipse cx="12" cy="13" rx="1" ry="4.4"/><path d="M12 8.4C11.6 6.6 10.6 5.2 9.2 4.5M12 8.4c.4-1.8 1.4-3.2 2.8-3.9" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></span></div>
 <div class="lock-top"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></svg></div>
 <div class="lock-clock"><div class="lock-date" id="lock-date">3月12日 金曜日</div><div class="lock-time" id="lock-time">9:41</div></div>
-<div class="lock-title"><div class="lt-over">알고 있어도</div><div class="lt-main">わかっていても</div><div class="lt-rule"></div></div>
 <div class="lock-notifs" id="lock-notifs">
 <div class="lnotif"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>지금</span></div><div class="ln-t"><b>박재언</b>： ……蝶、見に行く？</div></div></div>
 <div class="lnotif stack"><span class="ln-ic" style="background:#fee500"><svg width="21" height="21" viewBox="0 0 24 24"><path d="M12 3.2C6.4 3.2 1.9 6.8 1.9 11.2c0 2.8 1.8 5.2 4.5 6.6-.2 1.1-.8 2.6-1.7 3.8 0 0 3.1-.9 5-2.3.7.1 1.5.2 2.3.2 5.6 0 10.1-3.6 10.1-8S17.6 3.2 12 3.2z" fill="#3a1d1d"/><text x="12" y="13.4" text-anchor="middle" font-size="4.9" font-weight="800" letter-spacing=".2" fill="#fee500">TALK</text></svg></span><div style="flex:1;min-width:0"><div class="ln-h"><b>카카오톡</b><span>어제</span></div><div class="ln-t"><b>박재언</b>： 先輩、今日はありがとう</div></div></div>
@@ -1935,7 +1942,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let toastTimer=null;
 function toast(msg){const t=$('#toast'); t.textContent=msg; t.classList.add('on'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400);} /* v47：連続表示ではタイマーを張り直し、前のタイマーで途中消えしないようにする */
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-igedit','v-news','v-newsread','v-cal','v-notes','v-note','v-calllog','v-pov','v-povread','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on')); $('#'+id).classList.add('on'); const dk=['v-kakao','v-chat','v-side','v-ig','v-igsearch','v-igact','v-igedit','v-news','v-newsread','v-cal','v-notes','v-note','v-calllog','v-pov','v-povread','v-epi','v-epiread'].includes(id); /* v84：チャットとサイドトークも明るい背景なので、実物 iOS どおりステータスバーを暗色にする */ const sb=document.querySelector('.statusbar'); if(sb) sb.classList.toggle('dark',dk); sb.classList.toggle('off',id==='v-lock'); /* v156：入口（ロック）では作り物のステータスバーを出さない（実機のバーと二重になるため） */ const hb=document.querySelector('.homebar'); if(hb) hb.classList.toggle('dk',dk); if(id!=='v-ig'){ const cs=document.querySelector('#cm-sheet'); if(cs) cs.classList.remove('on'); const ps=document.querySelector('#ppl-sheet'); if(ps) ps.classList.remove('on'); const as=document.querySelector('#act-sheet'); if(as) as.classList.remove('on'); const fs=document.querySelector('#fol-sheet'); if(fs) fs.classList.remove('on'); } }
 function updParams(){
  $('#p-kai').textContent=S.kai; $('#p-kai-bar').style.transform='scaleX('+(S.kai/100)+')';
  $('#p-kyori').textContent=S.kyo;
